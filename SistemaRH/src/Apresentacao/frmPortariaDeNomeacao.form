@@ -45,7 +45,7 @@
               <Component id="jPanel2" min="-2" pref="28" max="-2" attributes="0"/>
               <EmptySpace max="-2" attributes="0"/>
               <Component id="jPanel1" min="-2" max="-2" attributes="0"/>
-              <EmptySpace max="32767" attributes="0"/>
+              <EmptySpace pref="16" max="32767" attributes="0"/>
           </Group>
       </Group>
     </DimensionLayout>
@@ -127,7 +127,7 @@
                                           <Component id="jButton1" min="-2" max="-2" attributes="0"/>
                                           <EmptySpace min="-2" pref="55" max="-2" attributes="0"/>
                                       </Group>
-                                      <Component id="jFmtNumeroPortaria" alignment="1" max="32767" attributes="0"/>
+                                      <Component id="txtNumeroDaPortaria" alignment="1" max="32767" attributes="0"/>
                                   </Group>
                                   <EmptySpace max="-2" attributes="0"/>
                                   <Component id="jCalendar1" min="-2" max="-2" attributes="0"/>
@@ -168,11 +168,11 @@
                               <Component id="lblCargoEmprego" alignment="3" min="-2" max="-2" attributes="0"/>
                           </Group>
                           <EmptySpace max="-2" attributes="0"/>
-                          <Group type="103" groupAlignment="3" attributes="0">
-                              <Component id="lblNumeroPortaria" alignment="3" min="-2" max="-2" attributes="0"/>
-                              <Component id="jFmtNumeroPortaria" alignment="3" min="-2" max="-2" attributes="0"/>
+                          <Group type="103" groupAlignment="0" attributes="0">
+                              <Component id="lblNumeroPortaria" min="-2" max="-2" attributes="0"/>
+                              <Component id="txtNumeroDaPortaria" min="-2" max="-2" attributes="0"/>
                           </Group>
-                          <EmptySpace min="-2" pref="31" max="-2" attributes="0"/>
+                          <EmptySpace min="-2" pref="28" max="-2" attributes="0"/>
                           <Group type="103" groupAlignment="3" attributes="0">
                               <Component id="jButton1" alignment="3" min="-2" max="-2" attributes="0"/>
                               <Component id="btnGerarPortaria" alignment="3" min="-2" max="-2" attributes="0"/>
@@ -257,15 +257,15 @@
             <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jButton1ActionPerformed"/>
           </Events>
         </Component>
-        <Component class="javax.swing.JFormattedTextField" name="jFmtNumeroPortaria">
+        <Component class="javax.swing.JFormattedTextField" name="txtNumeroDaPortaria">
           <Properties>
             <Property name="formatterFactory" type="javax.swing.JFormattedTextField$AbstractFormatterFactory" editor="org.netbeans.modules.form.editors.AbstractFormatterFactoryEditor" preCode="try {" postCode="} catch (java.text.ParseException ex) {&#xa;ex.printStackTrace();&#xa;}">
               <Format format="###/####" subtype="-1" type="5"/>
             </Property>
           </Properties>
           <Events>
-            <EventHandler event="focusLost" listener="java.awt.event.FocusListener" parameters="java.awt.event.FocusEvent" handler="jFmtNumeroPortariaFocusLost"/>
-            <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jFmtNumeroPortariaActionPerformed"/>
+            <EventHandler event="focusLost" listener="java.awt.event.FocusListener" parameters="java.awt.event.FocusEvent" handler="txtNumeroDaPortariaFocusLost"/>
+            <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="txtNumeroDaPortariaActionPerformed"/>
           </Events>
         </Component>
         <Component class="com.toedter.calendar.JCalendar" name="jCalendar1">

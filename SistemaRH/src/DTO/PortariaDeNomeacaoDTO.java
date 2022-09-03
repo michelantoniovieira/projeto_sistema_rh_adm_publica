@@ -12,7 +12,7 @@ public class PortariaDeNomeacaoDTO
 {
     private String matricula;
     private String pronomeTratamento;
-    private String nome;
+    private String nomeServidor;
     private String dataAdmissao;
     private String dataNascimento;
     private String cargo;
@@ -37,6 +37,7 @@ public class PortariaDeNomeacaoDTO
     private String email;
     private String mensagem;
     private String regimeJuridico;
+    private String numeroDaPortaria;
     
     
     public String getMatricula()
@@ -59,12 +60,12 @@ public class PortariaDeNomeacaoDTO
         this.pronomeTratamento = pronomeTratamento;
     }
 
-    public String getNome() {
-        return nome;
+    public String getNomeServidor() {
+        return nomeServidor;
     }
 
-    public void setNome(String nome) {
-        this.nome = nome;
+    public void setNomeServidor(String nome) {
+        this.nomeServidor = nome;
     }
 
     public String getDataAdmissao() {
@@ -259,4 +260,13 @@ public class PortariaDeNomeacaoDTO
         this.cmbQuemAssinaPortaria = cmbQuemAssinaPortaria;
     }
        
+    public String getNumeroDaPortaria()
+    {
+        return numeroDaPortaria;
+    }
+    
+    public void setNumeroDaPortaria(String numeroDaPortaria)
+    {
+        this.numeroDaPortaria = numeroDaPortaria;
+    }
 }

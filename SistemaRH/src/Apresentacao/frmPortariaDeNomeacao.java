@@ -6,6 +6,7 @@ package Apresentacao;
 
 import DAO.ConversorClassificacao;
 import DAO.Extenso;
+import Modelo.PortariaDeNomeacaoControle;
 import java.awt.event.KeyEvent;
 import java.io.File;
 import java.io.FileNotFoundException;
@@ -65,7 +66,7 @@ public class frmPortariaDeNomeacao extends javax.swing.JDialog {
         lblMatricula = new javax.swing.JLabel();
         txtNomeServidor = new javax.swing.JTextField();
         jButton1 = new javax.swing.JButton();
-        jFmtNumeroPortaria = new javax.swing.JFormattedTextField();
+        txtNumeroDaPortaria = new javax.swing.JFormattedTextField();
         jCalendar1 = new com.toedter.calendar.JCalendar();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
@@ -137,18 +138,18 @@ public class frmPortariaDeNomeacao extends javax.swing.JDialog {
         });
 
         try {
-            jFmtNumeroPortaria.setFormatterFactory(new javax.swing.text.DefaultFormatterFactory(new javax.swing.text.MaskFormatter("###/####")));
+            txtNumeroDaPortaria.setFormatterFactory(new javax.swing.text.DefaultFormatterFactory(new javax.swing.text.MaskFormatter("###/####")));
         } catch (java.text.ParseException ex) {
             ex.printStackTrace();
         }
-        jFmtNumeroPortaria.addFocusListener(new java.awt.event.FocusAdapter() {
+        txtNumeroDaPortaria.addFocusListener(new java.awt.event.FocusAdapter() {
             public void focusLost(java.awt.event.FocusEvent evt) {
-                jFmtNumeroPortariaFocusLost(evt);
+                txtNumeroDaPortariaFocusLost(evt);
             }
         });
-        jFmtNumeroPortaria.addActionListener(new java.awt.event.ActionListener() {
+        txtNumeroDaPortaria.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jFmtNumeroPortariaActionPerformed(evt);
+                txtNumeroDaPortariaActionPerformed(evt);
             }
         });
 
@@ -189,7 +190,7 @@ public class frmPortariaDeNomeacao extends javax.swing.JDialog {
                                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                                         .addComponent(jButton1)
                                         .addGap(55, 55, 55))
-                                    .addComponent(jFmtNumeroPortaria, javax.swing.GroupLayout.Alignment.TRAILING))
+                                    .addComponent(txtNumeroDaPortaria, javax.swing.GroupLayout.Alignment.TRAILING))
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                                 .addComponent(jCalendar1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))))
                 .addContainerGap())
@@ -218,10 +219,10 @@ public class frmPortariaDeNomeacao extends javax.swing.JDialog {
                             .addComponent(txtCargoEmprego, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(lblCargoEmprego))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(lblNumeroPortaria)
-                            .addComponent(jFmtNumeroPortaria, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addGap(31, 31, 31)
+                            .addComponent(txtNumeroDaPortaria, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGap(28, 28, 28)
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(jButton1)
                             .addComponent(btnGerarPortaria)))
@@ -247,7 +248,7 @@ public class frmPortariaDeNomeacao extends javax.swing.JDialog {
                 .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, 28, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addContainerGap(16, Short.MAX_VALUE))
         );
 
         pack();
@@ -255,7 +256,16 @@ public class frmPortariaDeNomeacao extends javax.swing.JDialog {
     }// </editor-fold>//GEN-END:initComponents
 
     private void btnGerarPortariaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnGerarPortariaActionPerformed
-        btnGerarPortaria();
+       
+        PortariaDeNomeacaoControle controle = new PortariaDeNomeacaoControle(txtMatricula.getText(), txtDataAdmissao.getText(), txtNomeServidor.getText(), txtCargoEmprego.getText(), txtNumeroDaPortaria.getText());
+        if(controle.getMensagem().equals("ok"))
+        {
+            btnGerarPortaria();
+        }
+        else
+        {
+            JOptionPane.showMessageDialog(null, "Preencha todas as informações antes de continuar.");
+        }
     }//GEN-LAST:event_btnGerarPortariaActionPerformed
     private void btnGerarPortaria()
     {
@@ -299,7 +309,7 @@ public class frmPortariaDeNomeacao extends javax.swing.JDialog {
             paragrafo1.setSpacingAfter(0);
             XWPFRun p1 = paragrafo1.createRun();
             
-            p1.setText("PORTARIA Nº " + jFmtNumeroPortaria.getText());
+            p1.setText("PORTARIA Nº " + txtNumeroDaPortaria.getText());
             p1.setFontSize(12);
             p1.setFontFamily(fontTimesNewRoman);
             p1.setBold(true);
@@ -748,14 +758,14 @@ public class frmPortariaDeNomeacao extends javax.swing.JDialog {
         this.dispose();
     }//GEN-LAST:event_jButton1ActionPerformed
 
-    private void jFmtNumeroPortariaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jFmtNumeroPortariaActionPerformed
+    private void txtNumeroDaPortariaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtNumeroDaPortariaActionPerformed
       
-        if(!jFmtNumeroPortaria.getText().equals("   /    "))
+        if(!txtNumeroDaPortaria.getText().equals("   /    "))
         {
             btnGerarPortaria.setEnabled(true);
             btnGerarPortaria.requestFocus();
         }
-    }//GEN-LAST:event_jFmtNumeroPortariaActionPerformed
+    }//GEN-LAST:event_txtNumeroDaPortariaActionPerformed
 
     private void btnGerarPortariaKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_btnGerarPortariaKeyPressed
         if(evt.getKeyCode() == KeyEvent.VK_ENTER)
@@ -764,13 +774,13 @@ public class frmPortariaDeNomeacao extends javax.swing.JDialog {
         }
     }//GEN-LAST:event_btnGerarPortariaKeyPressed
 
-    private void jFmtNumeroPortariaFocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_jFmtNumeroPortariaFocusLost
-        if(!jFmtNumeroPortaria.getText().equals("   /    "))
+    private void txtNumeroDaPortariaFocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_txtNumeroDaPortariaFocusLost
+        if(!txtNumeroDaPortaria.getText().equals("   /    "))
         {
             btnGerarPortaria.setEnabled(true);
             btnGerarPortaria.requestFocus();
         }
-    }//GEN-LAST:event_jFmtNumeroPortariaFocusLost
+    }//GEN-LAST:event_txtNumeroDaPortariaFocusLost
 
     /**
      * @param args the command line arguments
@@ -821,7 +831,6 @@ public class frmPortariaDeNomeacao extends javax.swing.JDialog {
     private javax.swing.JButton jButton1;
     private com.toedter.calendar.JCalendar jCalendar1;
     private com.toedter.calendar.JCalendar jCalendar2;
-    private javax.swing.JFormattedTextField jFmtNumeroPortaria;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
     private javax.swing.JLabel lblAdmissao;
@@ -834,5 +843,6 @@ public class frmPortariaDeNomeacao extends javax.swing.JDialog {
     private javax.swing.JTextField txtDataAdmissao;
     private javax.swing.JTextField txtMatricula;
     private javax.swing.JTextField txtNomeServidor;
+    private javax.swing.JFormattedTextField txtNumeroDaPortaria;
     // End of variables declaration//GEN-END:variables
 }
