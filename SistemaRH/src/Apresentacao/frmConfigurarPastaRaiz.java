@@ -4,8 +4,21 @@
  */
 package Apresentacao;
 
+import DAO.CadastrarUsuarioDAO;
+import DAO.ConfigurarPastaRaizDAO;
+import DTO.CadastrarUsuarioDTO;
+import DTO.ConfigurarPastaRaizDTO;
+import java.sql.ResultSet;
+import java.sql.SQLException;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javafx.stage.FileChooser;
 import javax.swing.JFileChooser;
+import javax.swing.JOptionPane;
+import javax.swing.JTextArea;
+import javax.swing.text.SimpleAttributeSet;
+import javax.swing.text.StyleConstants;
+import javax.swing.text.StyledDocument;
 
 /**
  *
@@ -19,6 +32,7 @@ public class frmConfigurarPastaRaiz extends javax.swing.JDialog {
     public frmConfigurarPastaRaiz(java.awt.Frame parent, boolean modal) {
         super(parent, modal);
         initComponents();
+        mostrarCaminhoSalvo();
     }
 
     /**
@@ -33,7 +47,10 @@ public class frmConfigurarPastaRaiz extends javax.swing.JDialog {
         jLabel1 = new javax.swing.JLabel();
         lblCaminho = new javax.swing.JLabel();
         btnSelecionarCaminho = new javax.swing.JButton();
-        lblCaminhoDirecionar = new javax.swing.JLabel();
+        btnSalvar = new javax.swing.JButton();
+        btnCancelar = new javax.swing.JButton();
+        jScrollPane1 = new javax.swing.JScrollPane();
+        txtPaneCaminhoDirecionar = new javax.swing.JTextPane();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         setTitle("Configurar Pasta Raiz");
@@ -50,7 +67,29 @@ public class frmConfigurarPastaRaiz extends javax.swing.JDialog {
             }
         });
 
-        lblCaminhoDirecionar.setText("Caminho");
+        btnSalvar.setText("Salvar");
+        btnSalvar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnSalvarActionPerformed(evt);
+            }
+        });
+
+        btnCancelar.setText("Cancelar");
+        btnCancelar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnCancelarActionPerformed(evt);
+            }
+        });
+
+        txtPaneCaminhoDirecionar.setBorder(new javax.swing.border.MatteBorder(null));
+        txtPaneCaminhoDirecionar.setAutoscrolls(false);
+        txtPaneCaminhoDirecionar.setEnabled(false);
+        txtPaneCaminhoDirecionar.addPropertyChangeListener(new java.beans.PropertyChangeListener() {
+            public void propertyChange(java.beans.PropertyChangeEvent evt) {
+                txtPaneCaminhoDirecionarPropertyChange(evt);
+            }
+        });
+        jScrollPane1.setViewportView(txtPaneCaminhoDirecionar);
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -60,27 +99,39 @@ public class frmConfigurarPastaRaiz extends javax.swing.JDialog {
                 .addGap(24, 24, 24)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
-                        .addComponent(jLabel1)
-                        .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                    .addGroup(layout.createSequentialGroup()
                         .addComponent(lblCaminho)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addComponent(btnSelecionarCaminho, javax.swing.GroupLayout.PREFERRED_SIZE, 23, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(18, 18, 18)
-                        .addComponent(lblCaminhoDirecionar, javax.swing.GroupLayout.DEFAULT_SIZE, 220, Short.MAX_VALUE)
-                        .addGap(113, 113, 113))))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(btnSelecionarCaminho, javax.swing.GroupLayout.PREFERRED_SIZE, 23, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 281, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+            .addGroup(layout.createSequentialGroup()
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(14, 14, 14)
+                        .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 301, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(65, 65, 65)
+                        .addComponent(btnSalvar)
+                        .addGap(58, 58, 58)
+                        .addComponent(btnCancelar)))
+                .addGap(0, 19, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addGap(28, 28, 28)
+                .addGap(29, 29, 29)
                 .addComponent(jLabel1)
-                .addGap(32, 32, 32)
+                .addGap(18, 18, 18)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(lblCaminho)
-                    .addComponent(lblCaminhoDirecionar)
                     .addComponent(btnSelecionarCaminho))
-                .addContainerGap(52, Short.MAX_VALUE))
+                .addGap(18, 18, 18)
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 78, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(18, 18, 18)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(btnSalvar)
+                    .addComponent(btnCancelar))
+                .addContainerGap(13, Short.MAX_VALUE))
         );
 
         pack();
@@ -88,22 +139,94 @@ public class frmConfigurarPastaRaiz extends javax.swing.JDialog {
     }// </editor-fold>//GEN-END:initComponents
 
     private void btnSelecionarCaminhoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSelecionarCaminhoActionPerformed
-        if (evt.getSource() == btnSelecionarCaminho) {
-            JFileChooser j = new JFileChooser();
-            j.setFileSelectionMode(JFileChooser.DIRECTORIES_ONLY);
-            
-            int i = j.showSaveDialog(null);
-            if (i == 0) 
-            {
-                lblCaminhoDirecionar.setText(j.getSelectedFile().getAbsolutePath());
-            } 
-            else 
-            {
-                
-            }
 
+        //codigo para pegar o caminho desejado para salvar a pasta
+        if (evt.getSource() == btnSelecionarCaminho) {
+
+            //por padrão abrir a pasta c:
+            JFileChooser j = new JFileChooser("C:\\");
+
+            j.setFileSelectionMode(JFileChooser.DIRECTORIES_ONLY);
+
+            //se clicar em salvar entra no if
+            int i = j.showSaveDialog(null);
+            if (i == 0) {
+                //passar na label o caminho escolhido pelo usuario
+                txtPaneCaminhoDirecionar.setText(j.getSelectedFile().getAbsolutePath());
+            } else {
+
+            }
         }
     }//GEN-LAST:event_btnSelecionarCaminhoActionPerformed
+
+    private void btnCancelarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCancelarActionPerformed
+        this.dispose();
+    }//GEN-LAST:event_btnCancelarActionPerformed
+
+    private void btnSalvarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSalvarActionPerformed
+        if (!txtPaneCaminhoDirecionar.getText().equals("")) {
+            ConfigurarPastaRaizDTO objconfigurarpastaraizdto = new ConfigurarPastaRaizDTO();
+
+            objconfigurarpastaraizdto.setId(1);
+            objconfigurarpastaraizdto.setCaminho(txtPaneCaminhoDirecionar.getText());
+
+            ConfigurarPastaRaizDAO objCadastrarPastaRaizDAO = new ConfigurarPastaRaizDAO();
+            ResultSet rscadastrapastaraizdao = objCadastrarPastaRaizDAO.verificarAntesDeCadastrar(objconfigurarpastaraizdto);
+
+            try {
+                if (rscadastrapastaraizdao.next()) {
+                    //envia mensagem para o form falando que o usuario esta no banco de dados
+                    objCadastrarPastaRaizDAO.alterarCaminho(objconfigurarpastaraizdto);
+
+                } else {
+                    //enviar mensagem dizendo que posso inserir no banco de dados
+                    objCadastrarPastaRaizDAO.cadastrarCaminho(objconfigurarpastaraizdto);
+                }
+            } catch (SQLException ex) {
+                Logger.getLogger(frmConfigurarPastaRaiz.class.getName()).log(Level.SEVERE, null, ex);
+            }
+
+            this.dispose();
+
+        } else {
+            JOptionPane.showMessageDialog(null, "Selecione um caminho antes de salvar.");
+        }
+    }//GEN-LAST:event_btnSalvarActionPerformed
+
+    private void mostrarCaminhoSalvo() 
+    {
+            ConfigurarPastaRaizDTO objconfigurarpastaraizdto = new ConfigurarPastaRaizDTO();
+
+            objconfigurarpastaraizdto.setId(1);
+
+            ConfigurarPastaRaizDAO objCadastrarPastaRaizDAO = new ConfigurarPastaRaizDAO();
+            
+            ResultSet rscadastrapastaraizdao = objCadastrarPastaRaizDAO.verificarAntesDeCadastrar(objconfigurarpastaraizdto);
+
+            try 
+            {
+                if (rscadastrapastaraizdao.next()) {
+                    //envia mensagem para o form falando que o usuario esta no banco de dados
+                    txtPaneCaminhoDirecionar.setText(rscadastrapastaraizdao.getString("caminho"));
+
+                } else {
+                    //enviar mensagem dizendo que posso inserir no banco de dados
+                    
+                    
+                }
+            } catch (SQLException ex) {
+                Logger.getLogger(frmConfigurarPastaRaiz.class.getName()).log(Level.SEVERE, null, ex);
+            }
+            this.dispose();
+    }
+    
+    private void txtPaneCaminhoDirecionarPropertyChange(java.beans.PropertyChangeEvent evt) {//GEN-FIRST:event_txtPaneCaminhoDirecionarPropertyChange
+        //COMANDO PARA JUSTIFICAR O TEXTO DENTRO DO TEXT PANE
+        StyledDocument doc = txtPaneCaminhoDirecionar.getStyledDocument();
+        SimpleAttributeSet center = new SimpleAttributeSet();
+        StyleConstants.setAlignment(center, StyleConstants.ALIGN_JUSTIFIED);
+        doc.setParagraphAttributes(0, doc.getLength(), center, false);
+    }//GEN-LAST:event_txtPaneCaminhoDirecionarPropertyChange
 
     /**
      * @param args the command line arguments
@@ -148,9 +271,13 @@ public class frmConfigurarPastaRaiz extends javax.swing.JDialog {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton btnCancelar;
+    private javax.swing.JButton btnSalvar;
     private javax.swing.JButton btnSelecionarCaminho;
     private javax.swing.JLabel jLabel1;
+    private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JLabel lblCaminho;
-    private javax.swing.JLabel lblCaminhoDirecionar;
+    private javax.swing.JTextPane txtPaneCaminhoDirecionar;
     // End of variables declaration//GEN-END:variables
+
 }
