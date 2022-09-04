@@ -219,7 +219,6 @@
         <Component class="javax.swing.JButton" name="btnGerarPortaria">
           <Properties>
             <Property name="text" type="java.lang.String" value="Gerar"/>
-            <Property name="enabled" type="boolean" value="false"/>
           </Properties>
           <Events>
             <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btnGerarPortariaActionPerformed"/>
@@ -237,6 +236,7 @@
           </Properties>
           <Events>
             <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btnVincularServidorActionPerformed"/>
+            <EventHandler event="keyPressed" listener="java.awt.event.KeyListener" parameters="java.awt.event.KeyEvent" handler="btnVincularServidorKeyPressed"/>
           </Events>
         </Component>
         <Component class="javax.swing.JLabel" name="lblMatricula">

@@ -21,7 +21,6 @@ public class PortariaDeNomeacaoControle extends PortariaDeNomeacaoDTO
     {
      PortariaDeNomecaoValidacao validacao = new PortariaDeNomecaoValidacao(this.getMatricula(), this.getDataAdmissao(), this.getNomeServidor(), this.getCargo(), this.getNumeroDaPortaria());
      this.setMensagem(validacao.getMensagem());
-     JOptionPane.showMessageDialog(null, this.getMensagem());
     }
    
     

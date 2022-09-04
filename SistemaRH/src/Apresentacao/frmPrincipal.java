@@ -35,10 +35,11 @@ public class frmPrincipal extends javax.swing.JFrame {
         jMenuBar1 = new javax.swing.JMenuBar();
         mnServidores = new javax.swing.JMenu();
         mnCadastroFuncionario = new javax.swing.JMenuItem();
-        mnUsuario = new javax.swing.JMenu();
-        jMenuItem1 = new javax.swing.JMenuItem();
         mnPortarias = new javax.swing.JMenu();
         subMnNomeacao = new javax.swing.JMenuItem();
+        mnConfiguracao = new javax.swing.JMenu();
+        jMenuItem2 = new javax.swing.JMenuItem();
+        mnAno = new javax.swing.JMenuItem();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setTitle("Sistema RH - Michel");
@@ -67,18 +68,6 @@ public class frmPrincipal extends javax.swing.JFrame {
 
         jMenuBar1.add(mnServidores);
 
-        mnUsuario.setText("Usuários");
-
-        jMenuItem1.setText("Cadastrar Usuário");
-        jMenuItem1.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jMenuItem1ActionPerformed(evt);
-            }
-        });
-        mnUsuario.add(jMenuItem1);
-
-        jMenuBar1.add(mnUsuario);
-
         mnPortarias.setText("Portarias");
 
         subMnNomeacao.setText("Nomeação");
@@ -90,6 +79,26 @@ public class frmPrincipal extends javax.swing.JFrame {
         mnPortarias.add(subMnNomeacao);
 
         jMenuBar1.add(mnPortarias);
+
+        mnConfiguracao.setText("Configuração");
+
+        jMenuItem2.setText("1 - Cadastrar Usuário");
+        jMenuItem2.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jMenuItem2ActionPerformed(evt);
+            }
+        });
+        mnConfiguracao.add(jMenuItem2);
+
+        mnAno.setText("2 - Configurar Pasta Raiz");
+        mnAno.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                mnAnoActionPerformed(evt);
+            }
+        });
+        mnConfiguracao.add(mnAno);
+
+        jMenuBar1.add(mnConfiguracao);
 
         setJMenuBar(jMenuBar1);
 
@@ -108,11 +117,6 @@ public class frmPrincipal extends javax.swing.JFrame {
         setLocationRelativeTo(null);
     }// </editor-fold>//GEN-END:initComponents
 
-    private void jMenuItem1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem1ActionPerformed
-        frmCadastrarUsuario frmCadU = new frmCadastrarUsuario(null, true);
-        frmCadU.setVisible(true);
-    }//GEN-LAST:event_jMenuItem1ActionPerformed
-
     private void mnCadastroFuncionarioActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_mnCadastroFuncionarioActionPerformed
      //CODIGO DO BOTÃO MANUTENÇÃO
         frmServidores frmM = new frmServidores(null, true);  
@@ -123,6 +127,16 @@ public class frmPrincipal extends javax.swing.JFrame {
         frmPortariaDeNomeacao frmPN = new frmPortariaDeNomeacao(null, true);
         frmPN.setVisible(true);
     }//GEN-LAST:event_subMnNomeacaoActionPerformed
+
+    private void jMenuItem2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem2ActionPerformed
+        frmCadastrarUsuario frmCadU = new frmCadastrarUsuario(null, true);
+        frmCadU.setVisible(true);
+    }//GEN-LAST:event_jMenuItem2ActionPerformed
+
+    private void mnAnoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_mnAnoActionPerformed
+        frmConfigurarPastaRaiz frmConfigurarPastaRaiz = new frmConfigurarPastaRaiz(null, true);
+        frmConfigurarPastaRaiz.setVisible(true);
+    }//GEN-LAST:event_mnAnoActionPerformed
 
     /**
      * @param args the command line arguments
@@ -163,11 +177,12 @@ public class frmPrincipal extends javax.swing.JFrame {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JDesktopPane jDesktopPane2;
     private javax.swing.JMenuBar jMenuBar1;
-    private javax.swing.JMenuItem jMenuItem1;
+    private javax.swing.JMenuItem jMenuItem2;
+    private javax.swing.JMenuItem mnAno;
     private javax.swing.JMenuItem mnCadastroFuncionario;
+    private javax.swing.JMenu mnConfiguracao;
     private javax.swing.JMenu mnPortarias;
     private javax.swing.JMenu mnServidores;
-    private javax.swing.JMenu mnUsuario;
     private javax.swing.JMenuItem subMnNomeacao;
     // End of variables declaration//GEN-END:variables
 }

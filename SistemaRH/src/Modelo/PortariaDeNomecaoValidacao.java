@@ -21,7 +21,7 @@ public class PortariaDeNomecaoValidacao extends PortariaDeNomeacaoDTO
     {
         try
         {
-           if(!this.getMatricula().equals("") && !this.getDataAdmissao().equals("") && !this.getNomeServidor().equals("")  && !this.getCargo().equals("") && !this.getNumeroDaPortaria().equals("")) 
+           if(!this.getMatricula().equals("") && !this.getDataAdmissao().equals("") && !this.getNomeServidor().equals("")  && !this.getCargo().equals("") && !this.getNumeroDaPortaria().equals("   /    ")) 
            {
                this.setMensagem("ok");
            }
@@ -32,7 +32,7 @@ public class PortariaDeNomecaoValidacao extends PortariaDeNomeacaoDTO
         }
         catch(Exception e)
         {
-           JOptionPane.showMessageDialog(null, "Erro");
+           JOptionPane.showMessageDialog(null, "CAIU AQUI");
         }
     }
     

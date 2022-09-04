@@ -7,6 +7,7 @@ package Apresentacao;
 import DAO.ConversorClassificacao;
 import DAO.Extenso;
 import Modelo.PortariaDeNomeacaoControle;
+import java.awt.Desktop;
 import java.awt.event.KeyEvent;
 import java.io.File;
 import java.io.FileNotFoundException;
@@ -18,6 +19,8 @@ import java.util.logging.Level;
 import java.util.logging.Logger;
 import javafx.scene.input.KeyCode;
 import javax.swing.JOptionPane;
+import javax.swing.event.DocumentEvent;
+import javax.swing.event.DocumentListener;
 import org.apache.poi.xwpf.usermodel.ParagraphAlignment;
 import org.apache.poi.xwpf.usermodel.XWPFDocument;
 import org.apache.poi.xwpf.usermodel.XWPFParagraph;
@@ -39,6 +42,7 @@ public class frmPortariaDeNomeacao extends javax.swing.JDialog {
     public frmPortariaDeNomeacao(java.awt.Frame parent, boolean modal) {
         super(parent, modal);
         initComponents();
+        btnVincularServidor.requestFocus();
     }
 
     /**
@@ -105,7 +109,6 @@ public class frmPortariaDeNomeacao extends javax.swing.JDialog {
         txtMatricula.setEnabled(false);
 
         btnGerarPortaria.setText("Gerar");
-        btnGerarPortaria.setEnabled(false);
         btnGerarPortaria.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnGerarPortariaActionPerformed(evt);
@@ -123,6 +126,11 @@ public class frmPortariaDeNomeacao extends javax.swing.JDialog {
         btnVincularServidor.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnVincularServidorActionPerformed(evt);
+            }
+        });
+        btnVincularServidor.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyPressed(java.awt.event.KeyEvent evt) {
+                btnVincularServidorKeyPressed(evt);
             }
         });
 
@@ -255,12 +263,14 @@ public class frmPortariaDeNomeacao extends javax.swing.JDialog {
         setLocationRelativeTo(null);
     }// </editor-fold>//GEN-END:initComponents
 
+    
     private void btnGerarPortariaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnGerarPortariaActionPerformed
        
         PortariaDeNomeacaoControle controle = new PortariaDeNomeacaoControle(txtMatricula.getText(), txtDataAdmissao.getText(), txtNomeServidor.getText(), txtCargoEmprego.getText(), txtNumeroDaPortaria.getText());
         if(controle.getMensagem().equals("ok"))
         {
             btnGerarPortaria();
+
         }
         else
         {
@@ -289,7 +299,7 @@ public class frmPortariaDeNomeacao extends javax.swing.JDialog {
         try
         {
             //diretório que será criado com o arquivo da portaria
-            String diretorio = "C:/modelos/";
+            String diretorio = "C:/Administração de Pessoal - MavSys/2022/Portarias/1 - Nomeação/";
             String nomeDoArquivo = "Portaria de Nomeação.docx";
             String fontTimesNewRoman = "Times New Roman";
             //caso não exista o diretorio, crie um e salve
@@ -731,6 +741,8 @@ public class frmPortariaDeNomeacao extends javax.swing.JDialog {
             document.close();
             fileOutPut.close();
             JOptionPane.showMessageDialog(null, "Portaria gerada com sucesso!");
+            Desktop.getDesktop().open(new File("C:\\Administração de Pessoal - MavSys\\2022\\Portarias\\1 - Nomeação\\"));
+            this.dispose();
         }
         catch(FileNotFoundException ex)
         {
@@ -743,26 +755,31 @@ public class frmPortariaDeNomeacao extends javax.swing.JDialog {
         }
     }
     private void btnVincularServidorActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnVincularServidorActionPerformed
-        frmPF.setVisible(true);
+        btnVincularServidor();
+    }//GEN-LAST:event_btnVincularServidorActionPerformed
+
+    private void btnVincularServidor()
+    {
+       frmPF.setVisible(true);
         if(frmPF.getMensagem().equals("pode passar"))
         {
             txtMatricula.setText(frmPF.getLista().get(frmPF.getIndex()).getMatricula());
             txtNomeServidor.setText(frmPF.getLista().get(frmPF.getIndex()).getNome());
             txtDataAdmissao.setText(frmPF.getLista().get(frmPF.getIndex()).getDataAdmissao());
             txtCargoEmprego.setText(frmPF.getLista().get(frmPF.getIndex()).getCargo());
-        }
-    }//GEN-LAST:event_btnVincularServidorActionPerformed
-
+            txtNumeroDaPortaria.requestFocus();
+        } 
+    }
+    
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
         // TODO add your handling code here:
         this.dispose();
     }//GEN-LAST:event_jButton1ActionPerformed
 
     private void txtNumeroDaPortariaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtNumeroDaPortariaActionPerformed
-      
+    
         if(!txtNumeroDaPortaria.getText().equals("   /    "))
         {
-            btnGerarPortaria.setEnabled(true);
             btnGerarPortaria.requestFocus();
         }
     }//GEN-LAST:event_txtNumeroDaPortariaActionPerformed
@@ -781,6 +798,13 @@ public class frmPortariaDeNomeacao extends javax.swing.JDialog {
             btnGerarPortaria.requestFocus();
         }
     }//GEN-LAST:event_txtNumeroDaPortariaFocusLost
+
+    private void btnVincularServidorKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_btnVincularServidorKeyPressed
+        if(evt.getKeyCode() == KeyEvent.VK_ENTER)
+        {
+         btnVincularServidor();
+        }
+    }//GEN-LAST:event_btnVincularServidorKeyPressed
 
     /**
      * @param args the command line arguments
