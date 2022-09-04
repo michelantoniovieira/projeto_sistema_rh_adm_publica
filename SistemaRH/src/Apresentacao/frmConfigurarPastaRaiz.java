@@ -152,7 +152,7 @@ public class frmConfigurarPastaRaiz extends javax.swing.JDialog {
             int i = j.showSaveDialog(null);
             if (i == 0) {
                 //passar na label o caminho escolhido pelo usuario
-                txtPaneCaminhoDirecionar.setText(j.getSelectedFile().getAbsolutePath());
+                txtPaneCaminhoDirecionar.setText(j.getSelectedFile().getAbsolutePath()+"\\");
             } else {
 
             }

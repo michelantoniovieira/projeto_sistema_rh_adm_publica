@@ -6,6 +6,7 @@ package Apresentacao;
 
 import DAO.ConversorClassificacao;
 import DAO.Extenso;
+import DAO.LocalizarPastaRaiz;
 import Modelo.PortariaDeNomeacaoControle;
 import java.awt.Desktop;
 import java.awt.event.KeyEvent;
@@ -298,10 +299,18 @@ public class frmPortariaDeNomeacao extends javax.swing.JDialog {
             
         try
         {
+            LocalizarPastaRaiz localizar = new LocalizarPastaRaiz();
             //diretório que será criado com o arquivo da portaria
-            String diretorio = "C:/Administração de Pessoal - MavSys/2022/Portarias/1 - Nomeação/";
+            //String diretorio = "C:/Administração de Pessoal - MavSys/2022/Portarias/1 - Nomeação/";
+            String diretorio = localizar.LocalizarPastaRaiz();
+            //comando para inverter a barra contra
+            String s = diretorio.replace('\\', '/'); 
+            //diretorio em que será cadastrada a pasta
+            diretorio = s + "MavSys - Administração de Pessoal\\2022\\Portarias\\1 - Nomeação\\";
+  
             String nomeDoArquivo = "Portaria de Nomeação.docx";
             String fontTimesNewRoman = "Times New Roman";
+           
             //caso não exista o diretorio, crie um e salve
             File f = new File(diretorio);
             if(!f.exists())
@@ -741,7 +750,10 @@ public class frmPortariaDeNomeacao extends javax.swing.JDialog {
             document.close();
             fileOutPut.close();
             JOptionPane.showMessageDialog(null, "Portaria gerada com sucesso!");
-            Desktop.getDesktop().open(new File("C:\\Administração de Pessoal - MavSys\\2022\\Portarias\\1 - Nomeação\\"));
+            s = diretorio.replace("/", "\\");
+            diretorio = s;
+            JOptionPane.showMessageDialog(null, diretorio);
+            Desktop.getDesktop().open(new File(diretorio));
             this.dispose();
         }
         catch(FileNotFoundException ex)
