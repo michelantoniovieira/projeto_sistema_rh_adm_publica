@@ -17,7 +17,7 @@ public class LoginUsuarioDAO
        conn = new ConexaoDAO().conectaBD();
        try
        {
-         String sql = "Select * from usuario where nome_usuario = ? and senha_usuario = ?";
+         String sql = "SELECT * FROM usuario WHERE nome_usuario = ? AND senha_usuario = ?";
          
          PreparedStatement pstm = conn.prepareStatement(sql);
          pstm.setString(1, objusuariodto.getLoginUsuario());

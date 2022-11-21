@@ -34,11 +34,11 @@ public class PesquisarFuncionarioDAO
         String sql;
         if(this.getComandoSqlParaPesquisa().equals("tudo") && this.getDigitadoNoCampoPesquisa().equals(""))
         {
-            sql = "SELECT * FROM FUNCIONARIOS";   
+            sql = "SELECT * FROM cadastro_funcionario";   
         }
         else
         {
-            sql = "SELECT * FROM FUNCIONARIOS WHERE "+this.getComandoSqlParaPesquisa()+" LIKE " + "'"+ this.getDigitadoNoCampoPesquisa() +"%'";           
+            sql = "SELECT * FROM cadastro_funcionario WHERE "+this.getComandoSqlParaPesquisa()+" LIKE " + "'"+ this.getDigitadoNoCampoPesquisa() +"%'";           
         }
 
         con = new ConexaoDAO().conectaBD();

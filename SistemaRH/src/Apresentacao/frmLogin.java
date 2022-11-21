@@ -139,7 +139,7 @@ public class frmLogin extends javax.swing.JDialog {
         {
             try
             {
-                frmPrincipal frmP = new frmPrincipal();
+                frmPrincipal frmP = new frmPrincipal(txtLogin.getText());
                 this.dispose();
                 frmP.setVisible(true);
             }

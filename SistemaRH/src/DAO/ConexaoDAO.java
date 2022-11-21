@@ -22,7 +22,8 @@ public class ConexaoDAO
             //"jdbc:mysql://localhost:3306/bdteste?user=root"
             //"jdbc:mysql://localhost:3306/bdteste?user=root&senha="
             
-            String url = "jdbc:mysql://localhost:3306/bancoteste?user=root&password=";
+            //String url = "jdbc:mysql://localhost:3306/bancoteste?user=root&password=";
+            String url = "jdbc:mysql://localhost:3306/sistemarh?user=root&password=";
             conn = DriverManager.getConnection(url);
         }
         catch(SQLException erro)
