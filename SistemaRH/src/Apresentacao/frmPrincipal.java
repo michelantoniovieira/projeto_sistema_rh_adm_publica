@@ -19,30 +19,31 @@ import javax.swing.JOptionPane;
  *
  * @author miche
  */
-public class frmPrincipal extends javax.swing.JFrame {
+public class frmPrincipal extends javax.swing.JFrame
+{
 
-   
     frmPortariaDeNomeacao frmPN;
     frmCadastrarUsuario frmCadU;
     frmConfigurarPastaRaiz frmConfigurarPastaRaiz;
-     frmPreCadastro frmPC;
-     frmCadastrarConcurso frmCC;
-    
-    public frmPrincipal() {
+    frmPreCadastro frmPC;
+    frmCadastrarConcurso frmCC;
+
+    public frmPrincipal()
+    {
         initComponents();
         this.setExtendedState(MAXIMIZED_BOTH);
-     }
-    
+    }
+
     public frmPrincipal(String usuarioConectado)
     {
         initComponents();
         this.setExtendedState(MAXIMIZED_BOTH);
         this.lblUsuarioConectado.setText(usuarioConectado);
-        
-    }
-    
 
-    frmPrincipal(Object object, boolean b) {
+    }
+
+    frmPrincipal(Object object, boolean b)
+    {
         throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
     }
 
@@ -552,9 +553,8 @@ public class frmPrincipal extends javax.swing.JFrame {
     }//GEN-LAST:event_btnSairActionPerformed
 
     private void btnSairKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_btnSairKeyPressed
-     //BOTÃO SAIR PELO ATALHO BACKSPACE
-        if (evt.getKeyCode() == KeyEvent.VK_BACK_SPACE) 
-        {
+        //BOTÃO SAIR PELO ATALHO BACKSPACE
+        if (evt.getKeyCode() == KeyEvent.VK_BACK_SPACE) {
             int resposta = JOptionPane.showConfirmDialog(null, "Deseja Sair?", "Sair", JOptionPane.YES_NO_OPTION);
 
             if (resposta == JOptionPane.YES_OPTION) {
@@ -564,9 +564,8 @@ public class frmPrincipal extends javax.swing.JFrame {
     }//GEN-LAST:event_btnSairKeyPressed
 
     private void formKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_formKeyPressed
-         //BOTÃO SAIR PELO ATALHO BACKSPACE
-        if (evt.getKeyCode() == KeyEvent.VK_BACK_SPACE) 
-        {
+        //BOTÃO SAIR PELO ATALHO BACKSPACE
+        if (evt.getKeyCode() == KeyEvent.VK_BACK_SPACE) {
             int resposta = JOptionPane.showConfirmDialog(null, "Deseja Sair?", "Sair", JOptionPane.YES_NO_CANCEL_OPTION);
 
             if (resposta == JOptionPane.YES_OPTION) {
@@ -579,22 +578,16 @@ public class frmPrincipal extends javax.swing.JFrame {
         //se tiver aparecendo a janela de cadastrar concurso executa essa parte do sistema
         //COMANDO PARA SALVAR AS INFORMAÇÕES GRAVADAS NA TELA CONCURSO
         frmCC.gravarRegistro();
-        
-        if(frmCC.isVisible() && !frmCC.getNumeroConcurso().equals("") && !frmCC.getAnoConcurso().equals("") && !frmCC.getBancaConcurso().equals(""))
-        {
+
+        if (frmCC.isVisible() && !frmCC.getNumeroConcurso().equals("") && !frmCC.getAnoConcurso().equals("") && !frmCC.getBancaConcurso().equals("")) {
             //quando eu digitar nos campos da janela CadastrarConcurso e clicar no icone salvar da janela principal entra aqui e manda gravar registro que significa que os dados dos campos serão passados para as variaveis que eu acesso por aqui para mandar para a variavel controle           
-           CadastrarConcursoControle controle = new CadastrarConcursoControle(Integer.parseInt(frmCC.getNumeroConcurso()), Integer.parseInt(frmCC.getAnoConcurso()), frmCC.getBancaConcurso(), frmCC.getTelBanca(), frmCC.getResponsavelBanca(), frmCC.getTelResposanvelBanca(), frmCC.getEmailResponsavel());
-           if(controle.getMensagem().equals("erro 1"))
-           {
-               JOptionPane.showMessageDialog(null, "Este concurso já foi cadastrado!");
-           }
-           else if(controle.getMensagem().equals("ok"))
-           {
-               JOptionPane.showMessageDialog(null, "Concurso cadastrado com sucesso.");
-           }
-        }
-        else
-        {
+            CadastrarConcursoControle controle = new CadastrarConcursoControle(Integer.parseInt(frmCC.getNumeroConcurso()), Integer.parseInt(frmCC.getAnoConcurso()), frmCC.getBancaConcurso(), frmCC.getTelBanca(), frmCC.getResponsavelBanca(), frmCC.getTelResponsavelBanca(), frmCC.getEmailResponsavel());
+            if (controle.getMensagem().equals("erro 1")) {
+                JOptionPane.showMessageDialog(null, "Este concurso já foi cadastrado!");
+            } else if (controle.getMensagem().equals("ok")) {
+                JOptionPane.showMessageDialog(null, "Concurso cadastrado com sucesso.");
+            }
+        } else {
             JOptionPane.showMessageDialog(null, "Digite as informações antes de salvar.");
         }
     }//GEN-LAST:event_btnSalvarActionPerformed
@@ -628,14 +621,28 @@ public class frmPrincipal extends javax.swing.JFrame {
     {//GEN-HEADEREND:event_btnPesquisarActionPerformed
         //se tiver aparecendo a janela de cadastrar concurso executa essa parte do sistema
         //COMANDO PARA pesquisar AS INFORMAÇÕES NA TELA CONCURSO
-        frmCC.gravarRegistro();
-        
-        if(frmCC.isVisible())
+        //frmCC.gravarRegistro();
+
+        if (frmCC.isVisible()) 
         {
-           frmPesquisarConcurso frmPC = new frmPesquisarConcurso(null, true);
-           frmPC.setVisible(true);
-        }
-        else
+            frmPesquisarConcurso frmPC = new frmPesquisarConcurso(null, true);
+            frmPC.setVisible(true);
+            //se a mensagem for pode passar entra no if abaixo
+            if (frmPC.getMensagem().equals("pode passar")) 
+            {         
+                //coloco na tela de cadastro de concurso, seto na variavel a lista e o index puxado direto da tela frmPesquisarConcurso 
+                frmCC.setNumeroConcurso(String.valueOf(frmPC.getLista().get(frmPC.getIndex()).getNumero_concurso()));
+                frmCC.setAnoConcurso(String.valueOf(frmPC.getLista().get(frmPC.getIndex()).getAno_concurso()));
+                frmCC.setBancaConcurso(String.valueOf(frmPC.getLista().get(frmPC.getIndex()).getNome_banca_organizadora()));
+                frmCC.setTelBanca(String.valueOf(frmPC.getLista().get(frmPC.getIndex()).getTelefone_banca_organizadora()));
+                frmCC.setResponsavelBanca(String.valueOf(frmPC.getLista().get(frmPC.getIndex()).getResponsavel_banca_organizadora()));
+                frmCC.setTelResponsavelBanca(String.valueOf(frmPC.getLista().get(frmPC.getIndex()).getTelefone_responsavel_banca_organizadora()));
+                frmCC.setEmailResponsavel(String.valueOf(frmPC.getLista().get(frmPC.getIndex()).getEmail_banca_organizadora()));
+                
+                frmCC.preencherCampos();
+            }
+        } 
+        else 
         {
             JOptionPane.showMessageDialog(null, "Digite as informações antes de salvar.");
         }
@@ -645,12 +652,14 @@ public class frmPrincipal extends javax.swing.JFrame {
     {//GEN-HEADEREND:event_btnNovoActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_btnNovoActionPerformed
-    
-    public static void main(String args[]) 
+
+    public static void main(String args[])
     {
-        
-        java.awt.EventQueue.invokeLater(new Runnable() {
-            public void run() {
+
+        java.awt.EventQueue.invokeLater(new Runnable()
+        {
+            public void run()
+            {
                 new frmPrincipal().setVisible(true);
             }
         });

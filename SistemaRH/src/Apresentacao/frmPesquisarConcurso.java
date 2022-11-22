@@ -298,6 +298,7 @@ private void listarValores(PesquisarConcursoControle controle)
              });
                 
                 setLista(lista);
+               
             }
         } 
         catch (Exception erro) 

@@ -4,7 +4,8 @@
  */
 package Apresentacao;
 
-import javax.swing.JTextField;
+import DTO.PesquisarConcursoDTO;
+import java.util.ArrayList;
 
 /**
  *
@@ -18,14 +19,13 @@ public class frmCadastrarConcurso extends javax.swing.JInternalFrame
     private String bancaConcurso = "";
     private String telBanca = "";
     private String responsavelBanca = "";
-    private String telResposanvelBanca = "";
+    private String telResponsavelBanca = "";
     private String emailResponsavel = "";
-    
-    
+    private ArrayList<PesquisarConcursoDTO> lista;
+
     public frmCadastrarConcurso()
     {
         initComponents();
-
     }
 
     public void gravarRegistro()
@@ -35,10 +35,41 @@ public class frmCadastrarConcurso extends javax.swing.JInternalFrame
         setBancaConcurso(txtBancaConcurso.getText());
         setTelBanca(txtTelBanca.getText());
         setResponsavelBanca(txtTelResponsavelBanca.getText());
-        setTelResposanvelBanca(txtTelResponsavelBanca.getText());
+        setTelResponsavelBanca(txtTelResponsavelBanca.getText());
         setEmailResponsavel(txtEmail.getText());
+    }
+
+    public void preencherLista(ArrayList<PesquisarConcursoDTO> lista, int index)
+    {
+        this.setLista(lista);
+        setNumeroConcurso(String.valueOf(getLista().get(index).getNumero_concurso()));
+        setAnoConcurso(String.valueOf(getLista().get(index).getAno_concurso()));
+        setBancaConcurso(String.valueOf(getLista().get(index).getNome_banca_organizadora()));
+        setTelBanca(String.valueOf(getLista().get(index).getTelefone_banca_organizadora()));
+        setResponsavelBanca(String.valueOf(getLista().get(index).getResponsavel_banca_organizadora()));
+        setTelResponsavelBanca(String.valueOf(getLista().get(index).getTelefone_responsavel_banca_organizadora()));
+        setEmailResponsavel(String.valueOf(getLista().get(index).getEmail_banca_organizadora()));
+        preencherCampos();
+    }
+
+    public void preencherCampos()
+    {
+        txtNumeroConcurso.setText(getNumeroConcurso());
+        txtAnoConcurso.setText(getAnoConcurso());
+        txtBancaConcurso.setText(getBancaConcurso());
+        txtTelBanca.setText(getTelBanca());
+        txtResponsavelBancaConcurso.setText(getResponsavelBanca());
+        txtTelResponsavelBanca.setText(getTelResponsavelBanca());
+        txtEmail.setText(getEmailResponsavel());
         
-        
+        System.out.println(getNumeroConcurso());
+        System.out.println(getAnoConcurso());
+        System.out.println(getBancaConcurso());
+        System.out.println(getTelBanca());
+        System.out.println(getResponsavelBanca());
+        System.out.println(getTelResponsavelBanca());
+        System.out.println(getEmailResponsavel());
+ 
     }
 
     public String getNumeroConcurso()
@@ -49,8 +80,8 @@ public class frmCadastrarConcurso extends javax.swing.JInternalFrame
     public void setNumeroConcurso(String numeroConcurso)
     {
         this.numeroConcurso = numeroConcurso;
-    }    
-    
+    }
+
     public String getAnoConcurso()
     {
         return anoConcurso;
@@ -91,14 +122,14 @@ public class frmCadastrarConcurso extends javax.swing.JInternalFrame
         this.responsavelBanca = responsavelBanca;
     }
 
-    public String getTelResposanvelBanca()
+    public String getTelResponsavelBanca()
     {
-        return telResposanvelBanca;
+        return telResponsavelBanca;
     }
 
-    public void setTelResposanvelBanca(String telResposanvelBanca)
+    public void setTelResponsavelBanca(String telResponsavelBanca)
     {
-        this.telResposanvelBanca = telResposanvelBanca;
+        this.telResponsavelBanca = telResponsavelBanca;
     }
 
     public String getEmailResponsavel()
@@ -110,9 +141,16 @@ public class frmCadastrarConcurso extends javax.swing.JInternalFrame
     {
         this.emailResponsavel = emailResponsavel;
     }
-    
-    
-    
+
+    public ArrayList<PesquisarConcursoDTO> getLista()
+    {
+        return lista;
+    }
+
+    public void setLista(ArrayList<PesquisarConcursoDTO> lista)
+    {
+        this.lista = lista;
+    }
 
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
