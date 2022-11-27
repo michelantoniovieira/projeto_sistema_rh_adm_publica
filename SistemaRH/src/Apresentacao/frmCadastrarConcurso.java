@@ -34,7 +34,7 @@ public class frmCadastrarConcurso extends javax.swing.JInternalFrame
         setAnoConcurso(txtAnoConcurso.getText());
         setBancaConcurso(txtBancaConcurso.getText());
         setTelBanca(txtTelBanca.getText());
-        setResponsavelBanca(txtTelResponsavelBanca.getText());
+        setResponsavelBanca(txtResponsavelBancaConcurso.getText());
         setTelResponsavelBanca(txtTelResponsavelBanca.getText());
         setEmailResponsavel(txtEmail.getText());
     }
@@ -61,15 +61,50 @@ public class frmCadastrarConcurso extends javax.swing.JInternalFrame
         txtResponsavelBancaConcurso.setText(getResponsavelBanca());
         txtTelResponsavelBanca.setText(getTelResponsavelBanca());
         txtEmail.setText(getEmailResponsavel());
-        
-        System.out.println(getNumeroConcurso());
-        System.out.println(getAnoConcurso());
-        System.out.println(getBancaConcurso());
-        System.out.println(getTelBanca());
-        System.out.println(getResponsavelBanca());
-        System.out.println(getTelResponsavelBanca());
-        System.out.println(getEmailResponsavel());
- 
+
+    }
+
+    //liberar os campos para edição
+    public void ativarCampos()
+    {
+        txtNumeroConcurso.setEnabled(true);
+        txtAnoConcurso.setEnabled(true);
+        txtBancaConcurso.setEnabled(true);
+        txtTelBanca.setEnabled(true);
+        txtResponsavelBancaConcurso.setEnabled(true);
+        txtTelResponsavelBanca.setEnabled(true);
+        txtEmail.setEnabled(true);
+    }
+
+    //travar os campos para edição
+    public void desativarCampos()
+    {
+        txtNumeroConcurso.setEnabled(false);
+        txtAnoConcurso.setEnabled(false);
+        txtBancaConcurso.setEnabled(false);
+        txtTelBanca.setEnabled(false);
+        txtResponsavelBancaConcurso.setEnabled(false);
+        txtTelResponsavelBanca.setEnabled(false);
+        txtEmail.setEnabled(false);
+        limparCampos();
+    }
+
+    public void limparCampos()
+    {
+        this.setNumeroConcurso("");
+        txtNumeroConcurso.setText("");
+        this.setAnoConcurso("");
+        txtAnoConcurso.setText("");
+        this.setBancaConcurso("");
+        txtBancaConcurso.setText("");
+        this.setTelBanca("");
+        txtTelBanca.setText("");
+        this.setResponsavelBanca("");
+        txtResponsavelBancaConcurso.setText("");
+        this.setTelResponsavelBanca("");
+        txtTelResponsavelBanca.setText("");
+        this.setEmailResponsavel("");
+        txtEmail.setText("");
     }
 
     public String getNumeroConcurso()
@@ -183,12 +218,17 @@ public class frmCadastrarConcurso extends javax.swing.JInternalFrame
         setTitle("Cadastrar Concurso");
         setToolTipText("");
 
+        txtTelBanca.setEnabled(false);
+
         lblTelBanca.setText("Tel.:");
+
+        txtTelResponsavelBanca.setEnabled(false);
 
         lblTelResponsavelBanca.setText("Tel.:");
 
         lblResponsavelBanca.setText("Responsável:");
 
+        txtResponsavelBancaConcurso.setEnabled(false);
         txtResponsavelBancaConcurso.addActionListener(new java.awt.event.ActionListener()
         {
             public void actionPerformed(java.awt.event.ActionEvent evt)
@@ -199,13 +239,20 @@ public class frmCadastrarConcurso extends javax.swing.JInternalFrame
 
         lblBancaConcurso.setText("Banca:");
 
+        txtBancaConcurso.setEnabled(false);
+
         lblNumeroConcurso.setText("Nº Concurso:");
 
+        txtNumeroConcurso.setEnabled(false);
+
         lblAnoConcurso.setText("Ano Concurso:");
+
+        txtAnoConcurso.setEnabled(false);
 
         lblTitulo.setFont(new java.awt.Font("Segoe UI", 0, 36)); // NOI18N
         lblTitulo.setText("Cadastrar Concurso");
 
+        txtEmail.setEnabled(false);
         txtEmail.addActionListener(new java.awt.event.ActionListener()
         {
             public void actionPerformed(java.awt.event.ActionEvent evt)
@@ -235,9 +282,7 @@ public class frmCadastrarConcurso extends javax.swing.JInternalFrame
                                     .addComponent(txtResponsavelBancaConcurso, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.PREFERRED_SIZE, 231, javax.swing.GroupLayout.PREFERRED_SIZE))
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                                 .addGroup(pInformacoesLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addGroup(pInformacoesLayout.createSequentialGroup()
-                                        .addComponent(lblTelResponsavelBanca)
-                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                                    .addComponent(lblTelResponsavelBanca)
                                     .addComponent(txtTelResponsavelBanca)))
                             .addGroup(javax.swing.GroupLayout.Alignment.LEADING, pInformacoesLayout.createSequentialGroup()
                                 .addGroup(pInformacoesLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)

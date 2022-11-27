@@ -194,6 +194,9 @@
           </Layout>
           <SubComponents>
             <Component class="javax.swing.JTextField" name="txtTelBanca">
+              <Properties>
+                <Property name="enabled" type="boolean" value="false"/>
+              </Properties>
             </Component>
             <Component class="javax.swing.JLabel" name="lblTelBanca">
               <Properties>
@@ -201,6 +204,9 @@
               </Properties>
             </Component>
             <Component class="javax.swing.JTextField" name="txtTelResponsavelBanca">
+              <Properties>
+                <Property name="enabled" type="boolean" value="false"/>
+              </Properties>
             </Component>
             <Component class="javax.swing.JLabel" name="lblTelResponsavelBanca">
               <Properties>
@@ -213,6 +219,9 @@
               </Properties>
             </Component>
             <Component class="javax.swing.JTextField" name="txtResponsavelBancaConcurso">
+              <Properties>
+                <Property name="enabled" type="boolean" value="false"/>
+              </Properties>
               <Events>
                 <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="txtResponsavelBancaConcursoActionPerformed"/>
               </Events>
@@ -223,6 +232,9 @@
               </Properties>
             </Component>
             <Component class="javax.swing.JTextField" name="txtBancaConcurso">
+              <Properties>
+                <Property name="enabled" type="boolean" value="false"/>
+              </Properties>
             </Component>
             <Component class="javax.swing.JLabel" name="lblNumeroConcurso">
               <Properties>
@@ -230,6 +242,9 @@
               </Properties>
             </Component>
             <Component class="javax.swing.JTextField" name="txtNumeroConcurso">
+              <Properties>
+                <Property name="enabled" type="boolean" value="false"/>
+              </Properties>
             </Component>
             <Component class="javax.swing.JLabel" name="lblAnoConcurso">
               <Properties>
@@ -237,6 +252,9 @@
               </Properties>
             </Component>
             <Component class="javax.swing.JTextField" name="txtAnoConcurso">
+              <Properties>
+                <Property name="enabled" type="boolean" value="false"/>
+              </Properties>
             </Component>
             <Component class="javax.swing.JLabel" name="lblTitulo">
               <Properties>
@@ -247,6 +265,9 @@
               </Properties>
             </Component>
             <Component class="javax.swing.JTextField" name="txtEmail">
+              <Properties>
+                <Property name="enabled" type="boolean" value="false"/>
+              </Properties>
               <Events>
                 <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="txtEmailActionPerformed"/>
               </Events>

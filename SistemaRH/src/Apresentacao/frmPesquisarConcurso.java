@@ -293,7 +293,7 @@ private void listarValores(PesquisarConcursoControle controle)
                 lista.get(num).getNome_banca_organizadora(),
                 lista.get(num).getTelefone_banca_organizadora(),
                 lista.get(num).getResponsavel_banca_organizadora(),
-                lista.get(num).getTelefone_banca_organizadora(),
+                lista.get(num).getTelefone_responsavel_banca_organizadora(),
                 lista.get(num).getEmail_banca_organizadora(),                
              });
                 

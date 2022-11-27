@@ -4,16 +4,20 @@
  */
 package Apresentacao;
 
+import DAO.CadastrarConcursoDAO;
 import Modelo.CadastrarConcursoControle;
 import java.awt.Image;
 import java.awt.event.ActionEvent;
 import java.awt.event.KeyEvent;
 import java.sql.Connection;
 import javax.imageio.ImageIO;
+import javax.swing.AbstractAction;
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
+import javax.swing.JComponent;
 import javax.swing.JFrame;
 import javax.swing.JOptionPane;
+import javax.swing.KeyStroke;
 
 /**
  *
@@ -28,6 +32,8 @@ public class frmPrincipal extends javax.swing.JFrame
     frmPreCadastro frmPC;
     frmCadastrarConcurso frmCC;
 
+    public boolean gravarAlteracao = false;
+
     public frmPrincipal()
     {
         initComponents();
@@ -39,6 +45,16 @@ public class frmPrincipal extends javax.swing.JFrame
         initComponents();
         this.setExtendedState(MAXIMIZED_BOTH);
         this.lblUsuarioConectado.setText(usuarioConectado);
+        atalhoSair();//permite utilizar as teclas de atalho
+        atalhoNovo();
+        atalhoPesquisar();
+        atalhoAlterar();
+        atalhoExcluir();
+        atalhoSalvar();
+        atalhoPrimeiro();
+        atalhoAnterior();
+        atalhoProximo();
+        atalhoUltimo();
 
     }
 
@@ -543,35 +559,25 @@ public class frmPrincipal extends javax.swing.JFrame
 
     private void btnSairActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSairActionPerformed
         //BOTÃO SAIR
-        if (evt.getSource() == btnSair) {
+
+        if (evt.getSource() == btnSair)
+        {
             int resposta = JOptionPane.showConfirmDialog(null, "Deseja Sair?", "Sair", JOptionPane.YES_NO_OPTION);
 
-            if (resposta == JOptionPane.YES_OPTION) {
+            if (resposta == JOptionPane.YES_OPTION)
+            {
                 System.exit(0);
             }
         }
     }//GEN-LAST:event_btnSairActionPerformed
 
     private void btnSairKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_btnSairKeyPressed
-        //BOTÃO SAIR PELO ATALHO BACKSPACE
-        if (evt.getKeyCode() == KeyEvent.VK_BACK_SPACE) {
-            int resposta = JOptionPane.showConfirmDialog(null, "Deseja Sair?", "Sair", JOptionPane.YES_NO_OPTION);
 
-            if (resposta == JOptionPane.YES_OPTION) {
-                System.exit(0);
-            }
-        }
+
     }//GEN-LAST:event_btnSairKeyPressed
 
     private void formKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_formKeyPressed
-        //BOTÃO SAIR PELO ATALHO BACKSPACE
-        if (evt.getKeyCode() == KeyEvent.VK_BACK_SPACE) {
-            int resposta = JOptionPane.showConfirmDialog(null, "Deseja Sair?", "Sair", JOptionPane.YES_NO_CANCEL_OPTION);
 
-            if (resposta == JOptionPane.YES_OPTION) {
-                System.exit(0);
-            }
-        }
     }//GEN-LAST:event_formKeyPressed
 
     private void btnSalvarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSalvarActionPerformed
@@ -579,17 +585,33 @@ public class frmPrincipal extends javax.swing.JFrame
         //COMANDO PARA SALVAR AS INFORMAÇÕES GRAVADAS NA TELA CONCURSO
         frmCC.gravarRegistro();
 
-        if (frmCC.isVisible() && !frmCC.getNumeroConcurso().equals("") && !frmCC.getAnoConcurso().equals("") && !frmCC.getBancaConcurso().equals("")) {
+        //entra aqui quando for gravar o primeiro cadastro
+        if (frmCC.isVisible() && !frmCC.getNumeroConcurso().equals("") && !frmCC.getAnoConcurso().equals("") && !frmCC.getBancaConcurso().equals("") && gravarAlteracao == false)
+        {
             //quando eu digitar nos campos da janela CadastrarConcurso e clicar no icone salvar da janela principal entra aqui e manda gravar registro que significa que os dados dos campos serão passados para as variaveis que eu acesso por aqui para mandar para a variavel controle           
             CadastrarConcursoControle controle = new CadastrarConcursoControle(Integer.parseInt(frmCC.getNumeroConcurso()), Integer.parseInt(frmCC.getAnoConcurso()), frmCC.getBancaConcurso(), frmCC.getTelBanca(), frmCC.getResponsavelBanca(), frmCC.getTelResponsavelBanca(), frmCC.getEmailResponsavel());
-            if (controle.getMensagem().equals("erro 1")) {
+            controle.cadastrar();
+            if (controle.getMensagem().equals("erro 1"))
+            {
                 JOptionPane.showMessageDialog(null, "Este concurso já foi cadastrado!");
-            } else if (controle.getMensagem().equals("ok")) {
+            } else if (controle.getMensagem().equals("ok"))
+            {
                 JOptionPane.showMessageDialog(null, "Concurso cadastrado com sucesso.");
+                frmCC.desativarCampos();
             }
-        } else {
-            JOptionPane.showMessageDialog(null, "Digite as informações antes de salvar.");
         }
+
+        //entra aqui quando for alterar um cadastro
+        if (frmCC.isVisible() && !frmCC.getNumeroConcurso().equals("") && !frmCC.getAnoConcurso().equals("") && !frmCC.getBancaConcurso().equals("") && gravarAlteracao == true)
+        {
+            CadastrarConcursoControle controle = new CadastrarConcursoControle(Integer.parseInt(frmCC.getNumeroConcurso()), Integer.parseInt(frmCC.getAnoConcurso()), frmCC.getBancaConcurso(), frmCC.getTelBanca(), frmCC.getResponsavelBanca(), frmCC.getTelResponsavelBanca(), frmCC.getEmailResponsavel());
+            controle.alterar();
+            gravarAlteracao = false;
+            frmCC.limparCampos();
+            frmCC.desativarCampos();
+            JOptionPane.showMessageDialog(null, "Alteração realizada com sucesso!");
+        }
+
     }//GEN-LAST:event_btnSalvarActionPerformed
 
     private void btnPrimeiroActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnPrimeiroActionPerformed
@@ -601,7 +623,10 @@ public class frmPrincipal extends javax.swing.JFrame
     }//GEN-LAST:event_btnAnteriorActionPerformed
 
     private void btnProximoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnProximoActionPerformed
-        // TODO add your handling code here:
+        if (frmCC.isVisible())
+        {
+
+        }
     }//GEN-LAST:event_btnProximoActionPerformed
 
     private void btnUltimoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnUltimoActionPerformed
@@ -609,12 +634,33 @@ public class frmPrincipal extends javax.swing.JFrame
     }//GEN-LAST:event_btnUltimoActionPerformed
 
     private void btnExcluirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnExcluirActionPerformed
-        // TODO add your handling code here:
+        if (frmCC.isVisible() && !frmCC.getNumeroConcurso().equals(""))
+        {
+            int resposta = JOptionPane.showConfirmDialog(null, "Deseja realizar a exclusão do registro?", "Sair", JOptionPane.YES_NO_OPTION, 2);
+
+            if (resposta == JOptionPane.YES_OPTION)
+            {
+                CadastrarConcursoControle controle = new CadastrarConcursoControle(Integer.parseInt(frmCC.getNumeroConcurso()));
+                controle.excluir();
+                JOptionPane.showMessageDialog(null, "Exclusão realizada com sucesso!");
+                frmCC.limparCampos();
+            }
+        } else
+        {
+            JOptionPane.showMessageDialog(null, "Selecione um registro para excluir.");
+        }
     }//GEN-LAST:event_btnExcluirActionPerformed
 
     private void btnAlterarActionPerformed(java.awt.event.ActionEvent evt)//GEN-FIRST:event_btnAlterarActionPerformed
     {//GEN-HEADEREND:event_btnAlterarActionPerformed
-        // TODO add your handling code here:
+        //JANELA CADASTRAR CONCURSO
+        if (frmCC.isVisible() && !frmCC.getNumeroConcurso().equals("") && !frmCC.getNumeroConcurso().equals("") && !frmCC.getAnoConcurso().equals("") && !frmCC.getBancaConcurso().equals("") && gravarAlteracao == false)
+        {
+            JOptionPane.showMessageDialog(null, true);
+            System.out.println(frmCC.getNumeroConcurso());
+            frmCC.ativarCampos();
+            gravarAlteracao = true;
+        }
     }//GEN-LAST:event_btnAlterarActionPerformed
 
     private void btnPesquisarActionPerformed(java.awt.event.ActionEvent evt)//GEN-FIRST:event_btnPesquisarActionPerformed
@@ -623,13 +669,13 @@ public class frmPrincipal extends javax.swing.JFrame
         //COMANDO PARA pesquisar AS INFORMAÇÕES NA TELA CONCURSO
         //frmCC.gravarRegistro();
 
-        if (frmCC.isVisible()) 
+        if (frmCC.isVisible())
         {
             frmPesquisarConcurso frmPC = new frmPesquisarConcurso(null, true);
             frmPC.setVisible(true);
             //se a mensagem for pode passar entra no if abaixo
-            if (frmPC.getMensagem().equals("pode passar")) 
-            {         
+            if (frmPC.getMensagem().equals("pode passar"))
+            {
                 //coloco na tela de cadastro de concurso, seto na variavel a lista e o index puxado direto da tela frmPesquisarConcurso 
                 frmCC.setNumeroConcurso(String.valueOf(frmPC.getLista().get(frmPC.getIndex()).getNumero_concurso()));
                 frmCC.setAnoConcurso(String.valueOf(frmPC.getLista().get(frmPC.getIndex()).getAno_concurso()));
@@ -638,19 +684,23 @@ public class frmPrincipal extends javax.swing.JFrame
                 frmCC.setResponsavelBanca(String.valueOf(frmPC.getLista().get(frmPC.getIndex()).getResponsavel_banca_organizadora()));
                 frmCC.setTelResponsavelBanca(String.valueOf(frmPC.getLista().get(frmPC.getIndex()).getTelefone_responsavel_banca_organizadora()));
                 frmCC.setEmailResponsavel(String.valueOf(frmPC.getLista().get(frmPC.getIndex()).getEmail_banca_organizadora()));
-                
+
                 frmCC.preencherCampos();
             }
-        } 
-        else 
+        } else
         {
             JOptionPane.showMessageDialog(null, "Digite as informações antes de salvar.");
         }
     }//GEN-LAST:event_btnPesquisarActionPerformed
 
+
     private void btnNovoActionPerformed(java.awt.event.ActionEvent evt)//GEN-FIRST:event_btnNovoActionPerformed
     {//GEN-HEADEREND:event_btnNovoActionPerformed
-        // TODO add your handling code here:
+        if (frmCC.isVisible())
+        {
+            frmCC.ativarCampos();
+            frmCC.limparCampos();
+        }
     }//GEN-LAST:event_btnNovoActionPerformed
 
     public static void main(String args[])
@@ -664,6 +714,148 @@ public class frmPrincipal extends javax.swing.JFrame
             }
         });
     }
+
+    //para este metodo funcionar eu devo chamalo no método construtor
+    public void atalhoSair()
+    {
+        rootPane.getInputMap(JComponent.WHEN_IN_FOCUSED_WINDOW).put(KeyStroke.getKeyStroke(KeyEvent.VK_BACK_SPACE, 0), "BACKSPACE");
+        rootPane.getRootPane().getActionMap().put("BACKSPACE", new AbstractAction("BACKSPACE")
+        {
+            @Override
+            public void actionPerformed(ActionEvent e)
+            {
+                btnSair.doClick();//Aqui é onde ocorre o evento simulando o click do botão através da tecla ENTER
+                // Mas o indicado é você criar um método para realizar essa tarefa e chama-lo onde for necessário.
+            }
+        });
+    }
+
+    public void atalhoNovo()
+    {
+        rootPane.getInputMap(JComponent.WHEN_IN_FOCUSED_WINDOW).put(KeyStroke.getKeyStroke(KeyEvent.VK_F5, 0), "NOVO");
+        rootPane.getRootPane().getActionMap().put("NOVO", new AbstractAction("NOVO")
+        {
+            @Override
+            public void actionPerformed(ActionEvent e)
+            {
+                btnNovo.doClick();//Aqui é onde ocorre o evento simulando o click do botão através da tecla ENTER
+                // Mas o indicado é você criar um método para realizar essa tarefa e chama-lo onde for necessário.
+            }
+        });
+    }
+
+    public void atalhoPesquisar()
+    {
+        rootPane.getInputMap(JComponent.WHEN_IN_FOCUSED_WINDOW).put(KeyStroke.getKeyStroke(KeyEvent.VK_F6, 0), "PESQUISAR");
+        rootPane.getRootPane().getActionMap().put("PESQUISAR", new AbstractAction("PESQUISAR")
+        {
+            @Override
+            public void actionPerformed(ActionEvent e)
+            {
+                btnPesquisar.doClick();//Aqui é onde ocorre o evento simulando o click do botão através da tecla ENTER
+                // Mas o indicado é você criar um método para realizar essa tarefa e chama-lo onde for necessário.
+            }
+        });
+    }
+
+    public void atalhoAlterar()
+    {
+        rootPane.getInputMap(JComponent.WHEN_IN_FOCUSED_WINDOW).put(KeyStroke.getKeyStroke(KeyEvent.VK_F7, 0), "ALTERAR");
+        rootPane.getRootPane().getActionMap().put("ALTERAR", new AbstractAction("ALTERAR")
+        {
+            @Override
+            public void actionPerformed(ActionEvent e)
+            {
+                btnAlterar.doClick();//Aqui é onde ocorre o evento simulando o click do botão através da tecla ENTER
+                // Mas o indicado é você criar um método para realizar essa tarefa e chama-lo onde for necessário.
+            }
+        });
+    }
+
+    public void atalhoExcluir()
+    {
+        rootPane.getInputMap(JComponent.WHEN_IN_FOCUSED_WINDOW).put(KeyStroke.getKeyStroke(KeyEvent.VK_F11, 0), "EXCLUIR");
+        rootPane.getRootPane().getActionMap().put("EXCLUIR", new AbstractAction("EXCLUIR")
+        {
+            @Override
+            public void actionPerformed(ActionEvent e)
+            {
+                btnExcluir.doClick();//Aqui é onde ocorre o evento simulando o click do botão através da tecla ENTER
+                // Mas o indicado é você criar um método para realizar essa tarefa e chama-lo onde for necessário.
+            }
+        });
+    }
+
+    public void atalhoSalvar()
+    {
+        rootPane.getInputMap(JComponent.WHEN_IN_FOCUSED_WINDOW).put(KeyStroke.getKeyStroke(KeyEvent.VK_F2, 0), "SALVAR");
+        rootPane.getRootPane().getActionMap().put("SALVAR", new AbstractAction("SALVAR")
+        {
+            @Override
+            public void actionPerformed(ActionEvent e)
+            {
+                btnSalvar.doClick();//Aqui é onde ocorre o evento simulando o click do botão através da tecla ENTER
+                // Mas o indicado é você criar um método para realizar essa tarefa e chama-lo onde for necessário.
+            }
+        });
+    }
+
+    public void atalhoPrimeiro()
+    {
+        rootPane.getInputMap(JComponent.WHEN_IN_FOCUSED_WINDOW).put(KeyStroke.getKeyStroke(KeyEvent.VK_F9, 0), "PRIMEIRO");
+        rootPane.getRootPane().getActionMap().put("PRIMEIRO", new AbstractAction("PRIMEIRO")
+        {
+            @Override
+            public void actionPerformed(ActionEvent e)
+            {
+                btnPrimeiro.doClick();//Aqui é onde ocorre o evento simulando o click do botão através da tecla ENTER
+                // Mas o indicado é você criar um método para realizar essa tarefa e chama-lo onde for necessário.
+            }
+        });
+    }
+
+    public void atalhoAnterior()
+    {
+        rootPane.getInputMap(JComponent.WHEN_IN_FOCUSED_WINDOW).put(KeyStroke.getKeyStroke(KeyEvent.VK_F7, 0), "ANTERIOR");
+        rootPane.getRootPane().getActionMap().put("ANTERIOR", new AbstractAction("ANTERIOR")
+        {
+            @Override
+            public void actionPerformed(ActionEvent e)
+            {
+                btnAnterior.doClick();//Aqui é onde ocorre o evento simulando o click do botão através da tecla ENTER
+                // Mas o indicado é você criar um método para realizar essa tarefa e chama-lo onde for necessário.
+            }
+        });
+    }
+    
+    public void atalhoProximo()
+    {
+        rootPane.getInputMap(JComponent.WHEN_IN_FOCUSED_WINDOW).put(KeyStroke.getKeyStroke(KeyEvent.VK_F8, 0), "PROXIMO");
+        rootPane.getRootPane().getActionMap().put("PROXIMO", new AbstractAction("PROXIMO")
+        {
+            @Override
+            public void actionPerformed(ActionEvent e)
+            {
+                btnProximo.doClick();//Aqui é onde ocorre o evento simulando o click do botão através da tecla ENTER
+                // Mas o indicado é você criar um método para realizar essa tarefa e chama-lo onde for necessário.
+            }
+        });
+    }
+    
+    public void atalhoUltimo()
+    {
+        rootPane.getInputMap(JComponent.WHEN_IN_FOCUSED_WINDOW).put(KeyStroke.getKeyStroke(KeyEvent.VK_F10, 0), "ULTIMO");
+        rootPane.getRootPane().getActionMap().put("ULTIMO", new AbstractAction("ULTIMO")
+        {
+            @Override
+            public void actionPerformed(ActionEvent e)
+            {
+                btnUltimo.doClick();//Aqui é onde ocorre o evento simulando o click do botão através da tecla ENTER
+                // Mas o indicado é você criar um método para realizar essa tarefa e chama-lo onde for necessário.
+            }
+        });
+    }
+
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnAlterar;
