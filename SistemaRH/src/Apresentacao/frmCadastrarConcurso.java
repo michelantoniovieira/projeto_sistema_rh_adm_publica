@@ -14,6 +14,7 @@ import java.util.ArrayList;
 public class frmCadastrarConcurso extends javax.swing.JInternalFrame
 {
 
+    private String codigoConcurso = "";
     private String numeroConcurso = "";
     private String anoConcurso = "";
     private String bancaConcurso = "";
@@ -30,6 +31,7 @@ public class frmCadastrarConcurso extends javax.swing.JInternalFrame
 
     public void gravarRegistro()
     {
+        setCodigoConcurso(txtCodigoConcurso.getText());
         setNumeroConcurso(txtNumeroConcurso.getText());
         setAnoConcurso(txtAnoConcurso.getText());
         setBancaConcurso(txtBancaConcurso.getText());
@@ -42,6 +44,7 @@ public class frmCadastrarConcurso extends javax.swing.JInternalFrame
     public void preencherLista(ArrayList<PesquisarConcursoDTO> lista, int index)
     {
         this.setLista(lista);
+        setCodigoConcurso(String.valueOf(getLista().get(index).getCodigoConcurso()));
         setNumeroConcurso(String.valueOf(getLista().get(index).getNumero_concurso()));
         setAnoConcurso(String.valueOf(getLista().get(index).getAno_concurso()));
         setBancaConcurso(String.valueOf(getLista().get(index).getNome_banca_organizadora()));
@@ -54,6 +57,7 @@ public class frmCadastrarConcurso extends javax.swing.JInternalFrame
 
     public void preencherCampos()
     {
+        txtCodigoConcurso.setText(getCodigoConcurso());
         txtNumeroConcurso.setText(getNumeroConcurso());
         txtAnoConcurso.setText(getAnoConcurso());
         txtBancaConcurso.setText(getBancaConcurso());
@@ -67,6 +71,7 @@ public class frmCadastrarConcurso extends javax.swing.JInternalFrame
     //liberar os campos para edição
     public void ativarCampos()
     {
+        txtCodigoConcurso.setEnabled(true);
         txtNumeroConcurso.setEnabled(true);
         txtAnoConcurso.setEnabled(true);
         txtBancaConcurso.setEnabled(true);
@@ -79,6 +84,7 @@ public class frmCadastrarConcurso extends javax.swing.JInternalFrame
     //travar os campos para edição
     public void desativarCampos()
     {
+        txtCodigoConcurso.setEnabled(false);
         txtNumeroConcurso.setEnabled(false);
         txtAnoConcurso.setEnabled(false);
         txtBancaConcurso.setEnabled(false);
@@ -91,6 +97,8 @@ public class frmCadastrarConcurso extends javax.swing.JInternalFrame
 
     public void limparCampos()
     {
+        this.setCodigoConcurso("");
+        txtCodigoConcurso.setText("");
         this.setNumeroConcurso("");
         txtNumeroConcurso.setText("");
         this.setAnoConcurso("");
@@ -107,6 +115,16 @@ public class frmCadastrarConcurso extends javax.swing.JInternalFrame
         txtEmail.setText("");
     }
 
+    public String getCodigoConcurso()
+    {
+        return codigoConcurso;
+    }
+
+    public void setCodigoConcurso(String codigoConcurso)
+    {
+        this.codigoConcurso = codigoConcurso;
+    }    
+    
     public String getNumeroConcurso()
     {
         return numeroConcurso;
@@ -207,9 +225,11 @@ public class frmCadastrarConcurso extends javax.swing.JInternalFrame
         txtNumeroConcurso = new javax.swing.JTextField();
         lblAnoConcurso = new javax.swing.JLabel();
         txtAnoConcurso = new javax.swing.JTextField();
-        lblTitulo = new javax.swing.JLabel();
         txtEmail = new javax.swing.JTextField();
         lblEmail = new javax.swing.JLabel();
+        txtCodigoConcurso = new javax.swing.JTextField();
+        lblNumeroConcurso1 = new javax.swing.JLabel();
+        lblTitulo = new javax.swing.JLabel();
 
         lblCadastrarConcurso.setText("label1");
 
@@ -249,9 +269,6 @@ public class frmCadastrarConcurso extends javax.swing.JInternalFrame
 
         txtAnoConcurso.setEnabled(false);
 
-        lblTitulo.setFont(new java.awt.Font("Segoe UI", 0, 36)); // NOI18N
-        lblTitulo.setText("Cadastrar Concurso");
-
         txtEmail.setEnabled(false);
         txtEmail.addActionListener(new java.awt.event.ActionListener()
         {
@@ -262,6 +279,10 @@ public class frmCadastrarConcurso extends javax.swing.JInternalFrame
         });
 
         lblEmail.setText("Email:");
+
+        txtCodigoConcurso.setEnabled(false);
+
+        lblNumeroConcurso1.setText("Codigo Concurso");
 
         javax.swing.GroupLayout pInformacoesLayout = new javax.swing.GroupLayout(pInformacoes);
         pInformacoes.setLayout(pInformacoesLayout);
@@ -286,18 +307,16 @@ public class frmCadastrarConcurso extends javax.swing.JInternalFrame
                                     .addComponent(txtTelResponsavelBanca)))
                             .addGroup(javax.swing.GroupLayout.Alignment.LEADING, pInformacoesLayout.createSequentialGroup()
                                 .addGroup(pInformacoesLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                                    .addGroup(javax.swing.GroupLayout.Alignment.LEADING, pInformacoesLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                                        .addComponent(lblTitulo)
-                                        .addGroup(pInformacoesLayout.createSequentialGroup()
-                                            .addGroup(pInformacoesLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                                .addComponent(lblNumeroConcurso)
-                                                .addComponent(txtNumeroConcurso, javax.swing.GroupLayout.PREFERRED_SIZE, 135, javax.swing.GroupLayout.PREFERRED_SIZE))
-                                            .addGap(18, 18, 18)
-                                            .addGroup(pInformacoesLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                                                .addGroup(pInformacoesLayout.createSequentialGroup()
-                                                    .addComponent(lblAnoConcurso)
-                                                    .addGap(92, 92, 92))
-                                                .addComponent(txtAnoConcurso))))
+                                    .addGroup(javax.swing.GroupLayout.Alignment.LEADING, pInformacoesLayout.createSequentialGroup()
+                                        .addGroup(pInformacoesLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                            .addComponent(lblNumeroConcurso)
+                                            .addComponent(txtNumeroConcurso, javax.swing.GroupLayout.PREFERRED_SIZE, 135, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                        .addGap(18, 18, 18)
+                                        .addGroup(pInformacoesLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                                            .addGroup(pInformacoesLayout.createSequentialGroup()
+                                                .addComponent(lblAnoConcurso)
+                                                .addGap(92, 92, 92))
+                                            .addComponent(txtAnoConcurso)))
                                     .addGroup(javax.swing.GroupLayout.Alignment.LEADING, pInformacoesLayout.createSequentialGroup()
                                         .addGroup(pInformacoesLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                                             .addGroup(pInformacoesLayout.createSequentialGroup()
@@ -310,14 +329,21 @@ public class frmCadastrarConcurso extends javax.swing.JInternalFrame
                                             .addComponent(lblTelBanca)
                                             .addComponent(txtTelBanca, javax.swing.GroupLayout.PREFERRED_SIZE, 87, javax.swing.GroupLayout.PREFERRED_SIZE))))
                                 .addGap(0, 0, Short.MAX_VALUE)))
-                        .addGap(150, 150, 150))))
+                        .addGap(150, 150, 150))
+                    .addGroup(pInformacoesLayout.createSequentialGroup()
+                        .addGroup(pInformacoesLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(lblNumeroConcurso1)
+                            .addComponent(txtCodigoConcurso, javax.swing.GroupLayout.PREFERRED_SIZE, 135, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGap(0, 0, Short.MAX_VALUE))))
         );
         pInformacoesLayout.setVerticalGroup(
             pInformacoesLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(pInformacoesLayout.createSequentialGroup()
-                .addGap(22, 22, 22)
-                .addComponent(lblTitulo)
-                .addGap(18, 18, 18)
+                .addGap(38, 38, 38)
+                .addComponent(lblNumeroConcurso1)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(txtCodigoConcurso, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(pInformacoesLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(lblNumeroConcurso)
                     .addComponent(lblAnoConcurso))
@@ -349,8 +375,11 @@ public class frmCadastrarConcurso extends javax.swing.JInternalFrame
                 .addComponent(lblEmail)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(txtEmail, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(24, Short.MAX_VALUE))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
+
+        lblTitulo.setFont(new java.awt.Font("Segoe UI", 0, 36)); // NOI18N
+        lblTitulo.setText("Cadastrar Concurso");
 
         javax.swing.GroupLayout pPrincipalLayout = new javax.swing.GroupLayout(pPrincipal);
         pPrincipal.setLayout(pPrincipalLayout);
@@ -360,11 +389,18 @@ public class frmCadastrarConcurso extends javax.swing.JInternalFrame
                 .addContainerGap(44, Short.MAX_VALUE)
                 .addComponent(pInformacoes, javax.swing.GroupLayout.PREFERRED_SIZE, 356, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(41, 41, 41))
+            .addGroup(pPrincipalLayout.createSequentialGroup()
+                .addGap(60, 60, 60)
+                .addComponent(lblTitulo)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         pPrincipalLayout.setVerticalGroup(
             pPrincipalLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, pPrincipalLayout.createSequentialGroup()
-                .addComponent(pInformacoes, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addContainerGap(18, Short.MAX_VALUE)
+                .addComponent(lblTitulo, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(pInformacoes, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap())
         );
 
@@ -404,6 +440,7 @@ public class frmCadastrarConcurso extends javax.swing.JInternalFrame
     private java.awt.Label lblCadastrarConcurso;
     private javax.swing.JLabel lblEmail;
     private javax.swing.JLabel lblNumeroConcurso;
+    private javax.swing.JLabel lblNumeroConcurso1;
     private javax.swing.JLabel lblResponsavelBanca;
     private javax.swing.JLabel lblTelBanca;
     private javax.swing.JLabel lblTelResponsavelBanca;
@@ -412,6 +449,7 @@ public class frmCadastrarConcurso extends javax.swing.JInternalFrame
     private javax.swing.JPanel pPrincipal;
     private javax.swing.JTextField txtAnoConcurso;
     private javax.swing.JTextField txtBancaConcurso;
+    private javax.swing.JTextField txtCodigoConcurso;
     private javax.swing.JTextField txtEmail;
     private javax.swing.JTextField txtNumeroConcurso;
     private javax.swing.JTextField txtResponsavelBancaConcurso;

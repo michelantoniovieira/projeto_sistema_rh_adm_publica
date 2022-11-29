@@ -615,23 +615,51 @@ public class frmPrincipal extends javax.swing.JFrame
     }//GEN-LAST:event_btnSalvarActionPerformed
 
     private void btnPrimeiroActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnPrimeiroActionPerformed
-        // TODO add your handling code here:
+        if (frmCC.isVisible())
+        {
+            preencherTelaCadastroConcurso("primeiro");
+        }
     }//GEN-LAST:event_btnPrimeiroActionPerformed
 
     private void btnAnteriorActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAnteriorActionPerformed
-        // TODO add your handling code here:
+        if (frmCC.isVisible())
+        {
+            preencherTelaCadastroConcurso("anterior");
+        }
     }//GEN-LAST:event_btnAnteriorActionPerformed
 
     private void btnProximoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnProximoActionPerformed
         if (frmCC.isVisible())
         {
-
+            preencherTelaCadastroConcurso("proximo");
         }
     }//GEN-LAST:event_btnProximoActionPerformed
 
     private void btnUltimoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnUltimoActionPerformed
-        // TODO add your handling code here:
+        if (frmCC.isVisible())
+        {
+            preencherTelaCadastroConcurso("ultimo");
+        }
     }//GEN-LAST:event_btnUltimoActionPerformed
+
+    private void preencherTelaCadastroConcurso(String comandoBotao)
+    {
+        if (frmCC.isVisible())
+        {
+            CadastrarConcursoControle controle = new CadastrarConcursoControle(Integer.parseInt(frmCC.getNumeroConcurso()));
+            controle.pesquisar(comandoBotao);
+
+            frmCC.setCodigoConcurso(String.valueOf(controle.getCodigo_concurso()));
+            frmCC.setNumeroConcurso(String.valueOf(controle.getNumero_concurso()));
+            frmCC.setAnoConcurso(String.valueOf(controle.getAno_concurso()));
+            frmCC.setBancaConcurso(String.valueOf(controle.getNome_banca_organizadora()));
+            frmCC.setTelBanca(String.valueOf(controle.getTelefone_banca_organizadora()));
+            frmCC.setResponsavelBanca(String.valueOf(controle.getResponsavel_banca_organizadora()));
+            frmCC.setTelResponsavelBanca(String.valueOf(controle.getResponsavel_banca_organizadora()));
+            frmCC.setEmailResponsavel(String.valueOf(controle.getEmail_banca_organizadora()));
+            frmCC.preencherCampos();
+        }
+    }
 
     private void btnExcluirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnExcluirActionPerformed
         if (frmCC.isVisible() && !frmCC.getNumeroConcurso().equals(""))
@@ -677,6 +705,7 @@ public class frmPrincipal extends javax.swing.JFrame
             if (frmPC.getMensagem().equals("pode passar"))
             {
                 //coloco na tela de cadastro de concurso, seto na variavel a lista e o index puxado direto da tela frmPesquisarConcurso 
+                frmCC.setCodigoConcurso(String.valueOf(frmPC.getLista().get(frmPC.getIndex()).getCodigoConcurso()));
                 frmCC.setNumeroConcurso(String.valueOf(frmPC.getLista().get(frmPC.getIndex()).getNumero_concurso()));
                 frmCC.setAnoConcurso(String.valueOf(frmPC.getLista().get(frmPC.getIndex()).getAno_concurso()));
                 frmCC.setBancaConcurso(String.valueOf(frmPC.getLista().get(frmPC.getIndex()).getNome_banca_organizadora()));
@@ -827,7 +856,7 @@ public class frmPrincipal extends javax.swing.JFrame
             }
         });
     }
-    
+
     public void atalhoProximo()
     {
         rootPane.getInputMap(JComponent.WHEN_IN_FOCUSED_WINDOW).put(KeyStroke.getKeyStroke(KeyEvent.VK_F8, 0), "PROXIMO");
@@ -841,7 +870,7 @@ public class frmPrincipal extends javax.swing.JFrame
             }
         });
     }
-    
+
     public void atalhoUltimo()
     {
         rootPane.getInputMap(JComponent.WHEN_IN_FOCUSED_WINDOW).put(KeyStroke.getKeyStroke(KeyEvent.VK_F10, 0), "ULTIMO");

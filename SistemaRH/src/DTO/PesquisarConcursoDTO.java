@@ -18,12 +18,23 @@ public class PesquisarConcursoDTO
 
     private int numero_concurso;
     private int ano_concurso;
+    private int codigoConcurso;
     private String nome_banca_organizadora;
     private String responsavel_banca_organizadora;
     private String telefone_banca_organizadora;
     private String telefone_responsavel_banca_organizadora;
     private String email_banca_organizadora;
 
+    public int getCodigoConcurso()
+    {
+        return codigoConcurso;
+    }
+
+    public void setCodigoConcurso(int codigoConcurso)
+    {
+        this.codigoConcurso = codigoConcurso;
+    }  
+    
     public String getModoDePesquisa()
     {
         return modoDePesquisa;

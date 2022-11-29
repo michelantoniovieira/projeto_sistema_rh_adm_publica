@@ -52,6 +52,7 @@ public class PesquisarConcursoDAO
             while(rs.next())
             {
                   PesquisarConcursoDTO objPesquisarConcursoDTO = new PesquisarConcursoDTO(); 
+                  objPesquisarConcursoDTO.setCodigoConcurso(rs.getInt("codigo_concurso"));
                   objPesquisarConcursoDTO.setNumero_concurso(rs.getInt("numero_concurso"));  
                   objPesquisarConcursoDTO.setAno_concurso(rs.getInt("ano_concurso"));
                   objPesquisarConcursoDTO.setNome_banca_organizadora(rs.getString("nome_banca_organizadora"));

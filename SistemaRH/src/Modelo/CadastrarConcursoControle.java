@@ -10,6 +10,7 @@ import DTO.CadastrarConcursoDTO;
 import DTO.CadastrarFuncionarioDTO;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.ArrayList;
 import javax.swing.JOptionPane;
 
 public class CadastrarConcursoControle extends CadastrarConcursoDTO
@@ -72,6 +73,45 @@ public class CadastrarConcursoControle extends CadastrarConcursoDTO
         {
             this.setMensagem(validacao.getMensagem());
         }
+    }
+
+    public void pesquisar(String comandoBotao)
+    {
+        CadastrarConcursoDAO pesquisar = new CadastrarConcursoDAO();
+        ArrayList<CadastrarConcursoDTO> obj = new ArrayList<CadastrarConcursoDTO>();
+        
+        switch(comandoBotao)
+        {
+            case "primeiro":
+                break;
+                
+            case "anterior":
+                
+                this.setCodigo_concurso(getCodigo_concurso()-1);
+                break;
+                
+            case "proximo":
+                this.setCodigo_concurso(getCodigo_concurso()+1);
+                break;
+                
+            case "ultimo":
+                break;
+        }
+        
+        obj = pesquisar.botao(comandoBotao, this.getCodigo_concurso());
+
+        for (int i = 0; i < obj.size(); i++)
+        {
+            this.setCodigo_concurso(obj.get(i).getCodigo_concurso());
+            this.setNumero_concurso(obj.get(i).getNumero_concurso());
+            this.setAno_concurso(obj.get(i).getAno_concurso());
+            this.setNome_banca_organizadora(obj.get(i).getNome_banca_organizadora());
+            this.setTelefone_banca_organizadora(obj.get(i).getTelefone_banca_organizadora());
+            this.setResponsavel_banca_organizadora(obj.get(i).getResponsavel_banca_organizadora());
+            this.setTelefone_responsavel_banca_organizadora(obj.get(i).getTelefone_responsavel_banca_organizadora());
+            this.setEmail_banca_organizadora(obj.get(i).getEmail_banca_organizadora());
+        }
+
     }
 
     public void alterar()

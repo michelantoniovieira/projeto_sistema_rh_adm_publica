@@ -76,11 +76,11 @@ public class frmPesquisarConcurso extends javax.swing.JDialog {
         tbPesquisarFuncionarios.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][]
             {
-                {null, null, null, null, null, null, null}
+                {null, null, null, null, null, null, null, null}
             },
             new String []
             {
-                "Número do Concurso", "Ano do Concurso", "Nome da Banca", "Telefone da Banca", "Responsável da Banca", "Telefone Responsável", "Email da Banca"
+                "Codigo do Concurso", "Número do Concurso", "Ano do Concurso", "Nome da Banca", "Telefone da Banca", "Responsável da Banca", "Telefone Responsável", "Email da Banca"
             }
         ));
         tbPesquisarFuncionarios.setAutoResizeMode(javax.swing.JTable.AUTO_RESIZE_OFF);
@@ -288,6 +288,7 @@ private void listarValores(PesquisarConcursoControle controle)
             {
              model.addRow(new Object[]
              {
+                lista.get(num).getCodigoConcurso(),
                 lista.get(num).getNumero_concurso(),
                 lista.get(num).getAno_concurso(),
                 lista.get(num).getNome_banca_organizadora(),

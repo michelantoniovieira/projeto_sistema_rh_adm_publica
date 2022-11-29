@@ -10,6 +10,7 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.ArrayList;
 import javax.swing.JOptionPane;
 
 /**
@@ -74,7 +75,7 @@ public class CadastrarConcursoDAO
         {
             try
             {
-                stmt = conexao.prepareStatement("UPDATE concurso_publico SET  numero_concurso = ?, ano_concurso = ?, nome_banca_organizadora = ?, telefone_banca_organizadora = ?, responsavel_banca_organizadora = ?, telefone_responsavel_banca_organizadora = ?, email_banca_organizadora = ?  WHERE numero_concurso = '"+cadastrarconcursodto.getNumero_concurso()+"'");
+                stmt = conexao.prepareStatement("UPDATE concurso_publico SET  numero_concurso = ?, ano_concurso = ?, nome_banca_organizadora = ?, telefone_banca_organizadora = ?, responsavel_banca_organizadora = ?, telefone_responsavel_banca_organizadora = ?, email_banca_organizadora = ?  WHERE numero_concurso = '" + cadastrarconcursodto.getNumero_concurso() + "'");
                 stmt.setInt(1, cadastrarconcursodto.getNumero_concurso());
                 stmt.setInt(2, cadastrarconcursodto.getAno_concurso());
                 stmt.setString(3, cadastrarconcursodto.getNome_banca_organizadora());
@@ -110,5 +111,59 @@ public class CadastrarConcursoDAO
                 ConexaoDAO.encerrarConexao(conexao, stmt);
             }
         }
+    }
+
+    public ArrayList<CadastrarConcursoDTO> botao(String comandoBotao, int codigoConcurso)
+    {
+        Connection conexao = ConexaoDAO.conectaBD();
+        PreparedStatement stmt = null;
+        PreparedStatement stmtRecebe = null;
+        ResultSet rs = null;
+        ArrayList<CadastrarConcursoDTO> objcadastrarconcursodto = new ArrayList<>();
+
+        try
+        {
+            switch (comandoBotao)
+            {
+                case "primeiro":
+                    stmtRecebe = conexao.prepareStatement("SELECT * FROM concurso_publico ORDER BY codigo_concurso ASC limit 1");
+                    break;
+
+                case "anterior":
+                    stmtRecebe = conexao.prepareStatement("SELECT * FROM concurso_publico WHERE codigo_concurso =" + codigoConcurso );
+
+                    break;
+
+                case "proximo":
+                    stmtRecebe = conexao.prepareStatement("SELECT * FROM concurso_publico WHERE codigo_concurso = " + codigoConcurso);
+                    break;
+
+                case "ultimo":
+                    stmtRecebe = conexao.prepareStatement("SELECT * FROM concurso_publico ORDER BY codigo_concurso DESC limit 1");
+                    break;
+            }
+
+            stmt = stmtRecebe;
+            rs = stmt.executeQuery();
+            while (rs.next())
+            {
+                CadastrarConcursoDTO ccdto = new CadastrarConcursoDTO();
+                ccdto.setNumero_concurso(rs.getInt("numero_concurso"));
+                ccdto.setAno_concurso(rs.getInt("ano_concurso"));
+                ccdto.setNome_banca_organizadora(rs.getString("nome_banca_organizadora"));
+                ccdto.setTelefone_banca_organizadora(rs.getString("telefone_banca_organizadora"));
+                ccdto.setResponsavel_banca_organizadora(rs.getString("responsavel_banca_organizadora"));
+                ccdto.setTelefone_responsavel_banca_organizadora(rs.getString("telefone_responsavel_banca_organizadora"));
+                ccdto.setEmail_banca_organizadora(rs.getString("email_banca_organizadora"));
+                objcadastrarconcursodto.add(ccdto);
+            }
+        } catch (SQLException erro)
+        {
+            erro.printStackTrace();
+        } finally
+        {
+            ConexaoDAO.encerrarConexao(conexao, stmt, rs);
+        }
+        return objcadastrarconcursodto;
     }
 }

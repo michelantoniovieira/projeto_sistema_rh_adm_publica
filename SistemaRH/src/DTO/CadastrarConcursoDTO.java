@@ -3,7 +3,7 @@ package DTO;
 
 public class CadastrarConcursoDTO 
 {
-    private int codigo_concurso;
+    static int codigo_concurso;
     private int numero_concurso;
     private int ano_concurso;
     private String nome_banca_organizadora;
