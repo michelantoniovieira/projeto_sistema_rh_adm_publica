@@ -75,41 +75,24 @@ public class CadastrarConcursoControle extends CadastrarConcursoDTO
         }
     }
 
-    public void pesquisar(String comandoBotao)
+    public void pesquisar(int index)
     {
         CadastrarConcursoDAO pesquisar = new CadastrarConcursoDAO();
-        ArrayList<CadastrarConcursoDTO> obj = new ArrayList<CadastrarConcursoDTO>();
-        
-        switch(comandoBotao)
-        {
-            case "primeiro":
-                break;
-                
-            case "anterior":
-                
-                this.setCodigo_concurso(getCodigo_concurso()-1);
-                break;
-                
-            case "proximo":
-                this.setCodigo_concurso(getCodigo_concurso()+1);
-                break;
-                
-            case "ultimo":
-                break;
-        }
-        
-        obj = pesquisar.botao(comandoBotao, this.getCodigo_concurso());
+        ArrayList<CadastrarConcursoDTO> obj = new ArrayList<>();
+
+        obj = pesquisar.botaoNavegacao();
 
         for (int i = 0; i < obj.size(); i++)
         {
-            this.setCodigo_concurso(obj.get(i).getCodigo_concurso());
-            this.setNumero_concurso(obj.get(i).getNumero_concurso());
-            this.setAno_concurso(obj.get(i).getAno_concurso());
-            this.setNome_banca_organizadora(obj.get(i).getNome_banca_organizadora());
-            this.setTelefone_banca_organizadora(obj.get(i).getTelefone_banca_organizadora());
-            this.setResponsavel_banca_organizadora(obj.get(i).getResponsavel_banca_organizadora());
-            this.setTelefone_responsavel_banca_organizadora(obj.get(i).getTelefone_responsavel_banca_organizadora());
-            this.setEmail_banca_organizadora(obj.get(i).getEmail_banca_organizadora());
+            //estou passo o indice para quando apertar os botões primeiro, anterior, proximo e ultimo conseguir navegar entre as opções
+            this.setCodigo_concurso(obj.get(index).getCodigo_concurso());
+            this.setNumero_concurso(obj.get(index).getNumero_concurso());
+            this.setAno_concurso(obj.get(index).getAno_concurso());
+            this.setNome_banca_organizadora(obj.get(index).getNome_banca_organizadora());
+            this.setTelefone_banca_organizadora(obj.get(index).getTelefone_banca_organizadora());
+            this.setResponsavel_banca_organizadora(obj.get(index).getResponsavel_banca_organizadora());
+            this.setTelefone_responsavel_banca_organizadora(obj.get(index).getTelefone_responsavel_banca_organizadora());
+            this.setEmail_banca_organizadora(obj.get(index).getEmail_banca_organizadora());
         }
 
     }

@@ -10,6 +10,7 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.sql.Statement;
 import java.util.ArrayList;
 import javax.swing.JOptionPane;
 
@@ -113,41 +114,20 @@ public class CadastrarConcursoDAO
         }
     }
 
-    public ArrayList<CadastrarConcursoDTO> botao(String comandoBotao, int codigoConcurso)
+    public ArrayList<CadastrarConcursoDTO> botaoNavegacao()
     {
         Connection conexao = ConexaoDAO.conectaBD();
         PreparedStatement stmt = null;
-        PreparedStatement stmtRecebe = null;
-        ResultSet rs = null;
         ArrayList<CadastrarConcursoDTO> objcadastrarconcursodto = new ArrayList<>();
 
         try
         {
-            switch (comandoBotao)
-            {
-                case "primeiro":
-                    stmtRecebe = conexao.prepareStatement("SELECT * FROM concurso_publico ORDER BY codigo_concurso ASC limit 1");
-                    break;
-
-                case "anterior":
-                    stmtRecebe = conexao.prepareStatement("SELECT * FROM concurso_publico WHERE codigo_concurso =" + codigoConcurso );
-
-                    break;
-
-                case "proximo":
-                    stmtRecebe = conexao.prepareStatement("SELECT * FROM concurso_publico WHERE codigo_concurso = " + codigoConcurso);
-                    break;
-
-                case "ultimo":
-                    stmtRecebe = conexao.prepareStatement("SELECT * FROM concurso_publico ORDER BY codigo_concurso DESC limit 1");
-                    break;
-            }
-
-            stmt = stmtRecebe;
+            stmt = conexao.prepareStatement("SELECT * FROM concurso_publico");
             rs = stmt.executeQuery();
             while (rs.next())
             {
                 CadastrarConcursoDTO ccdto = new CadastrarConcursoDTO();
+                ccdto.setCodigo_concurso(rs.getInt("codigo_concurso"));
                 ccdto.setNumero_concurso(rs.getInt("numero_concurso"));
                 ccdto.setAno_concurso(rs.getInt("ano_concurso"));
                 ccdto.setNome_banca_organizadora(rs.getString("nome_banca_organizadora"));
@@ -166,4 +146,5 @@ public class CadastrarConcursoDAO
         }
         return objcadastrarconcursodto;
     }
+
 }

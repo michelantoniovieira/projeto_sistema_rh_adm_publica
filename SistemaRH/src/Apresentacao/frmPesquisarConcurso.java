@@ -23,6 +23,9 @@ public class frmPesquisarConcurso extends javax.swing.JDialog {
     private ArrayList<PesquisarConcursoDTO> lista;
     private int index;
     private String mensagem;
+    //variavel que pega o ultimo registro da tabela pesquisar concurso, ela sera passada para o botão ultimo que esta no formulario principal. ai eu consigo navegar entre o primeiro e ultimo registro
+    public static int ultimoRegistro;
+    
 
     /**
      * Creates new form frmPesquisarFuncionario
@@ -32,6 +35,7 @@ public class frmPesquisarConcurso extends javax.swing.JDialog {
         initComponents();
         PesquisarConcursoControle controle = new PesquisarConcursoControle("tudo", "");
         listarValores(controle);
+        ultimoRegistro = tbPesquisarFuncionarios.getRowCount()-1;
     }
 
     /**

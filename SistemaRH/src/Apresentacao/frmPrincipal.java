@@ -10,6 +10,7 @@ import java.awt.Image;
 import java.awt.event.ActionEvent;
 import java.awt.event.KeyEvent;
 import java.sql.Connection;
+import java.util.ArrayList;
 import javax.imageio.ImageIO;
 import javax.swing.AbstractAction;
 import javax.swing.ImageIcon;
@@ -31,6 +32,7 @@ public class frmPrincipal extends javax.swing.JFrame
     frmConfigurarPastaRaiz frmConfigurarPastaRaiz;
     frmPreCadastro frmPC;
     frmCadastrarConcurso frmCC;
+    int index = 0;
 
     public boolean gravarAlteracao = false;
 
@@ -617,37 +619,47 @@ public class frmPrincipal extends javax.swing.JFrame
     private void btnPrimeiroActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnPrimeiroActionPerformed
         if (frmCC.isVisible())
         {
-            preencherTelaCadastroConcurso("primeiro");
+            index = 1;
+            preencherTelaCadastroConcurso(index);
         }
     }//GEN-LAST:event_btnPrimeiroActionPerformed
 
     private void btnAnteriorActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAnteriorActionPerformed
         if (frmCC.isVisible())
         {
-            preencherTelaCadastroConcurso("anterior");
+            index--;
+            if (index >= 0)
+            {
+                preencherTelaCadastroConcurso(index);
+            } else
+            {
+                index = 0;
+            }
         }
     }//GEN-LAST:event_btnAnteriorActionPerformed
 
     private void btnProximoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnProximoActionPerformed
         if (frmCC.isVisible())
         {
-            preencherTelaCadastroConcurso("proximo");
+            index++;
+            preencherTelaCadastroConcurso(index);
         }
     }//GEN-LAST:event_btnProximoActionPerformed
 
     private void btnUltimoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnUltimoActionPerformed
         if (frmCC.isVisible())
         {
-            preencherTelaCadastroConcurso("ultimo");
+            index = frmPesquisarConcurso.ultimoRegistro;
+            preencherTelaCadastroConcurso(index);
         }
     }//GEN-LAST:event_btnUltimoActionPerformed
 
-    private void preencherTelaCadastroConcurso(String comandoBotao)
+    private void preencherTelaCadastroConcurso(int index)
     {
         if (frmCC.isVisible())
         {
             CadastrarConcursoControle controle = new CadastrarConcursoControle(Integer.parseInt(frmCC.getNumeroConcurso()));
-            controle.pesquisar(comandoBotao);
+            controle.pesquisar(index);
 
             frmCC.setCodigoConcurso(String.valueOf(controle.getCodigo_concurso()));
             frmCC.setNumeroConcurso(String.valueOf(controle.getNumero_concurso()));
