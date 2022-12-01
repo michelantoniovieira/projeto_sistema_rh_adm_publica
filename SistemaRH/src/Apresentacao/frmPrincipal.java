@@ -40,6 +40,7 @@ public class frmPrincipal extends javax.swing.JFrame
     {
         initComponents();
         this.setExtendedState(MAXIMIZED_BOTH);
+
     }
 
     public frmPrincipal(String usuarioConectado)
@@ -57,7 +58,11 @@ public class frmPrincipal extends javax.swing.JFrame
         atalhoAnterior();
         atalhoProximo();
         atalhoUltimo();
-
+        frmCC = new frmCadastrarConcurso();
+        frmPN = new frmPortariaDeNomeacao(null, true);
+        frmCadU = new frmCadastrarUsuario(null, true);
+        frmConfigurarPastaRaiz = new frmConfigurarPastaRaiz(null, true);
+        frmPC = new frmPreCadastro();
     }
 
     frmPrincipal(Object object, boolean b)
@@ -532,30 +537,26 @@ public class frmPrincipal extends javax.swing.JFrame
     }//GEN-LAST:event_mnCadastroFuncionarioActionPerformed
 
     private void subMnNomeacaoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_subMnNomeacaoActionPerformed
-        frmPN = new frmPortariaDeNomeacao(null, true);
         frmPN.setVisible(true);
     }//GEN-LAST:event_subMnNomeacaoActionPerformed
 
     private void jMenuItem2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem2ActionPerformed
-        frmCadU = new frmCadastrarUsuario(null, true);
         frmCadU.setVisible(true);
     }//GEN-LAST:event_jMenuItem2ActionPerformed
 
     private void mnAnoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_mnAnoActionPerformed
-        frmConfigurarPastaRaiz = new frmConfigurarPastaRaiz(null, true);
         frmConfigurarPastaRaiz.setVisible(true);
     }//GEN-LAST:event_mnAnoActionPerformed
 
     private void mnPreCadastroFuncionarioActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_mnPreCadastroFuncionarioActionPerformed
-        frmPC = new frmPreCadastro();
         jdkpPrincipal.add(frmPC);
         frmPC.setVisible(true);
     }//GEN-LAST:event_mnPreCadastroFuncionarioActionPerformed
 
     private void jMenuItem1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem1ActionPerformed
-        frmCC = new frmCadastrarConcurso();
         jdkpPrincipal.add(frmCC);
         frmCC.setVisible(true);
+        frmCC.limparCampos();
     }//GEN-LAST:event_jMenuItem1ActionPerformed
 
 
@@ -642,6 +643,11 @@ public class frmPrincipal extends javax.swing.JFrame
         if (frmCC.isVisible())
         {
             index++;
+            //este bloco de comando não deixa a seleção ser maior que o último registro do banco
+            if (index > frmPesquisarConcurso.ultimoRegistro)
+            {
+                index = frmPesquisarConcurso.ultimoRegistro;
+            }
             preencherTelaCadastroConcurso(index);
         }
     }//GEN-LAST:event_btnProximoActionPerformed
@@ -650,6 +656,12 @@ public class frmPrincipal extends javax.swing.JFrame
         if (frmCC.isVisible())
         {
             index = frmPesquisarConcurso.ultimoRegistro;
+            //este bloco de comando não deixa a seleção ser maior que o último registro do banco
+            if (index > frmPesquisarConcurso.ultimoRegistro)
+            {
+                index = frmPesquisarConcurso.ultimoRegistro;
+            }
+
             preencherTelaCadastroConcurso(index);
         }
     }//GEN-LAST:event_btnUltimoActionPerformed
@@ -708,7 +720,6 @@ public class frmPrincipal extends javax.swing.JFrame
         //se tiver aparecendo a janela de cadastrar concurso executa essa parte do sistema
         //COMANDO PARA pesquisar AS INFORMAÇÕES NA TELA CONCURSO
         //frmCC.gravarRegistro();
-
         if (frmCC.isVisible())
         {
             frmPesquisarConcurso frmPC = new frmPesquisarConcurso(null, true);
@@ -728,10 +739,11 @@ public class frmPrincipal extends javax.swing.JFrame
 
                 frmCC.preencherCampos();
             }
-        } else
+        } else if (frmCC.isVisible())
         {
             JOptionPane.showMessageDialog(null, "Digite as informações antes de salvar.");
         }
+
     }//GEN-LAST:event_btnPesquisarActionPerformed
 
 
