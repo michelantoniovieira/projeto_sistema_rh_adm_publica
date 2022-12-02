@@ -71,7 +71,7 @@ public class frmCadastrarConcurso extends javax.swing.JInternalFrame
     //liberar os campos para edição
     public void ativarCampos()
     {
-        txtCodigoConcurso.setEnabled(true);
+        txtCodigoConcurso.setEnabled(false);
         txtNumeroConcurso.setEnabled(true);
         txtAnoConcurso.setEnabled(true);
         txtBancaConcurso.setEnabled(true);
@@ -92,12 +92,11 @@ public class frmCadastrarConcurso extends javax.swing.JInternalFrame
         txtResponsavelBancaConcurso.setEnabled(false);
         txtTelResponsavelBanca.setEnabled(false);
         txtEmail.setEnabled(false);
-        limparCampos();
     }
 
     public void limparCampos()
     {
-        this.setCodigoConcurso("");
+        //this.setCodigoConcurso("");
         txtCodigoConcurso.setText("");
         this.setNumeroConcurso("");
         txtNumeroConcurso.setText("");
@@ -281,6 +280,13 @@ public class frmCadastrarConcurso extends javax.swing.JInternalFrame
         lblEmail.setText("Email:");
 
         txtCodigoConcurso.setEnabled(false);
+        txtCodigoConcurso.addActionListener(new java.awt.event.ActionListener()
+        {
+            public void actionPerformed(java.awt.event.ActionEvent evt)
+            {
+                txtCodigoConcursoActionPerformed(evt);
+            }
+        });
 
         lblNumeroConcurso1.setText("Codigo Concurso");
 
@@ -432,6 +438,11 @@ public class frmCadastrarConcurso extends javax.swing.JInternalFrame
     {//GEN-HEADEREND:event_txtEmailActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_txtEmailActionPerformed
+
+    private void txtCodigoConcursoActionPerformed(java.awt.event.ActionEvent evt)//GEN-FIRST:event_txtCodigoConcursoActionPerformed
+    {//GEN-HEADEREND:event_txtCodigoConcursoActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_txtCodigoConcursoActionPerformed
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables

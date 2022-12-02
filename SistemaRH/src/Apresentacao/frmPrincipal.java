@@ -32,6 +32,8 @@ public class frmPrincipal extends javax.swing.JFrame
     frmConfigurarPastaRaiz frmConfigurarPastaRaiz;
     frmPreCadastro frmPC;
     frmCadastrarConcurso frmCC;
+
+    private boolean desativarBotoesFrmCC = true;//essa variavel bloqueia os botoes de menu para não deixar o cara tentar mudar de registro na tela de cadastro de concurso ao clicar no botao novo, por exemplo
     int index = 0;
 
     public boolean gravarAlteracao = false;
@@ -557,6 +559,8 @@ public class frmPrincipal extends javax.swing.JFrame
         jdkpPrincipal.add(frmCC);
         frmCC.setVisible(true);
         frmCC.limparCampos();
+        frmCC.desativarCampos();
+
     }//GEN-LAST:event_jMenuItem1ActionPerformed
 
 
@@ -587,6 +591,7 @@ public class frmPrincipal extends javax.swing.JFrame
         //se tiver aparecendo a janela de cadastrar concurso executa essa parte do sistema
         //COMANDO PARA SALVAR AS INFORMAÇÕES GRAVADAS NA TELA CONCURSO
         frmCC.gravarRegistro();
+        desativarBotoesFrmCC = false;
 
         //entra aqui quando for gravar o primeiro cadastro
         if (frmCC.isVisible() && !frmCC.getNumeroConcurso().equals("") && !frmCC.getAnoConcurso().equals("") && !frmCC.getBancaConcurso().equals("") && gravarAlteracao == false)
@@ -618,15 +623,15 @@ public class frmPrincipal extends javax.swing.JFrame
     }//GEN-LAST:event_btnSalvarActionPerformed
 
     private void btnPrimeiroActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnPrimeiroActionPerformed
-        if (frmCC.isVisible())
+        if (frmCC.isVisible() && desativarBotoesFrmCC == false)
         {
-            index = 1;
+            index = 0;
             preencherTelaCadastroConcurso(index);
         }
     }//GEN-LAST:event_btnPrimeiroActionPerformed
 
     private void btnAnteriorActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAnteriorActionPerformed
-        if (frmCC.isVisible())
+        if (frmCC.isVisible() && desativarBotoesFrmCC == false)
         {
             index--;
             if (index >= 0)
@@ -640,7 +645,7 @@ public class frmPrincipal extends javax.swing.JFrame
     }//GEN-LAST:event_btnAnteriorActionPerformed
 
     private void btnProximoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnProximoActionPerformed
-        if (frmCC.isVisible())
+        if (frmCC.isVisible() && desativarBotoesFrmCC == false)
         {
             index++;
             //este bloco de comando não deixa a seleção ser maior que o último registro do banco
@@ -653,7 +658,7 @@ public class frmPrincipal extends javax.swing.JFrame
     }//GEN-LAST:event_btnProximoActionPerformed
 
     private void btnUltimoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnUltimoActionPerformed
-        if (frmCC.isVisible())
+        if (frmCC.isVisible() && desativarBotoesFrmCC == false)
         {
             index = frmPesquisarConcurso.ultimoRegistro;
             //este bloco de comando não deixa a seleção ser maior que o último registro do banco
@@ -668,25 +673,28 @@ public class frmPrincipal extends javax.swing.JFrame
 
     private void preencherTelaCadastroConcurso(int index)
     {
-        if (frmCC.isVisible())
+        if (frmCC.isVisible() && desativarBotoesFrmCC == false)
         {
             CadastrarConcursoControle controle = new CadastrarConcursoControle(Integer.parseInt(frmCC.getNumeroConcurso()));
             controle.pesquisar(index);
 
-            frmCC.setCodigoConcurso(String.valueOf(controle.getCodigo_concurso()));
-            frmCC.setNumeroConcurso(String.valueOf(controle.getNumero_concurso()));
-            frmCC.setAnoConcurso(String.valueOf(controle.getAno_concurso()));
-            frmCC.setBancaConcurso(String.valueOf(controle.getNome_banca_organizadora()));
-            frmCC.setTelBanca(String.valueOf(controle.getTelefone_banca_organizadora()));
-            frmCC.setResponsavelBanca(String.valueOf(controle.getResponsavel_banca_organizadora()));
-            frmCC.setTelResponsavelBanca(String.valueOf(controle.getResponsavel_banca_organizadora()));
-            frmCC.setEmailResponsavel(String.valueOf(controle.getEmail_banca_organizadora()));
-            frmCC.preencherCampos();
+            if (!frmCC.getCodigoConcurso().equals(""))
+            {
+                frmCC.setCodigoConcurso(String.valueOf(controle.getCodigo_concurso()));
+                frmCC.setNumeroConcurso(String.valueOf(controle.getNumero_concurso()));
+                frmCC.setAnoConcurso(String.valueOf(controle.getAno_concurso()));
+                frmCC.setBancaConcurso(String.valueOf(controle.getNome_banca_organizadora()));
+                frmCC.setTelBanca(String.valueOf(controle.getTelefone_banca_organizadora()));
+                frmCC.setResponsavelBanca(String.valueOf(controle.getResponsavel_banca_organizadora()));
+                frmCC.setTelResponsavelBanca(String.valueOf(controle.getResponsavel_banca_organizadora()));
+                frmCC.setEmailResponsavel(String.valueOf(controle.getEmail_banca_organizadora()));
+                frmCC.preencherCampos();
+            }
         }
     }
 
     private void btnExcluirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnExcluirActionPerformed
-        if (frmCC.isVisible() && !frmCC.getNumeroConcurso().equals(""))
+        if (frmCC.isVisible() && !frmCC.getNumeroConcurso().equals("") && desativarBotoesFrmCC == false)
         {
             int resposta = JOptionPane.showConfirmDialog(null, "Deseja realizar a exclusão do registro?", "Sair", JOptionPane.YES_NO_OPTION, 2);
 
@@ -697,9 +705,6 @@ public class frmPrincipal extends javax.swing.JFrame
                 JOptionPane.showMessageDialog(null, "Exclusão realizada com sucesso!");
                 frmCC.limparCampos();
             }
-        } else
-        {
-            JOptionPane.showMessageDialog(null, "Selecione um registro para excluir.");
         }
     }//GEN-LAST:event_btnExcluirActionPerformed
 
@@ -708,7 +713,6 @@ public class frmPrincipal extends javax.swing.JFrame
         //JANELA CADASTRAR CONCURSO
         if (frmCC.isVisible() && !frmCC.getNumeroConcurso().equals("") && !frmCC.getNumeroConcurso().equals("") && !frmCC.getAnoConcurso().equals("") && !frmCC.getBancaConcurso().equals("") && gravarAlteracao == false)
         {
-            JOptionPane.showMessageDialog(null, true);
             System.out.println(frmCC.getNumeroConcurso());
             frmCC.ativarCampos();
             gravarAlteracao = true;
@@ -722,23 +726,36 @@ public class frmPrincipal extends javax.swing.JFrame
         //frmCC.gravarRegistro();
         if (frmCC.isVisible())
         {
-            frmPesquisarConcurso frmPC = new frmPesquisarConcurso(null, true);
-            frmPC.setVisible(true);
-            //se a mensagem for pode passar entra no if abaixo
-            if (frmPC.getMensagem().equals("pode passar"))
-            {
-                //coloco na tela de cadastro de concurso, seto na variavel a lista e o index puxado direto da tela frmPesquisarConcurso 
-                frmCC.setCodigoConcurso(String.valueOf(frmPC.getLista().get(frmPC.getIndex()).getCodigoConcurso()));
-                frmCC.setNumeroConcurso(String.valueOf(frmPC.getLista().get(frmPC.getIndex()).getNumero_concurso()));
-                frmCC.setAnoConcurso(String.valueOf(frmPC.getLista().get(frmPC.getIndex()).getAno_concurso()));
-                frmCC.setBancaConcurso(String.valueOf(frmPC.getLista().get(frmPC.getIndex()).getNome_banca_organizadora()));
-                frmCC.setTelBanca(String.valueOf(frmPC.getLista().get(frmPC.getIndex()).getTelefone_banca_organizadora()));
-                frmCC.setResponsavelBanca(String.valueOf(frmPC.getLista().get(frmPC.getIndex()).getResponsavel_banca_organizadora()));
-                frmCC.setTelResponsavelBanca(String.valueOf(frmPC.getLista().get(frmPC.getIndex()).getTelefone_responsavel_banca_organizadora()));
-                frmCC.setEmailResponsavel(String.valueOf(frmPC.getLista().get(frmPC.getIndex()).getEmail_banca_organizadora()));
 
-                frmCC.preencherCampos();
+            frmPesquisarConcurso frmPC = new frmPesquisarConcurso(null, true);
+            if (frmPC.getLista() != null)
+            {
+                frmPC.setVisible(true);
+                //se a mensagem for pode passar entra no if abaixo
+                if (frmPC.getMensagem().equals("pode passar"))
+                {
+                    //coloco na tela de cadastro de concurso, seto na variavel a lista e o index puxado direto da tela frmPesquisarConcurso 
+                    frmCC.setCodigoConcurso(String.valueOf(frmPC.getLista().get(frmPC.getIndex()).getCodigoConcurso()));
+                    frmCC.setNumeroConcurso(String.valueOf(frmPC.getLista().get(frmPC.getIndex()).getNumero_concurso()));
+                    frmCC.setAnoConcurso(String.valueOf(frmPC.getLista().get(frmPC.getIndex()).getAno_concurso()));
+                    frmCC.setBancaConcurso(String.valueOf(frmPC.getLista().get(frmPC.getIndex()).getNome_banca_organizadora()));
+                    frmCC.setTelBanca(String.valueOf(frmPC.getLista().get(frmPC.getIndex()).getTelefone_banca_organizadora()));
+                    frmCC.setResponsavelBanca(String.valueOf(frmPC.getLista().get(frmPC.getIndex()).getResponsavel_banca_organizadora()));
+                    frmCC.setTelResponsavelBanca(String.valueOf(frmPC.getLista().get(frmPC.getIndex()).getTelefone_responsavel_banca_organizadora()));
+                    frmCC.setEmailResponsavel(String.valueOf(frmPC.getLista().get(frmPC.getIndex()).getEmail_banca_organizadora()));
+
+                    frmCC.preencherCampos();
+                    frmCC.desativarCampos();
+                    desativarBotoesFrmCC = false;
+                    gravarAlteracao = false;//este botão serve para quando o usuario selecionar algum registro e clicar em alterar e caso clique no botão pesquisar e depois alterar ele consegue realizar a alteração
+
+                }
             }
+            else
+            {
+                JOptionPane.showMessageDialog(null, "Não existem registros para serem consultados!");
+            }
+
         } else if (frmCC.isVisible())
         {
             JOptionPane.showMessageDialog(null, "Digite as informações antes de salvar.");
@@ -751,6 +768,7 @@ public class frmPrincipal extends javax.swing.JFrame
     {//GEN-HEADEREND:event_btnNovoActionPerformed
         if (frmCC.isVisible())
         {
+            desativarBotoesFrmCC = true;
             frmCC.ativarCampos();
             frmCC.limparCampos();
         }
