@@ -17,11 +17,12 @@ public class frmCadastrarCargoEmprego extends javax.swing.JInternalFrame
 
     private String codigoCargoEmprego;
     private String nomeCargoEmprego;
-    private int regimeJuridico;
+    private String regimeJuridico;
     private String numeroLeiCriaCargoEmprego;
     private String dataLeiCriaCargoEmprego;
     private String referenciaSalarial = "";
     private ArrayList<PesquisarCargoEmpregoDTO> lista;
+    private String itemSelecionadoNoComboBox = "";
 
     public frmCadastrarCargoEmprego()
     {
@@ -32,7 +33,8 @@ public class frmCadastrarCargoEmprego extends javax.swing.JInternalFrame
     {
         setCodigoCargoEmprego(txtCodigoCargoEmprego.getText());
         setNomeCargoEmprego(txtNomeCargoEmprego.getText());
-        setRegimeJuridico(cmbRegimeJuridico.getSelectedIndex());
+        itemSelecionadoNoComboBox = cmbRegimeJuridico.getSelectedItem().toString();
+        setRegimeJuridico(itemSelecionadoNoComboBox);
         setNumeroLeiCriaCargoEmprego(txtNumero.getText());
         setDataLeiCriaCargoEmprego(txtDataLeiCriacaoCargoEmprego.getText());
         setReferenciaSalarial(txtReferencia.getText());
@@ -43,7 +45,7 @@ public class frmCadastrarCargoEmprego extends javax.swing.JInternalFrame
         this.setLista(lista);
         setCodigoCargoEmprego(String.valueOf(getLista().get(index).getCodigoCargoEmprego()));
         setNomeCargoEmprego(String.valueOf(getLista().get(index).getNomeCargoEmprego()));
-        setRegimeJuridico(Integer.parseInt(getLista().get(index).getRegimeJuridico()));
+        setRegimeJuridico(String.valueOf(getLista().get(index).getRegimeJuridico()));
         setNumeroLeiCriaCargoEmprego(String.valueOf(getLista().get(index).getNumeroLeiCriaCargoEmprego()));
         setDataLeiCriaCargoEmprego(String.valueOf(getLista().get(index).getDataLeiCriaCargoEmprego()));
         setReferenciaSalarial(String.valueOf(getLista().get(index).getReferenciaSalarial()));
@@ -54,7 +56,7 @@ public class frmCadastrarCargoEmprego extends javax.swing.JInternalFrame
     {
         txtCodigoCargoEmprego.setText(getCodigoCargoEmprego());
         txtNomeCargoEmprego.setText(getNomeCargoEmprego());
-        cmbRegimeJuridico.setSelectedIndex(0);
+        cmbRegimeJuridico.setSelectedItem(getRegimeJuridico());
         txtNumero.setText(getNumeroLeiCriaCargoEmprego());
         txtDataLeiCriacaoCargoEmprego.setText(getDataLeiCriaCargoEmprego());
         txtReferencia.setText(getReferenciaSalarial());
@@ -89,8 +91,8 @@ public class frmCadastrarCargoEmprego extends javax.swing.JInternalFrame
         this.setCodigoCargoEmprego("");
         txtNomeCargoEmprego.setText("");
         this.setNomeCargoEmprego("");
-        cmbRegimeJuridico.setSelectedIndex(0);
-        this.setRegimeJuridico(0);
+        cmbRegimeJuridico.setSelectedIndex(1);
+        this.setRegimeJuridico("0");
         txtNumero.setText("");
         this.setNumeroLeiCriaCargoEmprego("");
         txtDataLeiCriacaoCargoEmprego.setText("");
@@ -121,12 +123,12 @@ public class frmCadastrarCargoEmprego extends javax.swing.JInternalFrame
         this.nomeCargoEmprego = nomeCargoEmprego;
     }
 
-    public int getRegimeJuridico()
+    public String getRegimeJuridico()
     {
         return regimeJuridico;
     }
 
-    public void setRegimeJuridico(int regimeJuridico)
+    public void setRegimeJuridico(String regimeJuridico)
     {
         this.regimeJuridico = regimeJuridico;
     }
@@ -170,6 +172,18 @@ public class frmCadastrarCargoEmprego extends javax.swing.JInternalFrame
     {
         this.referenciaSalarial = referenciaSalarial;
     }
+
+    public String getItemSelecionadoNoComboBox()
+    {
+        return itemSelecionadoNoComboBox;
+    }
+
+    public void setItemSelecionadoNoComboBox(String itemSelecionadoNoComboBox)
+    {
+        this.itemSelecionadoNoComboBox = itemSelecionadoNoComboBox;
+    }
+    
+    
 
     /**
      * This method is called from within the constructor to initialize the form.
@@ -281,7 +295,7 @@ public class frmCadastrarCargoEmprego extends javax.swing.JInternalFrame
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
-        jLabel1.setFont(new java.awt.Font("Segoe UI", 0, 36)); // NOI18N
+        jLabel1.setFont(new java.awt.Font("Segoe UI", 1, 36)); // NOI18N
         jLabel1.setText("CADASTRO DE CARGO/EMPREGO");
 
         javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
@@ -306,11 +320,14 @@ public class frmCadastrarCargoEmprego extends javax.swing.JInternalFrame
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addGap(19, 19, 19)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, 558, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addContainerGap(24, Short.MAX_VALUE))
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(22, 22, 22)
+                        .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(layout.createSequentialGroup()
+                        .addContainerGap()
+                        .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, 582, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addContainerGap(23, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)

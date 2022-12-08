@@ -4,7 +4,7 @@
  */
 package DAO;
 
-import DTO.CadastrarBancaDTO;
+import DTO.CadastrarCargoEmpregoDTO;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -23,15 +23,15 @@ public class CadastrarCargoEmpregoDAO
     PreparedStatement pstm;
     ResultSet rs;
 
-    public ResultSet verificarAntesDeCadastrar(CadastrarBancaDTO cadastrarbancadto)
+    public ResultSet verificarAntesDeCadastrar(CadastrarCargoEmpregoDTO cadastrarcargoempregodto)
     {
         conn = new ConexaoDAO().conectaBD();
         try
         {
-            String sql = "SELECT * FROM banca WHERE nome_banca_organizadora = ?";
+            String sql = "SELECT * FROM cargo_emprego WHERE nome_cargo_emprego = ?";
 
             PreparedStatement pstm = conn.prepareStatement(sql);
-            pstm.setString(1, cadastrarbancadto.getNome_banca_organizadora());
+            pstm.setString(1, cadastrarcargoempregodto.getNomeCargoEmprego());
 
             ResultSet rs = pstm.executeQuery();
             return rs;
@@ -42,41 +42,41 @@ public class CadastrarCargoEmpregoDAO
         }
     }
 
-    public void CadastrarBancaDAO(CadastrarBancaDTO cadastrarbancadto)
+    public void CadastrarCargoEmpregoDAO(CadastrarCargoEmpregoDTO cadastrarcargoempregodto)
     {
-        String sql = "INSERT INTO banca (nome_banca_organizadora, telefone_banca_organizadora, responsavel_banca_organizadora,telefone_responsavel_banca_organizadora,email_banca_organizadora) values (?,?,?,?,?)";
+        String sql = "INSERT INTO cargo_emprego (nome_cargo_emprego, regime_juridico, numero_lei_cria_cargo_emprego, data_lei_cria_cargo_emprego, referencia_salarial) values (?,?,?,?,?)";
         conn = new ConexaoDAO().conectaBD();
 
         try
         {
             pstm = conn.prepareStatement(sql);
-            pstm.setString(1, cadastrarbancadto.getNome_banca_organizadora());
-            pstm.setString(2, cadastrarbancadto.getTelefone_banca_organizadora());
-            pstm.setString(3, cadastrarbancadto.getResponsavel_banca_organizadora());
-            pstm.setString(4, cadastrarbancadto.getTelefone_responsavel_banca_organizadora());
-            pstm.setString(5, cadastrarbancadto.getEmail_banca_organizadora());
+            pstm.setString(1, cadastrarcargoempregodto.getNomeCargoEmprego());
+            pstm.setString(2, cadastrarcargoempregodto.getRegimeJuridico());
+            pstm.setString(3, cadastrarcargoempregodto.getNumeroLeiCriaCargoEmprego());
+            pstm.setString(4, cadastrarcargoempregodto.getDataLeiCriaCargoEmprego());
+            pstm.setString(5, cadastrarcargoempregodto.getReferenciaSalarial());
 
             pstm.execute();
             pstm.close();
         } catch (SQLException erro)
         {
-            JOptionPane.showMessageDialog(null, "CadastrarBancaDAO - Cadastrar" + erro);
+            JOptionPane.showMessageDialog(null, "CadastrarCargoEmpregoDAO - Cadastrar" + erro);
         }
     }
 
-    public void update(CadastrarBancaDTO cadastrarbancadto)
+    public void update(CadastrarCargoEmpregoDTO cadastrarcargoempregodto)
     {
         Connection conexao = ConexaoDAO.conectaBD();
         PreparedStatement stmt = null;
         {
             try
             {
-                stmt = conexao.prepareStatement("UPDATE banca SET nome_banca_organizadora = ?, telefone_banca_organizadora = ?, responsavel_banca_organizadora = ?, telefone_responsavel_banca_organizadora = ?, email_banca_organizadora = ?  WHERE codigo_banca = '" + cadastrarbancadto.getCodigo_Banca() + "'");
-                stmt.setString(1, cadastrarbancadto.getNome_banca_organizadora());
-                stmt.setString(2, cadastrarbancadto.getTelefone_banca_organizadora());
-                stmt.setString(3, cadastrarbancadto.getResponsavel_banca_organizadora());
-                stmt.setString(4, cadastrarbancadto.getTelefone_responsavel_banca_organizadora());
-                stmt.setString(5, cadastrarbancadto.getEmail_banca_organizadora());
+                stmt = conexao.prepareStatement("UPDATE cargo_emprego SET nome_cargo_emprego = ?, regime_juridico = ?, numero_lei_cria_cargo_emprego = ?, data_lei_cria_cargo_emprego = ?, referencia_salarial = ?  WHERE codigo_cargo_emprego = '" + cadastrarcargoempregodto.getCodigoCargoEmprego()+ "'");
+                stmt.setString(1, cadastrarcargoempregodto.getNomeCargoEmprego());
+                stmt.setString(2, cadastrarcargoempregodto.getRegimeJuridico());
+                stmt.setString(3, cadastrarcargoempregodto.getNumeroLeiCriaCargoEmprego());
+                stmt.setString(4, cadastrarcargoempregodto.getDataLeiCriaCargoEmprego());
+                stmt.setString(5, cadastrarcargoempregodto.getReferenciaSalarial());
                 stmt.executeUpdate();
             } catch (SQLException erro)
             {
@@ -88,14 +88,14 @@ public class CadastrarCargoEmpregoDAO
         }
     }
 
-    public void delete(CadastrarBancaDTO cadastrarbancadto)
+    public void delete(CadastrarCargoEmpregoDTO cadastrarcargoempregodto)
     {
         Connection conexao = ConexaoDAO.conectaBD();
         PreparedStatement stmt = null;
         {
             try
             {
-                stmt = conexao.prepareStatement("DELETE from banca WHERE nome_banca_organizadora = '" + cadastrarbancadto.getNome_banca_organizadora()+ "'");
+                stmt = conexao.prepareStatement("DELETE from cargo_emprego WHERE nome_cargo_emprego = '" + cadastrarcargoempregodto.getNomeCargoEmprego()+ "'");
                 stmt.executeUpdate();
             } catch (SQLException erro)
             {
@@ -107,26 +107,26 @@ public class CadastrarCargoEmpregoDAO
         }
     }
 
-    public ArrayList<CadastrarBancaDTO> botaoNavegacao()
+    public ArrayList<CadastrarCargoEmpregoDTO> botaoNavegacao()
     {
         Connection conexao = ConexaoDAO.conectaBD();
         PreparedStatement stmt = null;
-        ArrayList<CadastrarBancaDTO> objcadastrarbancadto = new ArrayList<>();
+        ArrayList<CadastrarCargoEmpregoDTO> objcadastrarcargoempregodto = new ArrayList<>();
 
         try
         {
-            stmt = conexao.prepareStatement("SELECT * FROM banca");
+            stmt = conexao.prepareStatement("SELECT * FROM cargo_emprego");
             rs = stmt.executeQuery();
             while (rs.next())
             {
-                CadastrarBancaDTO cbdto = new CadastrarBancaDTO();
-                cbdto.setCodigo_Banca(rs.getInt("codigo_banca"));
-                cbdto.setNome_banca_organizadora(rs.getString("nome_banca_organizadora"));
-                cbdto.setTelefone_banca_organizadora(rs.getString("telefone_banca_organizadora"));
-                cbdto.setResponsavel_banca_organizadora(rs.getString("responsavel_banca_organizadora"));
-                cbdto.setTelefone_responsavel_banca_organizadora(rs.getString("telefone_responsavel_banca_organizadora"));
-                cbdto.setEmail_banca_organizadora(rs.getString("email_banca_organizadora"));
-                objcadastrarbancadto.add(cbdto);
+                CadastrarCargoEmpregoDTO cbdto = new CadastrarCargoEmpregoDTO();
+                cbdto.setCodigoCargoEmprego(rs.getInt("codigo_cargo_emprego"));
+                cbdto.setNomeCargoEmprego(rs.getString("nome_cargo_emprego"));
+                cbdto.setRegimeJuridico(rs.getString("regime_juridico"));
+                cbdto.setNumeroLeiCriaCargoEmprego(rs.getString("numero_lei_cria_cargo_emprego"));
+                cbdto.setDataLeiCriaCargoEmprego(rs.getString("data_lei_cria_cargo_emprego"));
+                cbdto.setReferenciaSalarial(rs.getString("referencia_salarial"));
+                objcadastrarcargoempregodto.add(cbdto);
             }
         } catch (SQLException erro)
         {
@@ -135,7 +135,7 @@ public class CadastrarCargoEmpregoDAO
         {
             ConexaoDAO.encerrarConexao(conexao, stmt, rs);
         }
-        return objcadastrarbancadto;
+        return objcadastrarcargoempregodto;
     }
 
 }

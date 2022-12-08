@@ -5,6 +5,7 @@
 package Apresentacao;
 
 import Modelo.CadastrarBancaControle;
+import Modelo.CadastrarCargoEmpregoControle;
 import java.awt.event.ActionEvent;
 import java.awt.event.KeyEvent;
 import javax.swing.AbstractAction;
@@ -25,10 +26,11 @@ public class frmPrincipal extends javax.swing.JFrame
     frmPreCadastro frmPC;
     frmCadastrarBanca frmCB;
     frmCadastrarCargoEmprego frmCCE;
+    frmCadastrarConcurso frmCC;
 
     private boolean desativarBotoesFrmCC = true;//essa variavel bloqueia os botoes de menu para não deixar o cara tentar mudar de registro na tela de cadastro de concurso ao clicar no botao novo, por exemplo
     private boolean desativarBotoesFrmCCE = true;
-    
+
     int index = 0;
 
     public boolean gravarAlteracaoFrmCC = false;
@@ -62,6 +64,7 @@ public class frmPrincipal extends javax.swing.JFrame
         frmConfigurarPastaRaiz = new frmConfigurarPastaRaiz(null, true);
         frmPC = new frmPreCadastro();
         frmCCE = new frmCadastrarCargoEmprego();
+        frmCC = new frmCadastrarConcurso();
     }
 
     frmPrincipal(Object object, boolean b)
@@ -612,7 +615,7 @@ public class frmPrincipal extends javax.swing.JFrame
 
     private void btnSalvarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSalvarActionPerformed
         //se tiver aparecendo a janela de cadastrar concurso executa essa parte do sistema
-        //COMANDO PARA SALVAR AS INFORMAÇÕES GRAVADAS NA TELA CONCURSO
+        //tela cadastrar banca
         frmCB.gravarRegistro();
         desativarBotoesFrmCC = false;
 
@@ -644,18 +647,63 @@ public class frmPrincipal extends javax.swing.JFrame
             frmCB.desativarCampos();
             JOptionPane.showMessageDialog(null, "Alteração realizada com sucesso!");
         }
+        
+        
+        //*******************************************************************************************************************************************************************************************************************************************************************************
+        //tela cadastrar cargo/emprego
+        frmCCE.gravarRegistro();
+        desativarBotoesFrmCCE = false;
+
+        //entra aqui quando for gravar o primeiro cadastro
+        if (frmCCE.isVisible() && !frmCCE.getNomeCargoEmprego().equals("") && gravarAlteracaoFrmCCE == false)
+        {
+            //quando eu digitar nos campos da janela CadastrarConcurso e clicar no icone salvar da janela principal entra aqui e manda gravar registro que significa que os dados dos campos serão passados para as variaveis que eu acesso por aqui para mandar para a variavel controle           
+            CadastrarCargoEmpregoControle controle = new CadastrarCargoEmpregoControle(frmCCE.getNomeCargoEmprego(), frmCCE.getRegimeJuridico(), frmCCE.getNumeroLeiCriaCargoEmprego(), frmCCE.getDataLeiCriaCargoEmprego(), frmCCE.getReferenciaSalarial());
+            controle.cadastrar();
+            if (controle.getMensagem().equals("erro 1"))
+            {
+                JOptionPane.showMessageDialog(null, "Esta banca já foi cadastrada!");
+            } else if (controle.getMensagem().equals("ok"))
+            {
+                JOptionPane.showMessageDialog(null, "Banca cadastrada com sucesso.");
+                frmCCE.limparCampos();
+                frmCCE.desativarCampos();
+                frmCCE.desativarCampos();
+            }
+        }
+
+        //entra aqui quando for alterar um cadastro
+        if (frmCCE.isVisible() && !frmCCE.getCodigoCargoEmprego().equals("") && gravarAlteracaoFrmCCE == true)
+        {
+            
+            CadastrarCargoEmpregoControle controle = new CadastrarCargoEmpregoControle(Integer.parseInt(frmCCE.getCodigoCargoEmprego()), frmCCE.getNomeCargoEmprego(), frmCCE.getRegimeJuridico(), frmCCE.getNumeroLeiCriaCargoEmprego(), frmCCE.getDataLeiCriaCargoEmprego(), frmCCE.getReferenciaSalarial());
+            controle.alterar();
+            gravarAlteracaoFrmCCE = false;
+            frmCCE.limparCampos();
+            frmCCE.desativarCampos();
+            JOptionPane.showMessageDialog(null, "Alteração realizada com sucesso!");
+        }
 
     }//GEN-LAST:event_btnSalvarActionPerformed
 
     private void btnPrimeiroActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnPrimeiroActionPerformed
+        //tela cadastrar banca
         if (frmCB.isVisible() && desativarBotoesFrmCC == false)
         {
             index = 0;
             preencherTelaCadastroBanca(index);
         }
+
+        //tela cadastrar cargo/emprego
+        if (frmCCE.isVisible() && desativarBotoesFrmCCE == false)
+        {
+            index = 0;
+            preencherTelaCadastroCargoEmprego(index);
+        }
     }//GEN-LAST:event_btnPrimeiroActionPerformed
 
     private void btnAnteriorActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAnteriorActionPerformed
+        //tela cadastrar banca
         if (frmCB.isVisible() && desativarBotoesFrmCC == false)
         {
             index--;
@@ -667,9 +715,24 @@ public class frmPrincipal extends javax.swing.JFrame
                 index = 0;
             }
         }
+
+        //tela cadastrar cargo/emprego
+        if (frmCCE.isVisible() && desativarBotoesFrmCCE == false)
+        {
+            index--;
+            if (index >= 0)
+            {
+                preencherTelaCadastroCargoEmprego(index);
+            } else
+            {
+                index = 0;
+            }
+        }
     }//GEN-LAST:event_btnAnteriorActionPerformed
 
     private void btnProximoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnProximoActionPerformed
+
+        //tela cadastrar banca
         if (frmCB.isVisible() && desativarBotoesFrmCC == false)
         {
             index++;
@@ -680,9 +743,23 @@ public class frmPrincipal extends javax.swing.JFrame
             }
             preencherTelaCadastroBanca(index);
         }
+
+        //tela cadastrar cargo/emprego
+        if (frmCCE.isVisible() && desativarBotoesFrmCCE == false)
+        {
+            index++;
+            //este bloco de comando não deixa a seleção ser maior que o último registro do banco
+            if (index > frmPesquisarCargoEmprego.ultimoRegistro)
+            {
+                index = frmPesquisarCargoEmprego.ultimoRegistro;
+            }
+            preencherTelaCadastroCargoEmprego(index);
+        }
+
     }//GEN-LAST:event_btnProximoActionPerformed
 
     private void btnUltimoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnUltimoActionPerformed
+        //tela cadastrar banca
         if (frmCB.isVisible() && desativarBotoesFrmCC == false)
         {
             index = frmPesquisarBanca.ultimoRegistro;
@@ -694,10 +771,24 @@ public class frmPrincipal extends javax.swing.JFrame
 
             preencherTelaCadastroBanca(index);
         }
+
+        //tela cadastrar cargo/emprego
+        if (frmCCE.isVisible() && desativarBotoesFrmCCE == false)
+        {
+            index = frmPesquisarCargoEmprego.ultimoRegistro;
+            //este bloco de comando não deixa a seleção ser maior que o último registro do banco
+            if (index > frmPesquisarCargoEmprego.ultimoRegistro)
+            {
+                index = frmPesquisarCargoEmprego.ultimoRegistro;
+            }
+
+            preencherTelaCadastroCargoEmprego(index);
+        }
     }//GEN-LAST:event_btnUltimoActionPerformed
 
     private void preencherTelaCadastroBanca(int index)
     {
+        //tela cadastrar banca
         if (frmCB.isVisible() && desativarBotoesFrmCC == false)
         {
             CadastrarBancaControle controle = new CadastrarBancaControle(frmCB.getBancaConcurso());
@@ -714,9 +805,32 @@ public class frmPrincipal extends javax.swing.JFrame
                 frmCB.preencherCampos();
             }
         }
+
+    }
+
+    private void preencherTelaCadastroCargoEmprego(int index)
+    {
+        //tela cadastrar cargo/emprego
+        if (frmCCE.isVisible() && desativarBotoesFrmCCE == false)
+        {
+            CadastrarCargoEmpregoControle controle = new CadastrarCargoEmpregoControle(frmCCE.getNomeCargoEmprego());
+            controle.pesquisar(index);
+
+            if (!frmCCE.getCodigoCargoEmprego().equals(""))
+            {
+                frmCCE.setCodigoCargoEmprego(String.valueOf(controle.getCodigoCargoEmprego()));
+                frmCCE.setNomeCargoEmprego(String.valueOf(controle.getNomeCargoEmprego()));
+                frmCCE.setRegimeJuridico(String.valueOf(controle.getRegimeJuridico()));
+                frmCCE.setNumeroLeiCriaCargoEmprego(String.valueOf(controle.getNumeroLeiCriaCargoEmprego()));
+                frmCCE.setDataLeiCriaCargoEmprego(String.valueOf(controle.getDataLeiCriaCargoEmprego()));
+                frmCCE.setReferenciaSalarial(String.valueOf(controle.getReferenciaSalarial()));
+                frmCCE.preencherCampos();
+            }
+        }
     }
 
     private void btnExcluirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnExcluirActionPerformed
+        //cadastrar banca
         if (frmCB.isVisible() && !frmCB.getBancaConcurso().equals("") && desativarBotoesFrmCC == false)
         {
             int resposta = JOptionPane.showConfirmDialog(null, "Deseja realizar a exclusão do registro?", "Sair", JOptionPane.YES_NO_OPTION, 2);
@@ -729,15 +843,36 @@ public class frmPrincipal extends javax.swing.JFrame
                 frmCB.limparCampos();
             }
         }
+        
+        //cadastrar cargo/emprego
+        if (frmCCE.isVisible() && !frmCCE.getNomeCargoEmprego().equals("") && desativarBotoesFrmCCE == false)
+        {
+            int resposta = JOptionPane.showConfirmDialog(null, "Deseja realizar a exclusão do registro?", "Sair", JOptionPane.YES_NO_OPTION, 2);
+
+            if (resposta == JOptionPane.YES_OPTION)
+            {
+                CadastrarCargoEmpregoControle controle = new CadastrarCargoEmpregoControle(frmCCE.getNomeCargoEmprego());
+                controle.excluir();
+                JOptionPane.showMessageDialog(null, "Exclusão realizada com sucesso!");
+                frmCCE.limparCampos();
+            }
+        }
     }//GEN-LAST:event_btnExcluirActionPerformed
 
     private void btnAlterarActionPerformed(java.awt.event.ActionEvent evt)//GEN-FIRST:event_btnAlterarActionPerformed
     {//GEN-HEADEREND:event_btnAlterarActionPerformed
-        //JANELA CADASTRAR CONCURSO
+        //janela cadastrar banca
         if (frmCB.isVisible() && !frmCB.getBancaConcurso().equals("") && gravarAlteracaoFrmCC == false)
         {
             frmCB.ativarCampos();
             gravarAlteracaoFrmCC = true;
+        }
+        
+        //janela cadastrar cargo/emprego
+        if (frmCCE.isVisible() && !frmCCE.getNomeCargoEmprego().equals("") && gravarAlteracaoFrmCCE == false)
+        {
+            frmCCE.ativarCampos();
+            gravarAlteracaoFrmCCE = true;
         }
     }//GEN-LAST:event_btnAlterarActionPerformed
 
@@ -780,7 +915,7 @@ public class frmPrincipal extends javax.swing.JFrame
         {
             JOptionPane.showMessageDialog(null, "Digite as informações antes de salvar.");
         }
-        
+
         //***************************************************************************************
         //tela cadastrar cargo/emprego
         if (frmCCE.isVisible())
@@ -795,7 +930,7 @@ public class frmPrincipal extends javax.swing.JFrame
                     //coloco na tela de cadastro de concurso, seto na variavel a lista e o index puxado direto da tela frmPesquisarConcurso 
                     frmCCE.setCodigoCargoEmprego(String.valueOf(frmPCE.getLista().get(frmPCE.getIndex()).getCodigoCargoEmprego()));
                     frmCCE.setNomeCargoEmprego(String.valueOf(frmPCE.getLista().get(frmPCE.getIndex()).getNomeCargoEmprego()));
-                    frmCCE.setRegimeJuridico(Integer.parseInt(frmPCE.getLista().get(frmPCE.getIndex()).getRegimeJuridico()));
+                    frmCCE.setRegimeJuridico(String.valueOf(frmPCE.getLista().get(frmPCE.getIndex()).getRegimeJuridico()));
                     frmCCE.setNumeroLeiCriaCargoEmprego(String.valueOf(frmPCE.getLista().get(frmPCE.getIndex()).getNumeroLeiCriaCargoEmprego()));
                     frmCCE.setDataLeiCriaCargoEmprego(String.valueOf(frmPCE.getLista().get(frmPCE.getIndex()).getDataLeiCriaCargoEmprego()));
                     frmCCE.setReferenciaSalarial(String.valueOf(frmPCE.getLista().get(frmPCE.getIndex()).getReferenciaSalarial()));
@@ -815,25 +950,36 @@ public class frmPrincipal extends javax.swing.JFrame
         {
             JOptionPane.showMessageDialog(null, "Digite as informações antes de salvar.");
         }
-        
-        
+
 
     }//GEN-LAST:event_btnPesquisarActionPerformed
 
 
     private void btnNovoActionPerformed(java.awt.event.ActionEvent evt)//GEN-FIRST:event_btnNovoActionPerformed
     {//GEN-HEADEREND:event_btnNovoActionPerformed
+        //tela cadastro banca
         if (frmCB.isVisible())
         {
             desativarBotoesFrmCC = true;
             frmCB.ativarCampos();
             frmCB.limparCampos();
         }
+        
+        //tela cadastro cargo/emprego
+        if (frmCCE.isVisible())
+        {
+            desativarBotoesFrmCCE = true;
+            frmCCE.ativarCampos();
+            frmCCE.limparCampos();
+        }
     }//GEN-LAST:event_btnNovoActionPerformed
 
     private void mnCadastrarConcursoActionPerformed(java.awt.event.ActionEvent evt)//GEN-FIRST:event_mnCadastrarConcursoActionPerformed
     {//GEN-HEADEREND:event_mnCadastrarConcursoActionPerformed
-        // TODO add your handling code here:
+        jdkpPrincipal.add(frmCC);
+        frmCC.setVisible(true);
+        frmCC.limparCampos();
+        frmCC.desativarCampos();
     }//GEN-LAST:event_mnCadastrarConcursoActionPerformed
 
     private void mnCadastrarCargoEmpregoActionPerformed(java.awt.event.ActionEvent evt)//GEN-FIRST:event_mnCadastrarCargoEmpregoActionPerformed
