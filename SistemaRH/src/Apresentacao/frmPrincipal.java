@@ -904,12 +904,11 @@ public class frmPrincipal extends javax.swing.JFrame
                     frmCB.desativarCampos();
                     desativarBotoesFrmCC = false;
                     gravarAlteracaoFrmCC = false;//este botão serve para quando o usuario selecionar algum registro e clicar em alterar e caso clique no botão pesquisar e depois alterar ele consegue realizar a alteração
-
                 }
             } else
             {
                 JOptionPane.showMessageDialog(null, "Não existem registros para serem consultados!");
-            }
+            }       
 
         } else if (frmCB.isVisible())
         {
@@ -939,14 +938,48 @@ public class frmPrincipal extends javax.swing.JFrame
                     frmCCE.desativarCampos();
                     desativarBotoesFrmCCE = false;
                     gravarAlteracaoFrmCCE = false;//este botão serve para quando o usuario selecionar algum registro e clicar em alterar e caso clique no botão pesquisar e depois alterar ele consegue realizar a alteração
+                }
+            } else
+            {
+                JOptionPane.showMessageDialog(null, "Não existem registros para serem consultados!");
+            }    
+        }
+        else if (frmCCE.isVisible())
+        {
+            JOptionPane.showMessageDialog(null, "Digite as informações antes de salvar.");
+        }
+        
+        //***************************************************************************************
+        //tela cadastrar concurso
+        if (frmCC.isVisible())
+        {
+            frmPesquisarConcurso frmPC = new frmPesquisarConcurso(null, true);
+            if (frmPC.getLista() != null)
+            {
+                frmPC.setVisible(true);
+                //se a mensagem for pode passar entra no if abaixo
+                if (frmPC.getMensagem().equals("pode passar"))
+                {
+                    //coloco na tela de cadastro de concurso, seto na variavel a lista e o index puxado direto da tela frmPesquisarConcurso 
+                    frmCC.setCodigoConcurso(String.valueOf(frmPC.getLista().get(frmPC.getIndex()).getCodigoConcurso()));
+                    frmCC.setNumeroConcurso(String.valueOf(frmPC.getLista().get(frmPC.getIndex()).getNumero_concurso()));
+                    frmCC.setAnoConcurso(String.valueOf(frmPC.getLista().get(frmPC.getIndex()).getAno_concurso()));
+                    frmCC.setSituacaoConcurso(String.valueOf(frmPC.getLista().get(frmPC.getIndex()).getSituacao_concurso()));
+                    frmCC.setFk_matricula_responsavel_concurso(String.valueOf(frmPC.getLista().get(frmPC.getIndex()).getFk_matricula_responsavel_concurso()));
+                    frmCC.setFk_codigo_banca(String.valueOf(frmPC.getLista().get(frmPC.getIndex()).getFk_codigo_banca()));
+
+                    frmCC.preencherCampos();
+                    frmCC.desativarCampos();
+                    desativarBotoesFrmCC = false;
+                    gravarAlteracaoFrmCC = false;//este botão serve para quando o usuario selecionar algum registro e clicar em alterar e caso clique no botão pesquisar e depois alterar ele consegue realizar a alteração
 
                 }
             } else
             {
                 JOptionPane.showMessageDialog(null, "Não existem registros para serem consultados!");
             }
-
-        } else if (frmCB.isVisible())
+        }
+        else if (frmCC.isVisible())
         {
             JOptionPane.showMessageDialog(null, "Digite as informações antes de salvar.");
         }
@@ -965,6 +998,14 @@ public class frmPrincipal extends javax.swing.JFrame
             frmCB.limparCampos();
         }
         
+         //tela cadastro concurso
+        if (frmCC.isVisible())
+        {
+            desativarBotoesFrmCC = true;
+            frmCC.ativarCampos();
+            frmCC.limparCampos();
+        }
+        
         //tela cadastro cargo/emprego
         if (frmCCE.isVisible())
         {
@@ -980,6 +1021,7 @@ public class frmPrincipal extends javax.swing.JFrame
         frmCC.setVisible(true);
         frmCC.limparCampos();
         frmCC.desativarCampos();
+        frmCC.popularCMBs();
     }//GEN-LAST:event_mnCadastrarConcursoActionPerformed
 
     private void mnCadastrarCargoEmpregoActionPerformed(java.awt.event.ActionEvent evt)//GEN-FIRST:event_mnCadastrarCargoEmpregoActionPerformed

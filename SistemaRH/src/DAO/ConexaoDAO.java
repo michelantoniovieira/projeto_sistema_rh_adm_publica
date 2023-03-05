@@ -13,7 +13,7 @@ public class ConexaoDAO
 	private static String DRIVER = "com.mysql.cj.jdbc.Driver";
 	private static String URL = "jdbc:mysql://localhost:3306/sistemarh"; 
 	private static String USER = "root"; //usuário do BD
-	private static String PASS = "root";//senha do BD
+	private static String PASS = "#Mav20222rh2";//senha do BD
 	
 	
 	//Connection classe responsavel por manter conexão aberta ou encerrar a conexão no banco

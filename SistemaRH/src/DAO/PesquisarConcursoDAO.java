@@ -53,12 +53,9 @@ public class PesquisarConcursoDAO
                 objPesquisarConcursoDTO.setCodigoConcurso(rs.getInt("codigo_concurso"));
                 objPesquisarConcursoDTO.setNumero_concurso(rs.getInt("numero_concurso"));
                 objPesquisarConcursoDTO.setAno_concurso(rs.getInt("ano_concurso"));
-                objPesquisarConcursoDTO.setNome_banca_organizadora(rs.getString("nome_banca_organizadora"));
-                objPesquisarConcursoDTO.setTelefone_banca_organizadora(rs.getString("telefone_banca_organizadora"));
-                objPesquisarConcursoDTO.setResponsavel_banca_organizadora(rs.getString("responsavel_banca_organizadora"));
-                objPesquisarConcursoDTO.setTelefone_responsavel_banca_organizadora(rs.getString("telefone_responsavel_banca_organizadora"));
-                objPesquisarConcursoDTO.setEmail_banca_organizadora(rs.getString("email_banca_organizadora"));
-
+                objPesquisarConcursoDTO.setSituacao_concurso(rs.getString("situacao_concurso"));
+                objPesquisarConcursoDTO.setFk_matricula_responsavel_concurso(rs.getInt("fk_matricula_responsavel_concurso"));
+                objPesquisarConcursoDTO.setFk_codigo_banca(rs.getInt("fk_codigo_banca"));
                 lista.add(objPesquisarConcursoDTO);
             }
         } catch (SQLException erro)

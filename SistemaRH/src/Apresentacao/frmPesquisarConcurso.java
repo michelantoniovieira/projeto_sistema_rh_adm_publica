@@ -308,11 +308,9 @@ public class frmPesquisarConcurso extends javax.swing.JDialog
                     lista.get(num).getCodigoConcurso(),
                     lista.get(num).getNumero_concurso(),
                     lista.get(num).getAno_concurso(),
-                    lista.get(num).getNome_banca_organizadora(),
-                    lista.get(num).getTelefone_banca_organizadora(),
-                    lista.get(num).getResponsavel_banca_organizadora(),
-                    lista.get(num).getTelefone_responsavel_banca_organizadora(),
-                    lista.get(num).getEmail_banca_organizadora(),
+                    lista.get(num).getSituacao_concurso(),
+                    lista.get(num).getFk_matricula_responsavel_concurso(),
+                    lista.get(num).getFk_codigo_banca()
                 });
                 setLista(lista);
 

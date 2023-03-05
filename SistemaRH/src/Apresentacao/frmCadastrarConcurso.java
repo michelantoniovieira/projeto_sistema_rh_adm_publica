@@ -4,180 +4,151 @@
  */
 package Apresentacao;
 
+import DAO.PopularCmbDAO;
 import DTO.PesquisarConcursoDTO;
 import java.util.ArrayList;
+import javax.swing.JOptionPane;
 
 /**
  *
  * @author miche
  */
-public class frmCadastrarConcurso extends javax.swing.JInternalFrame
-{
+public class frmCadastrarConcurso extends javax.swing.JInternalFrame {
 
     private String codigoConcurso = "";
     private String numeroConcurso = "";
     private String anoConcurso = "";
-    private String bancaConcurso = "";
-    private String telBanca = "";
-    private String responsavelBanca = "";
-    private String telResponsavelBanca = "";
-    private String emailResponsavel = "";
+    private String situacaoConcurso = "";
+    private String fk_matricula_responsavel_concurso = "";
+    private String fk_codigo_banca = "";
+
     private ArrayList<PesquisarConcursoDTO> lista;
 
-    public frmCadastrarConcurso()
-    {
+    public frmCadastrarConcurso() {
         initComponents();
     }
 
-    public void gravarRegistro()
-    {
+    public void gravarRegistro() {
         setCodigoConcurso(txtCodigoConcurso.getText());
         setNumeroConcurso(txtNumeroConcurso.getText());
         setAnoConcurso(txtAnoConcurso.getText());
+        setSituacaoConcurso((String) cmbSituacaoConcurso.getSelectedItem());
+        setFk_matricula_responsavel_concurso((String) cmbFkMatriculaResponsavelConcurso.getSelectedItem());
+        setFk_codigo_banca((String) cmbFkCodigoBanca.getSelectedItem());
+
     }
 
-    public void preencherLista(ArrayList<PesquisarConcursoDTO> lista, int index)
-    {
+    public void preencherLista(ArrayList<PesquisarConcursoDTO> lista, int index) {
         this.setLista(lista);
         setCodigoConcurso(String.valueOf(getLista().get(index).getCodigoConcurso()));
         setNumeroConcurso(String.valueOf(getLista().get(index).getNumero_concurso()));
         setAnoConcurso(String.valueOf(getLista().get(index).getAno_concurso()));
-        setBancaConcurso(String.valueOf(getLista().get(index).getNome_banca_organizadora()));
-        setTelBanca(String.valueOf(getLista().get(index).getTelefone_banca_organizadora()));
-        setResponsavelBanca(String.valueOf(getLista().get(index).getResponsavel_banca_organizadora()));
-        setTelResponsavelBanca(String.valueOf(getLista().get(index).getTelefone_responsavel_banca_organizadora()));
-        setEmailResponsavel(String.valueOf(getLista().get(index).getEmail_banca_organizadora()));
+        setSituacaoConcurso(String.valueOf(getLista().get(index).getSituacao_concurso()));
+        setFk_matricula_responsavel_concurso(String.valueOf(getLista().get(index).getFk_matricula_responsavel_concurso()));
+        setFk_codigo_banca(String.valueOf(getLista().get(index).getFk_codigo_banca()));
         preencherCampos();
     }
 
-    public void preencherCampos()
-    {
+    public void preencherCampos() {
         txtCodigoConcurso.setText(getCodigoConcurso());
         txtNumeroConcurso.setText(getNumeroConcurso());
         txtAnoConcurso.setText(getAnoConcurso());
+        cmbSituacaoConcurso.setSelectedIndex(0);
+        cmbFkCodigoBanca.setSelectedIndex(0);
+        cmbFkMatriculaResponsavelConcurso.setSelectedIndex(0);
     }
 
     //liberar os campos para edição
-    public void ativarCampos()
-    {
+    public void ativarCampos() {
         txtCodigoConcurso.setEnabled(false);
         txtNumeroConcurso.setEnabled(true);
         txtAnoConcurso.setEnabled(true);
+        cmbSituacaoConcurso.setEnabled(true);
+        cmbFkMatriculaResponsavelConcurso.setEnabled(true);
+        cmbFkCodigoBanca.setEnabled(true);
     }
 
     //travar os campos para edição
-    public void desativarCampos()
-    {
+    public void desativarCampos() {
         txtCodigoConcurso.setEnabled(false);
         txtNumeroConcurso.setEnabled(false);
         txtAnoConcurso.setEnabled(false);
+        cmbSituacaoConcurso.setEnabled(false);
+        cmbFkMatriculaResponsavelConcurso.setEnabled(false);
+        cmbFkCodigoBanca.setEnabled(false);
     }
 
-    public void limparCampos()
-    {
+    public void limparCampos() {
         //this.setCodigoConcurso("");
         txtCodigoConcurso.setText("");
         this.setNumeroConcurso("");
         txtNumeroConcurso.setText("");
         this.setAnoConcurso("");
         txtAnoConcurso.setText("");
-        this.setBancaConcurso("");
+        cmbFkCodigoBanca.setSelectedIndex(0);
+        cmbFkMatriculaResponsavelConcurso.setSelectedIndex(0);
+        cmbSituacaoConcurso.setSelectedIndex(0);
     }
 
-    public String getCodigoConcurso()
-    {
+    public String getCodigoConcurso() {
         return codigoConcurso;
     }
 
-    public void setCodigoConcurso(String codigoConcurso)
-    {
+    public void setCodigoConcurso(String codigoConcurso) {
         this.codigoConcurso = codigoConcurso;
-    }    
-    
-    public String getNumeroConcurso()
-    {
+    }
+
+    public String getNumeroConcurso() {
         return numeroConcurso;
     }
 
-    public void setNumeroConcurso(String numeroConcurso)
-    {
+    public void setNumeroConcurso(String numeroConcurso) {
         this.numeroConcurso = numeroConcurso;
     }
 
-    public String getAnoConcurso()
-    {
+    public String getAnoConcurso() {
         return anoConcurso;
     }
 
-    public void setAnoConcurso(String anoConcurso)
-    {
+    public void setAnoConcurso(String anoConcurso) {
         this.anoConcurso = anoConcurso;
     }
 
-    public String getBancaConcurso()
-    {
-        return bancaConcurso;
+    public String getSituacaoConcurso() {
+        return situacaoConcurso;
     }
 
-    public void setBancaConcurso(String bancaConcurso)
-    {
-        this.bancaConcurso = bancaConcurso;
+    public void setSituacaoConcurso(String situacaoConcurso) {
+        this.situacaoConcurso = situacaoConcurso;
     }
 
-    public String getTelBanca()
-    {
-        return telBanca;
+    public String getFk_matricula_responsavel_concurso() {
+        return fk_matricula_responsavel_concurso;
     }
 
-    public void setTelBanca(String telBanca)
-    {
-        this.telBanca = telBanca;
+    public void setFk_matricula_responsavel_concurso(String fk_matricula_responsavel_concurso) {
+        this.fk_matricula_responsavel_concurso = fk_matricula_responsavel_concurso;
     }
 
-    public String getResponsavelBanca()
-    {
-        return responsavelBanca;
+    public String getFk_codigo_banca() {
+        return fk_codigo_banca;
     }
 
-    public void setResponsavelBanca(String responsavelBanca)
-    {
-        this.responsavelBanca = responsavelBanca;
+    public void setFk_codigo_banca(String fk_codigo_banca) {
+        this.fk_codigo_banca = fk_codigo_banca;
     }
 
-    public String getTelResponsavelBanca()
-    {
-        return telResponsavelBanca;
-    }
-
-    public void setTelResponsavelBanca(String telResponsavelBanca)
-    {
-        this.telResponsavelBanca = telResponsavelBanca;
-    }
-
-    public String getEmailResponsavel()
-    {
-        return emailResponsavel;
-    }
-
-    public void setEmailResponsavel(String emailResponsavel)
-    {
-        this.emailResponsavel = emailResponsavel;
-    }
-
-    public ArrayList<PesquisarConcursoDTO> getLista()
-    {
+    public ArrayList<PesquisarConcursoDTO> getLista() {
         return lista;
     }
 
-    public void setLista(ArrayList<PesquisarConcursoDTO> lista)
-    {
+    public void setLista(ArrayList<PesquisarConcursoDTO> lista) {
         this.lista = lista;
     }
 
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
-    private void initComponents()
-    {
+    private void initComponents() {
 
         lblCadastrarConcurso = new java.awt.Label();
         pPrincipal = new javax.swing.JPanel();
@@ -188,16 +159,12 @@ public class frmCadastrarConcurso extends javax.swing.JInternalFrame
         txtAnoConcurso = new javax.swing.JTextField();
         txtCodigoConcurso = new javax.swing.JTextField();
         lblCodigoConcurso = new javax.swing.JLabel();
-        cmbCadastrarBancaConcurso = new javax.swing.JComboBox<>();
+        cmbFkCodigoBanca = new javax.swing.JComboBox<>();
         lblBanca = new javax.swing.JLabel();
-        jScrollPane1 = new javax.swing.JScrollPane();
-        jTable1 = new javax.swing.JTable();
-        btnCadastrarCargoEmpregoConcurso = new javax.swing.JButton();
-        cmbCadastrarCargoEmpregoConcurso = new javax.swing.JComboBox<>();
-        lblCargoEmpregoConcurso = new javax.swing.JLabel();
-        btnCadastrarCargoEmpregoConcurso1 = new javax.swing.JButton();
-        txtQuantidadeVagas = new javax.swing.JTextField();
-        lblQuantidadeVagas = new javax.swing.JLabel();
+        lblPrefeitoResponsavel = new javax.swing.JLabel();
+        cmbSituacaoConcurso = new javax.swing.JComboBox<>();
+        cmbFkMatriculaResponsavelConcurso = new javax.swing.JComboBox<>();
+        lblSituacaoConcurso = new javax.swing.JLabel();
         lblTitulo = new javax.swing.JLabel();
 
         lblCadastrarConcurso.setText("label1");
@@ -211,117 +178,104 @@ public class frmCadastrarConcurso extends javax.swing.JInternalFrame
 
         lblAnoConcurso.setText("Ano Concurso:");
 
-        txtCodigoConcurso.addActionListener(new java.awt.event.ActionListener()
-        {
-            public void actionPerformed(java.awt.event.ActionEvent evt)
-            {
+        txtCodigoConcurso.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
                 txtCodigoConcursoActionPerformed(evt);
             }
         });
 
-        lblCodigoConcurso.setText("Codigo Concurso:");
+        lblCodigoConcurso.setText("Código Concurso:");
+
+        cmbFkCodigoBanca.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "-" }));
+        cmbFkCodigoBanca.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                cmbFkCodigoBancaActionPerformed(evt);
+            }
+        });
 
         lblBanca.setText("Banca:");
 
-        jTable1.setModel(new javax.swing.table.DefaultTableModel(
-            new Object [][]
-            {
-                {null, null},
-                {null, null},
-                {null, null},
-                {null, null}
-            },
-            new String []
-            {
-                "Cargo/Emprego", "Quantidade de Vagas"
+        lblPrefeitoResponsavel.setText("Responsável/Prefeito");
+
+        cmbSituacaoConcurso.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "-", "Em andamento", "Homologado", "Cancelado" }));
+
+        cmbFkMatriculaResponsavelConcurso.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "-" }));
+        cmbFkMatriculaResponsavelConcurso.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                cmbFkMatriculaResponsavelConcursoActionPerformed(evt);
             }
-        ));
-        jScrollPane1.setViewportView(jTable1);
+        });
 
-        btnCadastrarCargoEmpregoConcurso.setText("Cadastrar");
-
-        lblCargoEmpregoConcurso.setText("Cargo/Emprego");
-
-        btnCadastrarCargoEmpregoConcurso1.setText("Remover");
-
-        lblQuantidadeVagas.setText("Quantidade Vagas");
+        lblSituacaoConcurso.setText("Situação Concurso");
 
         javax.swing.GroupLayout pInformacoesLayout = new javax.swing.GroupLayout(pInformacoes);
         pInformacoes.setLayout(pInformacoesLayout);
         pInformacoesLayout.setHorizontalGroup(
             pInformacoesLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, pInformacoesLayout.createSequentialGroup()
+            .addGroup(pInformacoesLayout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(pInformacoesLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(pInformacoesLayout.createSequentialGroup()
+                        .addGroup(pInformacoesLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+                            .addComponent(cmbFkCodigoBanca, javax.swing.GroupLayout.Alignment.LEADING, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(lblNumeroConcurso, javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(txtNumeroConcurso, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, 156, Short.MAX_VALUE))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                         .addGroup(pInformacoesLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(cmbCadastrarCargoEmpregoConcurso, javax.swing.GroupLayout.PREFERRED_SIZE, 156, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(lblCargoEmpregoConcurso))
-                        .addGap(18, 18, 18)
-                        .addGroup(pInformacoesLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(lblQuantidadeVagas)
-                            .addGroup(pInformacoesLayout.createSequentialGroup()
-                                .addComponent(txtQuantidadeVagas, javax.swing.GroupLayout.PREFERRED_SIZE, 47, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(btnCadastrarCargoEmpregoConcurso)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(btnCadastrarCargoEmpregoConcurso1)))
-                        .addGap(0, 5, Short.MAX_VALUE))
-                    .addComponent(jScrollPane1, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE)
+                            .addComponent(txtAnoConcurso, javax.swing.GroupLayout.PREFERRED_SIZE, 247, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(lblAnoConcurso)
+                            .addComponent(cmbFkMatriculaResponsavelConcurso, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
                     .addGroup(pInformacoesLayout.createSequentialGroup()
-                        .addGroup(pInformacoesLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(lblNumeroConcurso)
-                            .addComponent(txtNumeroConcurso, javax.swing.GroupLayout.PREFERRED_SIZE, 156, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addGap(17, 17, 17)
-                        .addGroup(pInformacoesLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(pInformacoesLayout.createSequentialGroup()
-                                .addComponent(lblAnoConcurso)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                            .addComponent(txtAnoConcurso)))
+                        .addComponent(txtCodigoConcurso, javax.swing.GroupLayout.PREFERRED_SIZE, 155, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addComponent(cmbSituacaoConcurso, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                     .addGroup(pInformacoesLayout.createSequentialGroup()
-                        .addGroup(pInformacoesLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(lblCodigoConcurso)
-                            .addComponent(txtCodigoConcurso, javax.swing.GroupLayout.PREFERRED_SIZE, 155, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addGap(18, 18, 18)
                         .addGroup(pInformacoesLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addGroup(pInformacoesLayout.createSequentialGroup()
                                 .addComponent(lblBanca)
-                                .addGap(0, 0, Short.MAX_VALUE))
-                            .addComponent(cmbCadastrarBancaConcurso, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
+                                .addGap(133, 133, 133)
+                                .addComponent(lblPrefeitoResponsavel))
+                            .addGroup(pInformacoesLayout.createSequentialGroup()
+                                .addComponent(lblCodigoConcurso)
+                                .addGap(71, 71, 71)
+                                .addComponent(lblSituacaoConcurso)))
+                        .addGap(0, 0, Short.MAX_VALUE)))
                 .addContainerGap())
         );
         pInformacoesLayout.setVerticalGroup(
             pInformacoesLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(pInformacoesLayout.createSequentialGroup()
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, pInformacoesLayout.createSequentialGroup()
                 .addContainerGap()
-                .addGroup(pInformacoesLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(lblCodigoConcurso)
-                    .addComponent(lblBanca))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(pInformacoesLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(txtCodigoConcurso, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(cmbCadastrarBancaConcurso, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(pInformacoesLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(lblNumeroConcurso)
-                    .addComponent(lblAnoConcurso))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(pInformacoesLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(txtNumeroConcurso, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(txtAnoConcurso, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(18, 18, 18)
-                .addGroup(pInformacoesLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(lblCargoEmpregoConcurso)
-                    .addComponent(lblQuantidadeVagas))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(pInformacoesLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(cmbCadastrarCargoEmpregoConcurso, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(txtQuantidadeVagas, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(btnCadastrarCargoEmpregoConcurso)
-                    .addComponent(btnCadastrarCargoEmpregoConcurso1))
-                .addGap(18, 18, 18)
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 219, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(69, Short.MAX_VALUE))
+                .addGroup(pInformacoesLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addGroup(pInformacoesLayout.createSequentialGroup()
+                        .addGap(0, 0, Short.MAX_VALUE)
+                        .addComponent(lblPrefeitoResponsavel)
+                        .addGap(28, 28, 28))
+                    .addGroup(pInformacoesLayout.createSequentialGroup()
+                        .addGroup(pInformacoesLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(lblCodigoConcurso)
+                            .addComponent(lblSituacaoConcurso))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addGroup(pInformacoesLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(txtCodigoConcurso, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(cmbSituacaoConcurso, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addGroup(pInformacoesLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                            .addGroup(pInformacoesLayout.createSequentialGroup()
+                                .addComponent(lblNumeroConcurso)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(txtNumeroConcurso, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addGroup(pInformacoesLayout.createSequentialGroup()
+                                .addComponent(lblAnoConcurso)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(txtAnoConcurso, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(lblBanca)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addGroup(pInformacoesLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                            .addComponent(cmbFkMatriculaResponsavelConcurso)
+                            .addComponent(cmbFkCodigoBanca))))
+                .addContainerGap())
         );
 
         lblTitulo.setFont(new java.awt.Font("Segoe UI", 0, 36)); // NOI18N
@@ -332,19 +286,20 @@ public class frmCadastrarConcurso extends javax.swing.JInternalFrame
         pPrincipalLayout.setHorizontalGroup(
             pPrincipalLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(pPrincipalLayout.createSequentialGroup()
-                .addGap(40, 40, 40)
-                .addComponent(lblTitulo)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, pPrincipalLayout.createSequentialGroup()
-                .addComponent(pInformacoes, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addGroup(pPrincipalLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(pPrincipalLayout.createSequentialGroup()
+                        .addGap(40, 40, 40)
+                        .addComponent(lblTitulo)
+                        .addGap(0, 78, Short.MAX_VALUE))
+                    .addComponent(pInformacoes, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 .addContainerGap())
         );
         pPrincipalLayout.setVerticalGroup(
             pPrincipalLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, pPrincipalLayout.createSequentialGroup()
-                .addGap(18, 18, 18)
+                .addContainerGap()
                 .addComponent(lblTitulo, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(18, 18, 18)
+                .addGap(20, 20, 20)
                 .addComponent(pInformacoes, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
@@ -356,7 +311,7 @@ public class frmCadastrarConcurso extends javax.swing.JInternalFrame
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
                 .addComponent(pPrincipal, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(14, Short.MAX_VALUE))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -373,27 +328,45 @@ public class frmCadastrarConcurso extends javax.swing.JInternalFrame
         // TODO add your handling code here:
     }//GEN-LAST:event_txtCodigoConcursoActionPerformed
 
+    private void cmbFkCodigoBancaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cmbFkCodigoBancaActionPerformed
+
+    }//GEN-LAST:event_cmbFkCodigoBancaActionPerformed
+
+    private void cmbFkMatriculaResponsavelConcursoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cmbFkMatriculaResponsavelConcursoActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_cmbFkMatriculaResponsavelConcursoActionPerformed
+
+    public void popularCMBs() {
+        JOptionPane.showMessageDialog(null, "poasd");
+        PopularCmbDAO pcd = new PopularCmbDAO();
+
+        ArrayList<String> popularCMB = new ArrayList<String>();
+        //popular nome das bancas
+        popularCMB = pcd.pesquisar("banca", "nome_banca_organizadora");
+        for (String nomes : popularCMB) {
+            cmbFkCodigoBanca.addItem(nomes);
+        }
+        
+        //LISTAR O NOME DOS PREFEITOS
+
+    }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton btnCadastrarCargoEmpregoConcurso;
-    private javax.swing.JButton btnCadastrarCargoEmpregoConcurso1;
-    private javax.swing.JComboBox<String> cmbCadastrarBancaConcurso;
-    private javax.swing.JComboBox<String> cmbCadastrarCargoEmpregoConcurso;
-    private javax.swing.JScrollPane jScrollPane1;
-    private javax.swing.JTable jTable1;
+    private javax.swing.JComboBox<String> cmbFkCodigoBanca;
+    private javax.swing.JComboBox<String> cmbFkMatriculaResponsavelConcurso;
+    private javax.swing.JComboBox<String> cmbSituacaoConcurso;
     private javax.swing.JLabel lblAnoConcurso;
     private javax.swing.JLabel lblBanca;
     private java.awt.Label lblCadastrarConcurso;
-    private javax.swing.JLabel lblCargoEmpregoConcurso;
     private javax.swing.JLabel lblCodigoConcurso;
     private javax.swing.JLabel lblNumeroConcurso;
-    private javax.swing.JLabel lblQuantidadeVagas;
+    private javax.swing.JLabel lblPrefeitoResponsavel;
+    private javax.swing.JLabel lblSituacaoConcurso;
     private javax.swing.JLabel lblTitulo;
     private javax.swing.JPanel pInformacoes;
     private javax.swing.JPanel pPrincipal;
     private javax.swing.JTextField txtAnoConcurso;
     private javax.swing.JTextField txtCodigoConcurso;
     private javax.swing.JTextField txtNumeroConcurso;
-    private javax.swing.JTextField txtQuantidadeVagas;
     // End of variables declaration//GEN-END:variables
 }

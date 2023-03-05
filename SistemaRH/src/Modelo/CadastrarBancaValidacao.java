@@ -4,11 +4,11 @@
  */
 package Modelo;
 
-import DTO.CadastrarConcursoDTO;
+import DTO.CadastrarBancaDTO;
 import javax.swing.JOptionPane;
 
 
-public class CadastrarBancaValidacao extends CadastrarConcursoDTO
+public class CadastrarBancaValidacao extends CadastrarBancaDTO
 {
     public CadastrarBancaValidacao(String NomeBancaConcurso, String telBancaConcurso, String responsavelBancaConcurso, String telResponsavelBanca, String emailBancaConcurso)
     {
@@ -24,8 +24,6 @@ public class CadastrarBancaValidacao extends CadastrarConcursoDTO
     {
         try
         {
-        System.out.println(getNumero_concurso());
-        System.out.println(getAno_concurso());
         System.out.println(getNome_banca_organizadora());
         System.out.println(getTelefone_banca_organizadora());
         System.out.println(getResponsavel_banca_organizadora());

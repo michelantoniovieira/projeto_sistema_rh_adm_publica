@@ -10,15 +10,13 @@ import javax.swing.JOptionPane;
 
 public class CadastrarConcursoValidacao extends CadastrarConcursoDTO
 {
-    public CadastrarConcursoValidacao(int numeroConcurso, int anoConcurso, String NomeBancaConcurso, String telBancaConcurso, String responsavelBancaConcurso, String telResponsavelBanca, String emailBancaConcurso)
+    public CadastrarConcursoValidacao(int numeroConcurso, int anoConcurso, String situacaoConcurso, int fk_matricula_responsavel_concurso, int fk_codigo_banca)
     {
-        this.setNumero_concurso(numeroConcurso);
-        this.setAno_concurso(anoConcurso);
-        this.setNome_banca_organizadora(NomeBancaConcurso);
-        this.setTelefone_banca_organizadora(telBancaConcurso);
-        this.setResponsavel_banca_organizadora(responsavelBancaConcurso);
-        this.setTelefone_responsavel_banca_organizadora(telResponsavelBanca);
-        this.setEmail_banca_organizadora(emailBancaConcurso);
+        this.setNumero_Concurso(numeroConcurso);
+        this.setAno_Concurso(anoConcurso);
+        this.setSituacao_Concurso(situacaoConcurso);
+        this.setFk_Matricula_Responsavel_Concurso(fk_matricula_responsavel_concurso);
+        this.setFk_codigo_banca(fk_codigo_banca);
         validar();
     }
     
@@ -26,12 +24,11 @@ public class CadastrarConcursoValidacao extends CadastrarConcursoDTO
     {
         try
         {
-        System.out.println(getNumero_concurso());
-        System.out.println(getAno_concurso());
-        System.out.println(getNome_banca_organizadora());
-        System.out.println(getTelefone_banca_organizadora());
-        System.out.println(getResponsavel_banca_organizadora());
-        System.out.println(getEmail_banca_organizadora());
+        System.out.println(getNumero_Concurso());
+        System.out.println(getAno_Concurso());
+        System.out.println(getSituacao_Concurso());
+        System.out.println(getFk_Matricula_Responsavel_Concurso());
+        System.out.println(getFk_codigo_banca());
  
         this.setMensagem("ok");
         }

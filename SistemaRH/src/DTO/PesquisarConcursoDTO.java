@@ -16,14 +16,13 @@ public class PesquisarConcursoDTO
     private String mensagem;
     private String comandoSqlParaPesquisa;
 
+    private int codigoConcurso;
     private int numero_concurso;
     private int ano_concurso;
-    private int codigoConcurso;
-    private String nome_banca_organizadora;
-    private String responsavel_banca_organizadora;
-    private String telefone_banca_organizadora;
-    private String telefone_responsavel_banca_organizadora;
-    private String email_banca_organizadora;
+    private String situacao_concurso;
+    private int fk_matricula_responsavel_concurso;
+    private int fk_codigo_banca;
+    
 
     public int getCodigoConcurso()
     {
@@ -95,55 +94,30 @@ public class PesquisarConcursoDTO
         this.ano_concurso = ano_concurso;
     }
 
-    public String getNome_banca_organizadora()
-    {
-        return nome_banca_organizadora;
+    public String getSituacao_concurso() {
+        return situacao_concurso;
     }
 
-    public void setNome_banca_organizadora(String nome_banca_organizadora)
-    {
-        this.nome_banca_organizadora = nome_banca_organizadora;
+    public void setSituacao_concurso(String situacao_concurso) {
+        this.situacao_concurso = situacao_concurso;
     }
 
-    public String getResponsavel_banca_organizadora()
-    {
-        return responsavel_banca_organizadora;
+    public int getFk_matricula_responsavel_concurso() {
+        return fk_matricula_responsavel_concurso;
     }
 
-    public void setResponsavel_banca_organizadora(String responsavel_banca_organizadora)
-    {
-        this.responsavel_banca_organizadora = responsavel_banca_organizadora;
+    public void setFk_matricula_responsavel_concurso(int fk_matricula_responsavel_concurso) {
+        this.fk_matricula_responsavel_concurso = fk_matricula_responsavel_concurso;
     }
 
-    public String getTelefone_banca_organizadora()
-    {
-        return telefone_banca_organizadora;
+    public int getFk_codigo_banca() {
+        return fk_codigo_banca;
     }
 
-    public void setTelefone_banca_organizadora(String telefone_banca_organizadora)
-    {
-        this.telefone_banca_organizadora = telefone_banca_organizadora;
+    public void setFk_codigo_banca(int fk_codigo_banca) {
+        this.fk_codigo_banca = fk_codigo_banca;
     }
 
-    public String getTelefone_responsavel_banca_organizadora()
-    {
-        return telefone_responsavel_banca_organizadora;
-    }
-
-    public void setTelefone_responsavel_banca_organizadora(String telefone_responsavel_banca_organizadora)
-    {
-        this.telefone_responsavel_banca_organizadora = telefone_responsavel_banca_organizadora;
-    }
-
-    public String getEmail_banca_organizadora()
-    {
-        return email_banca_organizadora;
-    }
-
-    public void setEmail_banca_organizadora(String email_banca_organizadora)
-    {
-        this.email_banca_organizadora = email_banca_organizadora;
-    }
-
+    
     
 }
