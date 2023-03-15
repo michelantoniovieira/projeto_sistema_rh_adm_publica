@@ -19,18 +19,26 @@ public class CadastrarConcursoControle extends CadastrarConcursoDTO {
         super();
         this.setNumero_Concurso(numeroConcurso);
     }
-
-    public CadastrarConcursoControle(int numeroConcurso, int anoConcurso, String situacaoConcurso, int fkMatriculaResponsavelConcurso, int fkCodigoBanca) {
+    
+    public CadastrarConcursoControle(int numeroConcurso, int anoConcurso, int situacaoConcurso, int fkMatriculaResponsavelConcurso, int fkCodigoBanca) {
         this.setNumero_Concurso(numeroConcurso);
         this.setAno_Concurso(anoConcurso);
         this.setSituacao_Concurso(situacaoConcurso);
         this.setFk_Matricula_Responsavel_Concurso(fkMatriculaResponsavelConcurso);
         this.setFk_codigo_banca(fkCodigoBanca);
+    }
 
+    public CadastrarConcursoControle(int codigoConcurso, int numeroConcurso, int anoConcurso, int situacaoConcurso, int fkMatriculaResponsavelConcurso, int fkCodigoBanca) {
+        this.setCodigo_Concurso(codigoConcurso);
+        this.setNumero_Concurso(numeroConcurso);
+        this.setAno_Concurso(anoConcurso);
+        this.setSituacao_Concurso(situacaoConcurso);
+        this.setFk_Matricula_Responsavel_Concurso(fkMatriculaResponsavelConcurso);
+        this.setFk_codigo_banca(fkCodigoBanca);
     }
 
     public void cadastrar() {
-        CadastrarConcursoValidacao validacao = new CadastrarConcursoValidacao(this.getNumero_Concurso(), this.getAno_Concurso(), this.getSituacao_Concurso(), this.getFk_Matricula_Responsavel_Concurso(), this.getFk_codigo_banca());
+        CadastrarConcursoValidacao validacao = new CadastrarConcursoValidacao(this.getCodigo_concurso(), this.getNumero_Concurso(), this.getAno_Concurso(), this.getSituacao_Concurso(), this.getFk_Matricula_Responsavel_Concurso(), this.getFk_codigo_banca());
         this.setMensagem(validacao.getMensagem());
         if (validacao.getMensagem().equals("ok")) {
             try {
@@ -41,6 +49,7 @@ public class CadastrarConcursoControle extends CadastrarConcursoDTO {
                 objcadastrarconcursoDTO.setFk_Matricula_Responsavel_Concurso(this.getFk_Matricula_Responsavel_Concurso());
                 objcadastrarconcursoDTO.setFk_codigo_banca(this.getFk_codigo_banca());
 
+                
                 CadastrarConcursoDAO objcadastrarconcursoDAO = new CadastrarConcursoDAO();
                 ResultSet rscadastrarconcursodao = objcadastrarconcursoDAO.verificarAntesDeCadastrar(objcadastrarconcursoDTO);
 
@@ -81,12 +90,20 @@ public class CadastrarConcursoControle extends CadastrarConcursoDTO {
 
     public void alterar() {
         CadastrarConcursoDTO objcadastrarconcursoDTO = new CadastrarConcursoDTO();
+        objcadastrarconcursoDTO.setCodigo_Concurso(this.getCodigo_concurso());
         objcadastrarconcursoDTO.setNumero_Concurso(this.getNumero_Concurso());
         objcadastrarconcursoDTO.setAno_Concurso(this.getAno_Concurso());
         objcadastrarconcursoDTO.setSituacao_Concurso(this.getSituacao_Concurso());
         objcadastrarconcursoDTO.setFk_Matricula_Responsavel_Concurso(this.getFk_Matricula_Responsavel_Concurso());
         objcadastrarconcursoDTO.setFk_codigo_banca(this.getFk_codigo_banca());
 
+        System.out.println(getCodigo_concurso());
+        System.out.println(getNumero_Concurso());
+        System.out.println(getAno_Concurso());
+        System.out.println(getSituacao_Concurso());
+        System.out.println(getFk_Matricula_Responsavel_Concurso());
+        System.out.println(getFk_codigo_banca());
+        
         CadastrarConcursoDAO alterar = new CadastrarConcursoDAO();
         alterar.update(objcadastrarconcursoDTO);
     }

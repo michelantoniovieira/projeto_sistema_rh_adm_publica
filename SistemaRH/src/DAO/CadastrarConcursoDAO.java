@@ -32,13 +32,11 @@ public class CadastrarConcursoDAO {
             PreparedStatement pstm = conn.prepareStatement(sql);
             pstm.setInt(1, objcadastrarconcursodto.getNumero_Concurso());
             pstm.setInt(2, objcadastrarconcursodto.getAno_Concurso());
-            pstm.setString(3, objcadastrarconcursodto.getSituacao_Concurso());
-            pstm.setInt(4, objcadastrarconcursodto.getFk_Matricula_Responsavel_Concurso());
-            pstm.setInt(5, objcadastrarconcursodto.getFk_codigo_banca());
+
             ResultSet rs = pstm.executeQuery();
             return rs;
         } catch (SQLException erro) {
-            JOptionPane.showMessageDialog(null, "Erro ao pesquisar Concurso" + erro);
+            JOptionPane.showMessageDialog(null, "Erro ao pesquisar CadastrarConcursoDAO" + erro);
             return null;
         }
     }
@@ -51,7 +49,7 @@ public class CadastrarConcursoDAO {
             pstm = conn.prepareStatement(sql);
             pstm.setInt(1, objcadastrarconcursodto.getNumero_Concurso());
             pstm.setInt(2, objcadastrarconcursodto.getAno_Concurso());
-            pstm.setString(3, objcadastrarconcursodto.getSituacao_Concurso());
+            pstm.setInt(3, objcadastrarconcursodto.getSituacao_Concurso());
             pstm.setInt(4, objcadastrarconcursodto.getFk_Matricula_Responsavel_Concurso());
             pstm.setInt(5, objcadastrarconcursodto.getFk_codigo_banca());
 
@@ -59,25 +57,29 @@ public class CadastrarConcursoDAO {
             pstm.close();
         } catch (SQLException erro) {
             JOptionPane.showMessageDialog(null, "CadastrarConcursoDAO - Cadastrar" + erro);
+            System.out.println(erro);
         }
     }
 
     public void update(CadastrarConcursoDTO objcadastrarconcursodto) {
-        Connection conexao = ConexaoDAO.conectaBD();
-        PreparedStatement stmt = null;
+        String sql = "UPDATE concurso_publico SET  numero_concurso = ?, ano_concurso = ?, situacao_concurso = ?, fk_matricula_responsavel_concurso = ?, fk_codigo_banca = ? WHERE codigo_concurso = '" + objcadastrarconcursodto.getCodigo_concurso() + "'";
+        conn = new ConexaoDAO().conectaBD();
+
         {
             try {
-                stmt = conexao.prepareStatement("UPDATE concurso_publico SET  numero_concurso = ?, ano_concurso = ?, situacao_concurso = ?, fk_matricula_responsavel_concurso = ?, fk_codigo_banca = ? WHERE numero_concurso = '" + objcadastrarconcursodto.getNumero_Concurso() + "'");
+                pstm = conn.prepareStatement(sql);
                 pstm.setInt(1, objcadastrarconcursodto.getNumero_Concurso());
                 pstm.setInt(2, objcadastrarconcursodto.getAno_Concurso());
-                pstm.setString(3, objcadastrarconcursodto.getSituacao_Concurso());
+                pstm.setInt(3, objcadastrarconcursodto.getSituacao_Concurso());
                 pstm.setInt(4, objcadastrarconcursodto.getFk_Matricula_Responsavel_Concurso());
                 pstm.setInt(5, objcadastrarconcursodto.getFk_codigo_banca());
-                stmt.executeUpdate();
+
+                pstm.execute();
+                pstm.close();
             } catch (SQLException erro) {
                 erro.printStackTrace();
             } finally {
-                ConexaoDAO.encerrarConexao(conexao, stmt);
+                ConexaoDAO.encerrarConexao(conn, pstm);
             }
         }
     }
@@ -110,10 +112,11 @@ public class CadastrarConcursoDAO {
                 ccdto.setCodigo_Concurso(rs.getInt("codigo_concurso"));
                 ccdto.setNumero_Concurso(rs.getInt("numero_concurso"));
                 ccdto.setAno_Concurso(rs.getInt("ano_concurso"));
-                ccdto.setSituacao_Concurso(rs.getString("situacao_concurso"));
+                ccdto.setSituacao_Concurso(rs.getInt("situacao_concurso"));
                 ccdto.setFk_Matricula_Responsavel_Concurso(rs.getInt("fk_matricula_responsavel_concurso"));
                 ccdto.setFk_codigo_banca(rs.getInt("fk_codigo_banca"));
                 objcadastrarconcursodto.add(ccdto);
+
             }
         } catch (SQLException erro) {
             erro.printStackTrace();

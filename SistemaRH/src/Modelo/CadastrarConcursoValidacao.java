@@ -10,8 +10,9 @@ import javax.swing.JOptionPane;
 
 public class CadastrarConcursoValidacao extends CadastrarConcursoDTO
 {
-    public CadastrarConcursoValidacao(int numeroConcurso, int anoConcurso, String situacaoConcurso, int fk_matricula_responsavel_concurso, int fk_codigo_banca)
+    public CadastrarConcursoValidacao(int codigoConcurso, int numeroConcurso, int anoConcurso, int situacaoConcurso, int fk_matricula_responsavel_concurso, int fk_codigo_banca)
     {
+        this.setCodigo_Concurso(codigoConcurso);
         this.setNumero_Concurso(numeroConcurso);
         this.setAno_Concurso(anoConcurso);
         this.setSituacao_Concurso(situacaoConcurso);
@@ -23,13 +24,7 @@ public class CadastrarConcursoValidacao extends CadastrarConcursoDTO
     public void validar()
     {
         try
-        {
-        System.out.println(getNumero_Concurso());
-        System.out.println(getAno_Concurso());
-        System.out.println(getSituacao_Concurso());
-        System.out.println(getFk_Matricula_Responsavel_Concurso());
-        System.out.println(getFk_codigo_banca());
- 
+        { 
         this.setMensagem("ok");
         }
         catch(NumberFormatException e)

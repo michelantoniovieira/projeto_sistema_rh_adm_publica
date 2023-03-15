@@ -7,37 +7,37 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 import javax.swing.JOptionPane;
 
-public class PopularCmbDAO 
-{
+public class PopularCmbDAO {
+
     Connection con;
     PreparedStatement pstm;
     ResultSet rs;
-    ArrayList<String> lista = new ArrayList<String>();
-    
-    public ArrayList pesquisar(String informarTabela, String informarAtributo)
-    {
+    //crio um arraylist para receber as informações do banco de dados
+    ArrayList<Object> listaObjetos = new ArrayList<Object>();
+
+    public ArrayList pesquisar(String informarNomeChavePrimaria, String informarTabela, String informarAtributo) {
+
         String sql;
-        sql = "SELECT " + informarAtributo + " FROM " + informarTabela;
-        
+        sql = "SELECT " + informarAtributo + "," + informarNomeChavePrimaria + " FROM " + informarTabela;
+
         con = new ConexaoDAO().conectaBD();
-        
-        try
-        {
+
+        try {
             pstm = con.prepareStatement(sql);
             rs = pstm.executeQuery();
 
-            while (rs.next())
-            {
-                lista.add(rs.getString(informarAtributo));
+            while (rs.next()) {
+                //passo a chave primaria e o codigo_banca para o atributo listanome
+                listaObjetos.add(rs.getInt(informarNomeChavePrimaria));
+                listaObjetos.add(rs.getString(informarAtributo));
+
             }
-        } catch (SQLException erro)
-        {
+        } catch (SQLException erro) {
             JOptionPane.showMessageDialog(null, "PopularCmbDAO: " + erro);
-        } finally
-        {
+        } finally {
             ConexaoDAO.encerrarConexao(con, pstm, rs);
         }
-        
-        return lista;
+
+        return listaObjetos;
     }
 }

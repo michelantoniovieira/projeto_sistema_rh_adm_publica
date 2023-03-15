@@ -5,7 +5,7 @@ public class CadastrarConcursoDTO {
     private int codigo_concurso;
     private int numero_concurso;
     private int ano_concurso;
-    private String situacao_concurso;
+    private int situacao_concurso;
     private int fk_matricula_responsavel_concurso;
     private int fk_codigo_banca;
     private String mensagem;
@@ -34,11 +34,11 @@ public class CadastrarConcursoDTO {
         this.ano_concurso = ano_concurso;
     }
 
-    public String getSituacao_Concurso() {
+    public int getSituacao_Concurso() {
         return situacao_concurso;
     }
 
-    public void setSituacao_Concurso(String situacao_concurso) {
+    public void setSituacao_Concurso(int situacao_concurso) {
         this.situacao_concurso = situacao_concurso;
     }
 
