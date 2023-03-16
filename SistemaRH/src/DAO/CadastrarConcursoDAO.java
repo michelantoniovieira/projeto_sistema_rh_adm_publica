@@ -57,7 +57,6 @@ public class CadastrarConcursoDAO {
             pstm.close();
         } catch (SQLException erro) {
             JOptionPane.showMessageDialog(null, "CadastrarConcursoDAO - Cadastrar" + erro);
-            System.out.println(erro);
         }
     }
 

@@ -36,7 +36,7 @@ public class frmCadastrarConcurso extends javax.swing.JInternalFrame {
         setAnoConcurso(txtAnoConcurso.getText());
         setSituacaoConcurso(String.valueOf(cmbSituacaoConcurso.getSelectedIndex()));
         setFk_matricula_responsavel_concurso((String) cmbFkMatriculaResponsavelConcurso.getSelectedItem());
-        setFk_codigo_banca(getFk_codigo_banca());
+        setFk_codigo_banca(String.valueOf(cmbFkCodigoBanca.getSelectedIndex()));
     }
 
     public void preencherLista(ArrayList<PesquisarConcursoDTO> lista, int index) {
@@ -54,7 +54,6 @@ public class frmCadastrarConcurso extends javax.swing.JInternalFrame {
         txtCodigoConcurso.setText(getCodigoConcurso());
         txtNumeroConcurso.setText(getNumeroConcurso());
         txtAnoConcurso.setText(getAnoConcurso());
-                System.out.println("banca" + getFk_codigo_banca());
         cmbSituacaoConcurso.setSelectedIndex(Integer.parseInt(getSituacaoConcurso()));
         cmbFkCodigoBanca.setSelectedIndex(Integer.parseInt(getFk_codigo_banca()));
 

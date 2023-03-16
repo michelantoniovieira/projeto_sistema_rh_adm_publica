@@ -1,0 +1,31 @@
+15:31 03/09/2022
+
+git status = para ver se tem algum arquivo faltando adicionar na nuvem
+
+git add . = para adicionar todos os arquivos
+
+git commit -m "mensagem" = para fazer o pacote a ser enviado no versionamento
+
+git push = para enviar a nuvem
+
+git reflog - para visualizar o histórico de envios 
+
+git reset --hard 9a23637
+
+git branch - para visualizar os galhos
+
+git checkout nomedabranch - para trocar de branch
+
+
+
+***************************************************
+
+para mesclar a merge eu vou fazer o seguinte.
+
+ir na merge principal no caso a master
+
+digitar git pull - para puxar as atualizações de forma a pegar a versão mais recente
+
+digitar git merge staging - para mesclar na master a versão atualizada na staging
+
+digitar git push
