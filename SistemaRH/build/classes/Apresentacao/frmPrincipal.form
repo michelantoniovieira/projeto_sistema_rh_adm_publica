@@ -4,44 +4,6 @@
   <NonVisualComponents>
     <Menu class="javax.swing.JMenuBar" name="mnBarra">
       <SubComponents>
-        <Menu class="javax.swing.JMenu" name="jMenu1">
-          <Properties>
-            <Property name="text" type="java.lang.String" value="Cargo/Emprego"/>
-          </Properties>
-          <SubComponents>
-            <MenuItem class="javax.swing.JMenuItem" name="mnCadastrarCargoEmprego">
-              <Properties>
-                <Property name="text" type="java.lang.String" value="1 - Cadastrar Cargo/Emprego"/>
-              </Properties>
-              <Events>
-                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="mnCadastrarCargoEmpregoActionPerformed"/>
-              </Events>
-            </MenuItem>
-          </SubComponents>
-        </Menu>
-        <Menu class="javax.swing.JMenu" name="mnConcurso">
-          <Properties>
-            <Property name="text" type="java.lang.String" value="Concurso"/>
-          </Properties>
-          <SubComponents>
-            <MenuItem class="javax.swing.JMenuItem" name="mnCadastrarBanca">
-              <Properties>
-                <Property name="text" type="java.lang.String" value="1 - Cadastrar Banca"/>
-              </Properties>
-              <Events>
-                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="mnCadastrarBancaActionPerformed"/>
-              </Events>
-            </MenuItem>
-            <MenuItem class="javax.swing.JMenuItem" name="mnCadastrarConcurso">
-              <Properties>
-                <Property name="text" type="java.lang.String" value="2 - Cadastrar Concurso"/>
-              </Properties>
-              <Events>
-                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="mnCadastrarConcursoActionPerformed"/>
-              </Events>
-            </MenuItem>
-          </SubComponents>
-        </Menu>
         <Menu class="javax.swing.JMenu" name="mnServidores">
           <Properties>
             <Property name="text" type="java.lang.String" value="Funcion&#xe1;rio"/>
@@ -49,18 +11,18 @@
           <SubComponents>
             <MenuItem class="javax.swing.JMenuItem" name="mnPreCadastroFuncionario">
               <Properties>
-                <Property name="text" type="java.lang.String" value="1 - Pr&#xe9; Cadastro "/>
+                <Property name="text" type="java.lang.String" value="Pr&#xe9; Cadastro "/>
               </Properties>
               <Events>
                 <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="mnPreCadastroFuncionarioActionPerformed"/>
               </Events>
             </MenuItem>
-            <MenuItem class="javax.swing.JMenuItem" name="mnCadastrarFuncionario">
+            <MenuItem class="javax.swing.JMenuItem" name="mnCadastroFuncionario">
               <Properties>
-                <Property name="text" type="java.lang.String" value="2 - Cadastrar Funcion&#xe1;rio"/>
+                <Property name="text" type="java.lang.String" value="Cadastro"/>
               </Properties>
               <Events>
-                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="mnCadastrarFuncionarioActionPerformed"/>
+                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="mnCadastroFuncionarioActionPerformed"/>
               </Events>
             </MenuItem>
           </SubComponents>
@@ -70,12 +32,12 @@
             <Property name="text" type="java.lang.String" value="Portarias"/>
           </Properties>
           <SubComponents>
-            <MenuItem class="javax.swing.JMenuItem" name="mnPortariaNomeacao">
+            <MenuItem class="javax.swing.JMenuItem" name="subMnNomeacao">
               <Properties>
-                <Property name="text" type="java.lang.String" value="1 - Portaria de Nomea&#xe7;&#xe3;o"/>
+                <Property name="text" type="java.lang.String" value="Nomea&#xe7;&#xe3;o"/>
               </Properties>
               <Events>
-                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="mnPortariaNomeacaoActionPerformed"/>
+                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="subMnNomeacaoActionPerformed"/>
               </Events>
             </MenuItem>
           </SubComponents>
@@ -99,6 +61,21 @@
               </Properties>
               <Events>
                 <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="mnAnoActionPerformed"/>
+              </Events>
+            </MenuItem>
+          </SubComponents>
+        </Menu>
+        <Menu class="javax.swing.JMenu" name="mnCadastrarConcurso">
+          <Properties>
+            <Property name="text" type="java.lang.String" value="Concurso"/>
+          </Properties>
+          <SubComponents>
+            <MenuItem class="javax.swing.JMenuItem" name="jMenuItem1">
+              <Properties>
+                <Property name="text" type="java.lang.String" value="Cadastro Concurso"/>
+              </Properties>
+              <Events>
+                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jMenuItem1ActionPerformed"/>
               </Events>
             </MenuItem>
           </SubComponents>
@@ -220,6 +197,7 @@
                               <EmptySpace min="-2" pref="34" max="-2" attributes="0"/>
                           </Group>
                           <Group type="102" alignment="1" attributes="0">
+                              <EmptySpace max="-2" attributes="0"/>
                               <Component id="btnExcluir" min="-2" max="-2" attributes="0"/>
                               <EmptySpace min="-2" pref="42" max="-2" attributes="0"/>
                           </Group>

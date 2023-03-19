@@ -1,6 +1,0 @@
-00:30 14/03/2023
-
-Preciso corrigir as informações que estão vindo do formulário, pois ao inves de puxar o cadastro do responsavel pelo concurso como 1 ele esta puxando o 16 que a banca escolhida, Tela CadastrarConcursoDAO
-
-01:08 15/03/2023
-Problema encontrado ao efetuar o cadastro da banca. Ao cadastrar o concurso o sistema não esta puxando informação da banca na tela de cadastro de concurso.

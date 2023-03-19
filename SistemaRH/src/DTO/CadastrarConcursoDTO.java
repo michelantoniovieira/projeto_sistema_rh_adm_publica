@@ -1,69 +1,106 @@
+
 package DTO;
 
-public class CadastrarConcursoDTO {
-
+public class CadastrarConcursoDTO 
+{
     private int codigo_concurso;
     private int numero_concurso;
     private int ano_concurso;
-    private int situacao_concurso;
-    private int fk_matricula_responsavel_concurso;
-    private int fk_codigo_banca;
+    private String nome_banca_organizadora;
+    private String responsavel_banca_organizadora;
+    private String telefone_banca_organizadora;
+    private String telefone_responsavel_banca_organizadora;
+    private String email_banca_organizadora;
     private String mensagem;
 
-    public int getCodigo_concurso() {
+    public int getCodigo_concurso()
+    {
         return codigo_concurso;
     }
 
-    public void setCodigo_Concurso(int codigo_concurso) {
+    public void setCodigo_concurso(int codigo_concurso)
+    {
         this.codigo_concurso = codigo_concurso;
     }
 
-    public int getNumero_Concurso() {
+    public int getNumero_concurso()
+    {
         return numero_concurso;
     }
 
-    public void setNumero_Concurso(int numero_concurso) {
+    public void setNumero_concurso(int numero_concurso)
+    {
         this.numero_concurso = numero_concurso;
     }
 
-    public int getAno_Concurso() {
+    public int getAno_concurso()
+    {
         return ano_concurso;
     }
 
-    public void setAno_Concurso(int ano_concurso) {
+    public void setAno_concurso(int ano_concurso)
+    {
         this.ano_concurso = ano_concurso;
     }
 
-    public int getSituacao_Concurso() {
-        return situacao_concurso;
+    public String getNome_banca_organizadora()
+    {
+        return nome_banca_organizadora;
     }
 
-    public void setSituacao_Concurso(int situacao_concurso) {
-        this.situacao_concurso = situacao_concurso;
+    public void setNome_banca_organizadora(String nome_banca_organizadora)
+    {
+        this.nome_banca_organizadora = nome_banca_organizadora;
     }
 
-    public int getFk_Matricula_Responsavel_Concurso() {
-        return fk_matricula_responsavel_concurso;
+    public String getResponsavel_banca_organizadora()
+    {
+        return responsavel_banca_organizadora;
     }
 
-    public void setFk_Matricula_Responsavel_Concurso(int fk_matricula_responsavel_concurso) {
-        this.fk_matricula_responsavel_concurso = fk_matricula_responsavel_concurso;
+    public void setResponsavel_banca_organizadora(String responsavel_banca_organizadora)
+    {
+        this.responsavel_banca_organizadora = responsavel_banca_organizadora;
     }
 
-    public int getFk_codigo_banca() {
-        return fk_codigo_banca;
+    public String getTelefone_banca_organizadora()
+    {
+        return telefone_banca_organizadora;
     }
 
-    public void setFk_codigo_banca(int fk_codigo_banca) {
-        this.fk_codigo_banca = fk_codigo_banca;
+    public void setTelefone_banca_organizadora(String telefone_banca_organizadora)
+    {
+        this.telefone_banca_organizadora = telefone_banca_organizadora;
     }
 
-    public String getMensagem() {
+    public String getTelefone_responsavel_banca_organizadora()
+    {
+        return telefone_responsavel_banca_organizadora;
+    }
+
+    public void setTelefone_responsavel_banca_organizadora(String telefone_responsavel_banca_organizadora)
+    {
+        this.telefone_responsavel_banca_organizadora = telefone_responsavel_banca_organizadora;
+    }
+
+    public String getEmail_banca_organizadora()
+    {
+        return email_banca_organizadora;
+    }
+
+    public void setEmail_banca_organizadora(String email_banca_organizadora)
+    {
+        this.email_banca_organizadora = email_banca_organizadora;
+    }
+
+    public String getMensagem()
+    {
         return mensagem;
     }
 
-    public void setMensagem(String mensagem) {
+    public void setMensagem(String mensagem)
+    {
         this.mensagem = mensagem;
     }
-
+    
 }
