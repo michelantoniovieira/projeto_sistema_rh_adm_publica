@@ -1149,7 +1149,6 @@ public class frmPrincipal extends javax.swing.JFrame
             JOptionPane.showMessageDialog(null, "Digite as informações antes de salvar.");
         }
 
-
     }//GEN-LAST:event_btnPesquisarActionPerformed
 
 
@@ -1178,7 +1177,7 @@ public class frmPrincipal extends javax.swing.JFrame
             desativarBotoesFrmCC = true;
             frmCC.ativarCampos();
             frmCC.limparCampos();
-        } 
+        }
     }//GEN-LAST:event_btnNovoActionPerformed
 
     private void mnCadastrarConcursoActionPerformed(java.awt.event.ActionEvent evt)//GEN-FIRST:event_mnCadastrarConcursoActionPerformed
@@ -1190,7 +1189,7 @@ public class frmPrincipal extends javax.swing.JFrame
         //para não ficar duplicando as informações da lista foi colocado um contador que toda vez que abre o programa ele passa a ser 0, assim ele entra no bloco de comando e mostra somente uma vez as informações da lista. Sem ficar duplicando
         if (frmCC.contador == 0)
         {
-            frmCC.popularCMBs();
+            frmCC.popularCMBNomeBanca("codigo_banca", "banca", "nome_banca_organizadora");
         }
         //quando o usuario abrir a tela para cadastrar concurso, ele conseguira utilizar os botões de primeiro até ultimo sem colocar uma matricula
         gravarAlteracaoFrmCC = false;

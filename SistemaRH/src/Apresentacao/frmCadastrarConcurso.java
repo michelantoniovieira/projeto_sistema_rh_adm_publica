@@ -24,6 +24,7 @@ public class frmCadastrarConcurso extends javax.swing.JInternalFrame
     private String fk_matricula_responsavel_concurso = "1";
     private String fk_codigo_banca = "";
     public int contador = 0;
+    private ArrayList<Object> popularCMB;
 
     private ArrayList<PesquisarConcursoDTO> lista;
 
@@ -31,6 +32,8 @@ public class frmCadastrarConcurso extends javax.swing.JInternalFrame
     {
         initComponents();
         contador = 0;
+        popularCMB = new ArrayList<Object>();
+        popularCMBNomeCargoEmprego();
     }
 
     public void gravarRegistro()
@@ -199,8 +202,16 @@ public class frmCadastrarConcurso extends javax.swing.JInternalFrame
         cmbFkMatriculaResponsavelConcurso = new javax.swing.JComboBox<>();
         lblSituacaoConcurso = new javax.swing.JLabel();
         lblTitulo = new javax.swing.JLabel();
-        jtpCargos = new javax.swing.JTabbedPane();
-        jTabbedPane2 = new javax.swing.JTabbedPane();
+        jPanel2 = new javax.swing.JPanel();
+        lblTitulo1 = new javax.swing.JLabel();
+        lblCargoEmpregoCadCon = new javax.swing.JLabel();
+        txtQuantidadeVagasCadCon = new javax.swing.JTextField();
+        lblQuantidadeVagasCadCon = new javax.swing.JLabel();
+        cmbCargoEmpregoCadCon = new javax.swing.JComboBox<>();
+        jScrollPane1 = new javax.swing.JScrollPane();
+        jTable1 = new javax.swing.JTable();
+        btnCadastrarCadCon = new javax.swing.JButton();
+        btnRemoverCadCon = new javax.swing.JButton();
 
         lblCadastrarConcurso.setText("label1");
 
@@ -245,6 +256,13 @@ public class frmCadastrarConcurso extends javax.swing.JInternalFrame
         lblPrefeitoResponsavel.setText("Responsável/Prefeito");
 
         cmbSituacaoConcurso.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "-", "Em andamento", "Homologado", "Cancelado" }));
+        cmbSituacaoConcurso.addActionListener(new java.awt.event.ActionListener()
+        {
+            public void actionPerformed(java.awt.event.ActionEvent evt)
+            {
+                cmbSituacaoConcursoActionPerformed(evt);
+            }
+        });
 
         cmbFkMatriculaResponsavelConcurso.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "1" }));
         cmbFkMatriculaResponsavelConcurso.addActionListener(new java.awt.event.ActionListener()
@@ -321,27 +339,105 @@ public class frmCadastrarConcurso extends javax.swing.JInternalFrame
         jtpPrincipalLayout.setHorizontalGroup(
             jtpPrincipalLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jtpPrincipalLayout.createSequentialGroup()
-                .addContainerGap(37, Short.MAX_VALUE)
+                .addContainerGap(43, Short.MAX_VALUE)
                 .addComponent(pInformacoes, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(32, 32, 32))
             .addGroup(jtpPrincipalLayout.createSequentialGroup()
-                .addGap(107, 107, 107)
+                .addGap(108, 108, 108)
                 .addComponent(lblTitulo)
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         jtpPrincipalLayout.setVerticalGroup(
             jtpPrincipalLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jtpPrincipalLayout.createSequentialGroup()
-                .addGap(26, 26, 26)
+                .addGap(20, 20, 20)
                 .addComponent(lblTitulo, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addGap(18, 18, 18)
                 .addComponent(pInformacoes, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addContainerGap(38, Short.MAX_VALUE))
         );
 
         jtpCadastrarConcurso.addTab("Concurso", jtpPrincipal);
-        jtpCadastrarConcurso.addTab("Cargos", jtpCargos);
-        jtpCadastrarConcurso.addTab("tab3", jTabbedPane2);
+
+        lblTitulo1.setFont(new java.awt.Font("Segoe UI", 0, 36)); // NOI18N
+        lblTitulo1.setText("Cadastrar Cargo/Emprego");
+
+        lblCargoEmpregoCadCon.setText("Cargo/Emprego:");
+
+        lblQuantidadeVagasCadCon.setText("Quantidade de Vagas");
+
+        jTable1.setModel(new javax.swing.table.DefaultTableModel(
+            new Object [][]
+            {
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null}
+            },
+            new String []
+            {
+                "Title 1", "Title 2", "Title 3", "Title 4"
+            }
+        ));
+        jScrollPane1.setViewportView(jTable1);
+
+        btnCadastrarCadCon.setText("Cadastrar");
+
+        btnRemoverCadCon.setText("Remover");
+
+        javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
+        jPanel2.setLayout(jPanel2Layout);
+        jPanel2Layout.setHorizontalGroup(
+            jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel2Layout.createSequentialGroup()
+                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jScrollPane1, javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addGroup(jPanel2Layout.createSequentialGroup()
+                        .addGap(13, 13, 13)
+                        .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(cmbCargoEmpregoCadCon, javax.swing.GroupLayout.PREFERRED_SIZE, 191, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(lblCargoEmpregoCadCon))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                            .addComponent(lblQuantidadeVagasCadCon, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(txtQuantidadeVagasCadCon, javax.swing.GroupLayout.PREFERRED_SIZE, 112, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGap(12, 12, 12)
+                        .addComponent(btnCadastrarCadCon)
+                        .addGap(18, 18, 18)
+                        .addComponent(btnRemoverCadCon)
+                        .addGap(0, 10, Short.MAX_VALUE)))
+                .addContainerGap())
+            .addGroup(jPanel2Layout.createSequentialGroup()
+                .addGap(55, 55, 55)
+                .addComponent(lblTitulo1)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+        );
+        jPanel2Layout.setVerticalGroup(
+            jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel2Layout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(lblTitulo1)
+                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(jPanel2Layout.createSequentialGroup()
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(lblCargoEmpregoCadCon)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(btnRemoverCadCon)
+                            .addComponent(cmbCargoEmpregoCadCon)))
+                    .addGroup(jPanel2Layout.createSequentialGroup()
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(lblQuantidadeVagasCadCon)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(txtQuantidadeVagasCadCon, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(btnCadastrarCadCon))))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 146, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(564, 564, 564))
+        );
+
+        jtpCadastrarConcurso.addTab("Cargo/Emprego", jPanel2);
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -356,42 +452,53 @@ public class frmCadastrarConcurso extends javax.swing.JInternalFrame
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addGap(15, 15, 15)
-                .addComponent(jtpCadastrarConcurso, javax.swing.GroupLayout.DEFAULT_SIZE, 277, Short.MAX_VALUE)
-                .addContainerGap())
+                .addComponent(jtpCadastrarConcurso, javax.swing.GroupLayout.PREFERRED_SIZE, 293, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    private void txtCodigoConcursoActionPerformed(java.awt.event.ActionEvent evt)//GEN-FIRST:event_txtCodigoConcursoActionPerformed
-    {//GEN-HEADEREND:event_txtCodigoConcursoActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_txtCodigoConcursoActionPerformed
-
-    private void cmbFkCodigoBancaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cmbFkCodigoBancaActionPerformed
-
-    }//GEN-LAST:event_cmbFkCodigoBancaActionPerformed
-
-    private void cmbFkMatriculaResponsavelConcursoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cmbFkMatriculaResponsavelConcursoActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_cmbFkMatriculaResponsavelConcursoActionPerformed
     //se clicar nas abas da tela cadastrar concurso e alterar de um para outra e de outra para outra bloqueia os campos
     private void jtpCadastrarConcursoStateChanged(javax.swing.event.ChangeEvent evt)//GEN-FIRST:event_jtpCadastrarConcursoStateChanged
     {//GEN-HEADEREND:event_jtpCadastrarConcursoStateChanged
         desativarCampos();
     }//GEN-LAST:event_jtpCadastrarConcursoStateChanged
 
-    public void popularCMBs()
+    private void cmbFkMatriculaResponsavelConcursoActionPerformed(java.awt.event.ActionEvent evt)//GEN-FIRST:event_cmbFkMatriculaResponsavelConcursoActionPerformed
+    {//GEN-HEADEREND:event_cmbFkMatriculaResponsavelConcursoActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_cmbFkMatriculaResponsavelConcursoActionPerformed
+
+    private void cmbFkCodigoBancaActionPerformed(java.awt.event.ActionEvent evt)//GEN-FIRST:event_cmbFkCodigoBancaActionPerformed
+    {//GEN-HEADEREND:event_cmbFkCodigoBancaActionPerformed
+
+    }//GEN-LAST:event_cmbFkCodigoBancaActionPerformed
+
+    private void txtCodigoConcursoActionPerformed(java.awt.event.ActionEvent evt)//GEN-FIRST:event_txtCodigoConcursoActionPerformed
+    {//GEN-HEADEREND:event_txtCodigoConcursoActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_txtCodigoConcursoActionPerformed
+
+    private void cmbSituacaoConcursoActionPerformed(java.awt.event.ActionEvent evt)//GEN-FIRST:event_cmbSituacaoConcursoActionPerformed
+    {//GEN-HEADEREND:event_cmbSituacaoConcursoActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_cmbSituacaoConcursoActionPerformed
+
+    //metodo automatico onde eu passo qual é a chave primaria, tabela e atributo que eu quero puxar no combobox
+    public ArrayList<Object> popularCMB(String informarNomeChavePrimaria, String informarTabela, String informarAtributo)
     {
         PopularCmbDAO pcd = new PopularCmbDAO();
 
-        ArrayList<Object> popularCMB = new ArrayList<Object>();
         //popular nome das bancas
+        return popularCMB = pcd.pesquisar(informarNomeChavePrimaria, informarTabela, informarAtributo);
+    }
 
-        popularCMB = pcd.pesquisar("codigo_banca", "banca", "nome_banca_organizadora");
+    public void popularCMBNomeBanca(String informarNomeChavePrimaria, String informarTabela, String informarAtributo)
+    {
 
         //parei aqui, o problema é que quando eu crio um concurso o codigo da banca que vai é o ultimo do combobox. Ai eu estou tentando fazer com que o item selecionado no combobox seja cadastrado com seu respectivo codigo.
-        for (Object obj : popularCMB)
+        for (Object obj : popularCMB(informarNomeChavePrimaria, informarTabela, informarAtributo))
         {
             //mostrar informações da listaObjeto para o combobox
             if (obj instanceof String)
@@ -408,25 +515,56 @@ public class frmCadastrarConcurso extends javax.swing.JInternalFrame
         contador = 1;
         //LISTAR O NOME DOS PREFEITOS
     }
+
+    public void popularCMBNomeCargoEmprego()
+    {
+        //parei aqui, o problema é que quando eu crio um concurso o codigo da banca que vai é o ultimo do combobox. Ai eu estou tentando fazer com que o item selecionado no combobox seja cadastrado com seu respectivo codigo.
+        for (Object obj : popularCMB("codigo_cargo_emprego", "cargo_emprego", "nome_cargo_emprego"))
+        {
+            //mostrar informações da listaObjeto para o combobox
+            if (obj instanceof String)
+            {
+                cmbCargoEmpregoCadCon.addItem((String) obj);
+            }
+            //aqui funciona assim, no combobox mostra qual é a banca mais aqui vai passar o codigo da banca para salvar no banco de dados
+            if (obj instanceof Integer)
+            {
+                // cmbFkCodigoBanca.addItem(obj.toString());
+                //cmbCargoEmpregoCadCon.addItem(obj.toString());
+                //PAREI AQUI - CONSEGUI MOSTRAR O NOME DO CARGO NA JANELA, AGORA FALTA CADASTRAR O CARGO
+            }
+        }
+        contador = 1;
+        //LISTAR O NOME DOS PREFEITOS
+    }
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton btnCadastrarCadCon;
+    private javax.swing.JButton btnRemoverCadCon;
+    private javax.swing.JComboBox<String> cmbCargoEmpregoCadCon;
     private javax.swing.JComboBox<String> cmbFkCodigoBanca;
     private javax.swing.JComboBox<String> cmbFkMatriculaResponsavelConcurso;
     private javax.swing.JComboBox<String> cmbSituacaoConcurso;
-    private javax.swing.JTabbedPane jTabbedPane2;
+    private javax.swing.JPanel jPanel2;
+    private javax.swing.JScrollPane jScrollPane1;
+    private javax.swing.JTable jTable1;
     private javax.swing.JTabbedPane jtpCadastrarConcurso;
-    private javax.swing.JTabbedPane jtpCargos;
     private javax.swing.JPanel jtpPrincipal;
     private javax.swing.JLabel lblAnoConcurso;
     private javax.swing.JLabel lblBanca;
     private java.awt.Label lblCadastrarConcurso;
+    private javax.swing.JLabel lblCargoEmpregoCadCon;
     private javax.swing.JLabel lblCodigoConcurso;
     private javax.swing.JLabel lblNumeroConcurso;
     private javax.swing.JLabel lblPrefeitoResponsavel;
+    private javax.swing.JLabel lblQuantidadeVagasCadCon;
     private javax.swing.JLabel lblSituacaoConcurso;
     private javax.swing.JLabel lblTitulo;
+    private javax.swing.JLabel lblTitulo1;
     private javax.swing.JPanel pInformacoes;
     private javax.swing.JTextField txtAnoConcurso;
     private javax.swing.JTextField txtCodigoConcurso;
     private javax.swing.JTextField txtNumeroConcurso;
+    private javax.swing.JTextField txtQuantidadeVagasCadCon;
     // End of variables declaration//GEN-END:variables
+
 }

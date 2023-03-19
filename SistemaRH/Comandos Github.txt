@@ -10,7 +10,7 @@ git push = para enviar a nuvem
 
 git reflog - para visualizar o histórico de envios 
 
-git reset --hard 9a23637
+git reset --hard e58ddd7 
 
 git branch - para visualizar os galhos
 
@@ -29,3 +29,6 @@ digitar git pull - para puxar as atualizações de forma a pegar a versão mais 
 digitar git merge staging - para mesclar na master a versão atualizada na staging
 
 digitar git push
+
+********************
+deletar branch git branch -d staging
