@@ -18,7 +18,8 @@ import javax.swing.KeyStroke;
  *
  * @author miche
  */
-public class frmPrincipal extends javax.swing.JFrame {
+public class frmPrincipal extends javax.swing.JFrame
+{
 
     frmPortariaDeNomeacao frmPN;
     frmCadastrarUsuario frmCadU;
@@ -30,7 +31,8 @@ public class frmPrincipal extends javax.swing.JFrame {
 
     private boolean desativarBotoesFrmCC;//essa variavel bloqueia os botoes de menu para não deixar o cara tentar mudar de registro na tela de cadastro de concurso ao clicar no botao novo, por exemplo
 
-    public void setDesativarBotoesFrmCC(boolean desativarBotoesFrmCC) {
+    public void setDesativarBotoesFrmCC(boolean desativarBotoesFrmCC)
+    {
         this.desativarBotoesFrmCC = desativarBotoesFrmCC;
     }
     private boolean desativarBotoesFrmCCE = true;
@@ -44,17 +46,20 @@ public class frmPrincipal extends javax.swing.JFrame {
     //cadastrar concurso
     public boolean gravarAlteracaoFrmCC = false;
 
-    public void setGravarAlteracaoFrmCC(boolean gravarAlteracaoFrmCC) {
+    public void setGravarAlteracaoFrmCC(boolean gravarAlteracaoFrmCC)
+    {
         this.gravarAlteracaoFrmCC = gravarAlteracaoFrmCC;
     }
 
-    public frmPrincipal() {
+    public frmPrincipal()
+    {
         initComponents();
         this.setExtendedState(MAXIMIZED_BOTH);
 
     }
 
-    public frmPrincipal(String usuarioConectado) {
+    public frmPrincipal(String usuarioConectado)
+    {
         initComponents();
         this.setExtendedState(MAXIMIZED_BOTH);
         this.lblUsuarioConectado.setText(usuarioConectado);
@@ -77,7 +82,8 @@ public class frmPrincipal extends javax.swing.JFrame {
         frmCC = new frmCadastrarConcurso();
     }
 
-    frmPrincipal(Object object, boolean b) {
+    frmPrincipal(Object object, boolean b)
+    {
         throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
     }
 
@@ -602,10 +608,12 @@ public class frmPrincipal extends javax.swing.JFrame {
     private void btnSairActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSairActionPerformed
         //BOTÃO SAIR
 
-        if (evt.getSource() == btnSair) {
+        if (evt.getSource() == btnSair)
+        {
             int resposta = JOptionPane.showConfirmDialog(null, "Deseja Sair?", "Sair", JOptionPane.YES_NO_OPTION);
 
-            if (resposta == JOptionPane.YES_OPTION) {
+            if (resposta == JOptionPane.YES_OPTION)
+            {
                 System.exit(0);
             }
         }
@@ -627,13 +635,16 @@ public class frmPrincipal extends javax.swing.JFrame {
         desativarBotoesFrmCC = false;
 
         //entra aqui quando for gravar o primeiro cadastro
-        if (frmCB.isVisible() && !frmCB.getBancaConcurso().equals("") && gravarAlteracaoFrmCB == false) {
+        if (frmCB.isVisible() && !frmCB.getBancaConcurso().equals("") && gravarAlteracaoFrmCB == false)
+        {
             //quando eu digitar nos campos da janela CadastrarConcurso e clicar no icone salvar da janela principal entra aqui e manda gravar registro que significa que os dados dos campos serão passados para as variaveis que eu acesso por aqui para mandar para a variavel controle           
             CadastrarBancaControle controle = new CadastrarBancaControle(frmCB.getBancaConcurso(), frmCB.getTelBanca(), frmCB.getResponsavelBanca(), frmCB.getTelResponsavelBanca(), frmCB.getEmailResponsavel());
             controle.cadastrar();
-            if (controle.getMensagem().equals("erro 1")) {
+            if (controle.getMensagem().equals("erro 1"))
+            {
                 JOptionPane.showMessageDialog(null, "Esta banca já foi cadastrada!");
-            } else if (controle.getMensagem().equals("ok")) {
+            } else if (controle.getMensagem().equals("ok"))
+            {
                 JOptionPane.showMessageDialog(null, "Banca cadastrada com sucesso.");
                 frmCB.limparCampos();
                 frmCB.desativarCampos();
@@ -642,7 +653,8 @@ public class frmPrincipal extends javax.swing.JFrame {
         }
 
         //entra aqui quando for alterar um cadastro
-        if (frmCB.isVisible() && !frmCB.getCodigoBanca().equals("") && gravarAlteracaoFrmCB == true) {
+        if (frmCB.isVisible() && !frmCB.getCodigoBanca().equals("") && gravarAlteracaoFrmCB == true)
+        {
             CadastrarBancaControle controle = new CadastrarBancaControle(Integer.parseInt(frmCB.getCodigoBanca()), frmCB.getBancaConcurso(), frmCB.getTelBanca(), frmCB.getResponsavelBanca(), frmCB.getTelResponsavelBanca(), frmCB.getEmailResponsavel());
             controle.alterar();
             gravarAlteracaoFrmCB = false;
@@ -657,13 +669,16 @@ public class frmPrincipal extends javax.swing.JFrame {
         desativarBotoesFrmCCE = false;
 
         //entra aqui quando for gravar o primeiro cadastro
-        if (frmCCE.isVisible() && !frmCCE.getNomeCargoEmprego().equals("") && gravarAlteracaoFrmCCE == false) {
+        if (frmCCE.isVisible() && !frmCCE.getNomeCargoEmprego().equals("") && gravarAlteracaoFrmCCE == false)
+        {
             //quando eu digitar nos campos da janela CadastrarConcurso e clicar no icone salvar da janela principal entra aqui e manda gravar registro que significa que os dados dos campos serão passados para as variaveis que eu acesso por aqui para mandar para a variavel controle           
             CadastrarCargoEmpregoControle controle = new CadastrarCargoEmpregoControle(frmCCE.getNomeCargoEmprego(), frmCCE.getRegimeJuridico(), frmCCE.getNumeroLeiCriaCargoEmprego(), frmCCE.getDataLeiCriaCargoEmprego(), frmCCE.getReferenciaSalarial());
             controle.cadastrar();
-            if (controle.getMensagem().equals("erro 1")) {
+            if (controle.getMensagem().equals("erro 1"))
+            {
                 JOptionPane.showMessageDialog(null, "Esta banca já foi cadastrada!");
-            } else if (controle.getMensagem().equals("ok")) {
+            } else if (controle.getMensagem().equals("ok"))
+            {
                 JOptionPane.showMessageDialog(null, "Banca cadastrada com sucesso.");
                 frmCCE.limparCampos();
                 frmCCE.desativarCampos();
@@ -672,7 +687,8 @@ public class frmPrincipal extends javax.swing.JFrame {
         }
 
         //entra aqui quando for alterar um cadastro
-        if (frmCCE.isVisible() && !frmCCE.getCodigoCargoEmprego().equals("") && gravarAlteracaoFrmCCE == true) {
+        if (frmCCE.isVisible() && !frmCCE.getCodigoCargoEmprego().equals("") && gravarAlteracaoFrmCCE == true)
+        {
 
             CadastrarCargoEmpregoControle controle = new CadastrarCargoEmpregoControle(Integer.parseInt(frmCCE.getCodigoCargoEmprego()), frmCCE.getNomeCargoEmprego(), frmCCE.getRegimeJuridico(), frmCCE.getNumeroLeiCriaCargoEmprego(), frmCCE.getDataLeiCriaCargoEmprego(), frmCCE.getReferenciaSalarial());
             controle.alterar();
@@ -688,14 +704,17 @@ public class frmPrincipal extends javax.swing.JFrame {
         desativarBotoesFrmCC = false;
 
         //entra aqui quando for gravar o primeiro cadastro
-        if (frmCC.isVisible() && !frmCC.getNumeroConcurso().equals("") && gravarAlteracaoFrmCC == false) {
+        if (frmCC.isVisible() && !frmCC.getNumeroConcurso().equals("") && gravarAlteracaoFrmCC == false)
+        {
             //quando eu digitar nos campos da janela CadastrarConcurso e clicar no icone salvar da janela principal entra aqui e manda gravar registro que significa que os dados dos campos serão passados para as variaveis que eu acesso por aqui para mandar para a variavel controle           
 
             CadastrarConcursoControle controle = new CadastrarConcursoControle(Integer.parseInt(frmCC.getNumeroConcurso()), Integer.parseInt(frmCC.getAnoConcurso()), Integer.parseInt(frmCC.getSituacaoConcurso()), Integer.parseInt(frmCC.getFk_matricula_responsavel_concurso()), Integer.parseInt(frmCC.getFk_codigo_banca()));
             controle.cadastrar();
-            if (controle.getMensagem().equals("erro 1")) {
+            if (controle.getMensagem().equals("erro 1"))
+            {
                 JOptionPane.showMessageDialog(null, "Este concurso já foi cadastrado!");
-            } else if (controle.getMensagem().equals("ok")) {
+            } else if (controle.getMensagem().equals("ok"))
+            {
                 JOptionPane.showMessageDialog(null, "Concurso cadastrado com sucesso.");
                 gravarAlteracaoFrmCCE = false;
                 frmCC.limparCampos();
@@ -705,7 +724,8 @@ public class frmPrincipal extends javax.swing.JFrame {
         }
 
         //entra aqui quando for alterar um cadastro
-        if (frmCC.isVisible() && !frmCC.getCodigoConcurso().equals("") && gravarAlteracaoFrmCC == true) {
+        if (frmCC.isVisible() && !frmCC.getCodigoConcurso().equals("") && gravarAlteracaoFrmCC == true)
+        {
             CadastrarConcursoControle controle = new CadastrarConcursoControle(Integer.parseInt(frmCC.getCodigoConcurso()), Integer.parseInt(frmCC.getNumeroConcurso()), Integer.parseInt(frmCC.getAnoConcurso()), Integer.parseInt(frmCC.getSituacaoConcurso()), Integer.parseInt(frmCC.getFk_matricula_responsavel_concurso()), Integer.parseInt(frmCC.getFk_codigo_banca()));
             System.out.println("botao salvar/alterar cadastro concurso/codigo banca" + frmCC.getFk_codigo_banca());
             controle.alterar();
@@ -718,19 +738,22 @@ public class frmPrincipal extends javax.swing.JFrame {
 
     private void btnPrimeiroActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnPrimeiroActionPerformed
         //tela cadastrar banca
-        if (frmCB.isVisible() && desativarBotoesFrmCC == false) {
+        if (frmCB.isVisible() && desativarBotoesFrmCC == false)
+        {
             index = 0;
             preencherTelaCadastroBanca(index);
         }
 
         //tela cadastrar cargo/emprego
-        if (frmCCE.isVisible() && desativarBotoesFrmCCE == false) {
+        if (frmCCE.isVisible() && desativarBotoesFrmCCE == false)
+        {
             index = 0;
             preencherTelaCadastroCargoEmprego(index);
         }
 
         //tela cadastrar concurso
-        if (frmCC.isVisible() && desativarBotoesFrmCC == false) {
+        if (frmCC.isVisible() && desativarBotoesFrmCC == false)
+        {
             index = 0;
             preencherTelaCadastroConcurso(index);
         }
@@ -738,31 +761,40 @@ public class frmPrincipal extends javax.swing.JFrame {
 
     private void btnAnteriorActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAnteriorActionPerformed
         //tela cadastrar banca
-        if (frmCB.isVisible() && desativarBotoesFrmCC == false) {
+        if (frmCB.isVisible() && desativarBotoesFrmCC == false)
+        {
             index--;
-            if (index >= 0) {
+            if (index >= 0)
+            {
                 preencherTelaCadastroBanca(index);
-            } else {
+            } else
+            {
                 index = 0;
             }
         }
 
         //tela cadastrar cargo/emprego
-        if (frmCCE.isVisible() && desativarBotoesFrmCCE == false) {
+        if (frmCCE.isVisible() && desativarBotoesFrmCCE == false)
+        {
             index--;
-            if (index >= 0) {
+            if (index >= 0)
+            {
                 preencherTelaCadastroCargoEmprego(index);
-            } else {
+            } else
+            {
                 index = 0;
             }
         }
 
         //tela cadastrar concurso
-        if (frmCC.isVisible() && desativarBotoesFrmCC == false) {
+        if (frmCC.isVisible() && desativarBotoesFrmCC == false)
+        {
             index--;
-            if (index >= 0) {
+            if (index >= 0)
+            {
                 preencherTelaCadastroConcurso(index);
-            } else {
+            } else
+            {
                 index = 0;
             }
         }
@@ -771,46 +803,58 @@ public class frmPrincipal extends javax.swing.JFrame {
     private void btnProximoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnProximoActionPerformed
 
         //tela cadastrar banca
-        if (frmCB.isVisible() && desativarBotoesFrmCC == false) {
-            if (index == null) {
+        if (frmCB.isVisible() && desativarBotoesFrmCC == false)
+        {
+            if (index == null)
+            {
                 index = 1;
-            } else {
+            } else
+            {
                 index += 0;
             }
             index++;
             //este bloco de comando não deixa a seleção ser maior que o último registro do banco
-            if (index > frmPesquisarBanca.ultimoRegistro) {
+            if (index > frmPesquisarBanca.ultimoRegistro)
+            {
                 index = frmPesquisarBanca.ultimoRegistro;
             }
             preencherTelaCadastroBanca(index);
         }
 
         //tela cadastrar cargo/emprego
-        if (frmCCE.isVisible() && desativarBotoesFrmCCE == false) {
-            if (index == null) {
+        if (frmCCE.isVisible() && desativarBotoesFrmCCE == false)
+        {
+            if (index == null)
+            {
                 index = 1;
-            } else {
+            } else
+            {
                 index += 0;
             }
             index++;
             //este bloco de comando não deixa a seleção ser maior que o último registro do banco
-            if (index > frmPesquisarCargoEmprego.ultimoRegistro) {
+            if (index > frmPesquisarCargoEmprego.ultimoRegistro)
+            {
                 index = frmPesquisarCargoEmprego.ultimoRegistro;
             }
             preencherTelaCadastroCargoEmprego(index);
         }
 
         //tela cadastrar concurso
-        if (frmCC.isVisible() && desativarBotoesFrmCC == false) {
-            if (index == null) {
+        if (frmCC.isVisible() && desativarBotoesFrmCC == false)
+        {
+            if (index == null)
+            {
                 index = 1;
-            } else {
+            } else
+            {
                 index += 0;
             }
             index++;
             System.out.println("index" + index);
             //este bloco de comando não deixa a seleção ser maior que o último registro do banco
-            if (index > frmPesquisarConcurso.ultimoRegistro) {
+            if (index > frmPesquisarConcurso.ultimoRegistro)
+            {
                 index = frmPesquisarConcurso.ultimoRegistro;
             }
             preencherTelaCadastroConcurso(index);
@@ -820,43 +864,52 @@ public class frmPrincipal extends javax.swing.JFrame {
 
     private void btnUltimoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnUltimoActionPerformed
         //tela cadastrar banca
-        if (frmCB.isVisible() && desativarBotoesFrmCC == false) {
+        if (frmCB.isVisible() && desativarBotoesFrmCC == false)
+        {
             index = frmPesquisarBanca.ultimoRegistro;
             //este bloco de comando não deixa a seleção ser maior que o último registro do banco
-            if (index > frmPesquisarBanca.ultimoRegistro) {
+            if (index > frmPesquisarBanca.ultimoRegistro)
+            {
                 index = frmPesquisarBanca.ultimoRegistro;
             }
             preencherTelaCadastroBanca(index);
         }
 
         //tela cadastrar cargo/emprego
-        if (frmCCE.isVisible() && desativarBotoesFrmCCE == false) {
+        if (frmCCE.isVisible() && desativarBotoesFrmCCE == false)
+        {
             index = frmPesquisarCargoEmprego.ultimoRegistro;
             //este bloco de comando não deixa a seleção ser maior que o último registro do banco
-            if (index > frmPesquisarCargoEmprego.ultimoRegistro) {
+            if (index > frmPesquisarCargoEmprego.ultimoRegistro)
+            {
                 index = frmPesquisarCargoEmprego.ultimoRegistro;
             }
             preencherTelaCadastroCargoEmprego(index);
         }
 
         //tela cadastrar concurso
-        if (frmCC.isVisible() && desativarBotoesFrmCC == false) {
+        if (frmCC.isVisible() && desativarBotoesFrmCC == false)
+        {
             index = frmPesquisarConcurso.ultimoRegistro;
             //este bloco de comando não deixa a seleção ser maior que o último registro do banco
-            if (index > frmPesquisarConcurso.ultimoRegistro) {
+            if (index > frmPesquisarConcurso.ultimoRegistro)
+            {
                 index = frmPesquisarConcurso.ultimoRegistro;
             }
             preencherTelaCadastroConcurso(index);
         }
     }//GEN-LAST:event_btnUltimoActionPerformed
     //prencher tela cadastro cargo emprego
-    private void preencherTelaCadastroCargoEmprego(int index) {
+    private void preencherTelaCadastroCargoEmprego(int index)
+    {
         //tela cadastrar cargo/emprego
-        if (frmCCE.isVisible() && desativarBotoesFrmCCE == false) {
+        if (frmCCE.isVisible() && desativarBotoesFrmCCE == false)
+        {
             CadastrarCargoEmpregoControle controle = new CadastrarCargoEmpregoControle(frmCCE.getNomeCargoEmprego());
             controle.pesquisar(index);
 
-            if (!frmCCE.getCodigoCargoEmprego().equals("")) {
+            if (!frmCCE.getCodigoCargoEmprego().equals(""))
+            {
                 frmCCE.setCodigoCargoEmprego(String.valueOf(controle.getCodigoCargoEmprego()));
                 frmCCE.setNomeCargoEmprego(String.valueOf(controle.getNomeCargoEmprego()));
                 frmCCE.setRegimeJuridico(String.valueOf(controle.getRegimeJuridico()));
@@ -869,13 +922,16 @@ public class frmPrincipal extends javax.swing.JFrame {
     }
 
     //prencher tela cadastro banca
-    private void preencherTelaCadastroBanca(int index) {
+    private void preencherTelaCadastroBanca(int index)
+    {
         //tela cadastrar banca
-        if (frmCB.isVisible() && desativarBotoesFrmCC == false) {
+        if (frmCB.isVisible() && desativarBotoesFrmCC == false)
+        {
             CadastrarBancaControle controle = new CadastrarBancaControle(frmCB.getBancaConcurso());
             controle.pesquisar(index);
 
-            if (!frmCB.getCodigoBanca().equals("")) {
+            if (!frmCB.getCodigoBanca().equals(""))
+            {
                 frmCB.setCodigoBanca(String.valueOf(controle.getCodigo_Banca()));
                 frmCB.setBancaConcurso(String.valueOf(controle.getNome_banca_organizadora()));
                 frmCB.setTelBanca(String.valueOf(controle.getTelefone_banca_organizadora()));
@@ -888,9 +944,11 @@ public class frmPrincipal extends javax.swing.JFrame {
     }
 
     //prencher tela cadastro concurso
-    private void preencherTelaCadastroConcurso(int index) {
+    private void preencherTelaCadastroConcurso(int index)
+    {
         //tela cadastrar banca
-        if (frmCC.isVisible() && desativarBotoesFrmCC == false) {
+        if (frmCC.isVisible() && desativarBotoesFrmCC == false)
+        {
             System.out.println("" + frmCC.getCodigoConcurso());
             System.out.println("" + frmCC.getNumeroConcurso());
             System.out.println("" + frmCC.getAnoConcurso());
@@ -902,7 +960,8 @@ public class frmPrincipal extends javax.swing.JFrame {
 
             controle.pesquisar(index);
 
-            if (!frmCC.getCodigoConcurso().equals("")) {
+            if (!frmCC.getCodigoConcurso().equals(""))
+            {
                 frmCC.setCodigoConcurso(String.valueOf(controle.getCodigo_concurso()));
                 frmCC.setNumeroConcurso(String.valueOf(controle.getNumero_Concurso()));
                 frmCC.setAnoConcurso(String.valueOf(controle.getAno_Concurso()));
@@ -917,10 +976,12 @@ public class frmPrincipal extends javax.swing.JFrame {
 
     private void btnExcluirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnExcluirActionPerformed
         //cadastrar banca
-        if (frmCB.isVisible() && !frmCB.getBancaConcurso().equals("") && desativarBotoesFrmCC == false) {
+        if (frmCB.isVisible() && !frmCB.getBancaConcurso().equals("") && desativarBotoesFrmCC == false)
+        {
             int resposta = JOptionPane.showConfirmDialog(null, "Deseja realizar a exclusão do registro?", "Sair", JOptionPane.YES_NO_OPTION, 2);
 
-            if (resposta == JOptionPane.YES_OPTION) {
+            if (resposta == JOptionPane.YES_OPTION)
+            {
                 CadastrarBancaControle controle = new CadastrarBancaControle(frmCB.getBancaConcurso());
                 controle.excluir();
                 JOptionPane.showMessageDialog(null, "Exclusão realizada com sucesso!");
@@ -929,47 +990,54 @@ public class frmPrincipal extends javax.swing.JFrame {
         }
 
         //cadastrar cargo/emprego
-        if (frmCCE.isVisible() && !frmCCE.getNomeCargoEmprego().equals("") && desativarBotoesFrmCCE == false) {
+        if (frmCCE.isVisible() && !frmCCE.getNomeCargoEmprego().equals("") && desativarBotoesFrmCCE == false)
+        {
             int resposta = JOptionPane.showConfirmDialog(null, "Deseja realizar a exclusão do registro?", "Sair", JOptionPane.YES_NO_OPTION, 2);
 
-            if (resposta == JOptionPane.YES_OPTION) {
+            if (resposta == JOptionPane.YES_OPTION)
+            {
                 CadastrarCargoEmpregoControle controle = new CadastrarCargoEmpregoControle(frmCCE.getNomeCargoEmprego());
                 controle.excluir();
                 JOptionPane.showMessageDialog(null, "Exclusão realizada com sucesso!");
                 frmCCE.limparCampos();
             }
         }
-        
-         //cadastrar concurso
-        if (frmCC.isVisible() && !frmCC.getNumeroConcurso().equals("") && !frmCC.getAnoConcurso().equals("") & desativarBotoesFrmCC == false) {
+
+        //cadastrar concurso
+        if (frmCC.isVisible() && !frmCC.getNumeroConcurso().equals("") && !frmCC.getAnoConcurso().equals("") & desativarBotoesFrmCC == false)
+        {
             int resposta = JOptionPane.showConfirmDialog(null, "Deseja realizar a exclusão do registro?", "Sair", JOptionPane.YES_NO_OPTION, 2);
 
-            if (resposta == JOptionPane.YES_OPTION) {
+            if (resposta == JOptionPane.YES_OPTION)
+            {
                 CadastrarConcursoControle controle = new CadastrarConcursoControle(Integer.parseInt(frmCC.getNumeroConcurso()), Integer.parseInt(frmCC.getAnoConcurso()));
                 controle.excluir();
                 JOptionPane.showMessageDialog(null, "Exclusão realizada com sucesso!");
                 frmCC.limparCampos();
             }
         }
-        
+
     }//GEN-LAST:event_btnExcluirActionPerformed
 
     private void btnAlterarActionPerformed(java.awt.event.ActionEvent evt)//GEN-FIRST:event_btnAlterarActionPerformed
     {//GEN-HEADEREND:event_btnAlterarActionPerformed
         //janela cadastrar banca
-        if (frmCB.isVisible() && !frmCB.getBancaConcurso().equals("") && gravarAlteracaoFrmCB == false) {
+        if (frmCB.isVisible() && !frmCB.getBancaConcurso().equals("") && gravarAlteracaoFrmCB == false)
+        {
             frmCB.ativarCampos();
             gravarAlteracaoFrmCB = true;
         }
 
         //janela cadastrar cargo/emprego
-        if (frmCCE.isVisible() && !frmCCE.getNomeCargoEmprego().equals("") && gravarAlteracaoFrmCCE == false) {
+        if (frmCCE.isVisible() && !frmCCE.getNomeCargoEmprego().equals("") && gravarAlteracaoFrmCCE == false)
+        {
             frmCCE.ativarCampos();
             gravarAlteracaoFrmCCE = true;
         }
 
         //janela cadastrar concurso
-        if (frmCC.isVisible() && !frmCC.getNumeroConcurso().equals("") && gravarAlteracaoFrmCC == false) {
+        if (frmCC.isVisible() && !frmCC.getNumeroConcurso().equals("") && gravarAlteracaoFrmCC == false)
+        {
             frmCC.ativarCampos();
             gravarAlteracaoFrmCC = true;
         }
@@ -981,13 +1049,16 @@ public class frmPrincipal extends javax.swing.JFrame {
         //COMANDO PARA pesquisar AS INFORMAÇÕES NA TELA CONCURSO
         //frmCC.gravarRegistro();
         //tela cadastrar banca
-        if (frmCB.isVisible()) {
+        if (frmCB.isVisible())
+        {
 
             frmPesquisarBanca frmPB = new frmPesquisarBanca(null, true);
-            if (frmPB.getLista() != null) {
+            if (frmPB.getLista() != null)
+            {
                 frmPB.setVisible(true);
                 //se a mensagem for pode passar entra no if abaixo
-                if (frmPB.getMensagem().equals("pode passar")) {
+                if (frmPB.getMensagem().equals("pode passar"))
+                {
                     //coloco na tela de cadastro de concurso, seto na variavel a lista e o index puxado direto da tela frmPesquisarConcurso 
                     frmCB.setCodigoBanca(String.valueOf(frmPB.getLista().get(frmPB.getIndex()).getCodigoBanca()));
                     frmCB.setBancaConcurso(String.valueOf(frmPB.getLista().get(frmPB.getIndex()).getNome_banca_organizadora()));
@@ -1001,22 +1072,27 @@ public class frmPrincipal extends javax.swing.JFrame {
                     desativarBotoesFrmCC = false;
                     gravarAlteracaoFrmCB = false;//este botão serve para quando o usuario selecionar algum registro e clicar em alterar e caso clique no botão pesquisar e depois alterar ele consegue realizar a alteração
                 }
-            } else {
+            } else
+            {
                 JOptionPane.showMessageDialog(null, "Não existem registros para serem consultados!");
             }
 
-        } else if (frmCB.isVisible()) {
+        } else if (frmCB.isVisible())
+        {
             JOptionPane.showMessageDialog(null, "Digite as informações antes de salvar.");
         }
 
         //***************************************************************************************
         //tela cadastrar cargo/emprego
-        if (frmCCE.isVisible()) {
+        if (frmCCE.isVisible())
+        {
             frmPesquisarCargoEmprego frmPCE = new frmPesquisarCargoEmprego(null, true);
-            if (frmPCE.getLista() != null) {
+            if (frmPCE.getLista() != null)
+            {
                 frmPCE.setVisible(true);
                 //se a mensagem for pode passar entra no if abaixo
-                if (frmPCE.getMensagem().equals("pode passar")) {
+                if (frmPCE.getMensagem().equals("pode passar"))
+                {
                     //coloco na tela de cadastro de concurso, seto na variavel a lista e o index puxado direto da tela frmPesquisarConcurso 
                     frmCCE.setCodigoCargoEmprego(String.valueOf(frmPCE.getLista().get(frmPCE.getIndex()).getCodigoCargoEmprego()));
                     frmCCE.setNomeCargoEmprego(String.valueOf(frmPCE.getLista().get(frmPCE.getIndex()).getNomeCargoEmprego()));
@@ -1030,21 +1106,27 @@ public class frmPrincipal extends javax.swing.JFrame {
                     desativarBotoesFrmCCE = false;
                     gravarAlteracaoFrmCCE = false;//este botão serve para quando o usuario selecionar algum registro e clicar em alterar e caso clique no botão pesquisar e depois alterar ele consegue realizar a alteração
                 }
-            } else {
+            } else
+            {
                 JOptionPane.showMessageDialog(null, "Não existem registros para serem consultados!");
             }
-        } else if (frmCCE.isVisible()) {
+        } else if (frmCCE.isVisible())
+        {
             JOptionPane.showMessageDialog(null, "Digite as informações antes de salvar.");
         }
 
         //***************************************************************************************
         //tela cadastrar concurso
-        if (frmCC.isVisible()) {
+        //se a tela estiver visivel e a aba selecionada foi a primeira ele mostra a janela pesquisar concurso
+        if (frmCC.isVisible() && frmCC.getJtpCadastrarConcurso() == 0)
+        {
             frmPesquisarConcurso frmPC = new frmPesquisarConcurso(null, true);
-            if (frmPC.getLista() != null) {
+            if (frmPC.getLista() != null)
+            {
                 frmPC.setVisible(true);
                 //se a mensagem for pode passar entra no if abaixo
-                if (frmPC.getMensagem().equals("pode passar")) {
+                if (frmPC.getMensagem().equals("pode passar"))
+                {
                     //coloco na tela de cadastro de concurso, seto na variavel a lista e o index puxado direto da tela frmPesquisarConcurso 
                     frmCC.setCodigoConcurso(String.valueOf(frmPC.getLista().get(frmPC.getIndex()).getCodigoConcurso()));
                     frmCC.setNumeroConcurso(String.valueOf(frmPC.getLista().get(frmPC.getIndex()).getNumero_concurso()));
@@ -1057,12 +1139,13 @@ public class frmPrincipal extends javax.swing.JFrame {
                     frmCC.desativarCampos();
                     desativarBotoesFrmCC = false;
                     gravarAlteracaoFrmCC = false;//este botão serve para quando o usuario selecionar algum registro e clicar em alterar e caso clique no botão pesquisar e depois alterar ele consegue realizar a alteração
-
                 }
-            } else {
+            } else
+            {
                 JOptionPane.showMessageDialog(null, "Não existem registros para serem consultados!");
             }
-        } else if (frmCC.isVisible()) {
+        } else if (frmCC.isVisible() && frmCC.getJtpCadastrarConcurso() == 0)
+        {
             JOptionPane.showMessageDialog(null, "Digite as informações antes de salvar.");
         }
 
@@ -1073,25 +1156,29 @@ public class frmPrincipal extends javax.swing.JFrame {
     private void btnNovoActionPerformed(java.awt.event.ActionEvent evt)//GEN-FIRST:event_btnNovoActionPerformed
     {//GEN-HEADEREND:event_btnNovoActionPerformed
         //tela cadastro banca
-        if (frmCB.isVisible()) {
+        if (frmCB.isVisible())
+        {
             desativarBotoesFrmCC = true;
             frmCB.ativarCampos();
             frmCB.limparCampos();
         }
 
         //tela cadastro cargo/emprego
-        if (frmCCE.isVisible()) {
+        if (frmCCE.isVisible())
+        {
             desativarBotoesFrmCCE = true;
             frmCCE.ativarCampos();
             frmCCE.limparCampos();
         }
 
         //tela cadastro concurso
-        if (frmCC.isVisible()) {
+        //se a tela cadastrar concurso estiver visivel e a aba 1 da tela cadastrar concurso estiver visivel abre os campos para cadastrar um novo registro
+        if (frmCC.isVisible() && frmCC.getJtpCadastrarConcurso() == 0)
+        {
             desativarBotoesFrmCC = true;
             frmCC.ativarCampos();
             frmCC.limparCampos();
-        }
+        } 
     }//GEN-LAST:event_btnNovoActionPerformed
 
     private void mnCadastrarConcursoActionPerformed(java.awt.event.ActionEvent evt)//GEN-FIRST:event_mnCadastrarConcursoActionPerformed
@@ -1101,7 +1188,8 @@ public class frmPrincipal extends javax.swing.JFrame {
         frmCC.limparCampos();
         frmCC.desativarCampos();
         //para não ficar duplicando as informações da lista foi colocado um contador que toda vez que abre o programa ele passa a ser 0, assim ele entra no bloco de comando e mostra somente uma vez as informações da lista. Sem ficar duplicando
-        if (frmCC.contador == 0) {
+        if (frmCC.contador == 0)
+        {
             frmCC.popularCMBs();
         }
         //quando o usuario abrir a tela para cadastrar concurso, ele conseguira utilizar os botões de primeiro até ultimo sem colocar uma matricula
@@ -1117,120 +1205,153 @@ public class frmPrincipal extends javax.swing.JFrame {
         frmCCE.desativarCampos();
     }//GEN-LAST:event_mnCadastrarCargoEmpregoActionPerformed
 
-    public static void main(String args[]) {
+    public static void main(String args[])
+    {
 
-        java.awt.EventQueue.invokeLater(new Runnable() {
-            public void run() {
+        java.awt.EventQueue.invokeLater(new Runnable()
+        {
+            public void run()
+            {
                 new frmPrincipal().setVisible(true);
             }
         });
     }
 
     //para este metodo funcionar eu devo chamalo no método construtor
-    public void atalhoSair() {
+    public void atalhoSair()
+    {
         rootPane.getInputMap(JComponent.WHEN_IN_FOCUSED_WINDOW).put(KeyStroke.getKeyStroke(KeyEvent.VK_BACK_SPACE, 0), "BACKSPACE");
-        rootPane.getRootPane().getActionMap().put("BACKSPACE", new AbstractAction("BACKSPACE") {
+        rootPane.getRootPane().getActionMap().put("BACKSPACE", new AbstractAction("BACKSPACE")
+        {
             @Override
-            public void actionPerformed(ActionEvent e) {
+            public void actionPerformed(ActionEvent e)
+            {
                 btnSair.doClick();//Aqui é onde ocorre o evento simulando o click do botão através da tecla ENTER
                 // Mas o indicado é você criar um método para realizar essa tarefa e chama-lo onde for necessário.
             }
         });
     }
 
-    public void atalhoNovo() {
+    public void atalhoNovo()
+    {
         rootPane.getInputMap(JComponent.WHEN_IN_FOCUSED_WINDOW).put(KeyStroke.getKeyStroke(KeyEvent.VK_F5, 0), "NOVO");
-        rootPane.getRootPane().getActionMap().put("NOVO", new AbstractAction("NOVO") {
+        rootPane.getRootPane().getActionMap().put("NOVO", new AbstractAction("NOVO")
+        {
             @Override
-            public void actionPerformed(ActionEvent e) {
+            public void actionPerformed(ActionEvent e)
+            {
                 btnNovo.doClick();//Aqui é onde ocorre o evento simulando o click do botão através da tecla ENTER
                 // Mas o indicado é você criar um método para realizar essa tarefa e chama-lo onde for necessário.
             }
         });
     }
 
-    public void atalhoPesquisar() {
+    public void atalhoPesquisar()
+    {
         rootPane.getInputMap(JComponent.WHEN_IN_FOCUSED_WINDOW).put(KeyStroke.getKeyStroke(KeyEvent.VK_F6, 0), "PESQUISAR");
-        rootPane.getRootPane().getActionMap().put("PESQUISAR", new AbstractAction("PESQUISAR") {
+        rootPane.getRootPane().getActionMap().put("PESQUISAR", new AbstractAction("PESQUISAR")
+        {
             @Override
-            public void actionPerformed(ActionEvent e) {
+            public void actionPerformed(ActionEvent e)
+            {
                 btnPesquisar.doClick();//Aqui é onde ocorre o evento simulando o click do botão através da tecla ENTER
                 // Mas o indicado é você criar um método para realizar essa tarefa e chama-lo onde for necessário.
             }
         });
     }
 
-    public void atalhoAlterar() {
+    public void atalhoAlterar()
+    {
         rootPane.getInputMap(JComponent.WHEN_IN_FOCUSED_WINDOW).put(KeyStroke.getKeyStroke(KeyEvent.VK_F7, 0), "ALTERAR");
-        rootPane.getRootPane().getActionMap().put("ALTERAR", new AbstractAction("ALTERAR") {
+        rootPane.getRootPane().getActionMap().put("ALTERAR", new AbstractAction("ALTERAR")
+        {
             @Override
-            public void actionPerformed(ActionEvent e) {
+            public void actionPerformed(ActionEvent e)
+            {
                 btnAlterar.doClick();//Aqui é onde ocorre o evento simulando o click do botão através da tecla ENTER
                 // Mas o indicado é você criar um método para realizar essa tarefa e chama-lo onde for necessário.
             }
         });
     }
 
-    public void atalhoExcluir() {
+    public void atalhoExcluir()
+    {
         rootPane.getInputMap(JComponent.WHEN_IN_FOCUSED_WINDOW).put(KeyStroke.getKeyStroke(KeyEvent.VK_F11, 0), "EXCLUIR");
-        rootPane.getRootPane().getActionMap().put("EXCLUIR", new AbstractAction("EXCLUIR") {
+        rootPane.getRootPane().getActionMap().put("EXCLUIR", new AbstractAction("EXCLUIR")
+        {
             @Override
-            public void actionPerformed(ActionEvent e) {
+            public void actionPerformed(ActionEvent e)
+            {
                 btnExcluir.doClick();//Aqui é onde ocorre o evento simulando o click do botão através da tecla ENTER
                 // Mas o indicado é você criar um método para realizar essa tarefa e chama-lo onde for necessário.
             }
         });
     }
 
-    public void atalhoSalvar() {
+    public void atalhoSalvar()
+    {
         rootPane.getInputMap(JComponent.WHEN_IN_FOCUSED_WINDOW).put(KeyStroke.getKeyStroke(KeyEvent.VK_F2, 0), "SALVAR");
-        rootPane.getRootPane().getActionMap().put("SALVAR", new AbstractAction("SALVAR") {
+        rootPane.getRootPane().getActionMap().put("SALVAR", new AbstractAction("SALVAR")
+        {
             @Override
-            public void actionPerformed(ActionEvent e) {
+            public void actionPerformed(ActionEvent e)
+            {
                 btnSalvar.doClick();//Aqui é onde ocorre o evento simulando o click do botão através da tecla ENTER
                 // Mas o indicado é você criar um método para realizar essa tarefa e chama-lo onde for necessário.
             }
         });
     }
 
-    public void atalhoPrimeiro() {
+    public void atalhoPrimeiro()
+    {
         rootPane.getInputMap(JComponent.WHEN_IN_FOCUSED_WINDOW).put(KeyStroke.getKeyStroke(KeyEvent.VK_F9, 0), "PRIMEIRO");
-        rootPane.getRootPane().getActionMap().put("PRIMEIRO", new AbstractAction("PRIMEIRO") {
+        rootPane.getRootPane().getActionMap().put("PRIMEIRO", new AbstractAction("PRIMEIRO")
+        {
             @Override
-            public void actionPerformed(ActionEvent e) {
+            public void actionPerformed(ActionEvent e)
+            {
                 btnPrimeiro.doClick();//Aqui é onde ocorre o evento simulando o click do botão através da tecla ENTER
                 // Mas o indicado é você criar um método para realizar essa tarefa e chama-lo onde for necessário.
             }
         });
     }
 
-    public void atalhoAnterior() {
+    public void atalhoAnterior()
+    {
         rootPane.getInputMap(JComponent.WHEN_IN_FOCUSED_WINDOW).put(KeyStroke.getKeyStroke(KeyEvent.VK_F7, 0), "ANTERIOR");
-        rootPane.getRootPane().getActionMap().put("ANTERIOR", new AbstractAction("ANTERIOR") {
+        rootPane.getRootPane().getActionMap().put("ANTERIOR", new AbstractAction("ANTERIOR")
+        {
             @Override
-            public void actionPerformed(ActionEvent e) {
+            public void actionPerformed(ActionEvent e)
+            {
                 btnAnterior.doClick();//Aqui é onde ocorre o evento simulando o click do botão através da tecla ENTER
                 // Mas o indicado é você criar um método para realizar essa tarefa e chama-lo onde for necessário.
             }
         });
     }
 
-    public void atalhoProximo() {
+    public void atalhoProximo()
+    {
         rootPane.getInputMap(JComponent.WHEN_IN_FOCUSED_WINDOW).put(KeyStroke.getKeyStroke(KeyEvent.VK_F8, 0), "PROXIMO");
-        rootPane.getRootPane().getActionMap().put("PROXIMO", new AbstractAction("PROXIMO") {
+        rootPane.getRootPane().getActionMap().put("PROXIMO", new AbstractAction("PROXIMO")
+        {
             @Override
-            public void actionPerformed(ActionEvent e) {
+            public void actionPerformed(ActionEvent e)
+            {
                 btnProximo.doClick();//Aqui é onde ocorre o evento simulando o click do botão através da tecla ENTER
                 // Mas o indicado é você criar um método para realizar essa tarefa e chama-lo onde for necessário.
             }
         });
     }
 
-    public void atalhoUltimo() {
+    public void atalhoUltimo()
+    {
         rootPane.getInputMap(JComponent.WHEN_IN_FOCUSED_WINDOW).put(KeyStroke.getKeyStroke(KeyEvent.VK_F10, 0), "ULTIMO");
-        rootPane.getRootPane().getActionMap().put("ULTIMO", new AbstractAction("ULTIMO") {
+        rootPane.getRootPane().getActionMap().put("ULTIMO", new AbstractAction("ULTIMO")
+        {
             @Override
-            public void actionPerformed(ActionEvent e) {
+            public void actionPerformed(ActionEvent e)
+            {
                 btnUltimo.doClick();//Aqui é onde ocorre o evento simulando o click do botão através da tecla ENTER
                 // Mas o indicado é você criar um método para realizar essa tarefa e chama-lo onde for necessário.
             }

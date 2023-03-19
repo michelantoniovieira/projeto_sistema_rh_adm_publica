@@ -8,12 +8,14 @@ import DAO.PopularCmbDAO;
 import DTO.PesquisarConcursoDTO;
 import java.util.ArrayList;
 import javax.swing.JOptionPane;
+import javax.swing.JTabbedPane;
 
 /**
  *
  * @author miche
  */
-public class frmCadastrarConcurso extends javax.swing.JInternalFrame {
+public class frmCadastrarConcurso extends javax.swing.JInternalFrame
+{
 
     private String codigoConcurso = "";
     private String numeroConcurso = "";
@@ -25,12 +27,14 @@ public class frmCadastrarConcurso extends javax.swing.JInternalFrame {
 
     private ArrayList<PesquisarConcursoDTO> lista;
 
-    public frmCadastrarConcurso() {
+    public frmCadastrarConcurso()
+    {
         initComponents();
         contador = 0;
     }
 
-    public void gravarRegistro() {
+    public void gravarRegistro()
+    {
         setCodigoConcurso(txtCodigoConcurso.getText());
         setNumeroConcurso(txtNumeroConcurso.getText());
         setAnoConcurso(txtAnoConcurso.getText());
@@ -39,7 +43,8 @@ public class frmCadastrarConcurso extends javax.swing.JInternalFrame {
         setFk_codigo_banca(String.valueOf(cmbFkCodigoBanca.getSelectedIndex()));
     }
 
-    public void preencherLista(ArrayList<PesquisarConcursoDTO> lista, int index) {
+    public void preencherLista(ArrayList<PesquisarConcursoDTO> lista, int index)
+    {
         this.setLista(lista);
         setCodigoConcurso(String.valueOf(getLista().get(index).getCodigoConcurso()));
         setNumeroConcurso(String.valueOf(getLista().get(index).getNumero_concurso()));
@@ -50,18 +55,19 @@ public class frmCadastrarConcurso extends javax.swing.JInternalFrame {
         preencherCampos();
     }
 
-    public void preencherCampos() {
+    public void preencherCampos()
+    {
         txtCodigoConcurso.setText(getCodigoConcurso());
         txtNumeroConcurso.setText(getNumeroConcurso());
         txtAnoConcurso.setText(getAnoConcurso());
         cmbSituacaoConcurso.setSelectedIndex(Integer.parseInt(getSituacaoConcurso()));
         cmbFkCodigoBanca.setSelectedIndex(Integer.parseInt(getFk_codigo_banca()));
-
         cmbFkMatriculaResponsavelConcurso.setSelectedIndex(0);
     }
 
     //liberar os campos para edição
-    public void ativarCampos() {
+    public void ativarCampos()
+    {
         //txtCodigoConcurso.setEnabled(true);
         txtNumeroConcurso.setEnabled(true);
         txtAnoConcurso.setEnabled(true);
@@ -73,7 +79,8 @@ public class frmCadastrarConcurso extends javax.swing.JInternalFrame {
     }
 
     //travar os campos para edição
-    public void desativarCampos() {
+    public void desativarCampos()
+    {
         txtCodigoConcurso.setEnabled(false);
         txtNumeroConcurso.setEnabled(false);
         txtAnoConcurso.setEnabled(false);
@@ -82,7 +89,8 @@ public class frmCadastrarConcurso extends javax.swing.JInternalFrame {
         cmbFkCodigoBanca.setEnabled(false);
     }
 
-    public void limparCampos() {
+    public void limparCampos()
+    {
         this.setCodigoConcurso("");
         txtCodigoConcurso.setText("");
         this.setNumeroConcurso("");
@@ -94,68 +102,89 @@ public class frmCadastrarConcurso extends javax.swing.JInternalFrame {
         cmbSituacaoConcurso.setSelectedIndex(0);
     }
 
-    public String getCodigoConcurso() {
+    public String getCodigoConcurso()
+    {
         return codigoConcurso;
     }
 
-    public void setCodigoConcurso(String codigoConcurso) {
+    public void setCodigoConcurso(String codigoConcurso)
+    {
         this.codigoConcurso = codigoConcurso;
     }
 
-    public String getNumeroConcurso() {
+    public String getNumeroConcurso()
+    {
         return numeroConcurso;
     }
 
-    public void setNumeroConcurso(String numeroConcurso) {
+    public void setNumeroConcurso(String numeroConcurso)
+    {
         this.numeroConcurso = numeroConcurso;
     }
 
-    public String getAnoConcurso() {
+    public String getAnoConcurso()
+    {
         return anoConcurso;
     }
 
-    public void setAnoConcurso(String anoConcurso) {
+    public void setAnoConcurso(String anoConcurso)
+    {
         this.anoConcurso = anoConcurso;
     }
 
-    public String getSituacaoConcurso() {
+    public String getSituacaoConcurso()
+    {
         return situacaoConcurso;
     }
 
-    public void setSituacaoConcurso(String situacaoConcurso) {
+    public void setSituacaoConcurso(String situacaoConcurso)
+    {
         this.situacaoConcurso = situacaoConcurso;
     }
 
-    public String getFk_matricula_responsavel_concurso() {
+    public String getFk_matricula_responsavel_concurso()
+    {
         return fk_matricula_responsavel_concurso;
     }
 
-    public void setFk_matricula_responsavel_concurso(String fk_matricula_responsavel_concurso) {
+    public void setFk_matricula_responsavel_concurso(String fk_matricula_responsavel_concurso)
+    {
         this.fk_matricula_responsavel_concurso = fk_matricula_responsavel_concurso;
     }
 
-    public String getFk_codigo_banca() {
+    public String getFk_codigo_banca()
+    {
         return fk_codigo_banca;
     }
 
-    public void setFk_codigo_banca(String fk_codigo_banca) {
+    public void setFk_codigo_banca(String fk_codigo_banca)
+    {
         this.fk_codigo_banca = fk_codigo_banca;
     }
 
-    public ArrayList<PesquisarConcursoDTO> getLista() {
+    public ArrayList<PesquisarConcursoDTO> getLista()
+    {
         return lista;
     }
 
-    public void setLista(ArrayList<PesquisarConcursoDTO> lista) {
+    public void setLista(ArrayList<PesquisarConcursoDTO> lista)
+    {
         this.lista = lista;
+    }
+
+    public int getJtpCadastrarConcurso()
+    {
+        return jtpCadastrarConcurso.getSelectedIndex();
     }
 
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
-    private void initComponents() {
+    private void initComponents()
+    {
 
         lblCadastrarConcurso = new java.awt.Label();
-        pPrincipal = new javax.swing.JPanel();
+        jtpCadastrarConcurso = new javax.swing.JTabbedPane();
+        jtpPrincipal = new javax.swing.JPanel();
         pInformacoes = new javax.swing.JPanel();
         lblNumeroConcurso = new javax.swing.JLabel();
         txtNumeroConcurso = new javax.swing.JTextField();
@@ -170,6 +199,8 @@ public class frmCadastrarConcurso extends javax.swing.JInternalFrame {
         cmbFkMatriculaResponsavelConcurso = new javax.swing.JComboBox<>();
         lblSituacaoConcurso = new javax.swing.JLabel();
         lblTitulo = new javax.swing.JLabel();
+        jtpCargos = new javax.swing.JTabbedPane();
+        jTabbedPane2 = new javax.swing.JTabbedPane();
 
         lblCadastrarConcurso.setText("label1");
 
@@ -178,12 +209,22 @@ public class frmCadastrarConcurso extends javax.swing.JInternalFrame {
         setTitle("Cadastrar Concurso");
         setToolTipText("");
 
+        jtpCadastrarConcurso.addChangeListener(new javax.swing.event.ChangeListener()
+        {
+            public void stateChanged(javax.swing.event.ChangeEvent evt)
+            {
+                jtpCadastrarConcursoStateChanged(evt);
+            }
+        });
+
         lblNumeroConcurso.setText("Nº Concurso:");
 
         lblAnoConcurso.setText("Ano Concurso:");
 
-        txtCodigoConcurso.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
+        txtCodigoConcurso.addActionListener(new java.awt.event.ActionListener()
+        {
+            public void actionPerformed(java.awt.event.ActionEvent evt)
+            {
                 txtCodigoConcursoActionPerformed(evt);
             }
         });
@@ -191,8 +232,10 @@ public class frmCadastrarConcurso extends javax.swing.JInternalFrame {
         lblCodigoConcurso.setText("Código Concurso:");
 
         cmbFkCodigoBanca.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "-" }));
-        cmbFkCodigoBanca.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
+        cmbFkCodigoBanca.addActionListener(new java.awt.event.ActionListener()
+        {
+            public void actionPerformed(java.awt.event.ActionEvent evt)
+            {
                 cmbFkCodigoBancaActionPerformed(evt);
             }
         });
@@ -204,8 +247,10 @@ public class frmCadastrarConcurso extends javax.swing.JInternalFrame {
         cmbSituacaoConcurso.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "-", "Em andamento", "Homologado", "Cancelado" }));
 
         cmbFkMatriculaResponsavelConcurso.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "1" }));
-        cmbFkMatriculaResponsavelConcurso.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
+        cmbFkMatriculaResponsavelConcurso.addActionListener(new java.awt.event.ActionListener()
+        {
+            public void actionPerformed(java.awt.event.ActionEvent evt)
+            {
                 cmbFkMatriculaResponsavelConcursoActionPerformed(evt);
             }
         });
@@ -271,27 +316,32 @@ public class frmCadastrarConcurso extends javax.swing.JInternalFrame {
         lblTitulo.setFont(new java.awt.Font("Segoe UI", 0, 36)); // NOI18N
         lblTitulo.setText("Cadastrar Concurso");
 
-        javax.swing.GroupLayout pPrincipalLayout = new javax.swing.GroupLayout(pPrincipal);
-        pPrincipal.setLayout(pPrincipalLayout);
-        pPrincipalLayout.setHorizontalGroup(
-            pPrincipalLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(pPrincipalLayout.createSequentialGroup()
-                .addGap(40, 40, 40)
+        javax.swing.GroupLayout jtpPrincipalLayout = new javax.swing.GroupLayout(jtpPrincipal);
+        jtpPrincipal.setLayout(jtpPrincipalLayout);
+        jtpPrincipalLayout.setHorizontalGroup(
+            jtpPrincipalLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jtpPrincipalLayout.createSequentialGroup()
+                .addContainerGap(37, Short.MAX_VALUE)
+                .addComponent(pInformacoes, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(32, 32, 32))
+            .addGroup(jtpPrincipalLayout.createSequentialGroup()
+                .addGap(107, 107, 107)
                 .addComponent(lblTitulo)
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-            .addGroup(pPrincipalLayout.createSequentialGroup()
-                .addComponent(pInformacoes, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(0, 0, Short.MAX_VALUE))
         );
-        pPrincipalLayout.setVerticalGroup(
-            pPrincipalLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, pPrincipalLayout.createSequentialGroup()
-                .addContainerGap()
+        jtpPrincipalLayout.setVerticalGroup(
+            jtpPrincipalLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jtpPrincipalLayout.createSequentialGroup()
+                .addGap(26, 26, 26)
                 .addComponent(lblTitulo, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(20, 20, 20)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(pInformacoes, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
+
+        jtpCadastrarConcurso.addTab("Concurso", jtpPrincipal);
+        jtpCadastrarConcurso.addTab("Cargos", jtpCargos);
+        jtpCadastrarConcurso.addTab("tab3", jTabbedPane2);
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -299,13 +349,14 @@ public class frmCadastrarConcurso extends javax.swing.JInternalFrame {
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(pPrincipal, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(10, Short.MAX_VALUE))
+                .addComponent(jtpCadastrarConcurso)
+                .addContainerGap())
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addComponent(pPrincipal, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addGap(15, 15, 15)
+                .addComponent(jtpCadastrarConcurso, javax.swing.GroupLayout.DEFAULT_SIZE, 277, Short.MAX_VALUE)
                 .addContainerGap())
         );
 
@@ -324,8 +375,14 @@ public class frmCadastrarConcurso extends javax.swing.JInternalFrame {
     private void cmbFkMatriculaResponsavelConcursoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cmbFkMatriculaResponsavelConcursoActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_cmbFkMatriculaResponsavelConcursoActionPerformed
+    //se clicar nas abas da tela cadastrar concurso e alterar de um para outra e de outra para outra bloqueia os campos
+    private void jtpCadastrarConcursoStateChanged(javax.swing.event.ChangeEvent evt)//GEN-FIRST:event_jtpCadastrarConcursoStateChanged
+    {//GEN-HEADEREND:event_jtpCadastrarConcursoStateChanged
+        desativarCampos();
+    }//GEN-LAST:event_jtpCadastrarConcursoStateChanged
 
-    public void popularCMBs() {
+    public void popularCMBs()
+    {
         PopularCmbDAO pcd = new PopularCmbDAO();
 
         ArrayList<Object> popularCMB = new ArrayList<Object>();
@@ -334,13 +391,16 @@ public class frmCadastrarConcurso extends javax.swing.JInternalFrame {
         popularCMB = pcd.pesquisar("codigo_banca", "banca", "nome_banca_organizadora");
 
         //parei aqui, o problema é que quando eu crio um concurso o codigo da banca que vai é o ultimo do combobox. Ai eu estou tentando fazer com que o item selecionado no combobox seja cadastrado com seu respectivo codigo.
-        for (Object obj : popularCMB) {
+        for (Object obj : popularCMB)
+        {
             //mostrar informações da listaObjeto para o combobox
-            if (obj instanceof String) {
+            if (obj instanceof String)
+            {
                 cmbFkCodigoBanca.addItem((String) obj);
             }
             //aqui funciona assim, no combobox mostra qual é a banca mais aqui vai passar o codigo da banca para salvar no banco de dados
-            if (obj instanceof Integer) {
+            if (obj instanceof Integer)
+            {
                 // cmbFkCodigoBanca.addItem(obj.toString());
                 setFk_codigo_banca(obj.toString());
             }
@@ -352,6 +412,10 @@ public class frmCadastrarConcurso extends javax.swing.JInternalFrame {
     private javax.swing.JComboBox<String> cmbFkCodigoBanca;
     private javax.swing.JComboBox<String> cmbFkMatriculaResponsavelConcurso;
     private javax.swing.JComboBox<String> cmbSituacaoConcurso;
+    private javax.swing.JTabbedPane jTabbedPane2;
+    private javax.swing.JTabbedPane jtpCadastrarConcurso;
+    private javax.swing.JTabbedPane jtpCargos;
+    private javax.swing.JPanel jtpPrincipal;
     private javax.swing.JLabel lblAnoConcurso;
     private javax.swing.JLabel lblBanca;
     private java.awt.Label lblCadastrarConcurso;
@@ -361,7 +425,6 @@ public class frmCadastrarConcurso extends javax.swing.JInternalFrame {
     private javax.swing.JLabel lblSituacaoConcurso;
     private javax.swing.JLabel lblTitulo;
     private javax.swing.JPanel pInformacoes;
-    private javax.swing.JPanel pPrincipal;
     private javax.swing.JTextField txtAnoConcurso;
     private javax.swing.JTextField txtCodigoConcurso;
     private javax.swing.JTextField txtNumeroConcurso;
