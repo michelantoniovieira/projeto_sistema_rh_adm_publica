@@ -939,6 +939,19 @@ public class frmPrincipal extends javax.swing.JFrame {
                 frmCCE.limparCampos();
             }
         }
+        
+         //cadastrar concurso
+        if (frmCC.isVisible() && !frmCC.getNumeroConcurso().equals("") && !frmCC.getAnoConcurso().equals("") & desativarBotoesFrmCC == false) {
+            int resposta = JOptionPane.showConfirmDialog(null, "Deseja realizar a exclusão do registro?", "Sair", JOptionPane.YES_NO_OPTION, 2);
+
+            if (resposta == JOptionPane.YES_OPTION) {
+                CadastrarConcursoControle controle = new CadastrarConcursoControle(Integer.parseInt(frmCC.getNumeroConcurso()), Integer.parseInt(frmCC.getAnoConcurso()));
+                controle.excluir();
+                JOptionPane.showMessageDialog(null, "Exclusão realizada com sucesso!");
+                frmCC.limparCampos();
+            }
+        }
+        
     }//GEN-LAST:event_btnExcluirActionPerformed
 
     private void btnAlterarActionPerformed(java.awt.event.ActionEvent evt)//GEN-FIRST:event_btnAlterarActionPerformed

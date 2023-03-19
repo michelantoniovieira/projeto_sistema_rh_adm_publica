@@ -88,7 +88,7 @@ public class CadastrarConcursoDAO {
         PreparedStatement stmt = null;
         {
             try {
-                stmt = conexao.prepareStatement("DELETE from concurso_publico WHERE numero_concurso = '" + objcadastrarconcursodto.getNumero_Concurso() + "'");
+                stmt = conexao.prepareStatement("DELETE from concurso_publico WHERE numero_concurso = '" + objcadastrarconcursodto.getNumero_Concurso() + "'AND ano_concurso = '" + objcadastrarconcursodto.getAno_Concurso() + "'");
                 stmt.executeUpdate();
             } catch (SQLException erro) {
                 erro.printStackTrace();

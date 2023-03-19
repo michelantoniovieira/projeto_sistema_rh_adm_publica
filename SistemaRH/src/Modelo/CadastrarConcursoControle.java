@@ -15,9 +15,10 @@ import javax.swing.JOptionPane;
 
 public class CadastrarConcursoControle extends CadastrarConcursoDTO {
 
-    public CadastrarConcursoControle(int numeroConcurso) {
+    public CadastrarConcursoControle(int numeroConcurso, int anoConcurso) {
         super();
         this.setNumero_Concurso(numeroConcurso);
+        this.setAno_Concurso(anoConcurso);
     }
 
     public CadastrarConcursoControle(int numeroConcurso, int anoConcurso, int situacaoConcurso, int fkMatriculaResponsavelConcurso, int fkCodigoBanca) {
