@@ -1139,6 +1139,8 @@ public class frmPrincipal extends javax.swing.JFrame
                     frmCC.desativarCampos();
                     desativarBotoesFrmCC = false;
                     gravarAlteracaoFrmCC = false;//este botão serve para quando o usuario selecionar algum registro e clicar em alterar e caso clique no botão pesquisar e depois alterar ele consegue realizar a alteração
+                    //ao pesquisar puxa as informações do concurso na tela
+                    frmCC.carregarLabels();
                 }
             } else
             {
@@ -1190,6 +1192,7 @@ public class frmPrincipal extends javax.swing.JFrame
         if (frmCC.contador == 0)
         {
             frmCC.popularCMBNomeBanca("codigo_banca", "banca", "nome_banca_organizadora");
+            frmCC.popularCMBNomeCargoEmprego("codigo_cargo_emprego", "cargo_emprego", "nome_cargo_emprego");
         }
         //quando o usuario abrir a tela para cadastrar concurso, ele conseguira utilizar os botões de primeiro até ultimo sem colocar uma matricula
         gravarAlteracaoFrmCC = false;
