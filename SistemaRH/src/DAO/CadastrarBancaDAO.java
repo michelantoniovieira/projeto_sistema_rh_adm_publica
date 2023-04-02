@@ -87,6 +87,25 @@ public class CadastrarBancaDAO
             }
         }
     }
+    
+    public ResultSet verificarAntesDeExcluir(CadastrarBancaDTO cadastrarbancadto)
+    {
+        conn = new ConexaoDAO().conectaBD();
+        try
+        {
+            String sql = "SELECT * FROM concurso_publico, banca WHERE codigo_banca = ? AND codigo_banca = fk_codigo_banca";
+
+            PreparedStatement pstm = conn.prepareStatement(sql);
+            pstm.setInt(1, cadastrarbancadto.getCodigo_Banca());
+
+            ResultSet rs = pstm.executeQuery();
+            return rs;
+        } catch (SQLException erro)
+        {
+            JOptionPane.showMessageDialog(null, "CadastrarBancaDAO - Erro! banca vinculada a concurso existente." + erro);
+            return null;
+        }
+    }
 
     public void delete(CadastrarBancaDTO cadastrarbancadto)
     {

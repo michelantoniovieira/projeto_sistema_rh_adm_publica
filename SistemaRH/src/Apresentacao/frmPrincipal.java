@@ -9,6 +9,9 @@ import Modelo.CadastrarCargoEmpregoControle;
 import Modelo.CadastrarConcursoControle;
 import java.awt.event.ActionEvent;
 import java.awt.event.KeyEvent;
+import java.sql.SQLException;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.swing.AbstractAction;
 import javax.swing.JComponent;
 import javax.swing.JOptionPane;
@@ -983,9 +986,22 @@ public class frmPrincipal extends javax.swing.JFrame
             if (resposta == JOptionPane.YES_OPTION)
             {
                 CadastrarBancaControle controle = new CadastrarBancaControle(frmCB.getBancaConcurso());
-                controle.excluir();
-                JOptionPane.showMessageDialog(null, "Exclusão realizada com sucesso!");
-                frmCB.limparCampos();
+                try
+                {
+                    controle.excluir();
+                    if (controle.getMensagem().equals("concurso_vinculado"))
+                    {
+                        JOptionPane.showMessageDialog(null, "Não sera possivel excluir a banca, pois a mesma já se encontra vinculada a um concurso!");
+                    } else
+                    {
+                        JOptionPane.showMessageDialog(null, "Exclusão realizada com sucesso!");
+                        frmCB.limparCampos();
+                    }
+                } catch (SQLException ex)
+                {
+                    Logger.getLogger(frmPrincipal.class.getName()).log(Level.SEVERE, null, ex);
+                }
+
             }
         }
 
@@ -1125,7 +1141,7 @@ public class frmPrincipal extends javax.swing.JFrame
             {
                 frmPC.setVisible(true);
                 //se a mensagem for pode passar entra no if abaixo
-                if (frmPC.getMensagem().equals("pode passar"))
+                if (frmPC.getMensagem() == "pode passar" && frmPC.getMensagem() != null)
                 {
                     //coloco na tela de cadastro de concurso, seto na variavel a lista e o index puxado direto da tela frmPesquisarConcurso 
                     frmCC.setCodigoConcurso(String.valueOf(frmPC.getLista().get(frmPC.getIndex()).getCodigoConcurso()));
@@ -1191,8 +1207,8 @@ public class frmPrincipal extends javax.swing.JFrame
         //para não ficar duplicando as informações da lista foi colocado um contador que toda vez que abre o programa ele passa a ser 0, assim ele entra no bloco de comando e mostra somente uma vez as informações da lista. Sem ficar duplicando
         if (frmCC.contador == 0)
         {
-            frmCC.popularCMBNomeBanca("codigo_banca", "banca", "nome_banca_organizadora");
-            frmCC.popularCMBNomeCargoEmprego("codigo_cargo_emprego", "cargo_emprego", "nome_cargo_emprego");
+            //aqui eu mando as informações referente a tabela do banco de dados que eu quero consultar, no caso a tabela banca, codigo da banca e nome da banca
+            frmCC.popularComboBox("banca", "codigo_banca", "nome_banca_organizadora");
         }
         //quando o usuario abrir a tela para cadastrar concurso, ele conseguira utilizar os botões de primeiro até ultimo sem colocar uma matricula
         gravarAlteracaoFrmCC = false;

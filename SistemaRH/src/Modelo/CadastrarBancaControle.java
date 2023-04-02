@@ -27,7 +27,7 @@ public class CadastrarBancaControle extends CadastrarBancaDTO
         this.setTelefone_responsavel_banca_organizadora(telResponsavelBanca);
         this.setEmail_banca_organizadora(emailBancaConcurso);
     }
-    
+
     public CadastrarBancaControle(int codigoBanca, String NomeBancaConcurso, String telBancaConcurso, String responsavelBancaConcurso, String telResponsavelBanca, String emailBancaConcurso)
     {
         this.setCodigo_Banca(codigoBanca);
@@ -112,13 +112,23 @@ public class CadastrarBancaControle extends CadastrarBancaDTO
         alterar.update(objcadastrarbancaDTO);
     }
 
-    public void excluir()
+    public void excluir() throws SQLException
     {
         CadastrarBancaDTO objcadastrarbancaDTO = new CadastrarBancaDTO();
+        objcadastrarbancaDTO.setCodigo_Banca(this.getCodigo_Banca());
         objcadastrarbancaDTO.setNome_banca_organizadora(this.getNome_banca_organizadora());
 
-        CadastrarBancaDAO excluir = new CadastrarBancaDAO();
-        excluir.delete(objcadastrarbancaDTO);
-    }
+        CadastrarBancaDAO pesquisarAntesDeExcluir = new CadastrarBancaDAO();
+        ResultSet rsexcluirconcursodao = pesquisarAntesDeExcluir.verificarAntesDeExcluir(objcadastrarbancaDTO);
 
+        if (rsexcluirconcursodao.next())
+        {
+            CadastrarBancaDAO excluir = new CadastrarBancaDAO();
+            excluir.delete(objcadastrarbancaDTO);
+
+        } else
+        {
+            this.setMensagem("concurso_vinculado");
+        }
+    }
 }

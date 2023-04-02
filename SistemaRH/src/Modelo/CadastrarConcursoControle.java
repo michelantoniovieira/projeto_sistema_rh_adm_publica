@@ -6,6 +6,7 @@ package Modelo;
 
 import DAO.CadastrarConcursoDAO;
 import DAO.CadastrarFuncionarioDAO;
+import DAO.ListarComboBox;
 import DTO.CadastrarConcursoDTO;
 import DTO.CadastrarFuncionarioDTO;
 import java.sql.ResultSet;
@@ -36,6 +37,15 @@ public class CadastrarConcursoControle extends CadastrarConcursoDTO {
         this.setSituacao_Concurso(situacaoConcurso);
         this.setFk_Matricula_Responsavel_Concurso(fkMatriculaResponsavelConcurso);
         this.setFk_codigo_banca(fkCodigoBanca);
+    }
+    
+    public CadastrarConcursoControle(String informarTabela, String informarNomeChavePrimaria, String informarAtributo)
+    {
+        ListarComboBox listarCMB = new ListarComboBox();
+        listarCMB.popularCMB(informarTabela, informarNomeChavePrimaria, informarAtributo);
+        this.setStringCMB(listarCMB.getE());
+
+        
     }
 
     public void cadastrar() {

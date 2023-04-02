@@ -1,5 +1,7 @@
 package DTO;
 
+import java.util.ArrayList;
+
 public class CadastrarConcursoDTO {
 
     private int codigo_concurso;
@@ -9,6 +11,7 @@ public class CadastrarConcursoDTO {
     private int fk_matricula_responsavel_concurso;
     private int fk_codigo_banca;
     private String mensagem;
+    private ArrayList<String> stringCMB;
 
     public int getCodigo_concurso() {
         return codigo_concurso;
@@ -66,4 +69,13 @@ public class CadastrarConcursoDTO {
         this.mensagem = mensagem;
     }
 
+    public void setStringCMB(ArrayList<String> stringCMB)
+    {
+        this.stringCMB = stringCMB;
+    }
+    
+    public ArrayList<String> getStringCMB()
+    {
+        return stringCMB;
+    }
 }

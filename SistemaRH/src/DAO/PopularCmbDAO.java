@@ -15,7 +15,7 @@ public class PopularCmbDAO {
     //crio um arraylist para receber as informações do banco de dados
     ArrayList<Object> listaObjetos = new ArrayList<Object>();
 
-    public ArrayList pesquisar(String informarNomeChavePrimaria, String informarTabela, String informarAtributo) {
+    public ArrayList pesquisar(String informarTabela, String informarNomeChavePrimaria, String informarAtributo) {
 
         String sql;
         sql = "SELECT " + informarAtributo + "," + informarNomeChavePrimaria + " FROM " + informarTabela;

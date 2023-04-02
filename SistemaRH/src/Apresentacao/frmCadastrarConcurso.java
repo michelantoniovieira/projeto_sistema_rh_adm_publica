@@ -6,7 +6,10 @@ package Apresentacao;
 
 import DAO.PopularCmbDAO;
 import DTO.PesquisarConcursoDTO;
+import Modelo.CadastrarConcursoControle;
 import java.util.ArrayList;
+import javax.swing.DefaultComboBoxModel;
+import javax.swing.JComboBox;
 import javax.swing.JOptionPane;
 import javax.swing.JTabbedPane;
 
@@ -14,7 +17,7 @@ import javax.swing.JTabbedPane;
  *
  * @author miche
  */
-public class frmCadastrarConcurso extends javax.swing.JInternalFrame
+public final class frmCadastrarConcurso extends javax.swing.JInternalFrame
 {
 
     private String codigoConcurso = "";
@@ -24,7 +27,7 @@ public class frmCadastrarConcurso extends javax.swing.JInternalFrame
     private String fk_matricula_responsavel_concurso = "1";
     private String fk_codigo_banca = "";
     public int contador = 0;
-    private ArrayList<Object> popularCMB;
+ 
 
     private ArrayList<PesquisarConcursoDTO> lista;
 
@@ -32,7 +35,20 @@ public class frmCadastrarConcurso extends javax.swing.JInternalFrame
     {
         initComponents();
         contador = 0;
-        popularCMB = new ArrayList<Object>();
+        popularComboBox("banca", "codigo_banca", "nome_banca_organizadora");
+    }
+
+    public void popularComboBox(String informarTabela, String informarNomeChavePrimaria, String informarAtributo)
+    {
+        CadastrarConcursoControle cadastrarConcursoControle = new CadastrarConcursoControle(informarTabela, informarNomeChavePrimaria, informarAtributo);
+        for(String nome : cadastrarConcursoControle.getStringCMB())
+        {
+           cmbFkCodigoBanca.addItem(nome);
+        }
+        //essa variavel esta aqui para não ficar duplicando as informações no combobox
+        //quando fechar a janela e abri-la de novo o contador fica 0 e carrega as informações no combobox
+        contador = 1;
+        
     }
 
     public void gravarRegistro()
@@ -242,46 +258,17 @@ public class frmCadastrarConcurso extends javax.swing.JInternalFrame
 
         lblAnoConcurso.setText("Ano Concurso:");
 
-        txtCodigoConcurso.addActionListener(new java.awt.event.ActionListener()
-        {
-            public void actionPerformed(java.awt.event.ActionEvent evt)
-            {
-                txtCodigoConcursoActionPerformed(evt);
-            }
-        });
-
         lblCodigoConcurso.setText("Código Concurso:");
 
         cmbFkCodigoBanca.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "-" }));
-        cmbFkCodigoBanca.addActionListener(new java.awt.event.ActionListener()
-        {
-            public void actionPerformed(java.awt.event.ActionEvent evt)
-            {
-                cmbFkCodigoBancaActionPerformed(evt);
-            }
-        });
 
         lblBanca.setText("Banca:");
 
         lblPrefeitoResponsavel.setText("Responsável/Prefeito");
 
         cmbSituacaoConcurso.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "-", "Em andamento", "Homologado", "Cancelado" }));
-        cmbSituacaoConcurso.addActionListener(new java.awt.event.ActionListener()
-        {
-            public void actionPerformed(java.awt.event.ActionEvent evt)
-            {
-                cmbSituacaoConcursoActionPerformed(evt);
-            }
-        });
 
         cmbFkMatriculaResponsavelConcurso.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "1" }));
-        cmbFkMatriculaResponsavelConcurso.addActionListener(new java.awt.event.ActionListener()
-        {
-            public void actionPerformed(java.awt.event.ActionEvent evt)
-            {
-                cmbFkMatriculaResponsavelConcursoActionPerformed(evt);
-            }
-        });
 
         lblSituacaoConcurso.setText("Situação Concurso");
 
@@ -362,9 +349,9 @@ public class frmCadastrarConcurso extends javax.swing.JInternalFrame
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jtpPrincipalLayout.createSequentialGroup()
                 .addGap(20, 20, 20)
                 .addComponent(lblTitulo, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(18, 18, 18)
+                .addGap(19, 19, 19)
                 .addComponent(pInformacoes, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(38, Short.MAX_VALUE))
+                .addContainerGap(37, Short.MAX_VALUE))
         );
 
         jtpCadastrarConcurso.addTab("Concurso", jtpPrincipal);
@@ -389,22 +376,8 @@ public class frmCadastrarConcurso extends javax.swing.JInternalFrame
         jScrollPane1.setViewportView(jTable1);
 
         btnCadastrarCadCon.setText("Cadastrar");
-        btnCadastrarCadCon.addActionListener(new java.awt.event.ActionListener()
-        {
-            public void actionPerformed(java.awt.event.ActionEvent evt)
-            {
-                btnCadastrarCadConActionPerformed(evt);
-            }
-        });
 
         btnRemoverCadCon.setText("Remover");
-        btnRemoverCadCon.addActionListener(new java.awt.event.ActionListener()
-        {
-            public void actionPerformed(java.awt.event.ActionEvent evt)
-            {
-                btnRemoverCadConActionPerformed(evt);
-            }
-        });
 
         lblNumeroConcursoTelaCargoEmprego.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
         lblNumeroConcursoTelaCargoEmprego.setText("Nº ");
@@ -525,77 +498,6 @@ public class frmCadastrarConcurso extends javax.swing.JInternalFrame
         desativarCampos();
     }//GEN-LAST:event_jtpCadastrarConcursoStateChanged
 
-    private void cmbFkMatriculaResponsavelConcursoActionPerformed(java.awt.event.ActionEvent evt)//GEN-FIRST:event_cmbFkMatriculaResponsavelConcursoActionPerformed
-    {//GEN-HEADEREND:event_cmbFkMatriculaResponsavelConcursoActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_cmbFkMatriculaResponsavelConcursoActionPerformed
-
-    private void cmbFkCodigoBancaActionPerformed(java.awt.event.ActionEvent evt)//GEN-FIRST:event_cmbFkCodigoBancaActionPerformed
-    {//GEN-HEADEREND:event_cmbFkCodigoBancaActionPerformed
-
-    }//GEN-LAST:event_cmbFkCodigoBancaActionPerformed
-
-    private void txtCodigoConcursoActionPerformed(java.awt.event.ActionEvent evt)//GEN-FIRST:event_txtCodigoConcursoActionPerformed
-    {//GEN-HEADEREND:event_txtCodigoConcursoActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_txtCodigoConcursoActionPerformed
-
-    private void cmbSituacaoConcursoActionPerformed(java.awt.event.ActionEvent evt)//GEN-FIRST:event_cmbSituacaoConcursoActionPerformed
-    {//GEN-HEADEREND:event_cmbSituacaoConcursoActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_cmbSituacaoConcursoActionPerformed
-
-    private void btnRemoverCadConActionPerformed(java.awt.event.ActionEvent evt)//GEN-FIRST:event_btnRemoverCadConActionPerformed
-    {//GEN-HEADEREND:event_btnRemoverCadConActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_btnRemoverCadConActionPerformed
-
-    private void btnCadastrarCadConActionPerformed(java.awt.event.ActionEvent evt)//GEN-FIRST:event_btnCadastrarCadConActionPerformed
-    {//GEN-HEADEREND:event_btnCadastrarCadConActionPerformed
-        //algoritmo        
-        //puxar a informação do combobox e jogar para a tabela
-    }//GEN-LAST:event_btnCadastrarCadConActionPerformed
-
-    //metodo automatico onde eu passo qual é a chave primaria, tabela e atributo que eu quero puxar no combobox
-    public ArrayList<Object> popularCMB(String informarNomeChavePrimaria, String informarTabela, String informarAtributo)
-    {
-        PopularCmbDAO pcd = new PopularCmbDAO();
-
-        //popular nome das bancas
-        return popularCMB = pcd.pesquisar(informarNomeChavePrimaria, informarTabela, informarAtributo);
-    }
-
-    public void popularCMBNomeBanca(String informarNomeChavePrimaria, String informarTabela, String informarAtributo)
-    {
-
-        //parei aqui, o problema é que quando eu crio um concurso o codigo da banca que vai é o ultimo do combobox. Ai eu estou tentando fazer com que o item selecionado no combobox seja cadastrado com seu respectivo codigo.
-        for (Object obj : popularCMB(informarNomeChavePrimaria, informarTabela, informarAtributo))
-        {
-            //mostrar informações da listaObjeto para o combobox
-            if (obj instanceof String)
-            {
-                cmbFkCodigoBanca.addItem((String) obj);
-            }
-            //aqui funciona assim, no combobox mostra qual é a banca mais aqui vai passar o codigo da banca para salvar no banco de dados
-            if (obj instanceof Integer)
-            {
-                setFk_codigo_banca(obj.toString());
-            }
-        }
-        contador = 1;
-    }
-
-    public void popularCMBNomeCargoEmprego(String informarNomeChavePrimaria, String informarTabela, String informarAtributo)
-    {
-        for (Object obj : popularCMB(informarNomeChavePrimaria, informarTabela, informarAtributo))
-        {
-            //mostrar informações da listaObjeto para o combobox
-            if (obj instanceof String)
-            {
-                cmbCargoEmpregoCadCon.addItem((String) obj);
-            }
-        }
-    }
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnCadastrarCadCon;
     private javax.swing.JButton btnRemoverCadCon;
