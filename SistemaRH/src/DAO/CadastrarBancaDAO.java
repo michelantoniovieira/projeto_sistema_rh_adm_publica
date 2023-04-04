@@ -103,6 +103,7 @@ public class CadastrarBancaDAO
         } catch (SQLException erro)
         {
             JOptionPane.showMessageDialog(null, "CadastrarBancaDAO - Erro! banca vinculada a concurso existente." + erro);
+            erro.printStackTrace(); // adicionado para obter informações sobre o erro
             return null;
         }
     }

@@ -13,10 +13,11 @@ import java.util.ArrayList;
 public class CadastrarBancaControle extends CadastrarBancaDTO
 {
 
-    public CadastrarBancaControle(String nomeBanca)
+    public CadastrarBancaControle(String codigoBanca, String nomeBanca)
     {
         super();
         this.setNome_banca_organizadora(nomeBanca);
+        this.setCodigo_Banca(Integer.parseInt(codigoBanca));
     }
 
     public CadastrarBancaControle(String NomeBancaConcurso, String telBancaConcurso, String responsavelBancaConcurso, String telResponsavelBanca, String emailBancaConcurso)
@@ -121,14 +122,16 @@ public class CadastrarBancaControle extends CadastrarBancaDTO
         CadastrarBancaDAO pesquisarAntesDeExcluir = new CadastrarBancaDAO();
         ResultSet rsexcluirconcursodao = pesquisarAntesDeExcluir.verificarAntesDeExcluir(objcadastrarbancaDTO);
 
+        System.out.println(objcadastrarbancaDTO.getCodigo_Banca());
         if (rsexcluirconcursodao.next())
         {
-            CadastrarBancaDAO excluir = new CadastrarBancaDAO();
-            excluir.delete(objcadastrarbancaDTO);
+            this.setMensagem("concurso_vinculado");
+            
 
         } else
         {
-            this.setMensagem("concurso_vinculado");
+            this.setMensagem("ok");
+            pesquisarAntesDeExcluir.delete(objcadastrarbancaDTO);
         }
     }
 }

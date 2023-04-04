@@ -930,7 +930,7 @@ public class frmPrincipal extends javax.swing.JFrame
         //tela cadastrar banca
         if (frmCB.isVisible() && desativarBotoesFrmCC == false)
         {
-            CadastrarBancaControle controle = new CadastrarBancaControle(frmCB.getBancaConcurso());
+            CadastrarBancaControle controle = new CadastrarBancaControle(frmCB.getCodigoBanca(),frmCB.getBancaConcurso());
             controle.pesquisar(index);
 
             if (!frmCB.getCodigoBanca().equals(""))
@@ -985,14 +985,14 @@ public class frmPrincipal extends javax.swing.JFrame
 
             if (resposta == JOptionPane.YES_OPTION)
             {
-                CadastrarBancaControle controle = new CadastrarBancaControle(frmCB.getBancaConcurso());
+                CadastrarBancaControle controle = new CadastrarBancaControle(frmCB.getCodigoBanca(),frmCB.getBancaConcurso());
                 try
                 {
                     controle.excluir();
                     if (controle.getMensagem().equals("concurso_vinculado"))
                     {
                         JOptionPane.showMessageDialog(null, "Não sera possivel excluir a banca, pois a mesma já se encontra vinculada a um concurso!");
-                    } else
+                    } else if(controle.getMensagem().equals("ok"))
                     {
                         JOptionPane.showMessageDialog(null, "Exclusão realizada com sucesso!");
                         frmCB.limparCampos();
