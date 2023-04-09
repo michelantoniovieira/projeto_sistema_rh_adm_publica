@@ -6,9 +6,10 @@ public class ListarComboBox
 {
 
     private String stringCMB;
-    private ArrayList<String> e = new ArrayList<>();
+    private ArrayList<String> informarAtributoString = new ArrayList<>();
+    private ArrayList<Integer> informarNomeChavePrimariaInt = new ArrayList<>();
 
-    private ArrayList<Object> popularComboBox = new ArrayList<Object>();
+    private ArrayList<Object> retornoInformacaoBancoDeDados = new ArrayList<>();
 
     public void popularCMB(String informarTabela, String informarNomeChavePrimaria, String informarAtributo)
     {
@@ -18,8 +19,11 @@ public class ListarComboBox
             if (obj instanceof String)
             {
                 // cmbFkCodigoBanca.addItem((String) obj);
-               e.add(obj.toString());
-                
+                informarAtributoString.add(obj.toString());
+            }
+            if (obj instanceof Integer)
+            {
+                informarNomeChavePrimariaInt.add((Integer) obj);
             }
         }
     }
@@ -30,7 +34,13 @@ public class ListarComboBox
         PopularCmbDAO pcd = new PopularCmbDAO();
 
         //popular nome das bancas
-        return popularComboBox = pcd.pesquisar(informarTabela, informarNomeChavePrimaria, informarAtributo);
+        return retornoInformacaoBancoDeDados = pcd.pesquisar(informarTabela, informarNomeChavePrimaria, informarAtributo);
+    }
+    
+    public ArrayList<Object> pesquisarInformacaoNoBancoDeDados(String informarTabela, String informarNomeChavePrimaria, String informarAtributo, String informacaoASerPesquisada)
+    {
+        PopularCmbDAO pcd = new PopularCmbDAO();
+        return retornoInformacaoBancoDeDados = pcd.pesquisarInformacaoBancoDeDados(informarTabela, informarNomeChavePrimaria, informarAtributo, informacaoASerPesquisada);
     }
 
     public String getStringCMB()
@@ -43,25 +53,36 @@ public class ListarComboBox
         this.stringCMB = stringCMB;
     }
 
-    public ArrayList<String> getE()
+    public ArrayList<String> getInformarAtributoString()
     {
-        return e;
+        return informarAtributoString;
     }
 
-    public void setE(ArrayList<String> e)
+    public void setInformarAtributoString(ArrayList<String> informarAtributoString)
     {
-        this.e = e;
+        this.informarAtributoString = informarAtributoString;
     }
 
-    public ArrayList<Object> getPopularComboBox()
+    public ArrayList<Integer> getInformarNomeChavePrimariaInt()
     {
-        return popularComboBox;
+        return informarNomeChavePrimariaInt;
     }
 
-    public void setPopularComboBox(ArrayList<Object> popularComboBox)
+    public void setInformarNomeChavePrimariaInt(ArrayList<Integer> informarNomeChavePrimariaInt)
     {
-        this.popularComboBox = popularComboBox;
+        this.informarNomeChavePrimariaInt = informarNomeChavePrimariaInt;
     }
-
     
+    
+
+    public ArrayList<Object> getRetornoInformacaoBancoDeDados()
+    {
+        return retornoInformacaoBancoDeDados;
+    }
+
+    public void setRetornoInformacaoBancoDeDados(ArrayList<Object> retornoInformacaoBancoDeDados)
+    {
+        this.retornoInformacaoBancoDeDados = retornoInformacaoBancoDeDados;
+    }
+
 }

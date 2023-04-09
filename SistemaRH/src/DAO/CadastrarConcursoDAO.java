@@ -18,15 +18,18 @@ import javax.swing.JOptionPane;
  *
  * @author miche
  */
-public class CadastrarConcursoDAO {
+public class CadastrarConcursoDAO
+{
 
     Connection conn;
     PreparedStatement pstm;
     ResultSet rs;
 
-    public ResultSet verificarAntesDeCadastrar(CadastrarConcursoDTO objcadastrarconcursodto) {
+    public ResultSet verificarAntesDeCadastrar(CadastrarConcursoDTO objcadastrarconcursodto)
+    {
         conn = new ConexaoDAO().conectaBD();
-        try {
+        try
+        {
             String sql = "SELECT * FROM concurso_publico WHERE numero_concurso = ? AND ano_concurso = ?";
 
             PreparedStatement pstm = conn.prepareStatement(sql);
@@ -35,17 +38,20 @@ public class CadastrarConcursoDAO {
 
             ResultSet rs = pstm.executeQuery();
             return rs;
-        } catch (SQLException erro) {
+        } catch (SQLException erro)
+        {
             JOptionPane.showMessageDialog(null, "Erro ao pesquisar CadastrarConcursoDAO" + erro);
             return null;
         }
     }
 
-    public void CadastrarConcursoDAO(CadastrarConcursoDTO objcadastrarconcursodto) {
+    public void CadastrarConcursoDAO(CadastrarConcursoDTO objcadastrarconcursodto)
+    {
         String sql = "INSERT INTO concurso_publico (numero_concurso, ano_concurso, situacao_concurso, fk_matricula_responsavel_concurso, fk_codigo_banca) values (?,?,?,?,?)";
         conn = new ConexaoDAO().conectaBD();
 
-        try {
+        try
+        {
             pstm = conn.prepareStatement(sql);
             pstm.setInt(1, objcadastrarconcursodto.getNumero_Concurso());
             pstm.setInt(2, objcadastrarconcursodto.getAno_Concurso());
@@ -55,17 +61,40 @@ public class CadastrarConcursoDAO {
 
             pstm.execute();
             pstm.close();
-        } catch (SQLException erro) {
+        } catch (SQLException erro)
+        {
             JOptionPane.showMessageDialog(null, "CadastrarConcursoDAO - Cadastrar" + erro);
         }
     }
 
-    public void update(CadastrarConcursoDTO objcadastrarconcursodto) {
+    public void CadastrarCargosEmpregosConcursoDAO(CadastrarConcursoDTO objcadastrarconcursodto)
+    {
+        String sql = "INSERT INTO listadecargosempregos (fk_codigo_concurso, fk_codigo_cargo_emprego, quantidade_vagas) values (?,?,?)";
+        conn = new ConexaoDAO().conectaBD();
+
+        try
+        {
+            pstm = conn.prepareStatement(sql);
+            pstm.setInt(1, objcadastrarconcursodto.getCodigo_concurso());
+            pstm.setInt(2, objcadastrarconcursodto.getCodigoCargoEmpregoSelecionado());
+            pstm.setString(3, objcadastrarconcursodto.getQuantidade_vagas());
+
+            pstm.execute();
+            pstm.close();
+        } catch (SQLException erro)
+        {
+            JOptionPane.showMessageDialog(null, "CadastrarConcursoDAO - Cadastrar" + erro);
+        }
+    }
+
+    public void update(CadastrarConcursoDTO objcadastrarconcursodto)
+    {
         String sql = "UPDATE concurso_publico SET  numero_concurso = ?, ano_concurso = ?, situacao_concurso = ?, fk_matricula_responsavel_concurso = ?, fk_codigo_banca = ? WHERE codigo_concurso = '" + objcadastrarconcursodto.getCodigo_concurso() + "'";
         conn = new ConexaoDAO().conectaBD();
 
         {
-            try {
+            try
+            {
                 pstm = conn.prepareStatement(sql);
                 pstm.setInt(1, objcadastrarconcursodto.getNumero_Concurso());
                 pstm.setInt(2, objcadastrarconcursodto.getAno_Concurso());
@@ -75,38 +104,47 @@ public class CadastrarConcursoDAO {
 
                 pstm.execute();
                 pstm.close();
-            } catch (SQLException erro) {
+            } catch (SQLException erro)
+            {
                 erro.printStackTrace();
-            } finally {
+            } finally
+            {
                 ConexaoDAO.encerrarConexao(conn, pstm);
             }
         }
     }
 
-    public void delete(CadastrarConcursoDTO objcadastrarconcursodto) {
+    public void delete(CadastrarConcursoDTO objcadastrarconcursodto)
+    {
         Connection conexao = ConexaoDAO.conectaBD();
         PreparedStatement stmt = null;
         {
-            try {
+            try
+            {
                 stmt = conexao.prepareStatement("DELETE from concurso_publico WHERE numero_concurso = '" + objcadastrarconcursodto.getNumero_Concurso() + "'AND ano_concurso = '" + objcadastrarconcursodto.getAno_Concurso() + "'");
                 stmt.executeUpdate();
-            } catch (SQLException erro) {
+            } catch (SQLException erro)
+            {
                 erro.printStackTrace();
-            } finally {
+            } finally
+            {
                 ConexaoDAO.encerrarConexao(conexao, stmt);
             }
         }
     }
 
-    public ArrayList<CadastrarConcursoDTO> botaoNavegacao() {
+    public ArrayList<CadastrarConcursoDTO> botaoNavegacao()
+    {
         Connection conexao = ConexaoDAO.conectaBD();
         PreparedStatement stmt = null;
         ArrayList<CadastrarConcursoDTO> objcadastrarconcursodto = new ArrayList<>();
 
-        try {
+        try
+        {
             stmt = conexao.prepareStatement("SELECT * FROM concurso_publico");
             rs = stmt.executeQuery();
-            while (rs.next()) {
+            while (rs.next())
+            {
                 CadastrarConcursoDTO ccdto = new CadastrarConcursoDTO();
                 ccdto.setCodigo_Concurso(rs.getInt("codigo_concurso"));
                 ccdto.setNumero_Concurso(rs.getInt("numero_concurso"));
@@ -117,9 +155,11 @@ public class CadastrarConcursoDAO {
                 objcadastrarconcursodto.add(ccdto);
 
             }
-        } catch (SQLException erro) {
+        } catch (SQLException erro)
+        {
             erro.printStackTrace();
-        } finally {
+        } finally
+        {
             ConexaoDAO.encerrarConexao(conexao, stmt, rs);
         }
         return objcadastrarconcursodto;

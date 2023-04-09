@@ -1,5 +1,6 @@
 package DTO;
 
+import com.mysql.cj.protocol.Resultset;
 import java.util.ArrayList;
 
 public class CadastrarConcursoDTO {
@@ -10,8 +11,13 @@ public class CadastrarConcursoDTO {
     private int situacao_concurso;
     private int fk_matricula_responsavel_concurso;
     private int fk_codigo_banca;
+    private String cargoEmpregoSelecionado;
+    private int codigoCargoEmpregoSelecionado;
+    private String quantidade_vagas;
     private String mensagem;
-    private ArrayList<String> stringCMB;
+    private ArrayList<String> informarAtributoString;
+    private ArrayList<Integer> informarNomeChavePrimariaInt;
+    private ArrayList<Object> listaObjetosRetornadosDoBancoDeDados;
 
     public int getCodigo_concurso() {
         return codigo_concurso;
@@ -69,13 +75,65 @@ public class CadastrarConcursoDTO {
         this.mensagem = mensagem;
     }
 
-    public void setStringCMB(ArrayList<String> stringCMB)
+    public void setInformarAtributoString(ArrayList<String> informarAtributoString)
     {
-        this.stringCMB = stringCMB;
+        this.informarAtributoString = informarAtributoString;
     }
     
-    public ArrayList<String> getStringCMB()
+    public ArrayList<String> getInformarAtributoString()
     {
-        return stringCMB;
+        return informarAtributoString;
     }
+
+    public ArrayList<Integer> getInformarNomeChavePrimariaInt()
+    {
+        return informarNomeChavePrimariaInt;
+    }
+
+    public void setInformarNomeChavePrimariaInt(ArrayList<Integer> informarNomeChavePrimariaInt)
+    {
+        this.informarNomeChavePrimariaInt = informarNomeChavePrimariaInt;
+    }    
+
+    public String getCargoEmpregoSelecionado()
+    {
+        return cargoEmpregoSelecionado;
+    }
+
+    public void setCargoEmpregoSelecionado(String cargoEmpregoSelecionado)
+    {
+        this.cargoEmpregoSelecionado = cargoEmpregoSelecionado;
+    }
+
+    public int getCodigoCargoEmpregoSelecionado()
+    {
+        return codigoCargoEmpregoSelecionado;
+    }
+
+    public void setCodigoCargoEmpregoSelecionado(int codigoCargoEmpregoSelecionado)
+    {
+        this.codigoCargoEmpregoSelecionado = codigoCargoEmpregoSelecionado;
+    }   
+    
+    public String getQuantidade_vagas()
+    {
+        return quantidade_vagas;
+    }
+
+    public void setQuantidade_vagas(String quantidade_vagas)
+    {
+        this.quantidade_vagas = quantidade_vagas;
+    }
+
+    public ArrayList<Object> getListaObjetosRetornadosDoBancoDeDados()
+    {
+        return listaObjetosRetornadosDoBancoDeDados;
+    }
+
+    public void setListaObjetosRetornadosDoBancoDeDados(ArrayList<Object> listaObjetosRetornadosDoBancoDeDados)
+    {
+        this.listaObjetosRetornadosDoBancoDeDados = listaObjetosRetornadosDoBancoDeDados;
+    }
+    
+    
 }

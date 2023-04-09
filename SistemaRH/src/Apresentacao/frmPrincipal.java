@@ -930,7 +930,7 @@ public class frmPrincipal extends javax.swing.JFrame
         //tela cadastrar banca
         if (frmCB.isVisible() && desativarBotoesFrmCC == false)
         {
-            CadastrarBancaControle controle = new CadastrarBancaControle(frmCB.getCodigoBanca(),frmCB.getBancaConcurso());
+            CadastrarBancaControle controle = new CadastrarBancaControle(frmCB.getCodigoBanca(), frmCB.getBancaConcurso());
             controle.pesquisar(index);
 
             if (!frmCB.getCodigoBanca().equals(""))
@@ -985,14 +985,14 @@ public class frmPrincipal extends javax.swing.JFrame
 
             if (resposta == JOptionPane.YES_OPTION)
             {
-                CadastrarBancaControle controle = new CadastrarBancaControle(frmCB.getCodigoBanca(),frmCB.getBancaConcurso());
+                CadastrarBancaControle controle = new CadastrarBancaControle(frmCB.getCodigoBanca(), frmCB.getBancaConcurso());
                 try
                 {
                     controle.excluir();
                     if (controle.getMensagem().equals("concurso_vinculado"))
                     {
                         JOptionPane.showMessageDialog(null, "Não sera possivel excluir a banca, pois a mesma já se encontra vinculada a um concurso!");
-                    } else if(controle.getMensagem().equals("ok"))
+                    } else if (controle.getMensagem().equals("ok"))
                     {
                         JOptionPane.showMessageDialog(null, "Exclusão realizada com sucesso!");
                         frmCB.limparCampos();
@@ -1134,7 +1134,7 @@ public class frmPrincipal extends javax.swing.JFrame
         //***************************************************************************************
         //tela cadastrar concurso
         //se a tela estiver visivel e a aba selecionada foi a primeira ele mostra a janela pesquisar concurso
-        if (frmCC.isVisible() && frmCC.getJtpCadastrarConcurso() == 0)
+        if (frmCC.isVisible())
         {
             frmPesquisarConcurso frmPC = new frmPesquisarConcurso(null, true);
             if (frmPC.getLista() != null)
@@ -1143,6 +1143,7 @@ public class frmPrincipal extends javax.swing.JFrame
                 //se a mensagem for pode passar entra no if abaixo
                 if (frmPC.getMensagem() == "pode passar" && frmPC.getMensagem() != null)
                 {
+                    frmCC.limparCampos();
                     //coloco na tela de cadastro de concurso, seto na variavel a lista e o index puxado direto da tela frmPesquisarConcurso 
                     frmCC.setCodigoConcurso(String.valueOf(frmPC.getLista().get(frmPC.getIndex()).getCodigoConcurso()));
                     frmCC.setNumeroConcurso(String.valueOf(frmPC.getLista().get(frmPC.getIndex()).getNumero_concurso()));
@@ -1153,6 +1154,8 @@ public class frmPrincipal extends javax.swing.JFrame
 
                     frmCC.preencherCampos();
                     frmCC.desativarCampos();
+                    frmCC.popularTabelaCadastroCargoEmprego(String.valueOf(frmPC.getLista().get(frmPC.getIndex()).getCodigoConcurso()));
+                    frmCC.ativarBotaoCadastrarRemover();
                     desativarBotoesFrmCC = false;
                     gravarAlteracaoFrmCC = false;//este botão serve para quando o usuario selecionar algum registro e clicar em alterar e caso clique no botão pesquisar e depois alterar ele consegue realizar a alteração
                     //ao pesquisar puxa as informações do concurso na tela
@@ -1204,13 +1207,6 @@ public class frmPrincipal extends javax.swing.JFrame
         frmCC.setVisible(true);
         frmCC.limparCampos();
         frmCC.desativarCampos();
-        //para não ficar duplicando as informações da lista foi colocado um contador que toda vez que abre o programa ele passa a ser 0, assim ele entra no bloco de comando e mostra somente uma vez as informações da lista. Sem ficar duplicando
-        if (frmCC.contador == 0)
-        {
-            //aqui eu mando as informações referente a tabela do banco de dados que eu quero consultar, no caso a tabela banca, codigo da banca e nome da banca
-            frmCC.popularComboBox("banca", "codigo_banca", "nome_banca_organizadora");
-        }
-        //quando o usuario abrir a tela para cadastrar concurso, ele conseguira utilizar os botões de primeiro até ultimo sem colocar uma matricula
         gravarAlteracaoFrmCC = false;
         index = 0;
     }//GEN-LAST:event_mnCadastrarConcursoActionPerformed
