@@ -39,7 +39,7 @@ public final class frmCadastrarConcurso extends javax.swing.JInternalFrame
         initComponents();
         contador = 0;
         popularComboBoxNomeBanca("banca", "codigo_banca", "nome_banca_organizadora");
-        popularComboBoxNomeCargoEmprego("cargo_emprego", "codigo_cargo_emprego", "nome_cargo_emprego");
+        popularComboBoxNomeCargoEmprego("cargo_emprego", "codigo_cargo_emprego", "descricao_cargo_emprego");
     }
 
     public void popularComboBoxNomeBanca(String informarTabela, String informarNomeChavePrimaria, String informarAtributo)
@@ -175,8 +175,15 @@ public final class frmCadastrarConcurso extends javax.swing.JInternalFrame
 
     public void carregarLabels()
     {
+        //tela cadastrar cargo/emprego
         lblNumeroConcursoTelaCargoEmprego.setText(txtNumeroConcurso.getText());
         lblAnoConcursoTelaCargoEmprego.setText(txtAnoConcurso.getText());
+        lblBancaConcurso.setText(cmbFkCodigoBanca.getSelectedItem().toString().toUpperCase());
+        
+        //tela cadastrar homologações cargo/emprego
+        lblNumeroConcursoTelaCargoEmprego2.setText(txtNumeroConcurso.getText());
+        lblAnoConcursoTelaCargoEmprego2.setText(txtAnoConcurso.getText());
+        lblBancaConcurso2.setText(cmbFkCodigoBanca.getSelectedItem().toString().toUpperCase());
     }
 
     public String getCodigoConcurso()
@@ -261,7 +268,7 @@ public final class frmCadastrarConcurso extends javax.swing.JInternalFrame
 
         lblCadastrarConcurso = new java.awt.Label();
         jtpCadastrarConcurso = new javax.swing.JTabbedPane();
-        jtpPrincipal = new javax.swing.JPanel();
+        jpCadastrarConcurso = new javax.swing.JPanel();
         pInformacoes = new javax.swing.JPanel();
         lblNumeroConcurso = new javax.swing.JLabel();
         txtNumeroConcurso = new javax.swing.JTextField();
@@ -276,7 +283,7 @@ public final class frmCadastrarConcurso extends javax.swing.JInternalFrame
         cmbFkMatriculaResponsavelConcurso = new javax.swing.JComboBox<>();
         lblSituacaoConcurso = new javax.swing.JLabel();
         lblTitulo = new javax.swing.JLabel();
-        jPanel2 = new javax.swing.JPanel();
+        jpCadastrarCargoEmprego = new javax.swing.JPanel();
         lblCargoEmpregoCadCon = new javax.swing.JLabel();
         lblQuantidadeVagasCadCon = new javax.swing.JLabel();
         cmbCargoEmpregoCadCon = new javax.swing.JComboBox<>();
@@ -286,17 +293,26 @@ public final class frmCadastrarConcurso extends javax.swing.JInternalFrame
         btnRemoverCadCon = new javax.swing.JButton();
         jPanel1 = new javax.swing.JPanel();
         lblNumeroConcursoTelaCargoEmprego = new javax.swing.JLabel();
-        lblCadastrarCargoEmprego = new javax.swing.JLabel();
         lblConcurso = new javax.swing.JLabel();
         lblbarra = new javax.swing.JLabel();
         lblAnoConcursoTelaCargoEmprego = new javax.swing.JLabel();
+        lblBancaConcurso = new javax.swing.JLabel();
         cmbQuantidadeVagasCadCon = new javax.swing.JComboBox<>();
+        jpCadastrarHomologacao = new javax.swing.JPanel();
+        jScrollPane2 = new javax.swing.JScrollPane();
+        jTable1 = new javax.swing.JTable();
+        jPanel3 = new javax.swing.JPanel();
+        lblNumeroConcursoTelaCargoEmprego2 = new javax.swing.JLabel();
+        lblConcurso2 = new javax.swing.JLabel();
+        lblbarra2 = new javax.swing.JLabel();
+        lblAnoConcursoTelaCargoEmprego2 = new javax.swing.JLabel();
+        lblBancaConcurso2 = new javax.swing.JLabel();
 
         lblCadastrarConcurso.setText("label1");
 
         setClosable(true);
         setIconifiable(true);
-        setTitle("Cadastrar Concurso");
+        setTitle("Concurso");
         setToolTipText("");
         addInternalFrameListener(new javax.swing.event.InternalFrameListener()
         {
@@ -406,33 +422,34 @@ public final class frmCadastrarConcurso extends javax.swing.JInternalFrame
                 .addContainerGap())
         );
 
-        lblTitulo.setFont(new java.awt.Font("Segoe UI", 0, 36)); // NOI18N
-        lblTitulo.setText("Cadastrar Concurso");
+        lblTitulo.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
+        lblTitulo.setText("CADASTRAR CONCURSO");
 
-        javax.swing.GroupLayout jtpPrincipalLayout = new javax.swing.GroupLayout(jtpPrincipal);
-        jtpPrincipal.setLayout(jtpPrincipalLayout);
-        jtpPrincipalLayout.setHorizontalGroup(
-            jtpPrincipalLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jtpPrincipalLayout.createSequentialGroup()
-                .addContainerGap(111, Short.MAX_VALUE)
-                .addComponent(pInformacoes, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(32, 32, 32))
-            .addGroup(jtpPrincipalLayout.createSequentialGroup()
-                .addGap(108, 108, 108)
-                .addComponent(lblTitulo)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+        javax.swing.GroupLayout jpCadastrarConcursoLayout = new javax.swing.GroupLayout(jpCadastrarConcurso);
+        jpCadastrarConcurso.setLayout(jpCadastrarConcursoLayout);
+        jpCadastrarConcursoLayout.setHorizontalGroup(
+            jpCadastrarConcursoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jpCadastrarConcursoLayout.createSequentialGroup()
+                .addGroup(jpCadastrarConcursoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(jpCadastrarConcursoLayout.createSequentialGroup()
+                        .addGap(77, 77, 77)
+                        .addComponent(pInformacoes, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(jpCadastrarConcursoLayout.createSequentialGroup()
+                        .addGap(86, 86, 86)
+                        .addComponent(lblTitulo)))
+                .addContainerGap(78, Short.MAX_VALUE))
         );
-        jtpPrincipalLayout.setVerticalGroup(
-            jtpPrincipalLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jtpPrincipalLayout.createSequentialGroup()
-                .addGap(20, 20, 20)
+        jpCadastrarConcursoLayout.setVerticalGroup(
+            jpCadastrarConcursoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jpCadastrarConcursoLayout.createSequentialGroup()
+                .addGap(24, 24, 24)
                 .addComponent(lblTitulo, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(19, 19, 19)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(pInformacoes, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(37, Short.MAX_VALUE))
+                .addContainerGap(62, Short.MAX_VALUE))
         );
 
-        jtpCadastrarConcurso.addTab("Concurso", jtpPrincipal);
+        jtpCadastrarConcurso.addTab("Cadastrar Concurso", jpCadastrarConcurso);
 
         lblCargoEmpregoCadCon.setText("Cargo/Emprego:");
 
@@ -473,11 +490,8 @@ public final class frmCadastrarConcurso extends javax.swing.JInternalFrame
         lblNumeroConcursoTelaCargoEmprego.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
         lblNumeroConcursoTelaCargoEmprego.setText("Nº ");
 
-        lblCadastrarCargoEmprego.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
-        lblCadastrarCargoEmprego.setText("CADASTRAR CARGO/EMPREGO");
-
         lblConcurso.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
-        lblConcurso.setText("CONCURSO");
+        lblConcurso.setText("CONCURSO:");
 
         lblbarra.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
         lblbarra.setText("/");
@@ -485,12 +499,17 @@ public final class frmCadastrarConcurso extends javax.swing.JInternalFrame
         lblAnoConcursoTelaCargoEmprego.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
         lblAnoConcursoTelaCargoEmprego.setText("ANO");
 
+        lblBancaConcurso.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
+        lblBancaConcurso.setText("BANCA");
+
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
         jPanel1Layout.setHorizontalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel1Layout.createSequentialGroup()
-                .addContainerGap()
+                .addGap(128, 128, 128)
+                .addComponent(lblBancaConcurso)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(lblConcurso)
                 .addGap(18, 18, 18)
                 .addComponent(lblNumeroConcursoTelaCargoEmprego)
@@ -498,40 +517,38 @@ public final class frmCadastrarConcurso extends javax.swing.JInternalFrame
                 .addComponent(lblbarra)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(lblAnoConcursoTelaCargoEmprego)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(lblCadastrarCargoEmprego)
-                .addGap(21, 21, 21))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel1Layout.createSequentialGroup()
-                .addContainerGap()
+                .addGap(15, 15, 15)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(lblCadastrarCargoEmprego)
-                    .addComponent(lblNumeroConcursoTelaCargoEmprego)
+                    .addComponent(lblBancaConcurso)
                     .addComponent(lblConcurso)
+                    .addComponent(lblNumeroConcursoTelaCargoEmprego)
                     .addComponent(lblbarra)
                     .addComponent(lblAnoConcursoTelaCargoEmprego))
-                .addContainerGap(16, Short.MAX_VALUE))
+                .addContainerGap(15, Short.MAX_VALUE))
         );
 
         cmbQuantidadeVagasCadCon.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "CR", "1", "2", "3", "4", "5", "6", "7", "8", "9", "10" }));
 
-        javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
-        jPanel2.setLayout(jPanel2Layout);
-        jPanel2Layout.setHorizontalGroup(
-            jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel2Layout.createSequentialGroup()
+        javax.swing.GroupLayout jpCadastrarCargoEmpregoLayout = new javax.swing.GroupLayout(jpCadastrarCargoEmprego);
+        jpCadastrarCargoEmprego.setLayout(jpCadastrarCargoEmpregoLayout);
+        jpCadastrarCargoEmpregoLayout.setHorizontalGroup(
+            jpCadastrarCargoEmpregoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jpCadastrarCargoEmpregoLayout.createSequentialGroup()
                 .addGap(29, 29, 29)
-                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                .addGroup(jpCadastrarCargoEmpregoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                     .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(jScrollPane1, javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(jPanel2Layout.createSequentialGroup()
-                        .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(jpCadastrarCargoEmpregoLayout.createSequentialGroup()
+                        .addGroup(jpCadastrarCargoEmpregoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(lblCargoEmpregoCadCon)
                             .addComponent(cmbCargoEmpregoCadCon, javax.swing.GroupLayout.PREFERRED_SIZE, 253, javax.swing.GroupLayout.PREFERRED_SIZE))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                        .addGroup(jpCadastrarCargoEmpregoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(lblQuantidadeVagasCadCon, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                             .addComponent(cmbQuantidadeVagasCadCon, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
@@ -540,48 +557,130 @@ public final class frmCadastrarConcurso extends javax.swing.JInternalFrame
                         .addComponent(btnRemoverCadCon)))
                 .addGap(18, 18, 18))
         );
-        jPanel2Layout.setVerticalGroup(
-            jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel2Layout.createSequentialGroup()
+        jpCadastrarCargoEmpregoLayout.setVerticalGroup(
+            jpCadastrarCargoEmpregoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jpCadastrarCargoEmpregoLayout.createSequentialGroup()
                 .addGap(5, 5, 5)
                 .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(jPanel2Layout.createSequentialGroup()
+                .addGroup(jpCadastrarCargoEmpregoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(jpCadastrarCargoEmpregoLayout.createSequentialGroup()
                         .addComponent(lblCargoEmpregoCadCon)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                        .addGroup(jpCadastrarCargoEmpregoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(cmbCargoEmpregoCadCon)
                             .addComponent(cmbQuantidadeVagasCadCon, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                    .addGroup(jPanel2Layout.createSequentialGroup()
+                    .addGroup(jpCadastrarCargoEmpregoLayout.createSequentialGroup()
                         .addComponent(lblQuantidadeVagasCadCon)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                        .addGroup(jpCadastrarCargoEmpregoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(btnRemoverCadCon, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                             .addComponent(btnCadastrarCadCon))))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 136, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(657, 657, 657))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 147, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(635, 635, 635))
         );
 
-        jtpCadastrarConcurso.addTab("Cargo/Emprego", jPanel2);
+        jtpCadastrarConcurso.addTab("Cadastrar Cargo/Emprego", jpCadastrarCargoEmprego);
+
+        jTable1.setModel(new javax.swing.table.DefaultTableModel(
+            new Object [][]
+            {
+                {null, null},
+                {null, null},
+                {null, null},
+                {null, null}
+            },
+            new String []
+            {
+                "Cargo/Emprego", "Cadastrar data da Homologação"
+            }
+        ));
+        jScrollPane2.setViewportView(jTable1);
+
+        lblNumeroConcursoTelaCargoEmprego2.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
+        lblNumeroConcursoTelaCargoEmprego2.setText("Nº ");
+
+        lblConcurso2.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
+        lblConcurso2.setText("CONCURSO:");
+
+        lblbarra2.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
+        lblbarra2.setText("/");
+
+        lblAnoConcursoTelaCargoEmprego2.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
+        lblAnoConcursoTelaCargoEmprego2.setText("ANO");
+
+        lblBancaConcurso2.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
+        lblBancaConcurso2.setText("BANCA");
+
+        javax.swing.GroupLayout jPanel3Layout = new javax.swing.GroupLayout(jPanel3);
+        jPanel3.setLayout(jPanel3Layout);
+        jPanel3Layout.setHorizontalGroup(
+            jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel3Layout.createSequentialGroup()
+                .addGap(137, 137, 137)
+                .addComponent(lblBancaConcurso2)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(lblConcurso2)
+                .addGap(18, 18, 18)
+                .addComponent(lblNumeroConcursoTelaCargoEmprego2)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(lblbarra2)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(lblAnoConcursoTelaCargoEmprego2)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+        );
+        jPanel3Layout.setVerticalGroup(
+            jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel3Layout.createSequentialGroup()
+                .addGap(14, 14, 14)
+                .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(lblBancaConcurso2)
+                    .addComponent(lblConcurso2)
+                    .addComponent(lblNumeroConcursoTelaCargoEmprego2)
+                    .addComponent(lblbarra2)
+                    .addComponent(lblAnoConcursoTelaCargoEmprego2))
+                .addContainerGap(16, Short.MAX_VALUE))
+        );
+
+        javax.swing.GroupLayout jpCadastrarHomologacaoLayout = new javax.swing.GroupLayout(jpCadastrarHomologacao);
+        jpCadastrarHomologacao.setLayout(jpCadastrarHomologacaoLayout);
+        jpCadastrarHomologacaoLayout.setHorizontalGroup(
+            jpCadastrarHomologacaoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jpCadastrarHomologacaoLayout.createSequentialGroup()
+                .addGroup(jpCadastrarHomologacaoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(jpCadastrarHomologacaoLayout.createSequentialGroup()
+                        .addContainerGap()
+                        .addComponent(jScrollPane2, javax.swing.GroupLayout.DEFAULT_SIZE, 599, Short.MAX_VALUE))
+                    .addGroup(jpCadastrarHomologacaoLayout.createSequentialGroup()
+                        .addGap(20, 20, 20)
+                        .addComponent(jPanel3, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
+                .addContainerGap())
+        );
+        jpCadastrarHomologacaoLayout.setVerticalGroup(
+            jpCadastrarHomologacaoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jpCadastrarHomologacaoLayout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(jPanel3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jScrollPane2, javax.swing.GroupLayout.DEFAULT_SIZE, 211, Short.MAX_VALUE)
+                .addContainerGap())
+        );
+
+        jtpCadastrarConcurso.addTab("Cadastrar Homologação", jpCadastrarHomologacao);
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(layout.createSequentialGroup()
-                .addContainerGap()
-                .addComponent(jtpCadastrarConcurso)
-                .addContainerGap())
+            .addComponent(jtpCadastrarConcurso)
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(layout.createSequentialGroup()
-                .addContainerGap()
-                .addComponent(jtpCadastrarConcurso, javax.swing.GroupLayout.PREFERRED_SIZE, 293, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+            .addComponent(jtpCadastrarConcurso, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 315, Short.MAX_VALUE)
         );
+
+        getAccessibleContext().setAccessibleName("");
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
@@ -667,24 +766,39 @@ public final class frmCadastrarConcurso extends javax.swing.JInternalFrame
     private javax.swing.JComboBox<String> cmbSituacaoConcurso;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
+    private javax.swing.JPanel jPanel3;
     private javax.swing.JScrollPane jScrollPane1;
+    private javax.swing.JScrollPane jScrollPane2;
+    private javax.swing.JTable jTable1;
+    private javax.swing.JPanel jpCadastrarCargoEmprego;
+    private javax.swing.JPanel jpCadastrarConcurso;
+    private javax.swing.JPanel jpCadastrarHomologacao;
     private javax.swing.JTabbedPane jtpCadastrarConcurso;
-    private javax.swing.JPanel jtpPrincipal;
     private javax.swing.JLabel lblAnoConcurso;
     private javax.swing.JLabel lblAnoConcursoTelaCargoEmprego;
+    private javax.swing.JLabel lblAnoConcursoTelaCargoEmprego1;
+    private javax.swing.JLabel lblAnoConcursoTelaCargoEmprego2;
     private javax.swing.JLabel lblBanca;
-    private javax.swing.JLabel lblCadastrarCargoEmprego;
+    private javax.swing.JLabel lblBancaConcurso;
+    private javax.swing.JLabel lblBancaConcurso1;
+    private javax.swing.JLabel lblBancaConcurso2;
     private java.awt.Label lblCadastrarConcurso;
     private javax.swing.JLabel lblCargoEmpregoCadCon;
     private javax.swing.JLabel lblCodigoConcurso;
     private javax.swing.JLabel lblConcurso;
+    private javax.swing.JLabel lblConcurso1;
+    private javax.swing.JLabel lblConcurso2;
     private javax.swing.JLabel lblNumeroConcurso;
     private javax.swing.JLabel lblNumeroConcursoTelaCargoEmprego;
+    private javax.swing.JLabel lblNumeroConcursoTelaCargoEmprego1;
+    private javax.swing.JLabel lblNumeroConcursoTelaCargoEmprego2;
     private javax.swing.JLabel lblPrefeitoResponsavel;
     private javax.swing.JLabel lblQuantidadeVagasCadCon;
     private javax.swing.JLabel lblSituacaoConcurso;
     private javax.swing.JLabel lblTitulo;
     private javax.swing.JLabel lblbarra;
+    private javax.swing.JLabel lblbarra1;
+    private javax.swing.JLabel lblbarra2;
     private javax.swing.JPanel pInformacoes;
     private javax.swing.JTable tabelaCadastroCargosEmpregos;
     private javax.swing.JTextField txtAnoConcurso;

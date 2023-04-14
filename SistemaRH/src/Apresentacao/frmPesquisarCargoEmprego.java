@@ -318,11 +318,11 @@ public class frmPesquisarCargoEmprego extends javax.swing.JDialog
                 model.addRow(new Object[]
                 {
                     lista.get(num).getCodigoCargoEmprego(),
-                    lista.get(num).getNomeCargoEmprego(),
-                    lista.get(num).getRegimeJuridico(),
+                    lista.get(num).getDescricaoCargoEmprego(),
+                    lista.get(num).getRegimeJuridicoCargoEmprego(),
                     lista.get(num).getNumeroLeiCriaCargoEmprego(),                    
                     lista.get(num).getDataLeiCriaCargoEmprego(),
-                    lista.get(num).getReferenciaSalarial()
+                    lista.get(num).getReferenciaSalarialCargoEmprego()
                 });
                 setLista(lista);
 

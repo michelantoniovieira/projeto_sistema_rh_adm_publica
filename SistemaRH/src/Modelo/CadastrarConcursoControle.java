@@ -88,7 +88,7 @@ public class CadastrarConcursoControle extends CadastrarConcursoDTO
         if (inclusaoExclusao.equals("inclusao"))
         {
             ListarComboBox pesquisarCodigoCargoEmprego = new ListarComboBox();
-            pesquisarCodigoCargoEmprego.pesquisarInformacaoNoBancoDeDados("cargo_emprego", "codigo_cargo_emprego", "nome_cargo_emprego", getCargoEmpregoSelecionado());
+            pesquisarCodigoCargoEmprego.pesquisarInformacaoNoBancoDeDados("cargo_emprego", "codigo_cargo_emprego", "descricao_cargo_emprego", getCargoEmpregoSelecionado());
 
             //comando para tirar os conchetes em volta do numero para cadastrar no banco de dados
             String str = pesquisarCodigoCargoEmprego.getRetornoInformacaoBancoDeDados().toString();
@@ -106,7 +106,7 @@ public class CadastrarConcursoControle extends CadastrarConcursoDTO
         else if (inclusaoExclusao.equals("exclusao"))
         {
             ListarComboBox pesquisarCodigoCargoEmprego = new ListarComboBox();
-            pesquisarCodigoCargoEmprego.pesquisarInformacaoNoBancoDeDados("cargo_emprego", "codigo_cargo_emprego", "nome_cargo_emprego", getCargoEmpregoSelecionado());
+            pesquisarCodigoCargoEmprego.pesquisarInformacaoNoBancoDeDados("cargo_emprego", "codigo_cargo_emprego", "descricao_cargo_emprego", getCargoEmpregoSelecionado());
 
             //comando para tirar os conchetes em volta do numero para cadastrar no banco de dados
             String str = pesquisarCodigoCargoEmprego.getRetornoInformacaoBancoDeDados().toString();
@@ -119,7 +119,7 @@ public class CadastrarConcursoControle extends CadastrarConcursoDTO
         else if (inclusaoExclusao.equals("alteracao"))
         {
             ListarComboBox pesquisarCodigoCargoEmprego = new ListarComboBox();
-            pesquisarCodigoCargoEmprego.pesquisarInformacaoNoBancoDeDados("cargo_emprego", "codigo_cargo_emprego", "nome_cargo_emprego", getCargoEmpregoSelecionado());
+            pesquisarCodigoCargoEmprego.pesquisarInformacaoNoBancoDeDados("cargo_emprego", "codigo_cargo_emprego", "descricao_cargo_emprego", getCargoEmpregoSelecionado());
 
             //comando para tirar os conchetes em volta do numero para cadastrar no banco de dados
             String str = pesquisarCodigoCargoEmprego.getRetornoInformacaoBancoDeDados().toString();
@@ -127,7 +127,7 @@ public class CadastrarConcursoControle extends CadastrarConcursoDTO
             this.setCodigoCargoEmpregoSelecionado(Integer.parseInt(str));
 
             PopularCmbDAO alterarCargoEmpregoSelecionado = new PopularCmbDAO();
-            alterarCargoEmpregoSelecionado.alterarInformacaoBancoDeDados("listadecargosempregos", this.getCodigo_concurso(), this.getCodigoCargoEmpregoSelecionado(), Integer.parseInt(this.getQuantidade_vagas()));
+            alterarCargoEmpregoSelecionado.alterarInformacaoBancoDeDados("listadecargosempregos", this.getCodigo_concurso(), this.getCodigoCargoEmpregoSelecionado(),this.getQuantidade_vagas());
         }
     }
 

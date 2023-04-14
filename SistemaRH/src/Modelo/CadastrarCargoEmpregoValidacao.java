@@ -12,8 +12,8 @@ public class CadastrarCargoEmpregoValidacao extends CadastrarCargoEmpregoDTO
 
     public CadastrarCargoEmpregoValidacao(String nomeCargoEmprego, String regimeJuridico, String numeroLeiCargoEmprego, String dataLeiCargoEmprego)
     {
-        this.setNomeCargoEmprego(nomeCargoEmprego);
-        this.setRegimeJuridico(regimeJuridico);
+        this.setDescricaoCargoEmprego(nomeCargoEmprego);
+        this.setRegimeJuridicoCargoEmprego(regimeJuridico);
         this.setNumeroLeiCriaCargoEmprego(numeroLeiCargoEmprego);
         this.setDataLeiCriaCargoEmprego(dataLeiCargoEmprego);
         validar();

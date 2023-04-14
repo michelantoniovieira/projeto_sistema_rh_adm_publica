@@ -51,11 +51,13 @@ public class PesquisarCargoEmpregoDAO
             {
                 PesquisarCargoEmpregoDTO objPesquisarCargoEmpregoDTO = new PesquisarCargoEmpregoDTO();
                 objPesquisarCargoEmpregoDTO.setCodigoCargoEmprego(rs.getInt("codigo_cargo_emprego"));
-                objPesquisarCargoEmpregoDTO.setNomeCargoEmprego(rs.getString("nome_cargo_emprego"));
+                objPesquisarCargoEmpregoDTO.setDescricaoCargoEmprego(rs.getString("descricao_cargo_emprego"));
+                objPesquisarCargoEmpregoDTO.setRegimeJuridicoCargoEmprego(rs.getString("regime_juridico_cargo_emprego"));
+                
                 objPesquisarCargoEmpregoDTO.setNumeroLeiCriaCargoEmprego(rs.getString("numero_lei_cria_cargo_emprego"));
-                objPesquisarCargoEmpregoDTO.setRegimeJuridico(rs.getString("regime_juridico"));
+                
                 objPesquisarCargoEmpregoDTO.setDataLeiCriaCargoEmprego(rs.getString("data_lei_cria_cargo_emprego"));
-                objPesquisarCargoEmpregoDTO.setReferenciaSalarial(rs.getString("referencia_salarial"));
+                objPesquisarCargoEmpregoDTO.setReferenciaSalarialCargoEmprego(rs.getString("referencia_salarial_cargo_emprego"));
 
                 lista.add(objPesquisarCargoEmpregoDTO);
             }

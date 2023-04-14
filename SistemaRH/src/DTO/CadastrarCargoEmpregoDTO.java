@@ -1,16 +1,20 @@
-
 package DTO;
 
-public class CadastrarCargoEmpregoDTO 
+public class CadastrarCargoEmpregoDTO
 {
-    
-    private int codigoCargoEmprego;
-    private String nomeCargoEmprego;
-    private String regimeJuridico;
-    private String numeroLeiCriaCargoEmprego;
-    private String dataLeiCriaCargoEmprego;  
-    private String referenciaSalarial;
+
     private String mensagem;
+
+    private int codigoCargoEmprego;
+    private String descricaoCargoEmprego;
+    private String regimeJuridicoCargoEmprego;
+    private String referenciaSalarialCargoEmprego;
+    private String numeroLeiCriaCargoEmprego;
+    private String dataLeiCriaCargoEmprego;
+    private String cboCargoEmprego;
+    private String requisitosProvimentoCargoEmprego;
+    private String escolariadeExigidaCargoEmprego;
+    private String valorSalarioCargoEmprego;
 
     public int getCodigoCargoEmprego()
     {
@@ -22,24 +26,24 @@ public class CadastrarCargoEmpregoDTO
         this.codigoCargoEmprego = codigoCargoEmprego;
     }
 
-    public String getNomeCargoEmprego()
+    public String getDescricaoCargoEmprego()
     {
-        return nomeCargoEmprego;
+        return descricaoCargoEmprego;
     }
 
-    public void setNomeCargoEmprego(String nomeCargoEmprego)
+    public void setDescricaoCargoEmprego(String descricaoCargoEmprego)
     {
-        this.nomeCargoEmprego = nomeCargoEmprego;
+        this.descricaoCargoEmprego = descricaoCargoEmprego;
     }
 
-    public String getRegimeJuridico()
+    public String getRegimeJuridicoCargoEmprego()
     {
-        return regimeJuridico;
+        return regimeJuridicoCargoEmprego;
     }
 
-    public void setRegimeJuridico(String regimeJuridico)
+    public void setRegimeJuridicoCargoEmprego(String regimeJuridicoCargoEmprego)
     {
-        this.regimeJuridico = regimeJuridico;
+        this.regimeJuridicoCargoEmprego = regimeJuridicoCargoEmprego;
     }
 
     public String getNumeroLeiCriaCargoEmprego()
@@ -62,16 +66,6 @@ public class CadastrarCargoEmpregoDTO
         this.dataLeiCriaCargoEmprego = dataLeiCriaCargoEmprego;
     }
 
-    public String getReferenciaSalarial()
-    {
-        return referenciaSalarial;
-    }
-
-    public void setReferenciaSalarial(String referenciaSalarial)
-    {
-        this.referenciaSalarial = referenciaSalarial;
-    }    
-    
     public String getMensagem()
     {
         return mensagem;
@@ -81,5 +75,55 @@ public class CadastrarCargoEmpregoDTO
     {
         this.mensagem = mensagem;
     }
-    
+
+    public String getReferenciaSalarialCargoEmprego()
+    {
+        return referenciaSalarialCargoEmprego;
+    }
+
+    public void setReferenciaSalarialCargoEmprego(String referenciaSalarialCargoEmprego)
+    {
+        this.referenciaSalarialCargoEmprego = referenciaSalarialCargoEmprego;
+    }
+
+    public String getRequisitosProvimentoCargoEmprego()
+    {
+        return requisitosProvimentoCargoEmprego;
+    }
+
+    public void setRequisitosProvimentoCargoEmprego(String requisitosProvimentoCargoEmprego)
+    {
+        this.requisitosProvimentoCargoEmprego = requisitosProvimentoCargoEmprego;
+    }
+
+    public String getEscolariadeExigidaCargoEmprego()
+    {
+        return escolariadeExigidaCargoEmprego;
+    }
+
+    public void setEscolariadeExigidaCargoEmprego(String escolariadeExigidaCargoEmprego)
+    {
+        this.escolariadeExigidaCargoEmprego = escolariadeExigidaCargoEmprego;
+    }
+
+    public String getValorSalarioCargoEmprego()
+    {
+        return valorSalarioCargoEmprego;
+    }
+
+    public void setValorSalarioCargoEmprego(String valorSalarioCargoEmprego)
+    {
+        this.valorSalarioCargoEmprego = valorSalarioCargoEmprego;
+    }
+
+    public String getCboCargoEmprego()
+    {
+        return cboCargoEmprego;
+    }
+
+    public void setCboCargoEmprego(String cboCargoEmprego)
+    {
+        this.cboCargoEmprego = cboCargoEmprego;
+    }
+
 }

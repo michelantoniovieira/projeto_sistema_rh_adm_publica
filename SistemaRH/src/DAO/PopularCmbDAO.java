@@ -93,14 +93,14 @@ public class PopularCmbDAO
 
         } catch (SQLException erro)
         {
-            JOptionPane.showMessageDialog(null, "EcluirInformacaoTabela: " + erro);
+            JOptionPane.showMessageDialog(null, "ExcluirInformacaoTabela: " + erro);
         } finally
         {
             ConexaoDAO.encerrarConexao(con, pstm);
         }
     }
     
-    public void alterarInformacaoBancoDeDados(String informarTabela, int informarAtributo, int informarAtributoII, int informarAtributoIII)
+    public void alterarInformacaoBancoDeDados(String informarTabela, int informarAtributo, int informarAtributoII, String informarAtributoIII)
     {
         String sql;
         sql = "UPDATE " + informarTabela + " SET quantidade_vagas = ? WHERE fk_codigo_concurso = ? AND fk_codigo_cargo_emprego = ? ";
@@ -110,7 +110,7 @@ public class PopularCmbDAO
         try
         {
             pstm = con.prepareStatement(sql);
-            pstm.setInt(1, informarAtributoIII);
+            pstm.setString(1, informarAtributoIII);
             pstm.setInt(2, informarAtributo);
             pstm.setInt(3, informarAtributoII);
             pstm.executeUpdate();

@@ -914,8 +914,8 @@ public class frmPrincipal extends javax.swing.JFrame
             if (!frmCCE.getCodigoCargoEmprego().equals(""))
             {
                 frmCCE.setCodigoCargoEmprego(String.valueOf(controle.getCodigoCargoEmprego()));
-                frmCCE.setNomeCargoEmprego(String.valueOf(controle.getNomeCargoEmprego()));
-                frmCCE.setRegimeJuridico(String.valueOf(controle.getRegimeJuridico()));
+                frmCCE.setNomeCargoEmprego(String.valueOf(controle.getDescricaoCargoEmprego()));
+                frmCCE.setRegimeJuridico(String.valueOf(controle.getRegimeJuridicoCargoEmprego()));
                 frmCCE.setNumeroLeiCriaCargoEmprego(String.valueOf(controle.getNumeroLeiCriaCargoEmprego()));
                 frmCCE.setDataLeiCriaCargoEmprego(String.valueOf(controle.getDataLeiCriaCargoEmprego()));
                 frmCCE.setReferenciaSalarial(String.valueOf(controle.getReferenciaSalarial()));
@@ -1111,11 +1111,11 @@ public class frmPrincipal extends javax.swing.JFrame
                 {
                     //coloco na tela de cadastro de concurso, seto na variavel a lista e o index puxado direto da tela frmPesquisarConcurso 
                     frmCCE.setCodigoCargoEmprego(String.valueOf(frmPCE.getLista().get(frmPCE.getIndex()).getCodigoCargoEmprego()));
-                    frmCCE.setNomeCargoEmprego(String.valueOf(frmPCE.getLista().get(frmPCE.getIndex()).getNomeCargoEmprego()));
-                    frmCCE.setRegimeJuridico(String.valueOf(frmPCE.getLista().get(frmPCE.getIndex()).getRegimeJuridico()));
+                    frmCCE.setNomeCargoEmprego(String.valueOf(frmPCE.getLista().get(frmPCE.getIndex()).getDescricaoCargoEmprego()));
+                    frmCCE.setRegimeJuridico(String.valueOf(frmPCE.getLista().get(frmPCE.getIndex()).getRegimeJuridicoCargoEmprego()));
                     frmCCE.setNumeroLeiCriaCargoEmprego(String.valueOf(frmPCE.getLista().get(frmPCE.getIndex()).getNumeroLeiCriaCargoEmprego()));
                     frmCCE.setDataLeiCriaCargoEmprego(String.valueOf(frmPCE.getLista().get(frmPCE.getIndex()).getDataLeiCriaCargoEmprego()));
-                    frmCCE.setReferenciaSalarial(String.valueOf(frmPCE.getLista().get(frmPCE.getIndex()).getReferenciaSalarial()));
+                    frmCCE.setReferenciaSalarial(String.valueOf(frmPCE.getLista().get(frmPCE.getIndex()).getReferenciaSalarialCargoEmprego()));
 
                     frmCCE.preencherCampos();
                     frmCCE.desativarCampos();

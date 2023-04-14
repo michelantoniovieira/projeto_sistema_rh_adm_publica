@@ -17,11 +17,15 @@ public class PesquisarCargoEmpregoDTO
     private String comandoSqlParaPesquisa;
 
     private int codigoCargoEmprego;
-    private String nomeCargoEmprego;
-    private String regimeJuridico;
+    private String descricaoCargoEmprego;
+    private String regimeJuridicoCargoEmprego;
+    private String referenciaSalarialCargoEmprego;
     private String numeroLeiCriaCargoEmprego;
     private String dataLeiCriaCargoEmprego;
-    private String referenciaSalarial;
+    private String cboCargoEmprego;
+    private String requisitosProvimentoCargoEmprego;
+    private String escolariadeExigidaCargoEmprego;
+    private String valorSalarioCargoEmprego;
 
     public int getCodigoCargoEmprego()
     {
@@ -73,24 +77,24 @@ public class PesquisarCargoEmpregoDTO
         this.comandoSqlParaPesquisa = comandoSqlParaPesquisa;
     }
 
-    public String getNomeCargoEmprego()
+    public String getDescricaoCargoEmprego()
     {
-        return nomeCargoEmprego;
+        return descricaoCargoEmprego;
     }
 
-    public void setNomeCargoEmprego(String nomeCargoEmprego)
+    public void setDescricaoCargoEmprego(String descricaoCargoEmprego)
     {
-        this.nomeCargoEmprego = nomeCargoEmprego;
+        this.descricaoCargoEmprego = descricaoCargoEmprego;
     }
 
-    public String getRegimeJuridico()
+    public String getRegimeJuridicoCargoEmprego()
     {
-        return regimeJuridico;
+        return regimeJuridicoCargoEmprego;
     }
 
-    public void setRegimeJuridico(String regimeJuridico)
+    public void setRegimeJuridicoCargoEmprego(String regimeJuridicoCargoEmprego)
     {
-        this.regimeJuridico = regimeJuridico;
+        this.regimeJuridicoCargoEmprego = regimeJuridicoCargoEmprego;
     }
 
     public String getNumeroLeiCriaCargoEmprego()
@@ -113,15 +117,54 @@ public class PesquisarCargoEmpregoDTO
         this.dataLeiCriaCargoEmprego = dataLeiCriaCargoEmprego;
     }
 
-    public String getReferenciaSalarial()
+    public String getReferenciaSalarialCargoEmprego()
     {
-        return referenciaSalarial;
+        return referenciaSalarialCargoEmprego;
     }
 
-    public void setReferenciaSalarial(String referenciaSalarial)
+    public void setReferenciaSalarialCargoEmprego(String referenciaSalarialCargoEmprego)
     {
-        this.referenciaSalarial = referenciaSalarial;
+        this.referenciaSalarialCargoEmprego = referenciaSalarialCargoEmprego;
     }
-    
-    
+
+    public String getCboCargoEmprego()
+    {
+        return cboCargoEmprego;
+    }
+
+    public void setCboCargoEmprego(String cboCargoEmprego)
+    {
+        this.cboCargoEmprego = cboCargoEmprego;
+    }
+
+    public String getRequisitosProvimentoCargoEmprego()
+    {
+        return requisitosProvimentoCargoEmprego;
+    }
+
+    public void setRequisitosProvimentoCargoEmprego(String requisitosProvimentoCargoEmprego)
+    {
+        this.requisitosProvimentoCargoEmprego = requisitosProvimentoCargoEmprego;
+    }
+
+    public String getEscolariadeExigidaCargoEmprego()
+    {
+        return escolariadeExigidaCargoEmprego;
+    }
+
+    public void setEscolariadeExigidaCargoEmprego(String escolariadeExigidaCargoEmprego)
+    {
+        this.escolariadeExigidaCargoEmprego = escolariadeExigidaCargoEmprego;
+    }
+
+    public String getValorSalarioCargoEmprego()
+    {
+        return valorSalarioCargoEmprego;
+    }
+
+    public void setValorSalarioCargoEmprego(String valorSalarioCargoEmprego)
+    {
+        this.valorSalarioCargoEmprego = valorSalarioCargoEmprego;
+    }
+
 }

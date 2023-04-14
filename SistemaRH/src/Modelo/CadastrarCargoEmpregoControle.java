@@ -16,13 +16,13 @@ public class CadastrarCargoEmpregoControle extends CadastrarCargoEmpregoDTO
     public CadastrarCargoEmpregoControle(String nomeCargoEmprego)
     {
         super();
-        this.setNomeCargoEmprego(nomeCargoEmprego);
+        this.setDescricaoCargoEmprego(nomeCargoEmprego);
     }
 
     public CadastrarCargoEmpregoControle(String nomeCargoEmprego, String regimeJuridico, String numeroLeiCargoEmprego, String dataLeiCargoEmprego, String referenciaSalarial)
     {
-        this.setNomeCargoEmprego(nomeCargoEmprego);
-        this.setRegimeJuridico(regimeJuridico);
+        this.setDescricaoCargoEmprego(nomeCargoEmprego);
+        this.setRegimeJuridicoCargoEmprego(regimeJuridico);
         this.setNumeroLeiCriaCargoEmprego(numeroLeiCargoEmprego);
         this.setDataLeiCriaCargoEmprego(dataLeiCargoEmprego);
         this.setReferenciaSalarial(referenciaSalarial);
@@ -31,8 +31,8 @@ public class CadastrarCargoEmpregoControle extends CadastrarCargoEmpregoDTO
     public CadastrarCargoEmpregoControle(int codigoCargoEmprego, String nomeCargoEmprego, String regimeJuridico, String numeroLeiCargoEmprego, String dataLeiCargoEmprego, String referenciaSalarial)
     {
         this.setCodigoCargoEmprego(codigoCargoEmprego);
-        this.setNomeCargoEmprego(nomeCargoEmprego);
-        this.setRegimeJuridico(regimeJuridico);
+        this.setDescricaoCargoEmprego(nomeCargoEmprego);
+        this.setRegimeJuridicoCargoEmprego(regimeJuridico);
         this.setNumeroLeiCriaCargoEmprego(numeroLeiCargoEmprego);
         this.setDataLeiCriaCargoEmprego(dataLeiCargoEmprego);
         this.setReferenciaSalarial(referenciaSalarial);
@@ -40,15 +40,15 @@ public class CadastrarCargoEmpregoControle extends CadastrarCargoEmpregoDTO
 
     public void cadastrar()
     {
-        CadastrarCargoEmpregoValidacao validacao = new CadastrarCargoEmpregoValidacao(this.getNomeCargoEmprego(), this.getRegimeJuridico(), this.getNomeCargoEmprego(), this.getDataLeiCriaCargoEmprego());
+        CadastrarCargoEmpregoValidacao validacao = new CadastrarCargoEmpregoValidacao(this.getDescricaoCargoEmprego(), this.getRegimeJuridicoCargoEmprego(), this.getDescricaoCargoEmprego(), this.getDataLeiCriaCargoEmprego());
         this.setMensagem(validacao.getMensagem());
         if (validacao.getMensagem().equals("ok"))
         {
             try
             {
                 CadastrarCargoEmpregoDTO objcadastrarcargoempregoDTO = new CadastrarCargoEmpregoDTO();
-                objcadastrarcargoempregoDTO.setNomeCargoEmprego(this.getNomeCargoEmprego());
-                objcadastrarcargoempregoDTO.setRegimeJuridico(this.getRegimeJuridico());
+                objcadastrarcargoempregoDTO.setDescricaoCargoEmprego(this.getDescricaoCargoEmprego());
+                objcadastrarcargoempregoDTO.setRegimeJuridicoCargoEmprego(this.getRegimeJuridicoCargoEmprego());
                 objcadastrarcargoempregoDTO.setNumeroLeiCriaCargoEmprego(this.getNumeroLeiCriaCargoEmprego());
                 objcadastrarcargoempregoDTO.setDataLeiCriaCargoEmprego(this.getDataLeiCriaCargoEmprego());
                 objcadastrarcargoempregoDTO.setReferenciaSalarial(this.getReferenciaSalarial());
@@ -88,8 +88,8 @@ public class CadastrarCargoEmpregoControle extends CadastrarCargoEmpregoDTO
         {
             //estou passo o indice para quando apertar os botões primeiro, anterior, proximo e ultimo conseguir navegar entre as opções
             this.setCodigoCargoEmprego(obj.get(index).getCodigoCargoEmprego());
-            this.setNomeCargoEmprego(obj.get(index).getNomeCargoEmprego());
-            this.setRegimeJuridico(obj.get(index).getRegimeJuridico());
+            this.setDescricaoCargoEmprego(obj.get(index).getDescricaoCargoEmprego());
+            this.setRegimeJuridicoCargoEmprego(obj.get(index).getRegimeJuridicoCargoEmprego());
             this.setNumeroLeiCriaCargoEmprego(obj.get(index).getNumeroLeiCriaCargoEmprego());
             this.setDataLeiCriaCargoEmprego(obj.get(index).getDataLeiCriaCargoEmprego());
             this.setReferenciaSalarial(obj.get(index).getReferenciaSalarial());
@@ -101,8 +101,8 @@ public class CadastrarCargoEmpregoControle extends CadastrarCargoEmpregoDTO
     {
         CadastrarCargoEmpregoDTO objcadastrarcargoemprego = new CadastrarCargoEmpregoDTO();
         objcadastrarcargoemprego.setCodigoCargoEmprego(this.getCodigoCargoEmprego());
-        objcadastrarcargoemprego.setNomeCargoEmprego(this.getNomeCargoEmprego());
-        objcadastrarcargoemprego.setRegimeJuridico(this.getRegimeJuridico());
+        objcadastrarcargoemprego.setDescricaoCargoEmprego(this.getDescricaoCargoEmprego());
+        objcadastrarcargoemprego.setRegimeJuridicoCargoEmprego(this.getRegimeJuridicoCargoEmprego());
         objcadastrarcargoemprego.setNumeroLeiCriaCargoEmprego(this.getNumeroLeiCriaCargoEmprego());
         objcadastrarcargoemprego.setDataLeiCriaCargoEmprego(this.getDataLeiCriaCargoEmprego());
         objcadastrarcargoemprego.setReferenciaSalarial(this.getReferenciaSalarial());
@@ -114,7 +114,7 @@ public class CadastrarCargoEmpregoControle extends CadastrarCargoEmpregoDTO
     public void excluir()
     {
         CadastrarCargoEmpregoDTO objcadastrarcargoempregoDTO = new CadastrarCargoEmpregoDTO();
-        objcadastrarcargoempregoDTO.setNomeCargoEmprego(this.getNomeCargoEmprego());
+        objcadastrarcargoempregoDTO.setDescricaoCargoEmprego(this.getDescricaoCargoEmprego());
 
         CadastrarCargoEmpregoDAO excluir = new CadastrarCargoEmpregoDAO();
         excluir.delete(objcadastrarcargoempregoDTO);
