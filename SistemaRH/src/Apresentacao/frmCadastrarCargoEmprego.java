@@ -6,7 +6,13 @@ package Apresentacao;
 
 import DTO.PesquisarBancaDTO;
 import DTO.PesquisarCargoEmpregoDTO;
+import Modelo.CentralizarJanela;
+import java.awt.Dimension;
+import java.awt.Point;
+import java.awt.Toolkit;
 import java.util.ArrayList;
+import javax.swing.event.InternalFrameAdapter;
+import javax.swing.event.InternalFrameEvent;
 
 /**
  *
@@ -32,12 +38,12 @@ public class frmCadastrarCargoEmprego extends javax.swing.JInternalFrame
     public void gravarRegistro()
     {
         setCodigoCargoEmprego(txtCodigoCargoEmprego.getText());
-        setNomeCargoEmprego(txtNomeCargoEmprego.getText());
+        setNomeCargoEmprego(txtDescricaoCargoEmprego.getText());
         itemSelecionadoNoComboBox = cmbRegimeJuridico.getSelectedItem().toString();
         setRegimeJuridico(itemSelecionadoNoComboBox);
-        setNumeroLeiCriaCargoEmprego(txtNumero.getText());
+        setNumeroLeiCriaCargoEmprego(txtNumeroLeiCriaCargoEmprego.getText());
         setDataLeiCriaCargoEmprego(txtDataLeiCriacaoCargoEmprego.getText());
-        setReferenciaSalarial(txtReferencia.getText());
+        setReferenciaSalarial(txtReferenciaSalarialCargoEmprego.getText());
     }
 
     public void preencherLista(ArrayList<PesquisarCargoEmpregoDTO> lista, int index)
@@ -55,33 +61,33 @@ public class frmCadastrarCargoEmprego extends javax.swing.JInternalFrame
     public void preencherCampos()
     {
         txtCodigoCargoEmprego.setText(getCodigoCargoEmprego());
-        txtNomeCargoEmprego.setText(getNomeCargoEmprego());
+        txtDescricaoCargoEmprego.setText(getNomeCargoEmprego());
         cmbRegimeJuridico.setSelectedItem(getRegimeJuridico());
-        txtNumero.setText(getNumeroLeiCriaCargoEmprego());
+        txtNumeroLeiCriaCargoEmprego.setText(getNumeroLeiCriaCargoEmprego());
         txtDataLeiCriacaoCargoEmprego.setText(getDataLeiCriaCargoEmprego());
-        txtReferencia.setText(getReferenciaSalarial());
+        txtReferenciaSalarialCargoEmprego.setText(getReferenciaSalarial());
     }
 
     //liberar os campos para edição
     public void ativarCampos()
     {
         txtCodigoCargoEmprego.setEnabled(false);
-        txtNomeCargoEmprego.setEnabled(true);
+        txtDescricaoCargoEmprego.setEnabled(true);
         cmbRegimeJuridico.setEnabled(true);
-        txtNumero.setEnabled(true);
+        txtNumeroLeiCriaCargoEmprego.setEnabled(true);
         txtDataLeiCriacaoCargoEmprego.setEnabled(true);
-        txtReferencia.setEnabled(true);
+        txtReferenciaSalarialCargoEmprego.setEnabled(true);
     }
 
     //travar os campos para edição
     public void desativarCampos()
     {
         txtCodigoCargoEmprego.setEnabled(false);
-        txtNomeCargoEmprego.setEnabled(false);
+        txtDescricaoCargoEmprego.setEnabled(false);
         cmbRegimeJuridico.setEnabled(false);
-        txtNumero.setEnabled(false);
+        txtNumeroLeiCriaCargoEmprego.setEnabled(false);
         txtDataLeiCriacaoCargoEmprego.setEnabled(false);
-        txtReferencia.setEnabled(false);
+        txtReferenciaSalarialCargoEmprego.setEnabled(false);
     }
 
     public void limparCampos()
@@ -89,15 +95,15 @@ public class frmCadastrarCargoEmprego extends javax.swing.JInternalFrame
         //this.setCodigoConcurso("");
         txtCodigoCargoEmprego.setText("");
         this.setCodigoCargoEmprego("");
-        txtNomeCargoEmprego.setText("");
+        txtDescricaoCargoEmprego.setText("");
         this.setNomeCargoEmprego("");
         cmbRegimeJuridico.setSelectedIndex(1);
         this.setRegimeJuridico("0");
-        txtNumero.setText("");
+        txtNumeroLeiCriaCargoEmprego.setText("");
         this.setNumeroLeiCriaCargoEmprego("");
         txtDataLeiCriacaoCargoEmprego.setText("");
         this.setDataLeiCriaCargoEmprego("");
-        txtReferencia.setText("");
+        txtReferenciaSalarialCargoEmprego.setText("");
         this.setReferenciaSalarial("");
 
     }
@@ -162,8 +168,8 @@ public class frmCadastrarCargoEmprego extends javax.swing.JInternalFrame
     {
         this.lista = lista;
     }
-    
-        public String getReferenciaSalarial()
+
+    public String getReferenciaSalarial()
     {
         return referenciaSalarial;
     }
@@ -182,8 +188,6 @@ public class frmCadastrarCargoEmprego extends javax.swing.JInternalFrame
     {
         this.itemSelecionadoNoComboBox = itemSelecionadoNoComboBox;
     }
-    
-    
 
     /**
      * This method is called from within the constructor to initialize the form.
@@ -195,85 +199,356 @@ public class frmCadastrarCargoEmprego extends javax.swing.JInternalFrame
     private void initComponents()
     {
 
-        jPanel2 = new javax.swing.JPanel();
-        jPanel1 = new javax.swing.JPanel();
-        txtNomeCargoEmprego = new javax.swing.JTextField();
-        lblNomeCargoEmprego = new javax.swing.JLabel();
+        jpCadastroCargoEmprego = new javax.swing.JPanel();
+        jpCargoEmprego = new javax.swing.JPanel();
+        txtDescricaoCargoEmprego = new javax.swing.JTextField();
+        lblDescricaoCargoEmprego = new javax.swing.JLabel();
         txtCodigoCargoEmprego = new javax.swing.JTextField();
         lblCodigoCargoEmprego = new javax.swing.JLabel();
-        lblRegimeJuridico = new javax.swing.JLabel();
+        lblRegimeJuridicoCargoEmprego = new javax.swing.JLabel();
         cmbRegimeJuridico = new javax.swing.JComboBox<>();
-        jPanel3 = new javax.swing.JPanel();
-        txtNumero = new javax.swing.JTextField();
-        lblLeiCriacaoCargoEmprego1 = new javax.swing.JLabel();
+        lblCboCargoEmprego = new javax.swing.JLabel();
+        txtCboCargoEmprego = new javax.swing.JTextField();
+        jpExigencias = new javax.swing.JPanel();
+        jComboBox1 = new javax.swing.JComboBox<>();
+        lblEscolaridade = new javax.swing.JLabel();
+        jpCargaHoraria = new javax.swing.JPanel();
+        lblSemanal = new javax.swing.JLabel();
+        lblSemanal1 = new javax.swing.JLabel();
+        cmbCargaHorariaSemanal = new javax.swing.JComboBox<>();
+        cmbCargaHorariaMensal = new javax.swing.JComboBox<>();
+        jpQuadro = new javax.swing.JPanel();
+        jScrollPane4 = new javax.swing.JScrollPane();
+        jTable1 = new javax.swing.JTable();
+        jtpRemuneracao = new javax.swing.JTabbedPane();
+        jpTabelaVencimentos = new javax.swing.JPanel();
+        lblReferenciaSalarial = new javax.swing.JLabel();
+        cmbReferenciaSalarial = new javax.swing.JComboBox<>();
+        lblGrau = new javax.swing.JLabel();
+        cmbGrau = new javax.swing.JComboBox<>();
+        jLabel3 = new javax.swing.JLabel();
+        jLabel4 = new javax.swing.JLabel();
+        jPanel2 = new javax.swing.JPanel();
+        lblFaixa = new javax.swing.JLabel();
+        cmbFaixa = new javax.swing.JComboBox<>();
+        lblGrauProf = new javax.swing.JLabel();
+        cmbGrauProf = new javax.swing.JComboBox<>();
+        jLabel5 = new javax.swing.JLabel();
+        jLabel6 = new javax.swing.JLabel();
+        jtpLegislacao = new javax.swing.JTabbedPane();
+        jpLegislacaoCriacaoCargoEmprego = new javax.swing.JPanel();
+        txtNumeroLeiCriaCargoEmprego = new javax.swing.JTextField();
+        lblNumeroLeiCriaCargoEmprego = new javax.swing.JLabel();
         lblLeiCriacaoCargoEmprego = new javax.swing.JLabel();
-        txtReferencia = new javax.swing.JTextField();
-        lblCodigoCargoEmprego1 = new javax.swing.JLabel();
         txtDataLeiCriacaoCargoEmprego = new javax.swing.JFormattedTextField();
+        lblEmentaCriacao = new javax.swing.JLabel();
+        jScrollPane3 = new javax.swing.JScrollPane();
+        txtAEmentaCriacao = new javax.swing.JTextArea();
+        jpExtincaoCargoEmprego = new javax.swing.JPanel();
+        txtNumeroLeiExtingueCargoEmprego = new javax.swing.JTextField();
+        lblNumeroLeiExtingueCargoEmprego = new javax.swing.JLabel();
+        lblLeiExtingueCargoEmprego = new javax.swing.JLabel();
+        txtDataLeiExtingueCargoEmprego = new javax.swing.JFormattedTextField();
+        lblEmentaExtincao = new javax.swing.JLabel();
+        jScrollPane5 = new javax.swing.JScrollPane();
+        txtAEmentaExtincao = new javax.swing.JTextArea();
+        jpRequisitosDeProvimento = new javax.swing.JPanel();
+        jScrollPane1 = new javax.swing.JScrollPane();
+        txtAreaRequisitosProvimento = new javax.swing.JTextArea();
 
         setClosable(true);
         setTitle("Manutenção de Cargos e Empregos");
+        addAncestorListener(new javax.swing.event.AncestorListener()
+        {
+            public void ancestorAdded(javax.swing.event.AncestorEvent evt)
+            {
+            }
+            public void ancestorMoved(javax.swing.event.AncestorEvent evt)
+            {
+                formAncestorMoved(evt);
+            }
+            public void ancestorRemoved(javax.swing.event.AncestorEvent evt)
+            {
+            }
+        });
 
-        jPanel2.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "Cadastro de Cargos e Empregos", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Segoe UI", 1, 12))); // NOI18N
+        jpCadastroCargoEmprego.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "Cadastro de Cargos e Empregos", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Segoe UI", 1, 12))); // NOI18N
 
-        jPanel1.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "Cargo/Emprego", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Segoe UI", 1, 12))); // NOI18N
+        jpCargoEmprego.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "Cargo/Emprego", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Segoe UI", 1, 12))); // NOI18N
 
-        lblNomeCargoEmprego.setText("Descrição Cargo/Emprego:");
+        lblDescricaoCargoEmprego.setText("Descrição:");
 
         lblCodigoCargoEmprego.setText("Código:");
 
-        lblRegimeJuridico.setText("Regime Jurídico:");
+        lblRegimeJuridicoCargoEmprego.setText("Regime Jurídico:");
 
         cmbRegimeJuridico.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "ESTATUTÁRIO", "CELETISTA" }));
 
-        javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
-        jPanel1.setLayout(jPanel1Layout);
-        jPanel1Layout.setHorizontalGroup(
-            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
-                .addGap(6, 6, 6)
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(lblCodigoCargoEmprego, javax.swing.GroupLayout.PREFERRED_SIZE, 64, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(txtCodigoCargoEmprego, javax.swing.GroupLayout.PREFERRED_SIZE, 83, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(18, 18, 18)
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(lblNomeCargoEmprego, javax.swing.GroupLayout.PREFERRED_SIZE, 150, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(txtNomeCargoEmprego, javax.swing.GroupLayout.PREFERRED_SIZE, 350, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 98, Short.MAX_VALUE)
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                    .addComponent(cmbRegimeJuridico, 0, 109, Short.MAX_VALUE)
-                    .addComponent(lblRegimeJuridico, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                .addGap(10, 10, 10))
+        lblCboCargoEmprego.setText("CBO:");
+
+        javax.swing.GroupLayout jpCargoEmpregoLayout = new javax.swing.GroupLayout(jpCargoEmprego);
+        jpCargoEmprego.setLayout(jpCargoEmpregoLayout);
+        jpCargoEmpregoLayout.setHorizontalGroup(
+            jpCargoEmpregoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jpCargoEmpregoLayout.createSequentialGroup()
+                .addGap(12, 12, 12)
+                .addGroup(jpCargoEmpregoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addComponent(lblCodigoCargoEmprego, javax.swing.GroupLayout.PREFERRED_SIZE, 43, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(txtCodigoCargoEmprego, javax.swing.GroupLayout.PREFERRED_SIZE, 43, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(12, 12, 12)
+                .addGroup(jpCargoEmpregoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(lblDescricaoCargoEmprego, javax.swing.GroupLayout.PREFERRED_SIZE, 150, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(txtDescricaoCargoEmprego, javax.swing.GroupLayout.PREFERRED_SIZE, 200, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(jpCargoEmpregoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                    .addComponent(lblRegimeJuridicoCargoEmprego, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(cmbRegimeJuridico, javax.swing.GroupLayout.PREFERRED_SIZE, 109, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addGroup(jpCargoEmpregoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(jpCargoEmpregoLayout.createSequentialGroup()
+                        .addComponent(lblCboCargoEmprego, javax.swing.GroupLayout.PREFERRED_SIZE, 64, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(0, 0, Short.MAX_VALUE))
+                    .addComponent(txtCboCargoEmprego))
+                .addContainerGap())
         );
-        jPanel1Layout.setVerticalGroup(
-            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel1Layout.createSequentialGroup()
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addComponent(lblCodigoCargoEmprego, javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(javax.swing.GroupLayout.Alignment.LEADING, jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                        .addGroup(jPanel1Layout.createSequentialGroup()
-                            .addComponent(lblNomeCargoEmprego)
-                            .addGap(28, 28, 28))
-                        .addGroup(jPanel1Layout.createSequentialGroup()
-                            .addComponent(lblRegimeJuridico)
-                            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                            .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                                .addComponent(cmbRegimeJuridico, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addComponent(txtCodigoCargoEmprego, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))))
-                .addGap(0, 25, Short.MAX_VALUE))
-            .addGroup(jPanel1Layout.createSequentialGroup()
-                .addGap(22, 22, 22)
-                .addComponent(txtNomeCargoEmprego, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+        jpCargoEmpregoLayout.setVerticalGroup(
+            jpCargoEmpregoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jpCargoEmpregoLayout.createSequentialGroup()
+                .addContainerGap()
+                .addGroup(jpCargoEmpregoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(lblCodigoCargoEmprego)
+                    .addGroup(jpCargoEmpregoLayout.createSequentialGroup()
+                        .addGroup(jpCargoEmpregoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(lblRegimeJuridicoCargoEmprego)
+                            .addComponent(lblCboCargoEmprego))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addGroup(jpCargoEmpregoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(cmbRegimeJuridico, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(txtCboCargoEmprego, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                    .addComponent(lblDescricaoCargoEmprego)
+                    .addGroup(jpCargoEmpregoLayout.createSequentialGroup()
+                        .addGap(22, 22, 22)
+                        .addGroup(jpCargoEmpregoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(txtDescricaoCargoEmprego, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(txtCodigoCargoEmprego, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))))
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
-        jPanel3.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "Legislação", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Segoe UI", 1, 12))); // NOI18N
+        jpExigencias.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "Exigências", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Segoe UI", 1, 12))); // NOI18N
 
-        lblLeiCriacaoCargoEmprego1.setText("Número da Lei:");
+        jComboBox1.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "ENSINO FUNDAMENTAL INCOMPLETO", "ENSINO FUNDAMENTAL COMPLETO", "ENSINO MÉDIO COMPLETO", "ENSINO TÉCNICO ", "ENSINO SUPERIOR ", " " }));
 
-        lblLeiCriacaoCargoEmprego.setText("Data da Lei de Criação do Cargo/Emprego");
+        lblEscolaridade.setText("Escolaridade:");
 
-        lblCodigoCargoEmprego1.setText("Referência Salarial:");
+        javax.swing.GroupLayout jpExigenciasLayout = new javax.swing.GroupLayout(jpExigencias);
+        jpExigencias.setLayout(jpExigenciasLayout);
+        jpExigenciasLayout.setHorizontalGroup(
+            jpExigenciasLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jpExigenciasLayout.createSequentialGroup()
+                .addContainerGap()
+                .addGroup(jpExigenciasLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(jpExigenciasLayout.createSequentialGroup()
+                        .addComponent(lblEscolaridade)
+                        .addGap(0, 0, Short.MAX_VALUE))
+                    .addComponent(jComboBox1, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addContainerGap())
+        );
+        jpExigenciasLayout.setVerticalGroup(
+            jpExigenciasLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jpExigenciasLayout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(lblEscolaridade)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jComboBox1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+        );
+
+        jpCargaHoraria.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "Carga Horária", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Segoe UI", 1, 12))); // NOI18N
+
+        lblSemanal.setText("Semanal:");
+
+        lblSemanal1.setText("Mensal:");
+
+        cmbCargaHorariaSemanal.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "10h", "20h", "30h", "40h", "44h", "12x36" }));
+        cmbCargaHorariaSemanal.setSelectedIndex(4);
+
+        cmbCargaHorariaMensal.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "50h", "100h", "150h", "200h", "220h", "240h" }));
+        cmbCargaHorariaMensal.setSelectedIndex(4);
+
+        javax.swing.GroupLayout jpCargaHorariaLayout = new javax.swing.GroupLayout(jpCargaHoraria);
+        jpCargaHoraria.setLayout(jpCargaHorariaLayout);
+        jpCargaHorariaLayout.setHorizontalGroup(
+            jpCargaHorariaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jpCargaHorariaLayout.createSequentialGroup()
+                .addGap(15, 15, 15)
+                .addGroup(jpCargaHorariaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(lblSemanal1)
+                    .addComponent(lblSemanal))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED, 11, Short.MAX_VALUE)
+                .addGroup(jpCargaHorariaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+                    .addComponent(cmbCargaHorariaSemanal, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(cmbCargaHorariaMensal, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(24, 24, 24))
+        );
+        jpCargaHorariaLayout.setVerticalGroup(
+            jpCargaHorariaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jpCargaHorariaLayout.createSequentialGroup()
+                .addContainerGap()
+                .addGroup(jpCargaHorariaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(lblSemanal)
+                    .addComponent(cmbCargaHorariaSemanal, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(jpCargaHorariaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(lblSemanal1)
+                    .addComponent(cmbCargaHorariaMensal, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addContainerGap(10, Short.MAX_VALUE))
+        );
+
+        jpQuadro.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "Quadro", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Segoe UI", 1, 12))); // NOI18N
+
+        jTable1.setModel(new javax.swing.table.DefaultTableModel(
+            new Object [][]
+            {
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null}
+            },
+            new String []
+            {
+                "Vagas Criadas", "Vagas Providas", "Vagas Reservadas", "Vagas Disponiveis"
+            }
+        ));
+        jScrollPane4.setViewportView(jTable1);
+
+        javax.swing.GroupLayout jpQuadroLayout = new javax.swing.GroupLayout(jpQuadro);
+        jpQuadro.setLayout(jpQuadroLayout);
+        jpQuadroLayout.setHorizontalGroup(
+            jpQuadroLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jpQuadroLayout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(jScrollPane4)
+                .addContainerGap())
+        );
+        jpQuadroLayout.setVerticalGroup(
+            jpQuadroLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jpQuadroLayout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(jScrollPane4, javax.swing.GroupLayout.DEFAULT_SIZE, 158, Short.MAX_VALUE)
+                .addContainerGap())
+        );
+
+        jtpRemuneracao.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "Remuneração", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Segoe UI", 1, 12))); // NOI18N
+
+        lblReferenciaSalarial.setText("Referência:");
+
+        cmbReferenciaSalarial.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "1", "2", "3", "4", "5", "6", "7", "8", "9", "10", "11", "12", "13", "14", "15", "16", "17", "18", "19", "20", "21", "22", "23", "24", "25", "26", "27", "28", "29", "30", "31", "32", "33", "34", "35", "RME" }));
+
+        lblGrau.setText("Grau:");
+
+        cmbGrau.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "A", "B", "C", "D", "E", "F", "G" }));
+
+        jLabel3.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
+        jLabel3.setText("R$:");
+
+        jLabel4.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
+        jLabel4.setText("3.917,95");
+
+        javax.swing.GroupLayout jpTabelaVencimentosLayout = new javax.swing.GroupLayout(jpTabelaVencimentos);
+        jpTabelaVencimentos.setLayout(jpTabelaVencimentosLayout);
+        jpTabelaVencimentosLayout.setHorizontalGroup(
+            jpTabelaVencimentosLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jpTabelaVencimentosLayout.createSequentialGroup()
+                .addGap(14, 14, 14)
+                .addComponent(lblReferenciaSalarial)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(cmbReferenciaSalarial, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(lblGrau)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(cmbGrau, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 161, Short.MAX_VALUE)
+                .addComponent(jLabel3)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jLabel4)
+                .addGap(46, 46, 46))
+        );
+        jpTabelaVencimentosLayout.setVerticalGroup(
+            jpTabelaVencimentosLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jpTabelaVencimentosLayout.createSequentialGroup()
+                .addGap(11, 11, 11)
+                .addGroup(jpTabelaVencimentosLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(jpTabelaVencimentosLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                        .addComponent(lblGrau)
+                        .addComponent(cmbGrau, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(jLabel3)
+                        .addComponent(jLabel4))
+                    .addGroup(jpTabelaVencimentosLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                        .addComponent(lblReferenciaSalarial)
+                        .addComponent(cmbReferenciaSalarial, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addContainerGap(9, Short.MAX_VALUE))
+        );
+
+        jtpRemuneracao.addTab("Tabela de Vencimentos", jpTabelaVencimentos);
+
+        lblFaixa.setText("Faixa:");
+
+        cmbFaixa.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "PROF PEB I - COM GRADUAÇÃO", "PROF PEB I - COM ESPECIALIZAÇÃO", "PROF PEB I - COM MESTRADO", "PROF PEB I - COM DOUTORADO", "PROF PEB II - COM GRADUAÇÃO", "PROF PEB II - COM ESPECIALIZAÇÃO", "PROF PEB II - COM MESTRADO", "PROF PEB II - COM DOUTORADO", "PROF AUXILIAR - COM ENSINO MÉDIO", "PROF AUXILIAR - COM GRADUAÇÃO", "PROF AUXILIAR - COM PÓS GRADUAÇÃO" }));
+
+        lblGrauProf.setText("Grau:");
+
+        cmbGrauProf.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "ADM", "A", "B", "C", "D", "E", "F" }));
+
+        jLabel5.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
+        jLabel5.setText("R$:");
+
+        jLabel6.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
+        jLabel6.setText("3.917,95");
+
+        javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
+        jPanel2.setLayout(jPanel2Layout);
+        jPanel2Layout.setHorizontalGroup(
+            jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel2Layout.createSequentialGroup()
+                .addGap(14, 14, 14)
+                .addComponent(lblFaixa)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(cmbFaixa, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(lblGrauProf)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(cmbGrauProf, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(jLabel5)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jLabel6)
+                .addGap(46, 46, 46))
+        );
+        jPanel2Layout.setVerticalGroup(
+            jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel2Layout.createSequentialGroup()
+                .addGap(11, 11, 11)
+                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                        .addComponent(lblGrauProf)
+                        .addComponent(cmbGrauProf, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(jLabel5)
+                        .addComponent(jLabel6))
+                    .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                        .addComponent(lblFaixa)
+                        .addComponent(cmbFaixa, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addContainerGap(9, Short.MAX_VALUE))
+        );
+
+        jtpRemuneracao.addTab("Escala de Vencimentos - Docente", jPanel2);
+
+        jtpLegislacao.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "Legislação", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Segoe UI", 1, 12))); // NOI18N
+
+        jpLegislacaoCriacaoCargoEmprego.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Segoe UI", 1, 12))); // NOI18N
+
+        lblNumeroLeiCriaCargoEmprego.setText("Número da Lei:");
+
+        lblLeiCriacaoCargoEmprego.setText("Data da Lei:");
 
         try
         {
@@ -283,64 +558,172 @@ public class frmCadastrarCargoEmprego extends javax.swing.JInternalFrame
             ex.printStackTrace();
         }
 
-        javax.swing.GroupLayout jPanel3Layout = new javax.swing.GroupLayout(jPanel3);
-        jPanel3.setLayout(jPanel3Layout);
-        jPanel3Layout.setHorizontalGroup(
-            jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel3Layout.createSequentialGroup()
-                .addContainerGap()
-                .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(lblLeiCriacaoCargoEmprego1)
-                    .addComponent(txtNumero, javax.swing.GroupLayout.PREFERRED_SIZE, 83, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(18, 18, 18)
-                .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                    .addComponent(lblLeiCriacaoCargoEmprego, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(txtDataLeiCriacaoCargoEmprego))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                    .addComponent(lblCodigoCargoEmprego1)
-                    .addComponent(txtReferencia, javax.swing.GroupLayout.PREFERRED_SIZE, 98, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+        lblEmentaCriacao.setText("Ementa Criação:");
+
+        txtAEmentaCriacao.setColumns(20);
+        txtAEmentaCriacao.setLineWrap(true);
+        txtAEmentaCriacao.setRows(5);
+        jScrollPane3.setViewportView(txtAEmentaCriacao);
+
+        javax.swing.GroupLayout jpLegislacaoCriacaoCargoEmpregoLayout = new javax.swing.GroupLayout(jpLegislacaoCriacaoCargoEmprego);
+        jpLegislacaoCriacaoCargoEmprego.setLayout(jpLegislacaoCriacaoCargoEmpregoLayout);
+        jpLegislacaoCriacaoCargoEmpregoLayout.setHorizontalGroup(
+            jpLegislacaoCriacaoCargoEmpregoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jpLegislacaoCriacaoCargoEmpregoLayout.createSequentialGroup()
+                .addGap(15, 15, 15)
+                .addGroup(jpLegislacaoCriacaoCargoEmpregoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(lblNumeroLeiCriaCargoEmprego)
+                    .addComponent(txtNumeroLeiCriaCargoEmprego, javax.swing.GroupLayout.PREFERRED_SIZE, 72, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(17, 17, 17)
+                .addGroup(jpLegislacaoCriacaoCargoEmpregoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                    .addComponent(lblLeiCriacaoCargoEmprego)
+                    .addComponent(txtDataLeiCriacaoCargoEmprego, javax.swing.GroupLayout.PREFERRED_SIZE, 61, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(24, 24, 24)
+                .addGroup(jpLegislacaoCriacaoCargoEmpregoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(lblEmentaCriacao)
+                    .addComponent(jScrollPane3, javax.swing.GroupLayout.PREFERRED_SIZE, 322, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(0, 44, Short.MAX_VALUE))
         );
-        jPanel3Layout.setVerticalGroup(
-            jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel3Layout.createSequentialGroup()
+        jpLegislacaoCriacaoCargoEmpregoLayout.setVerticalGroup(
+            jpLegislacaoCriacaoCargoEmpregoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jpLegislacaoCriacaoCargoEmpregoLayout.createSequentialGroup()
                 .addContainerGap()
-                .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(jPanel3Layout.createSequentialGroup()
-                        .addComponent(lblCodigoCargoEmprego1)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(txtReferencia, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addGroup(jPanel3Layout.createSequentialGroup()
-                        .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(lblLeiCriacaoCargoEmprego1)
-                            .addComponent(lblLeiCriacaoCargoEmprego))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(txtNumero, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(txtDataLeiCriacaoCargoEmprego, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                .addGroup(jpLegislacaoCriacaoCargoEmpregoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(lblNumeroLeiCriaCargoEmprego)
+                    .addComponent(lblLeiCriacaoCargoEmprego)
+                    .addComponent(lblEmentaCriacao))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(jpLegislacaoCriacaoCargoEmpregoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(jpLegislacaoCriacaoCargoEmpregoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                        .addComponent(txtNumeroLeiCriaCargoEmprego, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(txtDataLeiCriacaoCargoEmprego, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(jScrollPane3, javax.swing.GroupLayout.PREFERRED_SIZE, 62, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addContainerGap(23, Short.MAX_VALUE))
         );
 
-        javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
-        jPanel2.setLayout(jPanel2Layout);
-        jPanel2Layout.setHorizontalGroup(
-            jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel2Layout.createSequentialGroup()
+        jtpLegislacao.addTab("Criação", jpLegislacaoCriacaoCargoEmprego);
+
+        jpExtincaoCargoEmprego.setBorder(javax.swing.BorderFactory.createTitledBorder(""));
+
+        lblNumeroLeiExtingueCargoEmprego.setText("Número da Lei:");
+
+        lblLeiExtingueCargoEmprego.setText("Data da Lei:");
+
+        try
+        {
+            txtDataLeiExtingueCargoEmprego.setFormatterFactory(new javax.swing.text.DefaultFormatterFactory(new javax.swing.text.MaskFormatter("##/##/####")));
+        } catch (java.text.ParseException ex)
+        {
+            ex.printStackTrace();
+        }
+
+        lblEmentaExtincao.setText("Ementa Extinção:");
+
+        txtAEmentaExtincao.setColumns(20);
+        txtAEmentaExtincao.setLineWrap(true);
+        txtAEmentaExtincao.setRows(5);
+        jScrollPane5.setViewportView(txtAEmentaExtincao);
+
+        javax.swing.GroupLayout jpExtincaoCargoEmpregoLayout = new javax.swing.GroupLayout(jpExtincaoCargoEmprego);
+        jpExtincaoCargoEmprego.setLayout(jpExtincaoCargoEmpregoLayout);
+        jpExtincaoCargoEmpregoLayout.setHorizontalGroup(
+            jpExtincaoCargoEmpregoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jpExtincaoCargoEmpregoLayout.createSequentialGroup()
+                .addGap(15, 15, 15)
+                .addGroup(jpExtincaoCargoEmpregoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(lblNumeroLeiExtingueCargoEmprego)
+                    .addComponent(txtNumeroLeiExtingueCargoEmprego, javax.swing.GroupLayout.PREFERRED_SIZE, 72, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(17, 17, 17)
+                .addGroup(jpExtincaoCargoEmpregoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                    .addComponent(lblLeiExtingueCargoEmprego)
+                    .addComponent(txtDataLeiExtingueCargoEmprego, javax.swing.GroupLayout.PREFERRED_SIZE, 61, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(24, 24, 24)
+                .addGroup(jpExtincaoCargoEmpregoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(lblEmentaExtincao)
+                    .addComponent(jScrollPane5, javax.swing.GroupLayout.PREFERRED_SIZE, 322, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(0, 44, Short.MAX_VALUE))
+        );
+        jpExtincaoCargoEmpregoLayout.setVerticalGroup(
+            jpExtincaoCargoEmpregoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jpExtincaoCargoEmpregoLayout.createSequentialGroup()
                 .addContainerGap()
-                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jPanel1, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(jPanel3, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addGroup(jpExtincaoCargoEmpregoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(lblNumeroLeiExtingueCargoEmprego)
+                    .addComponent(lblLeiExtingueCargoEmprego)
+                    .addComponent(lblEmentaExtincao))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(jpExtincaoCargoEmpregoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(jpExtincaoCargoEmpregoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                        .addComponent(txtNumeroLeiExtingueCargoEmprego, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(txtDataLeiExtingueCargoEmprego, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(jScrollPane5, javax.swing.GroupLayout.PREFERRED_SIZE, 62, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addContainerGap(23, Short.MAX_VALUE))
+        );
+
+        jtpLegislacao.addTab("Extinção", jpExtincaoCargoEmprego);
+
+        jpRequisitosDeProvimento.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "Requisitos de Provimento", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Segoe UI", 1, 12))); // NOI18N
+
+        txtAreaRequisitosProvimento.setColumns(20);
+        txtAreaRequisitosProvimento.setLineWrap(true);
+        txtAreaRequisitosProvimento.setRows(5);
+        jScrollPane1.setViewportView(txtAreaRequisitosProvimento);
+
+        javax.swing.GroupLayout jpRequisitosDeProvimentoLayout = new javax.swing.GroupLayout(jpRequisitosDeProvimento);
+        jpRequisitosDeProvimento.setLayout(jpRequisitosDeProvimentoLayout);
+        jpRequisitosDeProvimentoLayout.setHorizontalGroup(
+            jpRequisitosDeProvimentoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jpRequisitosDeProvimentoLayout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(jScrollPane1)
                 .addContainerGap())
         );
-        jPanel2Layout.setVerticalGroup(
-            jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel2Layout.createSequentialGroup()
+        jpRequisitosDeProvimentoLayout.setVerticalGroup(
+            jpRequisitosDeProvimentoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jpRequisitosDeProvimentoLayout.createSequentialGroup()
+                .addComponent(jScrollPane1)
+                .addContainerGap())
+        );
+
+        javax.swing.GroupLayout jpCadastroCargoEmpregoLayout = new javax.swing.GroupLayout(jpCadastroCargoEmprego);
+        jpCadastroCargoEmprego.setLayout(jpCadastroCargoEmpregoLayout);
+        jpCadastroCargoEmpregoLayout.setHorizontalGroup(
+            jpCadastroCargoEmpregoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jpCadastroCargoEmpregoLayout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(18, 18, 18)
-                .addComponent(jPanel3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(253, Short.MAX_VALUE))
+                .addGroup(jpCadastroCargoEmpregoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                    .addComponent(jtpLegislacao)
+                    .addComponent(jpCargoEmprego, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(jpRequisitosDeProvimento, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(jpCadastroCargoEmpregoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(jpCadastroCargoEmpregoLayout.createSequentialGroup()
+                        .addComponent(jpCargaHoraria, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(jpExigencias, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                    .addComponent(jtpRemuneracao)
+                    .addComponent(jpQuadro, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addContainerGap())
+        );
+        jpCadastroCargoEmpregoLayout.setVerticalGroup(
+            jpCadastroCargoEmpregoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jpCadastroCargoEmpregoLayout.createSequentialGroup()
+                .addContainerGap(12, Short.MAX_VALUE)
+                .addGroup(jpCadastroCargoEmpregoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                    .addComponent(jpCargoEmprego, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(jpExigencias, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(jpCargaHoraria, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(jpCadastroCargoEmpregoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                    .addGroup(jpCadastroCargoEmpregoLayout.createSequentialGroup()
+                        .addComponent(jtpRemuneracao, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(jpQuadro, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(jpCadastroCargoEmpregoLayout.createSequentialGroup()
+                        .addComponent(jtpLegislacao, javax.swing.GroupLayout.PREFERRED_SIZE, 169, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(jpRequisitosDeProvimento, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
+                .addContainerGap())
         );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
@@ -349,36 +732,84 @@ public class frmCadastrarCargoEmprego extends javax.swing.JInternalFrame
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(jPanel2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(jpCadastroCargoEmprego, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addContainerGap())
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(jpCadastroCargoEmprego, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
+    private void formAncestorMoved(javax.swing.event.AncestorEvent evt)//GEN-FIRST:event_formAncestorMoved
+    {//GEN-HEADEREND:event_formAncestorMoved
+        CentralizarJanela c = new CentralizarJanela();
+        c.NaoUltrapassarLimites(this);
+
+    }//GEN-LAST:event_formAncestorMoved
+
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JComboBox<String> cmbCargaHorariaMensal;
+    private javax.swing.JComboBox<String> cmbCargaHorariaSemanal;
+    private javax.swing.JComboBox<String> cmbFaixa;
+    private javax.swing.JComboBox<String> cmbGrau;
+    private javax.swing.JComboBox<String> cmbGrauProf;
+    private javax.swing.JComboBox<String> cmbReferenciaSalarial;
     private javax.swing.JComboBox<String> cmbRegimeJuridico;
-    private javax.swing.JPanel jPanel1;
+    private javax.swing.JComboBox<String> jComboBox1;
+    private javax.swing.JLabel jLabel3;
+    private javax.swing.JLabel jLabel4;
+    private javax.swing.JLabel jLabel5;
+    private javax.swing.JLabel jLabel6;
     private javax.swing.JPanel jPanel2;
-    private javax.swing.JPanel jPanel3;
+    private javax.swing.JScrollPane jScrollPane1;
+    private javax.swing.JScrollPane jScrollPane3;
+    private javax.swing.JScrollPane jScrollPane4;
+    private javax.swing.JScrollPane jScrollPane5;
+    private javax.swing.JTable jTable1;
+    private javax.swing.JPanel jpCadastroCargoEmprego;
+    private javax.swing.JPanel jpCargaHoraria;
+    private javax.swing.JPanel jpCargoEmprego;
+    private javax.swing.JPanel jpExigencias;
+    private javax.swing.JPanel jpExtincaoCargoEmprego;
+    private javax.swing.JPanel jpLegislacaoCriacaoCargoEmprego;
+    private javax.swing.JPanel jpQuadro;
+    private javax.swing.JPanel jpRequisitosDeProvimento;
+    private javax.swing.JPanel jpTabelaVencimentos;
+    private javax.swing.JTabbedPane jtpLegislacao;
+    private javax.swing.JTabbedPane jtpRemuneracao;
+    private javax.swing.JLabel lblCboCargoEmprego;
     private javax.swing.JLabel lblCodigoCargoEmprego;
-    private javax.swing.JLabel lblCodigoCargoEmprego1;
+    private javax.swing.JLabel lblDescricaoCargoEmprego;
+    private javax.swing.JLabel lblEmentaCriacao;
+    private javax.swing.JLabel lblEmentaExtincao;
+    private javax.swing.JLabel lblEscolaridade;
+    private javax.swing.JLabel lblFaixa;
+    private javax.swing.JLabel lblGrau;
+    private javax.swing.JLabel lblGrauProf;
     private javax.swing.JLabel lblLeiCriacaoCargoEmprego;
-    private javax.swing.JLabel lblLeiCriacaoCargoEmprego1;
-    private javax.swing.JLabel lblNomeCargoEmprego;
-    private javax.swing.JLabel lblRegimeJuridico;
+    private javax.swing.JLabel lblLeiExtingueCargoEmprego;
+    private javax.swing.JLabel lblNumeroLeiCriaCargoEmprego;
+    private javax.swing.JLabel lblNumeroLeiExtingueCargoEmprego;
+    private javax.swing.JLabel lblReferenciaSalarial;
+    private javax.swing.JLabel lblRegimeJuridicoCargoEmprego;
+    private javax.swing.JLabel lblSemanal;
+    private javax.swing.JLabel lblSemanal1;
+    private javax.swing.JTextArea txtAEmentaCriacao;
+    private javax.swing.JTextArea txtAEmentaExtincao;
+    private javax.swing.JTextArea txtAreaRequisitosProvimento;
+    private javax.swing.JTextField txtCboCargoEmprego;
     private javax.swing.JTextField txtCodigoCargoEmprego;
     private javax.swing.JFormattedTextField txtDataLeiCriacaoCargoEmprego;
-    private javax.swing.JTextField txtNomeCargoEmprego;
-    private javax.swing.JTextField txtNumero;
-    private javax.swing.JTextField txtReferencia;
+    private javax.swing.JFormattedTextField txtDataLeiExtingueCargoEmprego;
+    private javax.swing.JTextField txtDescricaoCargoEmprego;
+    private javax.swing.JTextField txtNumeroLeiCriaCargoEmprego;
+    private javax.swing.JTextField txtNumeroLeiExtingueCargoEmprego;
     // End of variables declaration//GEN-END:variables
 }

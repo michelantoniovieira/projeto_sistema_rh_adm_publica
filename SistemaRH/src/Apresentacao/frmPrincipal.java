@@ -1371,6 +1371,11 @@ public class frmPrincipal extends javax.swing.JFrame
             }
         });
     }
+    
+    public static void redesenhar()
+    {
+        jdkpPrincipal.repaint();
+    }
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
@@ -1394,7 +1399,7 @@ public class frmPrincipal extends javax.swing.JFrame
     private javax.swing.JLabel jLabel7;
     private javax.swing.JMenu jMenu1;
     private javax.swing.JMenuItem jMenuItem2;
-    private javax.swing.JDesktopPane jdkpPrincipal;
+    public static javax.swing.JDesktopPane jdkpPrincipal;
     private javax.swing.JLabel lblAlterar;
     private javax.swing.JLabel lblPesquisar;
     private javax.swing.JLabel lblSair;
