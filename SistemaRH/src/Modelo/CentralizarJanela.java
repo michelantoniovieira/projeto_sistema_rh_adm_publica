@@ -43,6 +43,7 @@ public class CentralizarJanela
         // Obter o tamanho da tela
         Dimension screenSize = Toolkit.getDefaultToolkit().getScreenSize();
         int screenWidth = (int) screenSize.getWidth();
+        int screenHeight = (int) (screenSize.getHeight() - frame.getHeight()/2);
 
         int x = location.x;
         int y = location.y;
@@ -54,10 +55,24 @@ public class CentralizarJanela
         }
         else if (x + frame.getWidth() > screenWidth)
         {
-            x = (int)(screenWidth - frame.getWidth() - 0.001f);
+            x = (int) (x - 0.001f);
             frame.setLocation(x, y);
         }
 
-        return frame;
-    }
+        if (y <= 0)
+        {
+            y = (int) (y + 0.001f);
+            frame.setLocation(x, y);
+        }
+        else if (y + frame.getHeight() > screenHeight)
+        {
+             //y = (int)((y + screenHeight - frame.getHeight())/2 - 0.001f);
+            y = (int) (y - 0.001f);
+            //y = (int) (y - 0.001f);
+            frame.setLocation(x, y);
+        }
+
+
+    return frame ;
+}
 }
