@@ -566,6 +566,9 @@
           </SubComponents>
         </Container>
         <Container class="javax.swing.JDesktopPane" name="jdkpPrincipal">
+          <Events>
+            <EventHandler event="propertyChange" listener="java.beans.PropertyChangeListener" parameters="java.beans.PropertyChangeEvent" handler="jdkpPrincipalPropertyChange"/>
+          </Events>
           <AuxValues>
             <AuxValue name="JavaCodeGenerator_VariableModifier" type="java.lang.Integer" value="9"/>
           </AuxValues>

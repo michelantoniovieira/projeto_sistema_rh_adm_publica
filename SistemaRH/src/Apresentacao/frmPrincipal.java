@@ -7,14 +7,21 @@ package Apresentacao;
 import Modelo.CadastrarBancaControle;
 import Modelo.CadastrarCargoEmpregoControle;
 import Modelo.CadastrarConcursoControle;
+import Modelo.GerenciadorDeJanelas;
+import Modelo.GerenciadorDeJanelas;
 import java.awt.event.ActionEvent;
 import java.awt.event.KeyEvent;
+import java.awt.event.WindowEvent;
+import java.awt.event.WindowListener;
 import java.sql.SQLException;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.AbstractAction;
 import javax.swing.JComponent;
+import javax.swing.JDesktopPane;
+import javax.swing.JMenu;
 import javax.swing.JOptionPane;
+import javax.swing.JTabbedPane;
 import javax.swing.KeyStroke;
 
 /**
@@ -31,6 +38,10 @@ public class frmPrincipal extends javax.swing.JFrame
     frmCadastrarBanca frmCB;
     frmCadastrarCargoEmprego frmCCE;
     frmCadastrarConcurso frmCC;
+
+    GerenciadorDeJanelas gerenciador;
+
+    static JMenu menuJanela = new JMenu("Janela");
 
     private boolean desativarBotoesFrmCC;//essa variavel bloqueia os botoes de menu para não deixar o cara tentar mudar de registro na tela de cadastro de concurso ao clicar no botao novo, por exemplo
 
@@ -58,7 +69,6 @@ public class frmPrincipal extends javax.swing.JFrame
     {
         initComponents();
         this.setExtendedState(MAXIMIZED_BOTH);
-
     }
 
     public frmPrincipal(String usuarioConectado)
@@ -83,11 +93,10 @@ public class frmPrincipal extends javax.swing.JFrame
         frmPC = new frmPreCadastro();
         frmCCE = new frmCadastrarCargoEmprego();
         frmCC = new frmCadastrarConcurso();
-    }
 
-    frmPrincipal(Object object, boolean b)
-    {
-        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+        //menu gerenciador janelas abertas
+        mnBarra.add(menuJanela);
+
     }
 
     @SuppressWarnings("unchecked")
@@ -425,6 +434,14 @@ public class frmPrincipal extends javax.swing.JFrame
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
+        jdkpPrincipal.addPropertyChangeListener(new java.beans.PropertyChangeListener()
+        {
+            public void propertyChange(java.beans.PropertyChangeEvent evt)
+            {
+                jdkpPrincipalPropertyChange(evt);
+            }
+        });
+
         javax.swing.GroupLayout jdkpPrincipalLayout = new javax.swing.GroupLayout(jdkpPrincipal);
         jdkpPrincipal.setLayout(jdkpPrincipalLayout);
         jdkpPrincipalLayout.setHorizontalGroup(
@@ -578,29 +595,35 @@ public class frmPrincipal extends javax.swing.JFrame
     }// </editor-fold>//GEN-END:initComponents
 
     private void mnCadastrarFuncionarioActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_mnCadastrarFuncionarioActionPerformed
-        //CODIGO DO BOTÃO MANUTENÇÃO
+        gerenciadorJanelasAbertas(gerenciador);
 
     }//GEN-LAST:event_mnCadastrarFuncionarioActionPerformed
 
     private void mnPortariaNomeacaoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_mnPortariaNomeacaoActionPerformed
         frmPN.setVisible(true);
+        gerenciadorJanelasAbertas(gerenciador);
     }//GEN-LAST:event_mnPortariaNomeacaoActionPerformed
 
     private void jMenuItem2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem2ActionPerformed
         frmCadU.setVisible(true);
+        gerenciadorJanelasAbertas(gerenciador);
     }//GEN-LAST:event_jMenuItem2ActionPerformed
 
     private void mnAnoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_mnAnoActionPerformed
         frmConfigurarPastaRaiz.setVisible(true);
+        gerenciadorJanelasAbertas(gerenciador);
     }//GEN-LAST:event_mnAnoActionPerformed
 
     private void mnPreCadastroFuncionarioActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_mnPreCadastroFuncionarioActionPerformed
         jdkpPrincipal.add(frmPC);
+        gerenciadorJanelasAbertas(gerenciador);
         frmPC.setVisible(true);
     }//GEN-LAST:event_mnPreCadastroFuncionarioActionPerformed
 
     private void mnCadastrarBancaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_mnCadastrarBancaActionPerformed
+
         jdkpPrincipal.add(frmCB);
+        atualizador(gerenciador);
         frmCB.setVisible(true);
         frmCB.limparCampos();
         frmCB.desativarCampos();
@@ -646,7 +669,8 @@ public class frmPrincipal extends javax.swing.JFrame
             if (controle.getMensagem().equals("erro 1"))
             {
                 JOptionPane.showMessageDialog(null, "Esta banca já foi cadastrada!");
-            } else if (controle.getMensagem().equals("ok"))
+            }
+            else if (controle.getMensagem().equals("ok"))
             {
                 JOptionPane.showMessageDialog(null, "Banca cadastrada com sucesso.");
                 frmCB.limparCampos();
@@ -680,7 +704,8 @@ public class frmPrincipal extends javax.swing.JFrame
             if (controle.getMensagem().equals("erro 1"))
             {
                 JOptionPane.showMessageDialog(null, "Esta banca já foi cadastrada!");
-            } else if (controle.getMensagem().equals("ok"))
+            }
+            else if (controle.getMensagem().equals("ok"))
             {
                 JOptionPane.showMessageDialog(null, "Banca cadastrada com sucesso.");
                 frmCCE.limparCampos();
@@ -716,7 +741,8 @@ public class frmPrincipal extends javax.swing.JFrame
             if (controle.getMensagem().equals("erro 1"))
             {
                 JOptionPane.showMessageDialog(null, "Este concurso já foi cadastrado!");
-            } else if (controle.getMensagem().equals("ok"))
+            }
+            else if (controle.getMensagem().equals("ok"))
             {
                 JOptionPane.showMessageDialog(null, "Concurso cadastrado com sucesso.");
                 gravarAlteracaoFrmCCE = false;
@@ -770,7 +796,8 @@ public class frmPrincipal extends javax.swing.JFrame
             if (index >= 0)
             {
                 preencherTelaCadastroBanca(index);
-            } else
+            }
+            else
             {
                 index = 0;
             }
@@ -783,7 +810,8 @@ public class frmPrincipal extends javax.swing.JFrame
             if (index >= 0)
             {
                 preencherTelaCadastroCargoEmprego(index);
-            } else
+            }
+            else
             {
                 index = 0;
             }
@@ -796,7 +824,8 @@ public class frmPrincipal extends javax.swing.JFrame
             if (index >= 0)
             {
                 preencherTelaCadastroConcurso(index);
-            } else
+            }
+            else
             {
                 index = 0;
             }
@@ -811,7 +840,8 @@ public class frmPrincipal extends javax.swing.JFrame
             if (index == null)
             {
                 index = 1;
-            } else
+            }
+            else
             {
                 index += 0;
             }
@@ -830,7 +860,8 @@ public class frmPrincipal extends javax.swing.JFrame
             if (index == null)
             {
                 index = 1;
-            } else
+            }
+            else
             {
                 index += 0;
             }
@@ -849,7 +880,8 @@ public class frmPrincipal extends javax.swing.JFrame
             if (index == null)
             {
                 index = 1;
-            } else
+            }
+            else
             {
                 index += 0;
             }
@@ -992,12 +1024,14 @@ public class frmPrincipal extends javax.swing.JFrame
                     if (controle.getMensagem().equals("concurso_vinculado"))
                     {
                         JOptionPane.showMessageDialog(null, "Não sera possivel excluir a banca, pois a mesma já se encontra vinculada a um concurso!");
-                    } else if (controle.getMensagem().equals("ok"))
+                    }
+                    else if (controle.getMensagem().equals("ok"))
                     {
                         JOptionPane.showMessageDialog(null, "Exclusão realizada com sucesso!");
                         frmCB.limparCampos();
                     }
-                } catch (SQLException ex)
+                }
+                catch (SQLException ex)
                 {
                     Logger.getLogger(frmPrincipal.class.getName()).log(Level.SEVERE, null, ex);
                 }
@@ -1088,12 +1122,14 @@ public class frmPrincipal extends javax.swing.JFrame
                     desativarBotoesFrmCC = false;
                     gravarAlteracaoFrmCB = false;//este botão serve para quando o usuario selecionar algum registro e clicar em alterar e caso clique no botão pesquisar e depois alterar ele consegue realizar a alteração
                 }
-            } else
+            }
+            else
             {
                 JOptionPane.showMessageDialog(null, "Não existem registros para serem consultados!");
             }
 
-        } else if (frmCB.isVisible())
+        }
+        else if (frmCB.isVisible())
         {
             JOptionPane.showMessageDialog(null, "Digite as informações antes de salvar.");
         }
@@ -1122,11 +1158,13 @@ public class frmPrincipal extends javax.swing.JFrame
                     desativarBotoesFrmCCE = false;
                     gravarAlteracaoFrmCCE = false;//este botão serve para quando o usuario selecionar algum registro e clicar em alterar e caso clique no botão pesquisar e depois alterar ele consegue realizar a alteração
                 }
-            } else
+            }
+            else
             {
                 JOptionPane.showMessageDialog(null, "Não existem registros para serem consultados!");
             }
-        } else if (frmCCE.isVisible())
+        }
+        else if (frmCCE.isVisible())
         {
             JOptionPane.showMessageDialog(null, "Digite as informações antes de salvar.");
         }
@@ -1161,11 +1199,13 @@ public class frmPrincipal extends javax.swing.JFrame
                     //ao pesquisar puxa as informações do concurso na tela
                     frmCC.carregarLabels();
                 }
-            } else
+            }
+            else
             {
                 JOptionPane.showMessageDialog(null, "Não existem registros para serem consultados!");
             }
-        } else if (frmCC.isVisible() && frmCC.getJtpCadastrarConcurso() == 0)
+        }
+        else if (frmCC.isVisible() && frmCC.getJtpCadastrarConcurso() == 0)
         {
             JOptionPane.showMessageDialog(null, "Digite as informações antes de salvar.");
         }
@@ -1204,6 +1244,7 @@ public class frmPrincipal extends javax.swing.JFrame
     private void mnCadastrarConcursoActionPerformed(java.awt.event.ActionEvent evt)//GEN-FIRST:event_mnCadastrarConcursoActionPerformed
     {//GEN-HEADEREND:event_mnCadastrarConcursoActionPerformed
         jdkpPrincipal.add(frmCC);
+        gerenciadorJanelasAbertas(gerenciador);
         frmCC.setVisible(true);
         frmCC.limparCampos();
         frmCC.desativarCampos();
@@ -1214,10 +1255,17 @@ public class frmPrincipal extends javax.swing.JFrame
     private void mnCadastrarCargoEmpregoActionPerformed(java.awt.event.ActionEvent evt)//GEN-FIRST:event_mnCadastrarCargoEmpregoActionPerformed
     {//GEN-HEADEREND:event_mnCadastrarCargoEmpregoActionPerformed
         jdkpPrincipal.add(frmCCE);
+        gerenciadorJanelasAbertas(gerenciador);
         frmCCE.setVisible(true);
         frmCCE.limparCampos();
         frmCCE.desativarCampos();
+
     }//GEN-LAST:event_mnCadastrarCargoEmpregoActionPerformed
+
+    private void jdkpPrincipalPropertyChange(java.beans.PropertyChangeEvent evt)//GEN-FIRST:event_jdkpPrincipalPropertyChange
+    {//GEN-HEADEREND:event_jdkpPrincipalPropertyChange
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jdkpPrincipalPropertyChange
 
     public static void main(String args[])
     {
@@ -1371,10 +1419,16 @@ public class frmPrincipal extends javax.swing.JFrame
             }
         });
     }
-    
+
     public static void redesenhar()
     {
         jdkpPrincipal.repaint();
+    }
+
+    public static void gerenciadorJanelasAbertas(GerenciadorDeJanelas gerenciador)
+    {
+        gerenciador = new GerenciadorDeJanelas();
+        gerenciador.gerenciadorJanela(jdkpPrincipal, menuJanela);
     }
 
 
@@ -1420,4 +1474,5 @@ public class frmPrincipal extends javax.swing.JFrame
     private java.awt.Panel pnMenu;
     private javax.swing.JPanel pnRodape;
     // End of variables declaration//GEN-END:variables
+
 }

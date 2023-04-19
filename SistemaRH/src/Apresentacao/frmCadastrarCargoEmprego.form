@@ -26,19 +26,17 @@
   <Layout>
     <DimensionLayout dim="0">
       <Group type="103" groupAlignment="0" attributes="0">
-          <Group type="102" attributes="0">
-              <EmptySpace max="-2" attributes="0"/>
-              <Component id="jpCadastroCargoEmprego" max="32767" attributes="0"/>
-              <EmptySpace max="-2" attributes="0"/>
+          <Group type="102" alignment="0" attributes="0">
+              <EmptySpace max="32767" attributes="0"/>
+              <Component id="jpCadastroCargoEmprego" min="-2" max="-2" attributes="0"/>
           </Group>
       </Group>
     </DimensionLayout>
     <DimensionLayout dim="1">
       <Group type="103" groupAlignment="0" attributes="0">
           <Group type="102" alignment="0" attributes="0">
-              <EmptySpace max="-2" attributes="0"/>
-              <Component id="jpCadastroCargoEmprego" min="-2" max="-2" attributes="0"/>
               <EmptySpace max="32767" attributes="0"/>
+              <Component id="jpCadastroCargoEmprego" min="-2" max="-2" attributes="0"/>
           </Group>
       </Group>
     </DimensionLayout>
@@ -60,48 +58,48 @@
           <Group type="103" groupAlignment="0" attributes="0">
               <Group type="102" attributes="0">
                   <EmptySpace max="-2" attributes="0"/>
-                  <Group type="103" groupAlignment="0" max="-2" attributes="0">
-                      <Component id="jtpLegislacao" max="32767" attributes="0"/>
-                      <Component id="jpCargoEmprego" max="32767" attributes="0"/>
+                  <Group type="103" groupAlignment="1" max="-2" attributes="0">
+                      <Component id="jtpLegislacao" alignment="0" max="32767" attributes="0"/>
+                      <Component id="jpCargoEmprego" alignment="0" max="32767" attributes="0"/>
                       <Component id="jpRequisitosDeProvimento" max="32767" attributes="0"/>
                   </Group>
                   <EmptySpace max="-2" attributes="0"/>
-                  <Group type="103" groupAlignment="0" attributes="0">
+                  <Group type="103" groupAlignment="1" attributes="0">
+                      <Component id="jtpRemuneracao" alignment="0" max="32767" attributes="0"/>
                       <Group type="102" attributes="0">
                           <Component id="jpCargaHoraria" min="-2" max="-2" attributes="0"/>
                           <EmptySpace max="-2" attributes="0"/>
                           <Component id="jpExigencias" max="32767" attributes="0"/>
                       </Group>
-                      <Component id="jtpRemuneracao" max="32767" attributes="0"/>
-                      <Component id="jpQuadro" alignment="0" max="32767" attributes="0"/>
+                      <Component id="jpQuadro" max="32767" attributes="0"/>
                   </Group>
-                  <EmptySpace max="-2" attributes="0"/>
+                  <EmptySpace min="-2" max="-2" attributes="0"/>
               </Group>
           </Group>
         </DimensionLayout>
         <DimensionLayout dim="1">
           <Group type="103" groupAlignment="0" attributes="0">
               <Group type="102" alignment="0" attributes="0">
-                  <EmptySpace pref="12" max="32767" attributes="0"/>
-                  <Group type="103" groupAlignment="0" max="-2" attributes="0">
-                      <Component id="jpCargoEmprego" max="32767" attributes="0"/>
-                      <Component id="jpExigencias" max="32767" attributes="0"/>
-                      <Component id="jpCargaHoraria" min="-2" max="-2" attributes="0"/>
+                  <EmptySpace max="-2" attributes="0"/>
+                  <Group type="103" groupAlignment="1" max="-2" attributes="0">
+                      <Component id="jpCargoEmprego" alignment="0" max="32767" attributes="0"/>
+                      <Component id="jpCargaHoraria" alignment="0" max="32767" attributes="0"/>
+                      <Component id="jpExigencias" min="-2" max="-2" attributes="0"/>
                   </Group>
                   <EmptySpace max="-2" attributes="0"/>
-                  <Group type="103" groupAlignment="0" max="-2" attributes="0">
-                      <Group type="102" attributes="0">
-                          <Component id="jtpRemuneracao" min="-2" pref="100" max="-2" attributes="0"/>
+                  <Group type="103" groupAlignment="1" attributes="0">
+                      <Group type="102" alignment="1" attributes="0">
+                          <Component id="jtpLegislacao" min="-2" max="-2" attributes="0"/>
+                          <EmptySpace max="-2" attributes="0"/>
+                          <Component id="jpRequisitosDeProvimento" min="-2" max="-2" attributes="0"/>
+                      </Group>
+                      <Group type="102" alignment="1" attributes="0">
+                          <Component id="jtpRemuneracao" min="-2" pref="97" max="-2" attributes="0"/>
                           <EmptySpace max="-2" attributes="0"/>
                           <Component id="jpQuadro" min="-2" max="-2" attributes="0"/>
                       </Group>
-                      <Group type="102" attributes="0">
-                          <Component id="jtpLegislacao" min="-2" pref="169" max="-2" attributes="0"/>
-                          <EmptySpace max="-2" attributes="0"/>
-                          <Component id="jpRequisitosDeProvimento" max="32767" attributes="0"/>
-                      </Group>
                   </Group>
-                  <EmptySpace min="-2" max="-2" attributes="0"/>
+                  <EmptySpace max="32767" attributes="0"/>
               </Group>
           </Group>
         </DimensionLayout>
@@ -132,18 +130,21 @@
                           <Component id="lblDescricaoCargoEmprego" min="-2" pref="150" max="-2" attributes="0"/>
                           <Component id="txtDescricaoCargoEmprego" min="-2" pref="238" max="-2" attributes="0"/>
                       </Group>
-                      <EmptySpace min="-2" pref="12" max="-2" attributes="0"/>
+                      <EmptySpace type="unrelated" max="-2" attributes="0"/>
                       <Group type="103" groupAlignment="0" attributes="0">
                           <Component id="txtCboCargoEmprego" min="-2" pref="77" max="-2" attributes="0"/>
                           <Component id="lblCboCargoEmprego" min="-2" pref="64" max="-2" attributes="0"/>
                       </Group>
-                      <EmptySpace type="unrelated" max="-2" attributes="0"/>
+                      <EmptySpace min="-2" pref="12" max="-2" attributes="0"/>
                       <Group type="103" groupAlignment="0" max="-2" attributes="0">
                           <Component id="lblRegimeJuridicoCargoEmprego" max="32767" attributes="0"/>
                           <Component id="cmbRegimeJuridico" min="-2" pref="109" max="-2" attributes="0"/>
                       </Group>
-                      <EmptySpace max="-2" attributes="0"/>
-                      <Component id="jCheckBox1" min="-2" max="-2" attributes="0"/>
+                      <EmptySpace type="unrelated" max="-2" attributes="0"/>
+                      <Group type="103" groupAlignment="0" attributes="0">
+                          <Component id="chkProfessor1" min="-2" max="-2" attributes="0"/>
+                          <Component id="chkProfessor" min="-2" max="-2" attributes="0"/>
+                      </Group>
                       <EmptySpace max="32767" attributes="0"/>
                   </Group>
               </Group>
@@ -154,28 +155,30 @@
                       <EmptySpace max="-2" attributes="0"/>
                       <Group type="103" groupAlignment="0" attributes="0">
                           <Component id="lblCodigoCargoEmprego" alignment="0" min="-2" max="-2" attributes="0"/>
-                          <Group type="102" alignment="0" attributes="0">
-                              <Group type="103" groupAlignment="3" attributes="0">
-                                  <Component id="lblRegimeJuridicoCargoEmprego" alignment="3" min="-2" max="-2" attributes="0"/>
-                                  <Component id="lblCboCargoEmprego" alignment="3" min="-2" max="-2" attributes="0"/>
-                              </Group>
-                              <EmptySpace max="-2" attributes="0"/>
-                              <Group type="103" groupAlignment="1" attributes="0">
-                                  <Component id="jCheckBox1" min="-2" max="-2" attributes="0"/>
-                                  <Component id="cmbRegimeJuridico" min="-2" max="-2" attributes="0"/>
-                              </Group>
+                          <Group type="103" alignment="0" groupAlignment="3" attributes="0">
+                              <Component id="lblRegimeJuridicoCargoEmprego" alignment="3" min="-2" max="-2" attributes="0"/>
+                              <Component id="chkProfessor1" alignment="3" min="-2" max="-2" attributes="0"/>
                           </Group>
                           <Component id="lblDescricaoCargoEmprego" alignment="0" min="-2" max="-2" attributes="0"/>
                           <Group type="103" alignment="0" groupAlignment="1" attributes="0">
-                              <Group type="102" attributes="0">
-                                  <EmptySpace min="22" pref="22" max="-2" attributes="0"/>
-                                  <Component id="txtCboCargoEmprego" min="-2" max="-2" attributes="0"/>
+                              <Group type="103" groupAlignment="0" attributes="0">
+                                  <Component id="lblCboCargoEmprego" alignment="0" min="-2" max="-2" attributes="0"/>
+                                  <Group type="102" alignment="0" attributes="0">
+                                      <EmptySpace min="-2" pref="20" max="-2" attributes="0"/>
+                                      <Component id="txtCboCargoEmprego" min="-2" max="-2" attributes="0"/>
+                                  </Group>
                               </Group>
                               <Group type="102" attributes="0">
-                                  <EmptySpace min="22" pref="22" max="-2" attributes="0"/>
-                                  <Group type="103" groupAlignment="3" attributes="0">
-                                      <Component id="txtDescricaoCargoEmprego" alignment="3" min="-2" max="-2" attributes="0"/>
-                                      <Component id="txtCodigoCargoEmprego" alignment="3" min="-2" max="-2" attributes="0"/>
+                                  <EmptySpace min="-2" pref="22" max="-2" attributes="0"/>
+                                  <Group type="103" groupAlignment="1" attributes="0">
+                                      <Group type="103" groupAlignment="3" attributes="0">
+                                          <Component id="cmbRegimeJuridico" alignment="3" min="-2" max="-2" attributes="0"/>
+                                          <Component id="chkProfessor" alignment="3" min="-2" max="-2" attributes="0"/>
+                                      </Group>
+                                      <Group type="103" groupAlignment="3" attributes="0">
+                                          <Component id="txtDescricaoCargoEmprego" alignment="3" min="-2" max="-2" attributes="0"/>
+                                          <Component id="txtCodigoCargoEmprego" alignment="3" min="-2" max="-2" attributes="0"/>
+                                      </Group>
                                   </Group>
                               </Group>
                           </Group>
@@ -223,12 +226,17 @@
                 <Property name="text" type="java.lang.String" value="CBO:"/>
               </Properties>
             </Component>
-            <Component class="javax.swing.JCheckBox" name="jCheckBox1">
+            <Component class="javax.swing.JCheckBox" name="chkProfessor">
               <Properties>
                 <Property name="text" type="java.lang.String" value="Professor"/>
               </Properties>
             </Component>
             <Component class="javax.swing.JTextField" name="txtCboCargoEmprego">
+            </Component>
+            <Component class="javax.swing.JCheckBox" name="chkProfessor1">
+              <Properties>
+                <Property name="text" type="java.lang.String" value="Ativo"/>
+              </Properties>
             </Component>
           </SubComponents>
         </Container>
@@ -266,7 +274,7 @@
                       <Component id="lblEscolaridade" min="-2" max="-2" attributes="0"/>
                       <EmptySpace max="-2" attributes="0"/>
                       <Component id="jComboBox1" min="-2" max="-2" attributes="0"/>
-                      <EmptySpace max="32767" attributes="0"/>
+                      <EmptySpace pref="12" max="32767" attributes="0"/>
                   </Group>
               </Group>
             </DimensionLayout>
@@ -279,11 +287,12 @@
                     <StringItem index="0" value="ENSINO FUNDAMENTAL INCOMPLETO"/>
                     <StringItem index="1" value="ENSINO FUNDAMENTAL COMPLETO"/>
                     <StringItem index="2" value="ENSINO M&#xc9;DIO COMPLETO"/>
-                    <StringItem index="3" value="ENSINO T&#xc9;CNICO "/>
-                    <StringItem index="4" value="ENSINO SUPERIOR "/>
+                    <StringItem index="3" value="ENSINO T&#xc9;CNICO COMPLETO"/>
+                    <StringItem index="4" value="ENSINO SUPERIOR COMPLETO"/>
                     <StringItem index="5" value=" "/>
                   </StringArray>
                 </Property>
+                <Property name="selectedIndex" type="int" value="4"/>
               </Properties>
               <AuxValues>
                 <AuxValue name="JavaCodeGenerator_TypeParameters" type="java.lang.String" value="&lt;String&gt;"/>
@@ -338,7 +347,7 @@
                           <Component id="lblSemanal1" alignment="3" min="-2" max="-2" attributes="0"/>
                           <Component id="cmbCargaHorariaMensal" alignment="3" min="-2" max="-2" attributes="0"/>
                       </Group>
-                      <EmptySpace pref="10" max="32767" attributes="0"/>
+                      <EmptySpace max="32767" attributes="0"/>
                   </Group>
               </Group>
             </DimensionLayout>
@@ -417,7 +426,7 @@
               <Group type="103" groupAlignment="0" attributes="0">
                   <Group type="102" alignment="0" attributes="0">
                       <EmptySpace max="-2" attributes="0"/>
-                      <Component id="jScrollPane4" pref="158" max="32767" attributes="0"/>
+                      <Component id="jScrollPane4" pref="161" max="32767" attributes="0"/>
                       <EmptySpace max="-2" attributes="0"/>
                   </Group>
               </Group>
@@ -495,17 +504,19 @@
                           <EmptySpace min="-2" pref="11" max="-2" attributes="0"/>
                           <Group type="103" groupAlignment="0" attributes="0">
                               <Group type="103" alignment="0" groupAlignment="3" attributes="0">
-                                  <Component id="lblGrau" alignment="3" min="-2" max="-2" attributes="0"/>
-                                  <Component id="cmbGrau" alignment="3" min="-2" max="-2" attributes="0"/>
                                   <Component id="jLabel3" alignment="3" min="-2" max="-2" attributes="0"/>
                                   <Component id="jLabel4" alignment="3" min="-2" max="-2" attributes="0"/>
                               </Group>
                               <Group type="103" groupAlignment="3" attributes="0">
                                   <Component id="lblReferenciaSalarial" alignment="3" min="-2" max="-2" attributes="0"/>
                                   <Component id="cmbReferenciaSalarial" alignment="3" min="-2" max="-2" attributes="0"/>
+                                  <Group type="103" alignment="3" groupAlignment="3" attributes="0">
+                                      <Component id="lblGrau" alignment="3" min="-2" max="-2" attributes="0"/>
+                                      <Component id="cmbGrau" alignment="3" min="-2" max="-2" attributes="0"/>
+                                  </Group>
                               </Group>
                           </Group>
-                          <EmptySpace pref="9" max="32767" attributes="0"/>
+                          <EmptySpace pref="7" max="32767" attributes="0"/>
                       </Group>
                   </Group>
                 </DimensionLayout>
@@ -625,31 +636,31 @@
                           <Component id="lblGrauProf" min="-2" max="-2" attributes="0"/>
                           <EmptySpace max="-2" attributes="0"/>
                           <Component id="cmbGrauProf" min="-2" max="-2" attributes="0"/>
-                          <EmptySpace max="32767" attributes="0"/>
+                          <EmptySpace type="unrelated" max="-2" attributes="0"/>
                           <Component id="jLabel5" min="-2" max="-2" attributes="0"/>
                           <EmptySpace max="-2" attributes="0"/>
                           <Component id="jLabel6" min="-2" max="-2" attributes="0"/>
-                          <EmptySpace min="-2" pref="46" max="-2" attributes="0"/>
+                          <EmptySpace pref="40" max="32767" attributes="0"/>
                       </Group>
                   </Group>
                 </DimensionLayout>
                 <DimensionLayout dim="1">
                   <Group type="103" groupAlignment="0" attributes="0">
                       <Group type="102" alignment="0" attributes="0">
-                          <EmptySpace min="-2" pref="11" max="-2" attributes="0"/>
-                          <Group type="103" groupAlignment="0" attributes="0">
-                              <Group type="103" alignment="0" groupAlignment="3" attributes="0">
+                          <EmptySpace min="-2" pref="7" max="-2" attributes="0"/>
+                          <Group type="103" groupAlignment="3" attributes="0">
+                              <Component id="lblFaixa" alignment="3" min="-2" max="-2" attributes="0"/>
+                              <Component id="cmbFaixa" alignment="3" min="-2" max="-2" attributes="0"/>
+                              <Group type="103" alignment="3" groupAlignment="3" attributes="0">
                                   <Component id="lblGrauProf" alignment="3" min="-2" max="-2" attributes="0"/>
                                   <Component id="cmbGrauProf" alignment="3" min="-2" max="-2" attributes="0"/>
-                                  <Component id="jLabel5" alignment="3" min="-2" max="-2" attributes="0"/>
-                                  <Component id="jLabel6" alignment="3" min="-2" max="-2" attributes="0"/>
-                              </Group>
-                              <Group type="103" groupAlignment="3" attributes="0">
-                                  <Component id="lblFaixa" alignment="3" min="-2" max="-2" attributes="0"/>
-                                  <Component id="cmbFaixa" alignment="3" min="-2" max="-2" attributes="0"/>
+                                  <Group type="103" alignment="3" groupAlignment="3" attributes="0">
+                                      <Component id="jLabel5" alignment="3" min="-2" max="-2" attributes="0"/>
+                                      <Component id="jLabel6" alignment="3" min="-2" max="-2" attributes="0"/>
+                                  </Group>
                               </Group>
                           </Group>
-                          <EmptySpace pref="9" max="32767" attributes="0"/>
+                          <EmptySpace pref="10" max="32767" attributes="0"/>
                       </Group>
                   </Group>
                 </DimensionLayout>
@@ -775,7 +786,7 @@
                               <Component id="lblEmentaCriacao" min="-2" max="-2" attributes="0"/>
                               <Component id="jScrollPane3" min="-2" pref="322" max="-2" attributes="0"/>
                           </Group>
-                          <EmptySpace min="0" pref="77" max="32767" attributes="0"/>
+                          <EmptySpace min="0" pref="110" max="32767" attributes="0"/>
                       </Group>
                   </Group>
                 </DimensionLayout>
@@ -879,7 +890,7 @@
                               <Component id="lblEmentaExtincao" alignment="0" min="-2" max="-2" attributes="0"/>
                               <Component id="jScrollPane5" alignment="0" min="-2" pref="322" max="-2" attributes="0"/>
                           </Group>
-                          <EmptySpace min="0" pref="77" max="32767" attributes="0"/>
+                          <EmptySpace min="0" pref="110" max="32767" attributes="0"/>
                       </Group>
                   </Group>
                 </DimensionLayout>
@@ -974,7 +985,7 @@
             <DimensionLayout dim="1">
               <Group type="103" groupAlignment="0" attributes="0">
                   <Group type="102" alignment="0" attributes="0">
-                      <Component id="jScrollPane1" max="32767" attributes="0"/>
+                      <Component id="jScrollPane1" pref="95" max="32767" attributes="0"/>
                       <EmptySpace max="-2" attributes="0"/>
                   </Group>
               </Group>
