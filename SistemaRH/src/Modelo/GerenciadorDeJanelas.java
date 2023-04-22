@@ -4,6 +4,7 @@
  */
 package Modelo;
 
+import java.awt.Component;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.beans.PropertyVetoException;
@@ -13,6 +14,7 @@ import javax.swing.JDesktopPane;
 import javax.swing.JInternalFrame;
 import javax.swing.JMenu;
 import javax.swing.JMenuItem;
+import javax.swing.JSeparator;
 import javax.swing.event.InternalFrameAdapter;
 import javax.swing.event.InternalFrameEvent;
 
@@ -23,66 +25,106 @@ import javax.swing.event.InternalFrameEvent;
 public class GerenciadorDeJanelas
 {
 
-    private Set<String> frameTitles = new HashSet<>();
     String title;
+    boolean temSeparador = false;
 
-    public void gerenciadorJanela(JDesktopPane jdp, JMenu mn)
+    public void gerenciadorJanela(JDesktopPane jdp, JMenu mn, JMenuItem fecharJanelas)
     {
         JInternalFrame[] janelas = jdp.getAllFrames();
 
         for (JInternalFrame janela : janelas)
         {
-            adicionarJiFrameNoMenu(janela, mn);
+            adicionarSeparadorNoMenu(mn);
+            adicionarJiFrameNoMenu(janela, mn, fecharJanelas, jdp);
+            fecharTodasAsJanelasDoMenu(janela, mn, fecharJanelas, jdp);
         }
     }
 
-    private void adicionarJiFrameNoMenu(final JInternalFrame frame, JMenu menuJanelas)
+    public void adicionarSeparadorNoMenu(JMenu menuJanelas)
+    {
+
+        //verifica se ja existe um separador na janela
+        Component[] componentes = menuJanelas.getMenuComponents();
+        for (Component componente : componentes)
+        {
+            if (componente instanceof JSeparator)
+            {
+                temSeparador = true;
+                break;
+            }
+        }
+
+        //Se não houver separador cria um
+        if (temSeparador == false)
+        {
+            menuJanelas.addSeparator();
+        }
+    }
+
+    private void adicionarJiFrameNoMenu(final JInternalFrame frame, JMenu menuJanelas, JMenuItem fecharJanelas, JDesktopPane jdp)
     {
         title = frame.getTitle();
-        if (frameTitles.contains(title))
+
+        for (int i = 0; i < menuJanelas.getMenuComponentCount(); i++)
         {
-            System.out.println("Título já adicionado: " + title); // adicionado para fins de debug
-            return; // título já adicionado, retorna sem adicionar ao menu
-        }
-        else
-        {
-            frameTitles.add(title); // adiciona título ao set de títulos
-            for (int i = 0; i < menuJanelas.getMenuComponentCount(); i++)
+            Component componentes = menuJanelas.getMenuComponent(i);
+            if (componentes instanceof JMenuItem)
             {
                 JMenuItem menuItem = (JMenuItem) menuJanelas.getMenuComponent(i);
+
                 if (menuItem.getText().equals(title))
                 {
-                    return; // título já adicionado, retorna sem adicionar ao menu
+                    return;
                 }
             }
-            JMenuItem menuItem = new JMenuItem(title);
-            menuItem.addActionListener(new ActionListener()
-            {
-                public void actionPerformed(ActionEvent e)
-                {
-                    try
-                    {
-                        frame.setSelected(true);
-                    }
-                    catch (PropertyVetoException ex)
-                    {
-                        ex.printStackTrace();
-                    }
-                }
-            });
-            menuJanelas.add(menuItem);
-
-            // adiciona ouvinte de eventos para remover item do menu quando a janela é fechada
-            frame.addInternalFrameListener(new InternalFrameAdapter()
-            {
-                @Override
-                public void internalFrameClosed(InternalFrameEvent e)
-                {
-                    menuJanelas.remove(menuItem);
-                    frameTitles.remove(title);
-                }
-            });
         }
+
+        //focar na janela clicada
+        JMenuItem menuItem = new JMenuItem(title);
+        //adiciona o nome da janela aberta no menu
+        menuJanelas.add(menuItem);
+        menuItem.addActionListener(new ActionListener()
+        {
+            public void actionPerformed(ActionEvent e)
+            {
+                try
+                {
+                    frame.setSelected(true);
+                }
+                catch (PropertyVetoException ex)
+                {
+                    ex.printStackTrace();
+                }
+            }
+        });
+
+        // adiciona ouvinte de eventos para remover item do menu quando a janela é fechada
+        frame.addInternalFrameListener(new InternalFrameAdapter()
+        {
+            @Override
+            public void internalFrameClosed(InternalFrameEvent e)
+            {
+                menuJanelas.remove(menuItem);
+            }
+        });
+    }
+
+    private void fecharTodasAsJanelasDoMenu(JInternalFrame janela, JMenu menuJanelas, JMenuItem fecharJanelas, JDesktopPane jdp)
+    {
+        //fechar todas as janelas ao clicar no item fechar todas as janelas
+        fecharJanelas.addActionListener(new ActionListener()
+        {
+            public void actionPerformed(ActionEvent e)
+            {
+                //fechar janelas abertas
+                for (JInternalFrame jif : jdp.getAllFrames())
+                {
+                    jif.dispose();
+                    jdp.removeAll();
+                    jdp.repaint();
+                }
+            }
+        });
     }
 
 }

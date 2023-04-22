@@ -19,8 +19,11 @@ import java.util.logging.Logger;
 import javax.swing.AbstractAction;
 import javax.swing.JComponent;
 import javax.swing.JDesktopPane;
+import javax.swing.JInternalFrame;
 import javax.swing.JMenu;
+import javax.swing.JMenuItem;
 import javax.swing.JOptionPane;
+import javax.swing.JSeparator;
 import javax.swing.JTabbedPane;
 import javax.swing.KeyStroke;
 
@@ -31,6 +34,7 @@ import javax.swing.KeyStroke;
 public class frmPrincipal extends javax.swing.JFrame
 {
 
+    public int contador = 0;
     frmPortariaDeNomeacao frmPN;
     frmCadastrarUsuario frmCadU;
     frmConfigurarPastaRaiz frmConfigurarPastaRaiz;
@@ -41,7 +45,9 @@ public class frmPrincipal extends javax.swing.JFrame
 
     GerenciadorDeJanelas gerenciador;
 
+    //criação do menuJanela que gerencia janelas abertas
     static JMenu menuJanela = new JMenu("Janela");
+    static JMenuItem fecharTodasJanelas = new JMenuItem("Fechar todas (CTRL + T)");
 
     private boolean desativarBotoesFrmCC;//essa variavel bloqueia os botoes de menu para não deixar o cara tentar mudar de registro na tela de cadastro de concurso ao clicar no botao novo, por exemplo
 
@@ -96,7 +102,7 @@ public class frmPrincipal extends javax.swing.JFrame
 
         //menu gerenciador janelas abertas
         mnBarra.add(menuJanela);
-
+        menuJanela.add(fecharTodasJanelas);
     }
 
     @SuppressWarnings("unchecked")
@@ -615,19 +621,31 @@ public class frmPrincipal extends javax.swing.JFrame
     }//GEN-LAST:event_mnAnoActionPerformed
 
     private void mnPreCadastroFuncionarioActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_mnPreCadastroFuncionarioActionPerformed
-        jdkpPrincipal.add(frmPC);
-        gerenciadorJanelasAbertas(gerenciador);
-        frmPC.setVisible(true);
+        if (verificarSeAJanelaJaEstaAberta(frmPC, jdkpPrincipal))
+        {
+            frmPC.toFront();
+        }
+        else
+        {
+            jdkpPrincipal.add(frmPC, 0);
+            gerenciadorJanelasAbertas(gerenciador);
+            frmPC.setVisible(true);
+        }
     }//GEN-LAST:event_mnPreCadastroFuncionarioActionPerformed
 
     private void mnCadastrarBancaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_mnCadastrarBancaActionPerformed
-
-        jdkpPrincipal.add(frmCB);
-        atualizador(gerenciador);
-        frmCB.setVisible(true);
-        frmCB.limparCampos();
-        frmCB.desativarCampos();
-
+        if (verificarSeAJanelaJaEstaAberta(frmCB, jdkpPrincipal))
+        {
+            frmCB.toFront();
+        }
+        else
+        {
+            jdkpPrincipal.add(frmCB, 0);
+            gerenciadorJanelasAbertas(gerenciador);
+            frmCB.setVisible(true);
+            frmCB.limparCampos();
+            frmCB.desativarCampos();
+        }
     }//GEN-LAST:event_mnCadastrarBancaActionPerformed
 
 
@@ -1243,23 +1261,36 @@ public class frmPrincipal extends javax.swing.JFrame
 
     private void mnCadastrarConcursoActionPerformed(java.awt.event.ActionEvent evt)//GEN-FIRST:event_mnCadastrarConcursoActionPerformed
     {//GEN-HEADEREND:event_mnCadastrarConcursoActionPerformed
-        jdkpPrincipal.add(frmCC);
-        gerenciadorJanelasAbertas(gerenciador);
-        frmCC.setVisible(true);
-        frmCC.limparCampos();
-        frmCC.desativarCampos();
-        gravarAlteracaoFrmCC = false;
-        index = 0;
+        if (verificarSeAJanelaJaEstaAberta(frmCC, jdkpPrincipal))
+        {
+            frmCC.toFront();
+        }
+        else
+        {
+            jdkpPrincipal.add(frmCC, 0);
+            gerenciadorJanelasAbertas(gerenciador);
+            frmCC.setVisible(true);
+            frmCC.limparCampos();
+            frmCC.desativarCampos();
+            gravarAlteracaoFrmCC = false;
+            index = 0;
+        }
     }//GEN-LAST:event_mnCadastrarConcursoActionPerformed
 
     private void mnCadastrarCargoEmpregoActionPerformed(java.awt.event.ActionEvent evt)//GEN-FIRST:event_mnCadastrarCargoEmpregoActionPerformed
     {//GEN-HEADEREND:event_mnCadastrarCargoEmpregoActionPerformed
-        jdkpPrincipal.add(frmCCE);
-        gerenciadorJanelasAbertas(gerenciador);
-        frmCCE.setVisible(true);
-        frmCCE.limparCampos();
-        frmCCE.desativarCampos();
-
+        if (verificarSeAJanelaJaEstaAberta(frmCCE, jdkpPrincipal))
+        {
+            frmCCE.toFront();
+        }
+        else
+        {
+            jdkpPrincipal.add(frmCCE, 0);
+            gerenciadorJanelasAbertas(gerenciador);
+            frmCCE.setVisible(true);
+            frmCCE.limparCampos();
+            frmCCE.desativarCampos();
+        }
     }//GEN-LAST:event_mnCadastrarCargoEmpregoActionPerformed
 
     private void jdkpPrincipalPropertyChange(java.beans.PropertyChangeEvent evt)//GEN-FIRST:event_jdkpPrincipalPropertyChange
@@ -1420,15 +1451,31 @@ public class frmPrincipal extends javax.swing.JFrame
         });
     }
 
+    public boolean verificarSeAJanelaJaEstaAberta(JInternalFrame frm, JDesktopPane jdk)
+    {
+
+        JInternalFrame[] janelasAbertas = jdk.getAllFrames();
+        for (JInternalFrame janelaAnalisada : janelasAbertas)
+        {
+            if (janelaAnalisada.isShowing() && janelaAnalisada.equals(frm))
+            {
+                return true;
+            }
+        }
+        return false;
+    }
+
     public static void redesenhar()
     {
+        jdkpPrincipal.revalidate();
         jdkpPrincipal.repaint();
     }
 
     public static void gerenciadorJanelasAbertas(GerenciadorDeJanelas gerenciador)
     {
         gerenciador = new GerenciadorDeJanelas();
-        gerenciador.gerenciadorJanela(jdkpPrincipal, menuJanela);
+        gerenciador.gerenciadorJanela(jdkpPrincipal, menuJanela, fecharTodasJanelas);
+        //redesenhar();
     }
 
 
