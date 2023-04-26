@@ -27,17 +27,15 @@ public class GerenciadorDeJanelas
 
     String title;
     boolean temSeparador = false;
+    static int contador = 1;
 
-    public void gerenciadorJanela(JDesktopPane jdp, JMenu mn, JMenuItem fecharJanelas)
+    public void gerenciadorJanela(JInternalFrame janela, JDesktopPane jdp, JMenu mn, JMenuItem fecharJanelas)
     {
-        JInternalFrame[] janelas = jdp.getAllFrames();
 
-        for (JInternalFrame janela : janelas)
-        {
-            adicionarSeparadorNoMenu(mn);
-            adicionarJiFrameNoMenu(janela, mn, fecharJanelas, jdp);
-            fecharTodasAsJanelasDoMenu(janela, mn, fecharJanelas, jdp);
-        }
+        adicionarSeparadorNoMenu(mn);
+        adicionarJiFrameNoMenu(janela, mn, fecharJanelas, jdp);
+        fecharTodasAsJanelasDoMenu(janela, mn, fecharJanelas, jdp);
+
     }
 
     public void adicionarSeparadorNoMenu(JMenu menuJanelas)
@@ -63,7 +61,8 @@ public class GerenciadorDeJanelas
 
     private void adicionarJiFrameNoMenu(final JInternalFrame frame, JMenu menuJanelas, JMenuItem fecharJanelas, JDesktopPane jdp)
     {
-        title = frame.getTitle();
+        title = contador++ + " - " + frame.getTitle();
+        System.out.println(title);
 
         for (int i = 0; i < menuJanelas.getMenuComponentCount(); i++)
         {
@@ -81,8 +80,10 @@ public class GerenciadorDeJanelas
 
         //focar na janela clicada
         JMenuItem menuItem = new JMenuItem(title);
+
         //adiciona o nome da janela aberta no menu
         menuJanelas.add(menuItem);
+
         menuItem.addActionListener(new ActionListener()
         {
             public void actionPerformed(ActionEvent e)
@@ -105,6 +106,7 @@ public class GerenciadorDeJanelas
             public void internalFrameClosed(InternalFrameEvent e)
             {
                 menuJanelas.remove(menuItem);
+                contador = contador - 1;
             }
         });
     }
@@ -122,6 +124,7 @@ public class GerenciadorDeJanelas
                     jif.dispose();
                     jdp.removeAll();
                     jdp.repaint();
+                    contador = 1;
                 }
             }
         });

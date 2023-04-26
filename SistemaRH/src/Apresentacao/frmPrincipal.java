@@ -7,13 +7,16 @@ package Apresentacao;
 import Modelo.CadastrarBancaControle;
 import Modelo.CadastrarCargoEmpregoControle;
 import Modelo.CadastrarConcursoControle;
+import Modelo.GerenciadorDeCoresDaInterface;
 import Modelo.GerenciadorDeJanelas;
 import Modelo.GerenciadorDeJanelas;
+import java.awt.Color;
 import java.awt.event.ActionEvent;
 import java.awt.event.KeyEvent;
 import java.awt.event.WindowEvent;
 import java.awt.event.WindowListener;
 import java.sql.SQLException;
+import java.util.ArrayList;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.AbstractAction;
@@ -42,12 +45,15 @@ public class frmPrincipal extends javax.swing.JFrame
     frmCadastrarBanca frmCB;
     frmCadastrarCargoEmprego frmCCE;
     frmCadastrarConcurso frmCC;
+    frmLegislacao frmLeg;
 
+    //gerenciadores
     GerenciadorDeJanelas gerenciador;
+    GerenciadorDeCoresDaInterface gerenciadorCores;
 
     //criação do menuJanela que gerencia janelas abertas
     static JMenu menuJanela = new JMenu("Janela");
-    static JMenuItem fecharTodasJanelas = new JMenuItem("Fechar todas (CTRL + T)");
+    static JMenuItem fecharTodasJanelas = new JMenuItem("- Fechar Todas -");
 
     private boolean desativarBotoesFrmCC;//essa variavel bloqueia os botoes de menu para não deixar o cara tentar mudar de registro na tela de cadastro de concurso ao clicar no botao novo, por exemplo
 
@@ -92,6 +98,7 @@ public class frmPrincipal extends javax.swing.JFrame
         atalhoAnterior();
         atalhoProximo();
         atalhoUltimo();
+
         frmCB = new frmCadastrarBanca();
         frmPN = new frmPortariaDeNomeacao(null, true);
         frmCadU = new frmCadastrarUsuario(null, true);
@@ -99,10 +106,18 @@ public class frmPrincipal extends javax.swing.JFrame
         frmPC = new frmPreCadastro();
         frmCCE = new frmCadastrarCargoEmprego();
         frmCC = new frmCadastrarConcurso();
+        frmLeg = new frmLegislacao();
 
         //menu gerenciador janelas abertas
         mnBarra.add(menuJanela);
         menuJanela.add(fecharTodasJanelas);
+
+        //gerenciador
+        gerenciador = new GerenciadorDeJanelas();
+        gerenciadorCores = new GerenciadorDeCoresDaInterface();
+
+        //definição
+        definicoesSistema();
     }
 
     @SuppressWarnings("unchecked")
@@ -110,7 +125,7 @@ public class frmPrincipal extends javax.swing.JFrame
     private void initComponents()
     {
 
-        jDesktopPane2 = new javax.swing.JDesktopPane();
+        jdkpCabecalho = new javax.swing.JDesktopPane();
         pnMenu = new java.awt.Panel();
         btnSair = new javax.swing.JButton();
         lblSair = new javax.swing.JLabel();
@@ -132,12 +147,15 @@ public class frmPrincipal extends javax.swing.JFrame
         lblAlterar = new javax.swing.JLabel();
         btnPesquisar = new javax.swing.JButton();
         btnNovo = new javax.swing.JButton();
+        jdkpPrincipal = new javax.swing.JDesktopPane();
+        jdkpRodape = new javax.swing.JDesktopPane();
         pnRodape = new javax.swing.JPanel();
         lblUsuarioConectado = new javax.swing.JLabel();
         lblUsuario = new javax.swing.JLabel();
-        jdkpPrincipal = new javax.swing.JDesktopPane();
         mnBarra = new javax.swing.JMenuBar();
-        jMenu1 = new javax.swing.JMenu();
+        mnAdministracao = new javax.swing.JMenu();
+        mnLegislacao = new javax.swing.JMenuItem();
+        mnCargoEmprego = new javax.swing.JMenu();
         mnCadastrarCargoEmprego = new javax.swing.JMenuItem();
         mnConcurso = new javax.swing.JMenu();
         mnCadastrarBanca = new javax.swing.JMenuItem();
@@ -148,7 +166,7 @@ public class frmPrincipal extends javax.swing.JFrame
         mnPortarias = new javax.swing.JMenu();
         mnPortariaNomeacao = new javax.swing.JMenuItem();
         mnConfiguracao = new javax.swing.JMenu();
-        jMenuItem2 = new javax.swing.JMenuItem();
+        mnCadastrarUsuario = new javax.swing.JMenuItem();
         mnAno = new javax.swing.JMenuItem();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
@@ -162,7 +180,8 @@ public class frmPrincipal extends javax.swing.JFrame
             }
         });
 
-        pnMenu.setBackground(new java.awt.Color(204, 204, 204));
+        jdkpCabecalho.setBorder(javax.swing.BorderFactory.createEtchedBorder());
+
         pnMenu.setForeground(new java.awt.Color(204, 204, 204));
 
         btnSair.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Icones/sair.png"))); // NOI18N
@@ -307,7 +326,7 @@ public class frmPrincipal extends javax.swing.JFrame
         pnMenuLayout.setHorizontalGroup(
             pnMenuLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(pnMenuLayout.createSequentialGroup()
-                .addContainerGap()
+                .addGap(34, 34, 34)
                 .addGroup(pnMenuLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(lblSair)
                     .addGroup(pnMenuLayout.createSequentialGroup()
@@ -364,12 +383,12 @@ public class frmPrincipal extends javax.swing.JFrame
                         .addGap(10, 10, 10)
                         .addComponent(btnUltimo))
                     .addComponent(jLabel7))
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addContainerGap(95, Short.MAX_VALUE))
         );
         pnMenuLayout.setVerticalGroup(
             pnMenuLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(pnMenuLayout.createSequentialGroup()
-                .addContainerGap()
+                .addGap(14, 14, 14)
                 .addGroup(pnMenuLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                     .addComponent(jLabel6)
                     .addGroup(pnMenuLayout.createSequentialGroup()
@@ -413,6 +432,41 @@ public class frmPrincipal extends javax.swing.JFrame
 
         btnSalvar.getAccessibleContext().setAccessibleDescription("Salvar");
 
+        jdkpCabecalho.setLayer(pnMenu, javax.swing.JLayeredPane.DEFAULT_LAYER);
+
+        javax.swing.GroupLayout jdkpCabecalhoLayout = new javax.swing.GroupLayout(jdkpCabecalho);
+        jdkpCabecalho.setLayout(jdkpCabecalhoLayout);
+        jdkpCabecalhoLayout.setHorizontalGroup(
+            jdkpCabecalhoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addComponent(pnMenu, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+        );
+        jdkpCabecalhoLayout.setVerticalGroup(
+            jdkpCabecalhoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addComponent(pnMenu, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+        );
+
+        jdkpPrincipal.setBorder(javax.swing.BorderFactory.createEtchedBorder());
+        jdkpPrincipal.addPropertyChangeListener(new java.beans.PropertyChangeListener()
+        {
+            public void propertyChange(java.beans.PropertyChangeEvent evt)
+            {
+                jdkpPrincipalPropertyChange(evt);
+            }
+        });
+
+        javax.swing.GroupLayout jdkpPrincipalLayout = new javax.swing.GroupLayout(jdkpPrincipal);
+        jdkpPrincipal.setLayout(jdkpPrincipalLayout);
+        jdkpPrincipalLayout.setHorizontalGroup(
+            jdkpPrincipalLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 1114, Short.MAX_VALUE)
+        );
+        jdkpPrincipalLayout.setVerticalGroup(
+            jdkpPrincipalLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 538, Short.MAX_VALUE)
+        );
+
+        jdkpRodape.setBorder(javax.swing.BorderFactory.createEtchedBorder());
+
         pnRodape.setBackground(new java.awt.Color(204, 204, 204));
 
         lblUsuarioConectado.setText("michel");
@@ -432,58 +486,42 @@ public class frmPrincipal extends javax.swing.JFrame
         );
         pnRodapeLayout.setVerticalGroup(
             pnRodapeLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(pnRodapeLayout.createSequentialGroup()
-                .addContainerGap()
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, pnRodapeLayout.createSequentialGroup()
+                .addContainerGap(12, Short.MAX_VALUE)
                 .addGroup(pnRodapeLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(lblUsuarioConectado)
                     .addComponent(lblUsuario))
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-        );
-
-        jdkpPrincipal.addPropertyChangeListener(new java.beans.PropertyChangeListener()
-        {
-            public void propertyChange(java.beans.PropertyChangeEvent evt)
-            {
-                jdkpPrincipalPropertyChange(evt);
-            }
-        });
-
-        javax.swing.GroupLayout jdkpPrincipalLayout = new javax.swing.GroupLayout(jdkpPrincipal);
-        jdkpPrincipal.setLayout(jdkpPrincipalLayout);
-        jdkpPrincipalLayout.setHorizontalGroup(
-            jdkpPrincipalLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 1362, Short.MAX_VALUE)
-        );
-        jdkpPrincipalLayout.setVerticalGroup(
-            jdkpPrincipalLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 621, Short.MAX_VALUE)
-        );
-
-        jDesktopPane2.setLayer(pnMenu, javax.swing.JLayeredPane.DEFAULT_LAYER);
-        jDesktopPane2.setLayer(pnRodape, javax.swing.JLayeredPane.DEFAULT_LAYER);
-        jDesktopPane2.setLayer(jdkpPrincipal, javax.swing.JLayeredPane.DEFAULT_LAYER);
-
-        javax.swing.GroupLayout jDesktopPane2Layout = new javax.swing.GroupLayout(jDesktopPane2);
-        jDesktopPane2.setLayout(jDesktopPane2Layout);
-        jDesktopPane2Layout.setHorizontalGroup(
-            jDesktopPane2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(pnMenu, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-            .addComponent(pnRodape, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jDesktopPane2Layout.createSequentialGroup()
-                .addComponent(jdkpPrincipal)
                 .addContainerGap())
         );
-        jDesktopPane2Layout.setVerticalGroup(
-            jDesktopPane2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jDesktopPane2Layout.createSequentialGroup()
-                .addComponent(pnMenu, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jdkpPrincipal)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(pnRodape, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+
+        jdkpRodape.setLayer(pnRodape, javax.swing.JLayeredPane.DEFAULT_LAYER);
+
+        javax.swing.GroupLayout jdkpRodapeLayout = new javax.swing.GroupLayout(jdkpRodape);
+        jdkpRodape.setLayout(jdkpRodapeLayout);
+        jdkpRodapeLayout.setHorizontalGroup(
+            jdkpRodapeLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addComponent(pnRodape, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+        );
+        jdkpRodapeLayout.setVerticalGroup(
+            jdkpRodapeLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addComponent(pnRodape, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
         );
 
-        jMenu1.setText("Cargo/Emprego");
+        mnAdministracao.setText("Administração");
+
+        mnLegislacao.setText("1 - Legislação");
+        mnLegislacao.addActionListener(new java.awt.event.ActionListener()
+        {
+            public void actionPerformed(java.awt.event.ActionEvent evt)
+            {
+                mnLegislacaoActionPerformed(evt);
+            }
+        });
+        mnAdministracao.add(mnLegislacao);
+
+        mnBarra.add(mnAdministracao);
+
+        mnCargoEmprego.setText("Cargo/Emprego");
 
         mnCadastrarCargoEmprego.setText("1 - Cadastrar Cargo/Emprego");
         mnCadastrarCargoEmprego.addActionListener(new java.awt.event.ActionListener()
@@ -493,9 +531,9 @@ public class frmPrincipal extends javax.swing.JFrame
                 mnCadastrarCargoEmpregoActionPerformed(evt);
             }
         });
-        jMenu1.add(mnCadastrarCargoEmprego);
+        mnCargoEmprego.add(mnCadastrarCargoEmprego);
 
-        mnBarra.add(jMenu1);
+        mnBarra.add(mnCargoEmprego);
 
         mnConcurso.setText("Concurso");
 
@@ -561,15 +599,15 @@ public class frmPrincipal extends javax.swing.JFrame
 
         mnConfiguracao.setText("Configuração");
 
-        jMenuItem2.setText("1 - Cadastrar Usuário");
-        jMenuItem2.addActionListener(new java.awt.event.ActionListener()
+        mnCadastrarUsuario.setText("1 - Cadastrar Usuário");
+        mnCadastrarUsuario.addActionListener(new java.awt.event.ActionListener()
         {
             public void actionPerformed(java.awt.event.ActionEvent evt)
             {
-                jMenuItem2ActionPerformed(evt);
+                mnCadastrarUsuarioActionPerformed(evt);
             }
         });
-        mnConfiguracao.add(jMenuItem2);
+        mnConfiguracao.add(mnCadastrarUsuario);
 
         mnAno.setText("2 - Configurar Pasta Raiz");
         mnAno.addActionListener(new java.awt.event.ActionListener()
@@ -589,11 +627,22 @@ public class frmPrincipal extends javax.swing.JFrame
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jDesktopPane2)
+            .addComponent(jdkpCabecalho)
+            .addComponent(jdkpRodape)
+            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                .addComponent(jdkpPrincipal, javax.swing.GroupLayout.Alignment.TRAILING))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jDesktopPane2)
+            .addGroup(layout.createSequentialGroup()
+                .addComponent(jdkpCabecalho, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 541, Short.MAX_VALUE)
+                .addComponent(jdkpRodape, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                .addGroup(layout.createSequentialGroup()
+                    .addGap(103, 103, 103)
+                    .addComponent(jdkpPrincipal, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addContainerGap(38, Short.MAX_VALUE)))
         );
 
         pack();
@@ -601,23 +650,23 @@ public class frmPrincipal extends javax.swing.JFrame
     }// </editor-fold>//GEN-END:initComponents
 
     private void mnCadastrarFuncionarioActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_mnCadastrarFuncionarioActionPerformed
-        gerenciadorJanelasAbertas(gerenciador);
+        //gerenciadorJanelasAbertas(gerenciador);
 
     }//GEN-LAST:event_mnCadastrarFuncionarioActionPerformed
 
     private void mnPortariaNomeacaoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_mnPortariaNomeacaoActionPerformed
         frmPN.setVisible(true);
-        gerenciadorJanelasAbertas(gerenciador);
+        //gerenciadorJanelasAbertas(gerenciador, frmPN);
     }//GEN-LAST:event_mnPortariaNomeacaoActionPerformed
 
-    private void jMenuItem2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem2ActionPerformed
+    private void mnCadastrarUsuarioActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_mnCadastrarUsuarioActionPerformed
         frmCadU.setVisible(true);
-        gerenciadorJanelasAbertas(gerenciador);
-    }//GEN-LAST:event_jMenuItem2ActionPerformed
+        //gerenciadorJanelasAbertas(gerenciador, frmCadU);
+    }//GEN-LAST:event_mnCadastrarUsuarioActionPerformed
 
     private void mnAnoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_mnAnoActionPerformed
         frmConfigurarPastaRaiz.setVisible(true);
-        gerenciadorJanelasAbertas(gerenciador);
+        //gerenciadorJanelasAbertas(gerenciador, frmConfigurarPastaRaiz);
     }//GEN-LAST:event_mnAnoActionPerformed
 
     private void mnPreCadastroFuncionarioActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_mnPreCadastroFuncionarioActionPerformed
@@ -628,7 +677,7 @@ public class frmPrincipal extends javax.swing.JFrame
         else
         {
             jdkpPrincipal.add(frmPC, 0);
-            gerenciadorJanelasAbertas(gerenciador);
+            gerenciadorJanelasAbertas(gerenciador, frmPC);
             frmPC.setVisible(true);
         }
     }//GEN-LAST:event_mnPreCadastroFuncionarioActionPerformed
@@ -641,7 +690,7 @@ public class frmPrincipal extends javax.swing.JFrame
         else
         {
             jdkpPrincipal.add(frmCB, 0);
-            gerenciadorJanelasAbertas(gerenciador);
+            gerenciadorJanelasAbertas(gerenciador, frmCB);
             frmCB.setVisible(true);
             frmCB.limparCampos();
             frmCB.desativarCampos();
@@ -968,7 +1017,7 @@ public class frmPrincipal extends javax.swing.JFrame
                 frmCCE.setRegimeJuridico(String.valueOf(controle.getRegimeJuridicoCargoEmprego()));
                 frmCCE.setNumeroLeiCriaCargoEmprego(String.valueOf(controle.getNumeroLeiCriaCargoEmprego()));
                 frmCCE.setDataLeiCriaCargoEmprego(String.valueOf(controle.getDataLeiCriaCargoEmprego()));
-                frmCCE.setReferenciaSalarial(String.valueOf(controle.getReferenciaSalarial()));
+                //frmCCE.setReferenciaSalarial(String.valueOf(controle.getReferenciaSalarial()));
                 frmCCE.preencherCampos();
             }
         }
@@ -1268,7 +1317,7 @@ public class frmPrincipal extends javax.swing.JFrame
         else
         {
             jdkpPrincipal.add(frmCC, 0);
-            gerenciadorJanelasAbertas(gerenciador);
+            gerenciadorJanelasAbertas(gerenciador, frmCC);
             frmCC.setVisible(true);
             frmCC.limparCampos();
             frmCC.desativarCampos();
@@ -1286,7 +1335,7 @@ public class frmPrincipal extends javax.swing.JFrame
         else
         {
             jdkpPrincipal.add(frmCCE, 0);
-            gerenciadorJanelasAbertas(gerenciador);
+            gerenciadorJanelasAbertas(gerenciador, frmCCE);
             frmCCE.setVisible(true);
             frmCCE.limparCampos();
             frmCCE.desativarCampos();
@@ -1297,6 +1346,20 @@ public class frmPrincipal extends javax.swing.JFrame
     {//GEN-HEADEREND:event_jdkpPrincipalPropertyChange
         // TODO add your handling code here:
     }//GEN-LAST:event_jdkpPrincipalPropertyChange
+
+    private void mnLegislacaoActionPerformed(java.awt.event.ActionEvent evt)//GEN-FIRST:event_mnLegislacaoActionPerformed
+    {//GEN-HEADEREND:event_mnLegislacaoActionPerformed
+        if (verificarSeAJanelaJaEstaAberta(frmLeg, jdkpPrincipal))
+        {
+            frmLeg.toFront();
+        }
+        else
+        {
+            jdkpPrincipal.add(frmLeg, 1);
+            frmLeg.setVisible(true);
+        }
+
+    }//GEN-LAST:event_mnLegislacaoActionPerformed
 
     public static void main(String args[])
     {
@@ -1451,6 +1514,29 @@ public class frmPrincipal extends javax.swing.JFrame
         });
     }
 
+    public void definicoesSistema()
+    {
+        gerenciadorCores.definirCorMenuDeBarra(mnBarra);
+
+        ArrayList<JMenuItem> mn = new ArrayList<>();
+        mn.add(mnLegislacao);
+        mn.add(mnCadastrarCargoEmprego);
+        mn.add(mnCadastrarBanca);
+        mn.add(mnCadastrarConcurso);
+        mn.add(mnPreCadastroFuncionario);
+        mn.add(mnCadastrarFuncionario);
+        mn.add(mnPortariaNomeacao);
+        mn.add(mnCadastrarUsuario);
+        mn.add(mnAno);
+        mn.add(fecharTodasJanelas);
+
+
+        gerenciadorCores.definirCorMenuItem(mn);
+        gerenciadorCores.definirCorCabecalho(jdkpCabecalho, pnMenu);
+        gerenciadorCores.definirCorCorpo(jdkpPrincipal);
+        gerenciadorCores.definirCorRodape(jdkpRodape, pnRodape);
+    }
+
     public boolean verificarSeAJanelaJaEstaAberta(JInternalFrame frm, JDesktopPane jdk)
     {
 
@@ -1471,11 +1557,11 @@ public class frmPrincipal extends javax.swing.JFrame
         jdkpPrincipal.repaint();
     }
 
-    public static void gerenciadorJanelasAbertas(GerenciadorDeJanelas gerenciador)
+    public static void gerenciadorJanelasAbertas(GerenciadorDeJanelas gerenciador, JInternalFrame janelasa)
     {
-        gerenciador = new GerenciadorDeJanelas();
-        gerenciador.gerenciadorJanela(jdkpPrincipal, menuJanela, fecharTodasJanelas);
-        //redesenhar();
+        gerenciador.gerenciadorJanela(janelasa, jdkpPrincipal, menuJanela, fecharTodasJanelas);
+        redesenhar();
+
     }
 
 
@@ -1490,7 +1576,6 @@ public class frmPrincipal extends javax.swing.JFrame
     private javax.swing.JButton btnSair;
     private javax.swing.JButton btnSalvar;
     private javax.swing.JButton btnUltimo;
-    private javax.swing.JDesktopPane jDesktopPane2;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
@@ -1498,22 +1583,26 @@ public class frmPrincipal extends javax.swing.JFrame
     private javax.swing.JLabel jLabel5;
     private javax.swing.JLabel jLabel6;
     private javax.swing.JLabel jLabel7;
-    private javax.swing.JMenu jMenu1;
-    private javax.swing.JMenuItem jMenuItem2;
+    private javax.swing.JDesktopPane jdkpCabecalho;
     public static javax.swing.JDesktopPane jdkpPrincipal;
+    private javax.swing.JDesktopPane jdkpRodape;
     private javax.swing.JLabel lblAlterar;
     private javax.swing.JLabel lblPesquisar;
     private javax.swing.JLabel lblSair;
     private javax.swing.JLabel lblUsuario;
     private javax.swing.JLabel lblUsuarioConectado;
+    private javax.swing.JMenu mnAdministracao;
     private javax.swing.JMenuItem mnAno;
     private javax.swing.JMenuBar mnBarra;
     private javax.swing.JMenuItem mnCadastrarBanca;
     private javax.swing.JMenuItem mnCadastrarCargoEmprego;
     private javax.swing.JMenuItem mnCadastrarConcurso;
     private javax.swing.JMenuItem mnCadastrarFuncionario;
+    private javax.swing.JMenuItem mnCadastrarUsuario;
+    private javax.swing.JMenu mnCargoEmprego;
     private javax.swing.JMenu mnConcurso;
     private javax.swing.JMenu mnConfiguracao;
+    private javax.swing.JMenuItem mnLegislacao;
     private javax.swing.JMenuItem mnPortariaNomeacao;
     private javax.swing.JMenu mnPortarias;
     private javax.swing.JMenuItem mnPreCadastroFuncionario;
