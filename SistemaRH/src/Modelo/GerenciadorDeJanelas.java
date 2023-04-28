@@ -5,11 +5,13 @@
 package Modelo;
 
 import java.awt.Component;
+import java.awt.Point;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.beans.PropertyVetoException;
-import java.util.HashSet;
-import java.util.Set;
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.Comparator;
 import javax.swing.JDesktopPane;
 import javax.swing.JInternalFrame;
 import javax.swing.JMenu;
@@ -29,12 +31,13 @@ public class GerenciadorDeJanelas
     boolean temSeparador = false;
     static int contador = 1;
 
-    public void gerenciadorJanela(JInternalFrame janela, JDesktopPane jdp, JMenu mn, JMenuItem fecharJanelas)
+    public void gerenciadorJanela(JInternalFrame janela, JDesktopPane jdp, JMenu mn, JMenuItem fecharJanelas, JMenuItem organizarJanelas)
     {
 
         adicionarSeparadorNoMenu(mn);
         adicionarJiFrameNoMenu(janela, mn, fecharJanelas, jdp);
         fecharTodasAsJanelasDoMenu(janela, mn, fecharJanelas, jdp);
+        organizarJanelas(organizarJanelas, jdp);
 
     }
 
@@ -130,4 +133,31 @@ public class GerenciadorDeJanelas
         });
     }
 
+    private void organizarJanelas(JMenuItem organizarJanelas, JDesktopPane jdp)
+    {
+        //fechar todas as janelas ao clicar no item fechar todas as janelas
+        organizarJanelas.addActionListener(new ActionListener()
+        {
+            public void actionPerformed(ActionEvent e)
+            {
+                int count = jdp.getComponentCount();
+                int width = jdp.getWidth() / 4; // ajuste o número de janelas por linha aqui
+                int height = jdp.getHeight() / 2; // divide a área em duas linhas
+
+                // Define a posição de cada janela com base no índice do componente
+                for (int i = count - 1; i >= 0; i--)
+                {
+                    JInternalFrame frame = (JInternalFrame) jdp.getComponent(i);
+                    int row = (count - i - 1) / 4; // calcula em qual linha a janela deve ser colocada
+                    int col = (count - i - 1) % 4; // calcula em qual coluna a janela deve ser colocada
+                    int x = col * width;
+                    int y = row * height;
+                    frame.setLocation(new Point(x, y));
+                    frame.setSize(width, height);
+                    frame.pack();
+                    jdp.repaint();
+                }
+            }
+        });
+    }
 }

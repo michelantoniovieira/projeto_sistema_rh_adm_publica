@@ -54,6 +54,7 @@ public class frmPrincipal extends javax.swing.JFrame
     //criação do menuJanela que gerencia janelas abertas
     static JMenu menuJanela = new JMenu("Janela");
     static JMenuItem fecharTodasJanelas = new JMenuItem("- Fechar Todas -");
+    static JMenuItem organizarJanelas = new JMenuItem("Organizar Janelas");
 
     private boolean desativarBotoesFrmCC;//essa variavel bloqueia os botoes de menu para não deixar o cara tentar mudar de registro na tela de cadastro de concurso ao clicar no botao novo, por exemplo
 
@@ -111,6 +112,7 @@ public class frmPrincipal extends javax.swing.JFrame
         //menu gerenciador janelas abertas
         mnBarra.add(menuJanela);
         menuJanela.add(fecharTodasJanelas);
+        menuJanela.add(organizarJanelas);
 
         //gerenciador
         gerenciador = new GerenciadorDeJanelas();
@@ -326,7 +328,7 @@ public class frmPrincipal extends javax.swing.JFrame
         pnMenuLayout.setHorizontalGroup(
             pnMenuLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(pnMenuLayout.createSequentialGroup()
-                .addGap(34, 34, 34)
+                .addGap(59, 59, 59)
                 .addGroup(pnMenuLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(lblSair)
                     .addGroup(pnMenuLayout.createSequentialGroup()
@@ -383,12 +385,11 @@ public class frmPrincipal extends javax.swing.JFrame
                         .addGap(10, 10, 10)
                         .addComponent(btnUltimo))
                     .addComponent(jLabel7))
-                .addContainerGap(95, Short.MAX_VALUE))
+                .addContainerGap(70, Short.MAX_VALUE))
         );
         pnMenuLayout.setVerticalGroup(
             pnMenuLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(pnMenuLayout.createSequentialGroup()
-                .addGap(14, 14, 14)
                 .addGroup(pnMenuLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                     .addComponent(jLabel6)
                     .addGroup(pnMenuLayout.createSequentialGroup()
@@ -427,7 +428,7 @@ public class frmPrincipal extends javax.swing.JFrame
                                 .addComponent(lblSair)
                                 .addComponent(jLabel1))
                             .addComponent(lblPesquisar, javax.swing.GroupLayout.Alignment.TRAILING))))
-                .addContainerGap(16, Short.MAX_VALUE))
+                .addGap(0, 5, Short.MAX_VALUE))
         );
 
         btnSalvar.getAccessibleContext().setAccessibleDescription("Salvar");
@@ -442,7 +443,10 @@ public class frmPrincipal extends javax.swing.JFrame
         );
         jdkpCabecalhoLayout.setVerticalGroup(
             jdkpCabecalhoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(pnMenu, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+            .addGroup(jdkpCabecalhoLayout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(pnMenu, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(15, Short.MAX_VALUE))
         );
 
         jdkpPrincipal.setBorder(javax.swing.BorderFactory.createEtchedBorder());
@@ -462,7 +466,7 @@ public class frmPrincipal extends javax.swing.JFrame
         );
         jdkpPrincipalLayout.setVerticalGroup(
             jdkpPrincipalLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 538, Short.MAX_VALUE)
+            .addGap(0, 526, Short.MAX_VALUE)
         );
 
         jdkpRodape.setBorder(javax.swing.BorderFactory.createEtchedBorder());
@@ -486,12 +490,12 @@ public class frmPrincipal extends javax.swing.JFrame
         );
         pnRodapeLayout.setVerticalGroup(
             pnRodapeLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, pnRodapeLayout.createSequentialGroup()
-                .addContainerGap(12, Short.MAX_VALUE)
+            .addGroup(pnRodapeLayout.createSequentialGroup()
+                .addContainerGap()
                 .addGroup(pnRodapeLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(lblUsuarioConectado)
-                    .addComponent(lblUsuario))
-                .addContainerGap())
+                    .addComponent(lblUsuario)
+                    .addComponent(lblUsuarioConectado))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
         jdkpRodape.setLayer(pnRodape, javax.swing.JLayeredPane.DEFAULT_LAYER);
@@ -504,7 +508,7 @@ public class frmPrincipal extends javax.swing.JFrame
         );
         jdkpRodapeLayout.setVerticalGroup(
             jdkpRodapeLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(pnRodape, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+            .addComponent(pnRodape, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
         );
 
         mnAdministracao.setText("Administração");
@@ -630,19 +634,19 @@ public class frmPrincipal extends javax.swing.JFrame
             .addComponent(jdkpCabecalho)
             .addComponent(jdkpRodape)
             .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                .addComponent(jdkpPrincipal, javax.swing.GroupLayout.Alignment.TRAILING))
+                .addComponent(jdkpPrincipal))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addComponent(jdkpCabecalho, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 541, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 784, Short.MAX_VALUE)
                 .addComponent(jdkpRodape, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
             .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                 .addGroup(layout.createSequentialGroup()
-                    .addGap(103, 103, 103)
+                    .addGap(102, 102, 102)
                     .addComponent(jdkpPrincipal, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addContainerGap(38, Short.MAX_VALUE)))
+                    .addContainerGap(288, Short.MAX_VALUE)))
         );
 
         pack();
@@ -676,9 +680,11 @@ public class frmPrincipal extends javax.swing.JFrame
         }
         else
         {
-            jdkpPrincipal.add(frmPC, 0);
+            jdkpPrincipal.add(frmPC, 5);
             gerenciadorJanelasAbertas(gerenciador, frmPC);
+            frmPC.setLocation(0, 0);
             frmPC.setVisible(true);
+            frmPC.pack();
         }
     }//GEN-LAST:event_mnPreCadastroFuncionarioActionPerformed
 
@@ -689,7 +695,9 @@ public class frmPrincipal extends javax.swing.JFrame
         }
         else
         {
-            jdkpPrincipal.add(frmCB, 0);
+            frmCB.setLocation(0, 0);
+            frmCB.pack();
+            jdkpPrincipal.add(frmCB, 3);
             gerenciadorJanelasAbertas(gerenciador, frmCB);
             frmCB.setVisible(true);
             frmCB.limparCampos();
@@ -1316,8 +1324,10 @@ public class frmPrincipal extends javax.swing.JFrame
         }
         else
         {
-            jdkpPrincipal.add(frmCC, 0);
+            jdkpPrincipal.add(frmCC, 4);
             gerenciadorJanelasAbertas(gerenciador, frmCC);
+            frmCC.setLocation(0, 0);
+            frmCC.pack();
             frmCC.setVisible(true);
             frmCC.limparCampos();
             frmCC.desativarCampos();
@@ -1334,7 +1344,9 @@ public class frmPrincipal extends javax.swing.JFrame
         }
         else
         {
-            jdkpPrincipal.add(frmCCE, 0);
+            frmCCE.setLocation(0, 0);
+            frmCCE.pack();
+            jdkpPrincipal.add(frmCCE, 2);
             gerenciadorJanelasAbertas(gerenciador, frmCCE);
             frmCCE.setVisible(true);
             frmCCE.limparCampos();
@@ -1355,8 +1367,11 @@ public class frmPrincipal extends javax.swing.JFrame
         }
         else
         {
+            frmLeg.setLocation(0, 0);
+            frmLeg.pack();
             jdkpPrincipal.add(frmLeg, 1);
             frmLeg.setVisible(true);
+
         }
 
     }//GEN-LAST:event_mnLegislacaoActionPerformed
@@ -1530,7 +1545,6 @@ public class frmPrincipal extends javax.swing.JFrame
         mn.add(mnAno);
         mn.add(fecharTodasJanelas);
 
-
         gerenciadorCores.definirCorMenuItem(mn);
         gerenciadorCores.definirCorCabecalho(jdkpCabecalho, pnMenu);
         gerenciadorCores.definirCorCorpo(jdkpPrincipal);
@@ -1559,7 +1573,7 @@ public class frmPrincipal extends javax.swing.JFrame
 
     public static void gerenciadorJanelasAbertas(GerenciadorDeJanelas gerenciador, JInternalFrame janelasa)
     {
-        gerenciador.gerenciadorJanela(janelasa, jdkpPrincipal, menuJanela, fecharTodasJanelas);
+        gerenciador.gerenciadorJanela(janelasa, jdkpPrincipal, menuJanela, fecharTodasJanelas, organizarJanelas);
         redesenhar();
 
     }

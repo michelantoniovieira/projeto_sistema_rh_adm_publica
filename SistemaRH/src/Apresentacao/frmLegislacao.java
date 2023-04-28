@@ -34,7 +34,9 @@ public class frmLegislacao extends javax.swing.JInternalFrame
         pnFundamento = new javax.swing.JPanel();
         pnEmenta = new javax.swing.JPanel();
 
+        setClosable(true);
         setTitle("Legislação");
+        setDoubleBuffered(true);
         addAncestorListener(new javax.swing.event.AncestorListener()
         {
             public void ancestorAdded(javax.swing.event.AncestorEvent evt)
@@ -98,7 +100,7 @@ public class frmLegislacao extends javax.swing.JInternalFrame
     private void formAncestorMoved(javax.swing.event.AncestorEvent evt)//GEN-FIRST:event_formAncestorMoved
     {//GEN-HEADEREND:event_formAncestorMoved
         CentralizarJanela c = new CentralizarJanela();
-        c.NaoUltrapassarLimites(this);
+        c.NaoUltrapassarLimites(this, frmPrincipal.jdkpPrincipal);
     }//GEN-LAST:event_formAncestorMoved
 
 

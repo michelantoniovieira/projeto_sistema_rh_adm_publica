@@ -8,14 +8,21 @@ import Apresentacao.frmPrincipal;
 import java.awt.Dimension;
 import java.awt.Point;
 import java.awt.Toolkit;
+import javax.swing.JComponent;
+import javax.swing.JDesktopPane;
 import javax.swing.JInternalFrame;
+import javax.swing.event.MouseInputAdapter;
+import javax.swing.plaf.basic.BasicInternalFrameTitlePane;
+import javax.swing.plaf.basic.BasicInternalFrameUI;
 
 /**
  *
  * @author miche
  */
-public class CentralizarJanela
+public class CentralizarJanela extends JInternalFrame
 {
+
+    private JComponent titlePane;
 
     public JInternalFrame CentralizarJInternalFrame(JInternalFrame frame)
     {
@@ -33,46 +40,16 @@ public class CentralizarJanela
         return frame;
     }
 
-    public JInternalFrame NaoUltrapassarLimites(JInternalFrame frame)
+    public JInternalFrame NaoUltrapassarLimites(JInternalFrame jif, JDesktopPane jdkp)
     {
         frmPrincipal.redesenhar();
-        //codigo para centralizar janela na tela
-        //pega o tamanho da tela
-        Point location = frame.getLocation();
-
-        // Obter o tamanho da tela
-        Dimension screenSize = Toolkit.getDefaultToolkit().getScreenSize();
-        int screenWidth = (int) screenSize.getWidth();
-        int screenHeight = (int) (screenSize.getHeight() - frame.getHeight()/2);
-
-        int x = location.x;
-        int y = location.y;
-
-        if (x <= 0)
+        
+        if (jif.getLocation().y <= 0)
         {
-            x = (int) (x + 0.001f);
-            frame.setLocation(x, y);
-        }
-        else if (x + frame.getWidth() > screenWidth)
-        {
-            x = (int) (x - 0.001f);
-            frame.setLocation(x, y);
+            jif.setLocation(jif.getLocation().x, (int)(jif.getLocation().y + 0.000001f));
+            jdkp.repaint();
         }
 
-        if (y <= 0)
-        {
-            y = (int) (y + 0.001f);
-            frame.setLocation(x, y);
-        }
-        else if (y + frame.getHeight() > screenHeight)
-        {
-             //y = (int)((y + screenHeight - frame.getHeight())/2 - 0.001f);
-            y = (int) (y - 0.001f);
-            //y = (int) (y - 0.001f);
-            frame.setLocation(x, y);
-        }
-
-
-    return frame ;
-}
+        return jif;
+    }
 }
