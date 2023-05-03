@@ -45,7 +45,7 @@ public class frmPrincipal extends javax.swing.JFrame
     frmCadastrarBanca frmCB;
     frmCadastrarCargoEmprego frmCCE;
     frmCadastrarConcurso frmCC;
-    frmLegislacao frmLeg;
+
 
     //gerenciadores
     GerenciadorDeJanelas gerenciador;
@@ -107,7 +107,6 @@ public class frmPrincipal extends javax.swing.JFrame
         frmPC = new frmPreCadastro();
         frmCCE = new frmCadastrarCargoEmprego();
         frmCC = new frmCadastrarConcurso();
-        frmLeg = new frmLegislacao();
 
         //menu gerenciador janelas abertas
         mnBarra.add(menuJanela);
@@ -156,7 +155,6 @@ public class frmPrincipal extends javax.swing.JFrame
         lblUsuario = new javax.swing.JLabel();
         mnBarra = new javax.swing.JMenuBar();
         mnAdministracao = new javax.swing.JMenu();
-        mnLegislacao = new javax.swing.JMenuItem();
         mnCargoEmprego = new javax.swing.JMenu();
         mnCadastrarCargoEmprego = new javax.swing.JMenuItem();
         mnConcurso = new javax.swing.JMenu();
@@ -512,17 +510,6 @@ public class frmPrincipal extends javax.swing.JFrame
         );
 
         mnAdministracao.setText("Administração");
-
-        mnLegislacao.setText("1 - Legislação");
-        mnLegislacao.addActionListener(new java.awt.event.ActionListener()
-        {
-            public void actionPerformed(java.awt.event.ActionEvent evt)
-            {
-                mnLegislacaoActionPerformed(evt);
-            }
-        });
-        mnAdministracao.add(mnLegislacao);
-
         mnBarra.add(mnAdministracao);
 
         mnCargoEmprego.setText("Cargo/Emprego");
@@ -1359,23 +1346,6 @@ public class frmPrincipal extends javax.swing.JFrame
         // TODO add your handling code here:
     }//GEN-LAST:event_jdkpPrincipalPropertyChange
 
-    private void mnLegislacaoActionPerformed(java.awt.event.ActionEvent evt)//GEN-FIRST:event_mnLegislacaoActionPerformed
-    {//GEN-HEADEREND:event_mnLegislacaoActionPerformed
-        if (verificarSeAJanelaJaEstaAberta(frmLeg, jdkpPrincipal))
-        {
-            frmLeg.toFront();
-        }
-        else
-        {
-            frmLeg.setLocation(0, 0);
-            frmLeg.pack();
-            jdkpPrincipal.add(frmLeg, 1);
-            frmLeg.setVisible(true);
-
-        }
-
-    }//GEN-LAST:event_mnLegislacaoActionPerformed
-
     public static void main(String args[])
     {
 
@@ -1534,7 +1504,6 @@ public class frmPrincipal extends javax.swing.JFrame
         gerenciadorCores.definirCorMenuDeBarra(mnBarra);
 
         ArrayList<JMenuItem> mn = new ArrayList<>();
-        mn.add(mnLegislacao);
         mn.add(mnCadastrarCargoEmprego);
         mn.add(mnCadastrarBanca);
         mn.add(mnCadastrarConcurso);
@@ -1616,7 +1585,6 @@ public class frmPrincipal extends javax.swing.JFrame
     private javax.swing.JMenu mnCargoEmprego;
     private javax.swing.JMenu mnConcurso;
     private javax.swing.JMenu mnConfiguracao;
-    private javax.swing.JMenuItem mnLegislacao;
     private javax.swing.JMenuItem mnPortariaNomeacao;
     private javax.swing.JMenu mnPortarias;
     private javax.swing.JMenuItem mnPreCadastroFuncionario;

@@ -142,7 +142,7 @@ public class GerenciadorDeJanelas
             {
                 int count = jdp.getComponentCount();
                 int width = jdp.getWidth() / 4; // ajuste o número de janelas por linha aqui
-                int height = jdp.getHeight() / 2; // divide a área em duas linhas
+                int height = jdp.getHeight() / 4; // divide a área em duas linhas
 
                 // Define a posição de cada janela com base no índice do componente
                 for (int i = count - 1; i >= 0; i--)
