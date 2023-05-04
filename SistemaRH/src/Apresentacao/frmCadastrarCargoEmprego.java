@@ -42,9 +42,6 @@ public class frmCadastrarCargoEmprego extends javax.swing.JInternalFrame
         setNomeCargoEmprego(txtDescricaoCargoEmprego.getText());
         itemSelecionadoNoComboBox = cmbRegimeJuridico.getSelectedItem().toString();
         setRegimeJuridico(itemSelecionadoNoComboBox);
-        setNumeroLeiCriaCargoEmprego(txtNumeroLeiCriaCargoEmprego.getText());
-        setDataLeiCriaCargoEmprego(txtDataLeiCriacaoCargoEmprego.getText());
-        setReferenciaSalarial(txtReferenciaSalarialCargoEmprego.getText());
     }
 
     public void preencherLista(ArrayList<PesquisarCargoEmpregoDTO> lista, int index)
@@ -64,9 +61,6 @@ public class frmCadastrarCargoEmprego extends javax.swing.JInternalFrame
         txtCodigoCargoEmprego.setText(getCodigoCargoEmprego());
         txtDescricaoCargoEmprego.setText(getNomeCargoEmprego());
         cmbRegimeJuridico.setSelectedItem(getRegimeJuridico());
-        txtNumeroLeiCriaCargoEmprego.setText(getNumeroLeiCriaCargoEmprego());
-        txtDataLeiCriacaoCargoEmprego.setText(getDataLeiCriaCargoEmprego());
-        txtReferenciaSalarialCargoEmprego.setText(getReferenciaSalarial());
     }
 
     //liberar os campos para edição
@@ -75,9 +69,6 @@ public class frmCadastrarCargoEmprego extends javax.swing.JInternalFrame
         txtCodigoCargoEmprego.setEnabled(false);
         txtDescricaoCargoEmprego.setEnabled(true);
         cmbRegimeJuridico.setEnabled(true);
-        txtNumeroLeiCriaCargoEmprego.setEnabled(true);
-        txtDataLeiCriacaoCargoEmprego.setEnabled(true);
-        txtReferenciaSalarialCargoEmprego.setEnabled(true);
     }
 
     //travar os campos para edição
@@ -86,9 +77,6 @@ public class frmCadastrarCargoEmprego extends javax.swing.JInternalFrame
         txtCodigoCargoEmprego.setEnabled(false);
         txtDescricaoCargoEmprego.setEnabled(false);
         cmbRegimeJuridico.setEnabled(false);
-        txtNumeroLeiCriaCargoEmprego.setEnabled(false);
-        txtDataLeiCriacaoCargoEmprego.setEnabled(false);
-        txtReferenciaSalarialCargoEmprego.setEnabled(false);
     }
 
     public void limparCampos()
@@ -100,12 +88,6 @@ public class frmCadastrarCargoEmprego extends javax.swing.JInternalFrame
         this.setNomeCargoEmprego("");
         cmbRegimeJuridico.setSelectedIndex(1);
         this.setRegimeJuridico("0");
-        txtNumeroLeiCriaCargoEmprego.setText("");
-        this.setNumeroLeiCriaCargoEmprego("");
-        txtDataLeiCriacaoCargoEmprego.setText("");
-        this.setDataLeiCriaCargoEmprego("");
-        txtReferenciaSalarialCargoEmprego.setText("");
-        this.setReferenciaSalarial("");
 
     }
 
@@ -248,6 +230,7 @@ public class frmCadastrarCargoEmprego extends javax.swing.JInternalFrame
         tbFundamento = new javax.swing.JTable();
         btnCadastrarFundamento = new javax.swing.JButton();
         btnAlterarFundamento = new javax.swing.JButton();
+        btnExcluirFundamento = new javax.swing.JButton();
 
         setClosable(true);
         setTitle("Manutenção de Cargos e Empregos");
@@ -293,8 +276,8 @@ public class frmCadastrarCargoEmprego extends javax.swing.JInternalFrame
                     .addComponent(txtCodigoCargoEmprego, javax.swing.GroupLayout.PREFERRED_SIZE, 43, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(jpCargoEmpregoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(lblDescricaoCargoEmprego, javax.swing.GroupLayout.PREFERRED_SIZE, 150, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(txtDescricaoCargoEmprego, javax.swing.GroupLayout.PREFERRED_SIZE, 238, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(txtDescricaoCargoEmprego, javax.swing.GroupLayout.PREFERRED_SIZE, 238, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(lblDescricaoCargoEmprego))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(jpCargoEmpregoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(txtCboCargoEmprego)
@@ -313,29 +296,29 @@ public class frmCadastrarCargoEmprego extends javax.swing.JInternalFrame
         jpCargoEmpregoLayout.setVerticalGroup(
             jpCargoEmpregoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jpCargoEmpregoLayout.createSequentialGroup()
+                .addContainerGap()
                 .addGroup(jpCargoEmpregoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                     .addGroup(jpCargoEmpregoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                        .addComponent(lblDescricaoCargoEmprego)
-                        .addGroup(jpCargoEmpregoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                            .addGroup(jpCargoEmpregoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                .addComponent(lblRegimeJuridicoCargoEmprego)
-                                .addGroup(jpCargoEmpregoLayout.createSequentialGroup()
-                                    .addGap(22, 22, 22)
-                                    .addGroup(jpCargoEmpregoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                                        .addComponent(cmbRegimeJuridico, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                        .addComponent(chkAtivo))))
-                            .addGroup(jpCargoEmpregoLayout.createSequentialGroup()
-                                .addComponent(lblCboCargoEmprego)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addGroup(jpCargoEmpregoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                                    .addComponent(txtDescricaoCargoEmprego, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addComponent(txtCboCargoEmprego, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))))
+                        .addComponent(lblRegimeJuridicoCargoEmprego)
+                        .addGroup(jpCargoEmpregoLayout.createSequentialGroup()
+                            .addGap(22, 22, 22)
+                            .addGroup(jpCargoEmpregoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                                .addComponent(cmbRegimeJuridico, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addComponent(chkAtivo))))
+                    .addGroup(jpCargoEmpregoLayout.createSequentialGroup()
+                        .addComponent(lblCboCargoEmprego)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addGroup(jpCargoEmpregoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(txtDescricaoCargoEmprego, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(txtCboCargoEmprego, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
                     .addGroup(jpCargoEmpregoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                        .addComponent(lblCodigoCargoEmprego)
+                        .addGroup(jpCargoEmpregoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(lblCodigoCargoEmprego)
+                            .addComponent(lblDescricaoCargoEmprego))
                         .addGroup(jpCargoEmpregoLayout.createSequentialGroup()
                             .addGap(22, 22, 22)
                             .addComponent(txtCodigoCargoEmprego, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))))
-                .addGap(0, 0, Short.MAX_VALUE))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
         jpExigencias.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "Exigências", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Segoe UI", 1, 12))); // NOI18N
@@ -361,10 +344,11 @@ public class frmCadastrarCargoEmprego extends javax.swing.JInternalFrame
         jpExigenciasLayout.setVerticalGroup(
             jpExigenciasLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jpExigenciasLayout.createSequentialGroup()
+                .addContainerGap()
                 .addComponent(lblEscolaridade)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(cmbEscolaridade, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(0, 0, Short.MAX_VALUE))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
         jpCargaHoraria.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "Carga Horária", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Segoe UI", 1, 12))); // NOI18N
@@ -405,7 +389,7 @@ public class frmCadastrarCargoEmprego extends javax.swing.JInternalFrame
                 .addGroup(jpCargaHorariaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(lblSemanal1)
                     .addComponent(cmbCargaHorariaMensal, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addContainerGap(21, Short.MAX_VALUE))
+                .addContainerGap(15, Short.MAX_VALUE))
         );
 
         jpQuadro.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "Quadro", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Segoe UI", 1, 12))); // NOI18N
@@ -495,7 +479,7 @@ public class frmCadastrarCargoEmprego extends javax.swing.JInternalFrame
                     .addGroup(jpTabelaVencimentosLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                         .addComponent(lblGrau)
                         .addComponent(cmbGrau, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addContainerGap(22, Short.MAX_VALUE))
+                .addContainerGap(47, Short.MAX_VALUE))
         );
 
         jtpRemuneracao.addTab("Tabela de Vencimentos", jpTabelaVencimentos);
@@ -548,7 +532,7 @@ public class frmCadastrarCargoEmprego extends javax.swing.JInternalFrame
                             .addComponent(lblGrauProf)
                             .addComponent(cmbGrauSalario, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(lblRs))))
-                .addContainerGap(22, Short.MAX_VALUE))
+                .addContainerGap(46, Short.MAX_VALUE))
         );
 
         jtpRemuneracao.addTab("Escala de Vencimentos - Docente", jPanel2);
@@ -599,10 +583,11 @@ public class frmCadastrarCargoEmprego extends javax.swing.JInternalFrame
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel1Layout.createSequentialGroup()
+                .addContainerGap()
                 .addComponent(jLabel1)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jComboBox1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(19, Short.MAX_VALUE))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
         jpLegislacao.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "Legislação", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Segoe UI", 1, 12))); // NOI18N
@@ -641,6 +626,22 @@ public class frmCadastrarCargoEmprego extends javax.swing.JInternalFrame
         });
 
         btnAlterarFundamento.setText("Alterar");
+        btnAlterarFundamento.addActionListener(new java.awt.event.ActionListener()
+        {
+            public void actionPerformed(java.awt.event.ActionEvent evt)
+            {
+                btnAlterarFundamentoActionPerformed(evt);
+            }
+        });
+
+        btnExcluirFundamento.setText("Excluir");
+        btnExcluirFundamento.addActionListener(new java.awt.event.ActionListener()
+        {
+            public void actionPerformed(java.awt.event.ActionEvent evt)
+            {
+                btnExcluirFundamentoActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout jpLegislacaoLayout = new javax.swing.GroupLayout(jpLegislacao);
         jpLegislacao.setLayout(jpLegislacaoLayout);
@@ -654,7 +655,10 @@ public class frmCadastrarCargoEmprego extends javax.swing.JInternalFrame
                         .addGap(0, 0, Short.MAX_VALUE)
                         .addComponent(btnCadastrarFundamento, javax.swing.GroupLayout.PREFERRED_SIZE, 125, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addComponent(btnAlterarFundamento, javax.swing.GroupLayout.PREFERRED_SIZE, 125, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                        .addComponent(btnAlterarFundamento, javax.swing.GroupLayout.PREFERRED_SIZE, 125, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addComponent(btnExcluirFundamento, javax.swing.GroupLayout.PREFERRED_SIZE, 125, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(35, 35, 35)))
                 .addContainerGap())
         );
         jpLegislacaoLayout.setVerticalGroup(
@@ -664,7 +668,8 @@ public class frmCadastrarCargoEmprego extends javax.swing.JInternalFrame
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(jpLegislacaoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(btnCadastrarFundamento)
-                    .addComponent(btnAlterarFundamento))
+                    .addComponent(btnAlterarFundamento)
+                    .addComponent(btnExcluirFundamento))
                 .addGap(0, 12, Short.MAX_VALUE))
         );
 
@@ -696,20 +701,18 @@ public class frmCadastrarCargoEmprego extends javax.swing.JInternalFrame
             jpCadastroCargoEmpregoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jpCadastroCargoEmpregoLayout.createSequentialGroup()
                 .addContainerGap()
+                .addGroup(jpCadastroCargoEmpregoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                    .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(jpCargoEmprego, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(jpCargaHoraria, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(jpExigencias, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(jpCadastroCargoEmpregoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                     .addGroup(jpCadastroCargoEmpregoLayout.createSequentialGroup()
-                        .addGroup(jpCadastroCargoEmpregoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jpCargaHoraria, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .addComponent(jpExigencias, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(jtpRemuneracao, javax.swing.GroupLayout.PREFERRED_SIZE, 118, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(jtpRemuneracao, javax.swing.GroupLayout.PREFERRED_SIZE, 142, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                         .addComponent(jpQuadro, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addGroup(jpCadastroCargoEmpregoLayout.createSequentialGroup()
-                        .addGroup(jpCadastroCargoEmpregoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                            .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .addComponent(jpCargoEmprego, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(jpLegislacao, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(jpRequisitosDeProvimento, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
@@ -744,17 +747,53 @@ public class frmCadastrarCargoEmprego extends javax.swing.JInternalFrame
     private void btnCadastrarFundamentoActionPerformed(java.awt.event.ActionEvent evt)//GEN-FIRST:event_btnCadastrarFundamentoActionPerformed
     {//GEN-HEADEREND:event_btnCadastrarFundamentoActionPerformed
 
-        frmCadastrarFundamento frmCadastrarFundamento = new frmCadastrarFundamento(null, true, (DefaultTableModel)tbFundamento.getModel());
+        frmCadastrarFundamento frmCadastrarFundamento = new frmCadastrarFundamento(null, true, (DefaultTableModel) tbFundamento.getModel());
         frmCadastrarFundamento.setVisible(true);
         frmCadastrarFundamento.setLocationRelativeTo(null);
         frmCadastrarFundamento.setDefaultCloseOperation(DISPOSE_ON_CLOSE);
 
     }//GEN-LAST:event_btnCadastrarFundamentoActionPerformed
 
+    private void btnExcluirFundamentoActionPerformed(java.awt.event.ActionEvent evt)//GEN-FIRST:event_btnExcluirFundamentoActionPerformed
+    {//GEN-HEADEREND:event_btnExcluirFundamentoActionPerformed
+        DefaultTableModel model = (DefaultTableModel) tbFundamento.getModel();
+
+        int linhaSelecionada = tbFundamento.getSelectedRow();
+
+        if (linhaSelecionada != -1)
+        {
+            model.removeRow(linhaSelecionada);
+        }
+    }//GEN-LAST:event_btnExcluirFundamentoActionPerformed
+
+    private void btnAlterarFundamentoActionPerformed(java.awt.event.ActionEvent evt)//GEN-FIRST:event_btnAlterarFundamentoActionPerformed
+    {//GEN-HEADEREND:event_btnAlterarFundamentoActionPerformed
+        DefaultTableModel model = (DefaultTableModel) tbFundamento.getModel();
+
+        int linhaSelecionada = tbFundamento.getSelectedRow();
+
+        if (linhaSelecionada != -1)
+        {
+            // Obtenha os valores da linha selecionada
+            Object numeroDaLei = model.getValueAt(linhaSelecionada, 0);
+            Object anoDaLei = model.getValueAt(linhaSelecionada, 1);
+            Object dataDaLei = model.getValueAt(linhaSelecionada, 2);
+            Object ementaDaLei = model.getValueAt(linhaSelecionada, 3);
+            Object atoDaLei = model.getValueAt(linhaSelecionada, 4);
+            Object quantidadeDaLei = model.getValueAt(linhaSelecionada, 5);
+            
+            frmCadastrarFundamento frmCadastrarFundamento = new frmCadastrarFundamento(null, true, (DefaultTableModel) tbFundamento.getModel(), numeroDaLei.toString(), anoDaLei.toString(), dataDaLei.toString(), ementaDaLei.toString(), atoDaLei.toString(), quantidadeDaLei.toString(), linhaSelecionada);
+            frmCadastrarFundamento.setVisible(true);
+            frmCadastrarFundamento.setLocationRelativeTo(null);
+            frmCadastrarFundamento.setDefaultCloseOperation(DISPOSE_ON_CLOSE);
+        }
+    }//GEN-LAST:event_btnAlterarFundamentoActionPerformed
+
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnAlterarFundamento;
     private javax.swing.JButton btnCadastrarFundamento;
+    private javax.swing.JButton btnExcluirFundamento;
     private javax.swing.JCheckBox chkAtivo;
     private javax.swing.JComboBox<String> cmbCargaHorariaMensal;
     private javax.swing.JComboBox<String> cmbCargaHorariaSemanal;

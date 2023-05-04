@@ -5,6 +5,11 @@
 package Apresentacao;
 
 import Modelo.ControleCadastrarFundamento;
+import Modelo.DefinirTamanhoMaximoCampoDeTexto;
+import java.awt.event.FocusAdapter;
+import java.awt.event.FocusEvent;
+import java.awt.event.KeyEvent;
+import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
 
 /**
@@ -15,6 +20,8 @@ public class frmCadastrarFundamento extends javax.swing.JDialog
 {
 
     private DefaultTableModel tabela;
+    private boolean eUmaAlteracao = false;
+    private int linhaSelecionada = -1;
 
     /**
      * Creates new form frmCadastrarFundamento
@@ -23,6 +30,7 @@ public class frmCadastrarFundamento extends javax.swing.JDialog
     {
         super(parent, modal);
         initComponents();
+        txtAnoLei.setDocument(new DefinirTamanhoMaximoCampoDeTexto(4));
     }
 
     public frmCadastrarFundamento(java.awt.Frame parent, boolean modal, DefaultTableModel tabela)
@@ -30,6 +38,24 @@ public class frmCadastrarFundamento extends javax.swing.JDialog
         super(parent, modal);
         this.tabela = tabela;
         initComponents();
+        eUmaAlteracao = false;
+        txtAnoLei.setDocument(new DefinirTamanhoMaximoCampoDeTexto(4));
+    }
+
+    public frmCadastrarFundamento(java.awt.Frame parent, boolean modal, DefaultTableModel tabela, String numeroDaLei, String anoDaLei, String dataDaLei, String ementaDaLei, String atoDaLei, String quantidadeCargosEmpregosDaLei, int linhaSelecionada)
+    {
+        super(parent, modal);
+        this.tabela = tabela;
+        initComponents();
+        this.txtNumeroLei.setText(numeroDaLei);
+        this.txtAnoLei.setText(anoDaLei);
+        this.jffDataLei.setText(dataDaLei);
+        this.jtaEmenta.setText(ementaDaLei);
+        this.cmbAto.getSelectedItem().equals(atoDaLei);
+        this.txtQuantidadeVagas.setText(quantidadeCargosEmpregosDaLei);
+        this.eUmaAlteracao = true;
+        this.linhaSelecionada = linhaSelecionada;
+        txtAnoLei.setDocument(new DefinirTamanhoMaximoCampoDeTexto(4));
     }
 
     /**
@@ -74,6 +100,20 @@ public class frmCadastrarFundamento extends javax.swing.JDialog
             ex.printStackTrace();
         }
         jffDataLei.setHorizontalAlignment(javax.swing.JTextField.CENTER);
+        jffDataLei.addFocusListener(new java.awt.event.FocusAdapter()
+        {
+            public void focusLost(java.awt.event.FocusEvent evt)
+            {
+                jffDataLeiFocusLost(evt);
+            }
+        });
+        jffDataLei.addKeyListener(new java.awt.event.KeyAdapter()
+        {
+            public void keyTyped(java.awt.event.KeyEvent evt)
+            {
+                jffDataLeiKeyTyped(evt);
+            }
+        });
 
         lblNumeroLei.setText("Número:");
 
@@ -84,18 +124,40 @@ public class frmCadastrarFundamento extends javax.swing.JDialog
                 txtNumeroLeiActionPerformed(evt);
             }
         });
-
-        lblAnoLei.setText("Ano:");
-
-        txtAnoLei.addActionListener(new java.awt.event.ActionListener()
+        txtNumeroLei.addKeyListener(new java.awt.event.KeyAdapter()
         {
-            public void actionPerformed(java.awt.event.ActionEvent evt)
+            public void keyTyped(java.awt.event.KeyEvent evt)
             {
-                txtAnoLeiActionPerformed(evt);
+                txtNumeroLeiKeyTyped(evt);
             }
         });
 
-        cmbAto.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Criação", "Alteração", "Extinção" }));
+        lblAnoLei.setText("Ano:");
+
+        txtAnoLei.addFocusListener(new java.awt.event.FocusAdapter()
+        {
+            public void focusGained(java.awt.event.FocusEvent evt)
+            {
+                txtAnoLeiFocusGained(evt);
+            }
+            public void focusLost(java.awt.event.FocusEvent evt)
+            {
+                txtAnoLeiFocusLost(evt);
+            }
+        });
+        txtAnoLei.addKeyListener(new java.awt.event.KeyAdapter()
+        {
+            public void keyReleased(java.awt.event.KeyEvent evt)
+            {
+                txtAnoLeiKeyReleased(evt);
+            }
+            public void keyTyped(java.awt.event.KeyEvent evt)
+            {
+                txtAnoLeiKeyTyped(evt);
+            }
+        });
+
+        cmbAto.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Criação", "Extinção", "Reajuste", "Outros" }));
 
         lblAto.setText("Ato:");
 
@@ -106,6 +168,13 @@ public class frmCadastrarFundamento extends javax.swing.JDialog
             public void actionPerformed(java.awt.event.ActionEvent evt)
             {
                 txtQuantidadeVagasActionPerformed(evt);
+            }
+        });
+        txtQuantidadeVagas.addKeyListener(new java.awt.event.KeyAdapter()
+        {
+            public void keyTyped(java.awt.event.KeyEvent evt)
+            {
+                txtQuantidadeVagasKeyTyped(evt);
             }
         });
 
@@ -242,11 +311,6 @@ public class frmCadastrarFundamento extends javax.swing.JDialog
         // TODO add your handling code here:
     }//GEN-LAST:event_txtNumeroLeiActionPerformed
 
-    private void txtAnoLeiActionPerformed(java.awt.event.ActionEvent evt)//GEN-FIRST:event_txtAnoLeiActionPerformed
-    {//GEN-HEADEREND:event_txtAnoLeiActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_txtAnoLeiActionPerformed
-
     private void txtQuantidadeVagasActionPerformed(java.awt.event.ActionEvent evt)//GEN-FIRST:event_txtQuantidadeVagasActionPerformed
     {//GEN-HEADEREND:event_txtQuantidadeVagasActionPerformed
         // TODO add your handling code here:
@@ -259,9 +323,152 @@ public class frmCadastrarFundamento extends javax.swing.JDialog
 
     private void btnCadastrarActionPerformed(java.awt.event.ActionEvent evt)//GEN-FIRST:event_btnCadastrarActionPerformed
     {//GEN-HEADEREND:event_btnCadastrarActionPerformed
-        ControleCadastrarFundamento controle = new ControleCadastrarFundamento(txtNumeroLei.getText(), txtAnoLei.getText(), jffDataLei.getText(), jtaEmenta.getText(), cmbAto.getSelectedItem().toString(), txtQuantidadeVagas.getText(), tabela);
-        this.dispose();
+        boolean valorDuplicado = false;
+        for (int i = 0; i < tabela.getRowCount(); i++)
+        {
+            String numeroDaLei = tabela.getValueAt(i, 0).toString();
+            String anoDaLei = tabela.getValueAt(i, 1).toString();
+            System.out.println("entrou");
+            if (txtNumeroLei.getText().equals(numeroDaLei) && txtAnoLei.getText().equals(anoDaLei) && !jffDataLei.getText().isEmpty() && !jtaEmenta.getText().isEmpty() && !txtQuantidadeVagas.getText().isEmpty())
+            {
+                JOptionPane.showMessageDialog(null, "Registro duplicado!");
+                valorDuplicado = true;
+                break;
+            }
+        }
+
+        if (eUmaAlteracao)
+        {
+            if (!valorDuplicado)
+            {
+                if (!txtNumeroLei.getText().isEmpty() && !txtAnoLei.getText().isEmpty() && !jffDataLei.getText().isEmpty() && !jtaEmenta.getText().isEmpty() && !txtQuantidadeVagas.getText().isEmpty())
+                {
+                    ControleCadastrarFundamento controle = new ControleCadastrarFundamento(txtNumeroLei.getText(), txtAnoLei.getText(), jffDataLei.getText(), jtaEmenta.getText(), cmbAto.getSelectedItem().toString(), txtQuantidadeVagas.getText(), tabela, eUmaAlteracao, linhaSelecionada);
+                    this.dispose();
+                }
+            }
+        }
+        else
+        {
+            if (!valorDuplicado)
+            {
+                if (!txtNumeroLei.getText().isEmpty() && !txtAnoLei.getText().isEmpty() && !jffDataLei.getText().isEmpty() && !jtaEmenta.getText().isEmpty() && !txtQuantidadeVagas.getText().isEmpty())
+                {
+                    ControleCadastrarFundamento controle = new ControleCadastrarFundamento(txtNumeroLei.getText(), txtAnoLei.getText(), jffDataLei.getText(), jtaEmenta.getText(), cmbAto.getSelectedItem().toString(), txtQuantidadeVagas.getText(), tabela, eUmaAlteracao, linhaSelecionada);
+                    this.dispose();
+                }
+            }
+        }
     }//GEN-LAST:event_btnCadastrarActionPerformed
+
+    private void txtNumeroLeiKeyTyped(java.awt.event.KeyEvent evt)//GEN-FIRST:event_txtNumeroLeiKeyTyped
+    {//GEN-HEADEREND:event_txtNumeroLeiKeyTyped
+        //Esse código verifica se o caractere digitado é uma letra, um backspace ou um delete. Se não for, o método consume() é chamado no evento, o que impede que o caractere seja inserido no campo de texto.
+        char c = evt.getKeyChar();
+        if (!(Character.isDigit(c) || (c == KeyEvent.VK_BACK_SPACE) || (c == KeyEvent.VK_DELETE)))
+        {
+            evt.consume();
+        }
+        else
+        {
+            String texto = txtNumeroLei.getText();
+            if (texto.length() == 2)
+            {
+                txtNumeroLei.setFocusTraversalKeysEnabled(true);
+            }
+        }
+    }//GEN-LAST:event_txtNumeroLeiKeyTyped
+
+    private void txtAnoLeiKeyTyped(java.awt.event.KeyEvent evt)//GEN-FIRST:event_txtAnoLeiKeyTyped
+    {//GEN-HEADEREND:event_txtAnoLeiKeyTyped
+        //Esse código verifica se o caractere digitado é uma letra, um backspace ou um delete. Se não for, o método consume() é chamado no evento, o que impede que o caractere seja inserido no campo de texto.
+        char c = evt.getKeyChar();
+        if (!(Character.isDigit(c) || (c == KeyEvent.VK_BACK_SPACE) || (c == KeyEvent.VK_DELETE)))
+        {
+            evt.consume();
+        }
+        else
+        {
+            String texto = txtAnoLei.getText();
+            if (texto.length() == 3)
+            {
+                txtAnoLei.setFocusTraversalKeysEnabled(true);
+            }
+        }
+    }//GEN-LAST:event_txtAnoLeiKeyTyped
+
+    private void jffDataLeiKeyTyped(java.awt.event.KeyEvent evt)//GEN-FIRST:event_jffDataLeiKeyTyped
+    {//GEN-HEADEREND:event_jffDataLeiKeyTyped
+        //Esse código verifica se o caractere digitado é uma letra, um backspace ou um delete. Se não for, o método consume() é chamado no evento, o que impede que o caractere seja inserido no campo de texto.
+        char c = evt.getKeyChar();
+        if (!(Character.isDigit(c) || (c == KeyEvent.VK_BACK_SPACE) || (c == KeyEvent.VK_DELETE)))
+        {
+            evt.consume();
+        }
+        else
+        {
+            String texto = jffDataLei.getText();
+            if (texto.length() == 8)
+            {
+                jffDataLei.setFocusTraversalKeysEnabled(true);
+            }
+
+        }
+    }//GEN-LAST:event_jffDataLeiKeyTyped
+
+    private void txtQuantidadeVagasKeyTyped(java.awt.event.KeyEvent evt)//GEN-FIRST:event_txtQuantidadeVagasKeyTyped
+    {//GEN-HEADEREND:event_txtQuantidadeVagasKeyTyped
+        //Esse código verifica se o caractere digitado é uma letra, um backspace ou um delete. Se não for, o método consume() é chamado no evento, o que impede que o caractere seja inserido no campo de texto.
+        char c = evt.getKeyChar();
+        if (!(Character.isDigit(c) || (c == KeyEvent.VK_BACK_SPACE) || (c == KeyEvent.VK_DELETE)))
+        {
+            evt.consume();
+        }
+    }//GEN-LAST:event_txtQuantidadeVagasKeyTyped
+
+    private void jffDataLeiFocusLost(java.awt.event.FocusEvent evt)//GEN-FIRST:event_jffDataLeiFocusLost
+    {//GEN-HEADEREND:event_jffDataLeiFocusLost
+
+        String data = jffDataLei.getText(); // Obtém o texto do campo
+        data = data.replaceAll("[^\\d]", ""); // Remove todos os caracteres que não são dígitos (espaços em branco e a barra)
+        int numCaracteresPreenchidos = data.length(); // Conta o número de dígitos restantes
+
+        if (numCaracteresPreenchidos != 8)
+        {
+            JOptionPane.showMessageDialog(null, "Campo data não pode estar vazio!");
+            jffDataLei.requestFocus();
+        }
+        else
+        {
+            jffDataLei.setFocusTraversalKeysEnabled(true);
+        }
+    }//GEN-LAST:event_jffDataLeiFocusLost
+
+    private void txtAnoLeiFocusLost(java.awt.event.FocusEvent evt)//GEN-FIRST:event_txtAnoLeiFocusLost
+    {//GEN-HEADEREND:event_txtAnoLeiFocusLost
+        String data = txtAnoLei.getText(); // Obtém o texto do campo
+        data = data.replaceAll("[^\\d]", ""); // Remove todos os caracteres que não são dígitos (espaços em branco e a barra)
+        int numCaracteresPreenchidos = data.length(); // Conta o número de dígitos restantes
+
+        System.out.println(numCaracteresPreenchidos);
+        if (numCaracteresPreenchidos != 4)
+        {
+            JOptionPane.showMessageDialog(null, "Campo ano não pode ser inferior a 4 digitos!");
+            txtAnoLei.requestFocusInWindow();
+        }
+
+
+    }//GEN-LAST:event_txtAnoLeiFocusLost
+
+    private void txtAnoLeiKeyReleased(java.awt.event.KeyEvent evt)//GEN-FIRST:event_txtAnoLeiKeyReleased
+    {//GEN-HEADEREND:event_txtAnoLeiKeyReleased
+
+    }//GEN-LAST:event_txtAnoLeiKeyReleased
+
+    private void txtAnoLeiFocusGained(java.awt.event.FocusEvent evt)//GEN-FIRST:event_txtAnoLeiFocusGained
+    {//GEN-HEADEREND:event_txtAnoLeiFocusGained
+        txtAnoLei.setFocusTraversalKeysEnabled(false);
+    }//GEN-LAST:event_txtAnoLeiFocusGained
 
     /**
      * @param args the command line arguments
