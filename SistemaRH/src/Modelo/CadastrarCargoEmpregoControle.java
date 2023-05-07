@@ -25,7 +25,7 @@ public class CadastrarCargoEmpregoControle extends CadastrarCargoEmpregoDTO
         this.setRegimeJuridicoCargoEmprego(regimeJuridico);
         this.setNumeroLeiCriaCargoEmprego(numeroLeiCargoEmprego);
         this.setDataLeiCriaCargoEmprego(dataLeiCargoEmprego);
-        this.setReferenciaSalarial(referenciaSalarial);
+
     }
 
     public CadastrarCargoEmpregoControle(int codigoCargoEmprego, String nomeCargoEmprego, String regimeJuridico, String numeroLeiCargoEmprego, String dataLeiCargoEmprego, String referenciaSalarial)
@@ -35,7 +35,7 @@ public class CadastrarCargoEmpregoControle extends CadastrarCargoEmpregoDTO
         this.setRegimeJuridicoCargoEmprego(regimeJuridico);
         this.setNumeroLeiCriaCargoEmprego(numeroLeiCargoEmprego);
         this.setDataLeiCriaCargoEmprego(dataLeiCargoEmprego);
-        this.setReferenciaSalarial(referenciaSalarial);
+  
     }
 
     public void cadastrar()
@@ -51,7 +51,7 @@ public class CadastrarCargoEmpregoControle extends CadastrarCargoEmpregoDTO
                 objcadastrarcargoempregoDTO.setRegimeJuridicoCargoEmprego(this.getRegimeJuridicoCargoEmprego());
                 objcadastrarcargoempregoDTO.setNumeroLeiCriaCargoEmprego(this.getNumeroLeiCriaCargoEmprego());
                 objcadastrarcargoempregoDTO.setDataLeiCriaCargoEmprego(this.getDataLeiCriaCargoEmprego());
-                objcadastrarcargoempregoDTO.setReferenciaSalarial(this.getReferenciaSalarial());
+      
 
                 CadastrarCargoEmpregoDAO objcadastrarcargoempregoDAO = new CadastrarCargoEmpregoDAO();
                 ResultSet rscadastrarcargoempregodao = objcadastrarcargoempregoDAO.verificarAntesDeCadastrar(objcadastrarcargoempregoDTO);
@@ -92,7 +92,7 @@ public class CadastrarCargoEmpregoControle extends CadastrarCargoEmpregoDTO
             this.setRegimeJuridicoCargoEmprego(obj.get(index).getRegimeJuridicoCargoEmprego());
             this.setNumeroLeiCriaCargoEmprego(obj.get(index).getNumeroLeiCriaCargoEmprego());
             this.setDataLeiCriaCargoEmprego(obj.get(index).getDataLeiCriaCargoEmprego());
-            this.setReferenciaSalarial(obj.get(index).getReferenciaSalarial());
+   
         }
 
     }
@@ -105,7 +105,7 @@ public class CadastrarCargoEmpregoControle extends CadastrarCargoEmpregoDTO
         objcadastrarcargoemprego.setRegimeJuridicoCargoEmprego(this.getRegimeJuridicoCargoEmprego());
         objcadastrarcargoemprego.setNumeroLeiCriaCargoEmprego(this.getNumeroLeiCriaCargoEmprego());
         objcadastrarcargoemprego.setDataLeiCriaCargoEmprego(this.getDataLeiCriaCargoEmprego());
-        objcadastrarcargoemprego.setReferenciaSalarial(this.getReferenciaSalarial());
+     
 
         CadastrarCargoEmpregoDAO alterar = new CadastrarCargoEmpregoDAO();
         alterar.update(objcadastrarcargoemprego);

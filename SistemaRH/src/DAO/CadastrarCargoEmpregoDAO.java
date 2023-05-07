@@ -54,7 +54,7 @@ public class CadastrarCargoEmpregoDAO
             pstm.setString(2, cadastrarcargoempregodto.getRegimeJuridicoCargoEmprego());
             pstm.setString(3, cadastrarcargoempregodto.getNumeroLeiCriaCargoEmprego());
             pstm.setString(4, cadastrarcargoempregodto.getDataLeiCriaCargoEmprego());
-            pstm.setString(5, cadastrarcargoempregodto.getReferenciaSalarial());
+       
 
             pstm.execute();
             pstm.close();
@@ -76,7 +76,6 @@ public class CadastrarCargoEmpregoDAO
                 stmt.setString(2, cadastrarcargoempregodto.getRegimeJuridicoCargoEmprego());
                 stmt.setString(3, cadastrarcargoempregodto.getNumeroLeiCriaCargoEmprego());
                 stmt.setString(4, cadastrarcargoempregodto.getDataLeiCriaCargoEmprego());
-                stmt.setString(5, cadastrarcargoempregodto.getReferenciaSalarial());
                 stmt.executeUpdate();
             } catch (SQLException erro)
             {
@@ -125,7 +124,7 @@ public class CadastrarCargoEmpregoDAO
                 cbdto.setRegimeJuridicoCargoEmprego(rs.getString("regime_juridico"));
                 cbdto.setNumeroLeiCriaCargoEmprego(rs.getString("numero_lei_cria_cargo_emprego"));
                 cbdto.setDataLeiCriaCargoEmprego(rs.getString("data_lei_cria_cargo_emprego"));
-                cbdto.setReferenciaSalarial(rs.getString("referencia_salarial"));
+                
                 objcadastrarcargoempregodto.add(cbdto);
             }
         } catch (SQLException erro)

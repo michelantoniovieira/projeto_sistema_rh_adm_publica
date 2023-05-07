@@ -48,7 +48,6 @@ public class frmCadastrarFundamento extends javax.swing.JDialog
         this.tabela = tabela;
         initComponents();
         this.txtNumeroLei.setText(numeroDaLei);
-        this.txtAnoLei.setText(anoDaLei);
         this.jffDataLei.setText(dataDaLei);
         this.jtaEmenta.setText(ementaDaLei);
         this.cmbAto.getSelectedItem().equals(atoDaLei);
@@ -56,6 +55,7 @@ public class frmCadastrarFundamento extends javax.swing.JDialog
         this.eUmaAlteracao = true;
         this.linhaSelecionada = linhaSelecionada;
         txtAnoLei.setDocument(new DefinirTamanhoMaximoCampoDeTexto(4));
+        this.txtAnoLei.setText(anoDaLei);
     }
 
     /**
@@ -532,16 +532,24 @@ public class frmCadastrarFundamento extends javax.swing.JDialog
     private javax.swing.JButton btnCadastrar;
     private javax.swing.JButton btnCancelar;
     private javax.swing.JComboBox<String> cmbAto;
+    private javax.swing.JComboBox<String> cmbGrau;
+    private javax.swing.JComboBox<String> cmbReferenciaSalarial;
+    private javax.swing.JLabel jLabel3;
+    private javax.swing.JLabel jLabel4;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JFormattedTextField jffDataLei;
+    private javax.swing.JPanel jpTabelaVencimentos;
     private javax.swing.JTextArea jtaEmenta;
+    private javax.swing.JTabbedPane jtpRemuneracao;
     private javax.swing.JLabel lblAnoLei;
     private javax.swing.JLabel lblAto;
     private javax.swing.JLabel lblDataLei;
+    private javax.swing.JLabel lblGrau;
     private javax.swing.JLabel lblNumeroLei;
     private javax.swing.JLabel lblQuantidadeVagas;
+    private javax.swing.JLabel lblReferenciaSalarial;
     private javax.swing.JTextField txtAnoLei;
     private javax.swing.JTextField txtNumeroLei;
     private javax.swing.JTextField txtQuantidadeVagas;
