@@ -1331,7 +1331,7 @@ public class frmPrincipal extends javax.swing.JFrame
         }
         else
         {
-            frmCCE.setLocation(0, 0);
+            frmCCE.setLocation((jdkpPrincipal.getWidth() - frmCCE.getWidth())/2,(jdkpPrincipal.getHeight()- frmCCE.getHeight())/2);
             frmCCE.pack();
             jdkpPrincipal.add(frmCCE, 2);
             gerenciadorJanelasAbertas(gerenciador, frmCCE);
@@ -1540,9 +1540,9 @@ public class frmPrincipal extends javax.swing.JFrame
         jdkpPrincipal.repaint();
     }
 
-    public static void gerenciadorJanelasAbertas(GerenciadorDeJanelas gerenciador, JInternalFrame janelasa)
+    public static void gerenciadorJanelasAbertas(GerenciadorDeJanelas gerenciador, JInternalFrame janela)
     {
-        gerenciador.gerenciadorJanela(janelasa, jdkpPrincipal, menuJanela, fecharTodasJanelas, organizarJanelas);
+        gerenciador.gerenciadorJanela(janela, jdkpPrincipal, menuJanela, fecharTodasJanelas, organizarJanelas);
         redesenhar();
 
     }
