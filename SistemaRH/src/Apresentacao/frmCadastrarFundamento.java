@@ -22,6 +22,12 @@ public class frmCadastrarFundamento extends javax.swing.JDialog
     private DefaultTableModel tabela;
     private boolean eUmaAlteracao = false;
     private int linhaSelecionada = -1;
+    private String numeroDaLei = "";
+    private String anoDaLei = "";
+    private String dataDaLei = "";
+    private String ementaDaLei = "";
+    private String atoDaLei = "";
+    private String quantidadeCargosEmpregosDaLei = "";
 
     /**
      * Creates new form frmCadastrarFundamento
@@ -48,14 +54,23 @@ public class frmCadastrarFundamento extends javax.swing.JDialog
         this.tabela = tabela;
         initComponents();
         this.txtNumeroLei.setText(numeroDaLei);
+        this.numeroDaLei = numeroDaLei;
         this.jffDataLei.setText(dataDaLei);
+        this.dataDaLei = dataDaLei;
         this.jtaEmenta.setText(ementaDaLei);
+        this.ementaDaLei = ementaDaLei;
         this.cmbAto.getSelectedItem().equals(atoDaLei);
+        this.atoDaLei = atoDaLei;
         this.txtQuantidadeVagas.setText(quantidadeCargosEmpregosDaLei);
+        this.quantidadeCargosEmpregosDaLei = quantidadeCargosEmpregosDaLei;
         this.eUmaAlteracao = true;
         this.linhaSelecionada = linhaSelecionada;
-        txtAnoLei.setDocument(new DefinirTamanhoMaximoCampoDeTexto(4));
+        this.txtAnoLei.setDocument(new DefinirTamanhoMaximoCampoDeTexto(4));
         this.txtAnoLei.setText(anoDaLei);
+        
+        //desativar campos
+        this.txtNumeroLei.setEnabled(false);
+        this.txtAnoLei.setEnabled(false);
     }
 
     /**
@@ -360,15 +375,24 @@ public class frmCadastrarFundamento extends javax.swing.JDialog
     private void btnCadastrarActionPerformed(java.awt.event.ActionEvent evt)//GEN-FIRST:event_btnCadastrarActionPerformed
     {//GEN-HEADEREND:event_btnCadastrarActionPerformed
         boolean valorDuplicado = false;
+        String numeroDaLeiNoRegistroDaTabela, anoDaLeiNoRegistroDaTabela;
         for (int i = 0; i < tabela.getRowCount(); i++)
         {
-            String numeroDaLei = tabela.getValueAt(i, 0).toString();
-            String anoDaLei = tabela.getValueAt(i, 1).toString();
-            System.out.println("entrou");
-            if (txtNumeroLei.getText().equals(numeroDaLei) && txtAnoLei.getText().equals(anoDaLei) && !jffDataLei.getText().isEmpty() && !jtaEmenta.getText().isEmpty() && !txtQuantidadeVagas.getText().isEmpty())
+            numeroDaLeiNoRegistroDaTabela = tabela.getValueAt(i, 0).toString();
+            anoDaLeiNoRegistroDaTabela = tabela.getValueAt(i, 1).toString();
+
+            //se o numero e ano da lei estiverem repetidos em algum registro da tabela barra a criação do novo registro
+            if (eUmaAlteracao == false && txtNumeroLei.getText().equals(numeroDaLeiNoRegistroDaTabela) && !txtNumeroLei.getText().isEmpty() && txtAnoLei.getText().equals(anoDaLeiNoRegistroDaTabela) && !txtAnoLei.getText().isEmpty())
             {
                 JOptionPane.showMessageDialog(null, "Registro duplicado!");
                 valorDuplicado = true;
+                break;
+            }
+            
+            //se os campos estiverem em branco sera mostrado um aviso
+            if(eUmaAlteracao == false && txtNumeroLei.getText().isEmpty() || txtAnoLei.getText().isEmpty() || jffDataLei.getText().isEmpty() || txtQuantidadeVagas.getText().isEmpty() || jtaEmenta.getText().isEmpty())
+            {
+                JOptionPane.showMessageDialog(null, "Preencha os campos para continuar.");
                 break;
             }
         }

@@ -16,3 +16,8 @@ SELECT *
 FROM listadecargosempregos
 WHERE fk_codigo_concurso = 1 AND fk_codigo_cargo_emprego = 1;
 
+-- ESSA TABELA MOSTRA O NOME DAS TABELAS E SEUS DEVIDOS VALORES
+SELECT nome_da_tabela_salarial, referencia_vencimento, grau_vencimento, valor_vencimento
+FROM vencimentos, tabela_salarial
+WHERE fk_codigo_tabela_salarial = codigo_tabela_salarial
+
