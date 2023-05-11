@@ -10,6 +10,7 @@ import java.awt.event.FocusAdapter;
 import java.awt.event.FocusEvent;
 import java.awt.event.KeyEvent;
 import javax.swing.JOptionPane;
+import javax.swing.JTabbedPane;
 import javax.swing.table.DefaultTableModel;
 
 /**
@@ -19,7 +20,7 @@ import javax.swing.table.DefaultTableModel;
 public class frmCadastrarFundamento extends javax.swing.JDialog
 {
 
-    private DefaultTableModel tabela;
+    private DefaultTableModel tbFundamentoCriacaoExclusao, tbFundamentoReajuste;
     private boolean eUmaAlteracao = false;
     private int linhaSelecionada = -1;
     private String numeroDaLei = "";
@@ -28,6 +29,7 @@ public class frmCadastrarFundamento extends javax.swing.JDialog
     private String ementaDaLei = "";
     private String atoDaLei = "";
     private String quantidadeCargosEmpregosDaLei = "";
+    private JTabbedPane jtp;
 
     /**
      * Creates new form frmCadastrarFundamento
@@ -39,19 +41,37 @@ public class frmCadastrarFundamento extends javax.swing.JDialog
         txtAnoLei.setDocument(new DefinirTamanhoMaximoCampoDeTexto(4));
     }
 
-    public frmCadastrarFundamento(java.awt.Frame parent, boolean modal, DefaultTableModel tabela)
+    public frmCadastrarFundamento(java.awt.Frame parent, boolean modal, DefaultTableModel tbFundamentoCriacaoExclusao, DefaultTableModel tbFundamentoReajuste, JTabbedPane jtp)
     {
         super(parent, modal);
-        this.tabela = tabela;
+        this.tbFundamentoCriacaoExclusao = tbFundamentoCriacaoExclusao;
+        this.tbFundamentoReajuste = tbFundamentoReajuste;
         initComponents();
         eUmaAlteracao = false;
         txtAnoLei.setDocument(new DefinirTamanhoMaximoCampoDeTexto(4));
+        this.jtp = jtp;
+
+        //se a aba Criação/Exclusao do frmCadastrarCargoEmprego estiver visivel desativa a aba reajuste do jtpAto
+        if (jtp.getSelectedIndex() == 0)
+        {
+            //foca a aba Criação/Exclusao
+            jtpAto.setSelectedIndex(0);
+            jtpAto.setEnabledAt(1, false);
+        }
+        //se a aba Reajuste do frmCadastrarCargoEmprego estiver visivel desativa a aba Criação/Exclusao do jtpAto
+        else if (jtp.getSelectedIndex() == 1)
+        {
+            //foca a aba Reajuste
+            jtpAto.setSelectedIndex(1);
+            jtpAto.setEnabledAt(0, false);
+        }
     }
 
-    public frmCadastrarFundamento(java.awt.Frame parent, boolean modal, DefaultTableModel tabela, String numeroDaLei, String anoDaLei, String dataDaLei, String ementaDaLei, String atoDaLei, String quantidadeCargosEmpregosDaLei, int linhaSelecionada)
+    public frmCadastrarFundamento(java.awt.Frame parent, boolean modal, DefaultTableModel tbFundamentoCriacaoExclusao, DefaultTableModel tbFundamentoReajuste, String numeroDaLei, String anoDaLei, String dataDaLei, String ementaDaLei, String atoDaLei, String quantidadeCargosEmpregosDaLei, int linhaSelecionada, JTabbedPane jtp)
     {
         super(parent, modal);
-        this.tabela = tabela;
+        this.tbFundamentoCriacaoExclusao = tbFundamentoCriacaoExclusao;
+        this.tbFundamentoReajuste = tbFundamentoReajuste;
         initComponents();
         this.txtNumeroLei.setText(numeroDaLei);
         this.numeroDaLei = numeroDaLei;
@@ -67,10 +87,27 @@ public class frmCadastrarFundamento extends javax.swing.JDialog
         this.linhaSelecionada = linhaSelecionada;
         this.txtAnoLei.setDocument(new DefinirTamanhoMaximoCampoDeTexto(4));
         this.txtAnoLei.setText(anoDaLei);
-        
+
         //desativar campos
         this.txtNumeroLei.setEnabled(false);
         this.txtAnoLei.setEnabled(false);
+
+        //se a aba Criação/Exclusao do frmCadastrarCargoEmprego estiver visivel desativa a aba reajuste do jtpAto
+        if (jtp.getSelectedIndex() == 0)
+        {
+            //foca a aba Criação/Exclusao
+            jtpAto.setSelectedIndex(0);
+            jtpAto.setEnabledAt(1, false);
+        }
+        //se a aba Reajuste do frmCadastrarCargoEmprego estiver visivel desativa a aba Criação/Exclusao do jtpAto
+        else if (jtp.getSelectedIndex() == 1)
+        {
+            //foca a aba Reajuste
+            jtpAto.setSelectedIndex(1);
+            jtpAto.setEnabledAt(0, false);
+        }
+
+        this.jtp = jtp;
     }
 
     /**
@@ -95,13 +132,17 @@ public class frmCadastrarFundamento extends javax.swing.JDialog
         jtaEmenta = new javax.swing.JTextArea();
         btnCancelar = new javax.swing.JButton();
         btnCadastrar = new javax.swing.JButton();
-        jTabbedPane1 = new javax.swing.JTabbedPane();
-        jPanel3 = new javax.swing.JPanel();
+        jtpAto = new javax.swing.JTabbedPane();
+        jpCriacaoExclusao = new javax.swing.JPanel();
         cmbAto = new javax.swing.JComboBox<>();
         txtQuantidadeVagas = new javax.swing.JTextField();
         lblQuantidadeVagas = new javax.swing.JLabel();
-        jLabel1 = new javax.swing.JLabel();
-        jPanel4 = new javax.swing.JPanel();
+        lblTipo = new javax.swing.JLabel();
+        jpReajuste = new javax.swing.JPanel();
+        lblValorDe = new javax.swing.JLabel();
+        lblValorPara = new javax.swing.JLabel();
+        txtValorPara = new javax.swing.JTextField();
+        txtValorDe = new javax.swing.JTextField();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         setTitle("Cadastrar Legislação");
@@ -250,7 +291,7 @@ public class frmCadastrarFundamento extends javax.swing.JDialog
             }
         });
 
-        jTabbedPane1.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "Ato", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Segoe UI", 1, 12))); // NOI18N
+        jtpAto.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "Ato", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Segoe UI", 1, 12))); // NOI18N
 
         cmbAto.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Criação", "Extinção", "Reajuste", "Outros" }));
 
@@ -271,50 +312,104 @@ public class frmCadastrarFundamento extends javax.swing.JDialog
 
         lblQuantidadeVagas.setText("Quantidade Vagas:");
 
-        jLabel1.setText("Tipo:");
+        lblTipo.setText("Tipo:");
 
-        javax.swing.GroupLayout jPanel3Layout = new javax.swing.GroupLayout(jPanel3);
-        jPanel3.setLayout(jPanel3Layout);
-        jPanel3Layout.setHorizontalGroup(
-            jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel3Layout.createSequentialGroup()
+        javax.swing.GroupLayout jpCriacaoExclusaoLayout = new javax.swing.GroupLayout(jpCriacaoExclusao);
+        jpCriacaoExclusao.setLayout(jpCriacaoExclusaoLayout);
+        jpCriacaoExclusaoLayout.setHorizontalGroup(
+            jpCriacaoExclusaoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jpCriacaoExclusaoLayout.createSequentialGroup()
                 .addGap(8, 8, 8)
-                .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(cmbAto, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jLabel1))
+                .addGroup(jpCriacaoExclusaoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(lblTipo)
+                    .addComponent(cmbAto, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                .addGroup(jpCriacaoExclusaoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                     .addComponent(lblQuantidadeVagas, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(txtQuantidadeVagas, javax.swing.GroupLayout.PREFERRED_SIZE, 99, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
-        jPanel3Layout.setVerticalGroup(
-            jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel3Layout.createSequentialGroup()
-                .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+        jpCriacaoExclusaoLayout.setVerticalGroup(
+            jpCriacaoExclusaoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jpCriacaoExclusaoLayout.createSequentialGroup()
+                .addGroup(jpCriacaoExclusaoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(lblQuantidadeVagas)
-                    .addComponent(jLabel1))
+                    .addComponent(lblTipo))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                .addGroup(jpCriacaoExclusaoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(txtQuantidadeVagas, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(cmbAto, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(0, 13, Short.MAX_VALUE))
+                .addGap(0, 0, Short.MAX_VALUE))
         );
 
-        jTabbedPane1.addTab("Criação/Exclusão", jPanel3);
+        jtpAto.addTab("Criação/Exclusão", jpCriacaoExclusao);
 
-        javax.swing.GroupLayout jPanel4Layout = new javax.swing.GroupLayout(jPanel4);
-        jPanel4.setLayout(jPanel4Layout);
-        jPanel4Layout.setHorizontalGroup(
-            jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 219, Short.MAX_VALUE)
+        lblValorDe.setText("De:");
+
+        lblValorPara.setText("Para:");
+
+        txtValorPara.addActionListener(new java.awt.event.ActionListener()
+        {
+            public void actionPerformed(java.awt.event.ActionEvent evt)
+            {
+                txtValorParaActionPerformed(evt);
+            }
+        });
+        txtValorPara.addKeyListener(new java.awt.event.KeyAdapter()
+        {
+            public void keyTyped(java.awt.event.KeyEvent evt)
+            {
+                txtValorParaKeyTyped(evt);
+            }
+        });
+
+        txtValorDe.addActionListener(new java.awt.event.ActionListener()
+        {
+            public void actionPerformed(java.awt.event.ActionEvent evt)
+            {
+                txtValorDeActionPerformed(evt);
+            }
+        });
+        txtValorDe.addKeyListener(new java.awt.event.KeyAdapter()
+        {
+            public void keyTyped(java.awt.event.KeyEvent evt)
+            {
+                txtValorDeKeyTyped(evt);
+            }
+        });
+
+        javax.swing.GroupLayout jpReajusteLayout = new javax.swing.GroupLayout(jpReajuste);
+        jpReajuste.setLayout(jpReajusteLayout);
+        jpReajusteLayout.setHorizontalGroup(
+            jpReajusteLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jpReajusteLayout.createSequentialGroup()
+                .addContainerGap()
+                .addGroup(jpReajusteLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(jpReajusteLayout.createSequentialGroup()
+                        .addComponent(lblValorDe)
+                        .addGap(94, 94, 94)
+                        .addComponent(lblValorPara))
+                    .addGroup(jpReajusteLayout.createSequentialGroup()
+                        .addGap(1, 1, 1)
+                        .addComponent(txtValorDe, javax.swing.GroupLayout.PREFERRED_SIZE, 99, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(txtValorPara, javax.swing.GroupLayout.PREFERRED_SIZE, 99, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addContainerGap(8, Short.MAX_VALUE))
         );
-        jPanel4Layout.setVerticalGroup(
-            jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 57, Short.MAX_VALUE)
+        jpReajusteLayout.setVerticalGroup(
+            jpReajusteLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jpReajusteLayout.createSequentialGroup()
+                .addGroup(jpReajusteLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(lblValorPara)
+                    .addComponent(lblValorDe))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(jpReajusteLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(txtValorPara, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(txtValorDe, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addContainerGap(13, Short.MAX_VALUE))
         );
 
-        jTabbedPane1.addTab("Reajuste", jPanel4);
+        jtpAto.addTab("Reajuste", jpReajuste);
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -325,13 +420,15 @@ public class frmCadastrarFundamento extends javax.swing.JDialog
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                     .addComponent(jPanel2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGap(18, 18, 18)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jtpAto)
                     .addGroup(layout.createSequentialGroup()
+                        .addGap(14, 14, 14)
                         .addComponent(btnCadastrar)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 43, Short.MAX_VALUE)
-                        .addComponent(btnCancelar))
-                    .addComponent(jTabbedPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addComponent(btnCancelar)
+                        .addGap(0, 0, Short.MAX_VALUE)))
                 .addContainerGap())
         );
         layout.setVerticalGroup(
@@ -344,7 +441,7 @@ public class frmCadastrarFundamento extends javax.swing.JDialog
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(jPanel2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                     .addGroup(layout.createSequentialGroup()
-                        .addComponent(jTabbedPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 111, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(jtpAto, javax.swing.GroupLayout.PREFERRED_SIZE, 111, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(18, 18, 18)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(btnCadastrar, javax.swing.GroupLayout.PREFERRED_SIZE, 32, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -374,48 +471,104 @@ public class frmCadastrarFundamento extends javax.swing.JDialog
 
     private void btnCadastrarActionPerformed(java.awt.event.ActionEvent evt)//GEN-FIRST:event_btnCadastrarActionPerformed
     {//GEN-HEADEREND:event_btnCadastrarActionPerformed
-        boolean valorDuplicado = false;
-        String numeroDaLeiNoRegistroDaTabela, anoDaLeiNoRegistroDaTabela;
-        for (int i = 0; i < tabela.getRowCount(); i++)
-        {
-            numeroDaLeiNoRegistroDaTabela = tabela.getValueAt(i, 0).toString();
-            anoDaLeiNoRegistroDaTabela = tabela.getValueAt(i, 1).toString();
 
-            //se o numero e ano da lei estiverem repetidos em algum registro da tabela barra a criação do novo registro
-            if (eUmaAlteracao == false && txtNumeroLei.getText().equals(numeroDaLeiNoRegistroDaTabela) && !txtNumeroLei.getText().isEmpty() && txtAnoLei.getText().equals(anoDaLeiNoRegistroDaTabela) && !txtAnoLei.getText().isEmpty())
-            {
-                JOptionPane.showMessageDialog(null, "Registro duplicado!");
-                valorDuplicado = true;
-                break;
-            }
-            
-            //se os campos estiverem em branco sera mostrado um aviso
-            if(eUmaAlteracao == false && txtNumeroLei.getText().isEmpty() || txtAnoLei.getText().isEmpty() || jffDataLei.getText().isEmpty() || txtQuantidadeVagas.getText().isEmpty() || jtaEmenta.getText().isEmpty())
-            {
-                JOptionPane.showMessageDialog(null, "Preencha os campos para continuar.");
-                break;
-            }
-        }
-
-        if (eUmaAlteracao)
+        if (jtp.getSelectedIndex() == 0)
         {
-            if (!valorDuplicado)
+            boolean valorDuplicado = false;
+            String numeroDaLeiNoRegistroDaTabelaCriacaoExclusao, anoDaLeiNoRegistroDaTabelaCriacaoExclusao;
+            for (int i = 0; i < tbFundamentoCriacaoExclusao.getRowCount(); i++)
             {
-                if (!txtNumeroLei.getText().isEmpty() && !txtAnoLei.getText().isEmpty() && !jffDataLei.getText().isEmpty() && !jtaEmenta.getText().isEmpty() && !txtQuantidadeVagas.getText().isEmpty())
+                numeroDaLeiNoRegistroDaTabelaCriacaoExclusao = tbFundamentoCriacaoExclusao.getValueAt(i, 0).toString();
+                anoDaLeiNoRegistroDaTabelaCriacaoExclusao = tbFundamentoCriacaoExclusao.getValueAt(i, 1).toString();
+
+                //se o numero e ano da lei estiverem repetidos em algum registro da tabela barra a criação do novo registro
+                if (eUmaAlteracao == false && txtNumeroLei.getText().equals(numeroDaLeiNoRegistroDaTabelaCriacaoExclusao) && !txtNumeroLei.getText().isEmpty() && txtAnoLei.getText().equals(anoDaLeiNoRegistroDaTabelaCriacaoExclusao) && !txtAnoLei.getText().isEmpty())
                 {
-                    ControleCadastrarFundamento controle = new ControleCadastrarFundamento(txtNumeroLei.getText(), txtAnoLei.getText(), jffDataLei.getText(), jtaEmenta.getText(), cmbAto.getSelectedItem().toString(), txtQuantidadeVagas.getText(), tabela, eUmaAlteracao, linhaSelecionada);
-                    this.dispose();
+                    JOptionPane.showMessageDialog(null, "Registro duplicado na aba Criação/Exclusão!");
+                    valorDuplicado = true;
+                    break;
+                }
+
+                //se os campos estiverem em branco sera mostrado um aviso
+                if (eUmaAlteracao == false && txtNumeroLei.getText().isEmpty() || txtAnoLei.getText().isEmpty() || jffDataLei.getText().isEmpty() || txtQuantidadeVagas.getText().isEmpty() || jtaEmenta.getText().isEmpty())
+                {
+                    JOptionPane.showMessageDialog(null, "Preencha os campos para continuar.");
+                    break;
+                }
+            }
+            //script para lançar as informações das tabelas
+            if (eUmaAlteracao)
+            {
+                if (!valorDuplicado)
+                {
+                    if (!txtNumeroLei.getText().isEmpty() && !txtAnoLei.getText().isEmpty() && !jffDataLei.getText().isEmpty() && !jtaEmenta.getText().isEmpty() && !txtQuantidadeVagas.getText().isEmpty())
+                    {
+                        ControleCadastrarFundamento controle = new ControleCadastrarFundamento(txtNumeroLei.getText(), txtAnoLei.getText(), jffDataLei.getText(), jtaEmenta.getText(), cmbAto.getSelectedItem().toString(), txtQuantidadeVagas.getText(), tbFundamentoCriacaoExclusao, eUmaAlteracao, linhaSelecionada, txtValorDe.getText(), txtValorPara.getText(), jtp);
+                        this.dispose();
+                    }
+                }
+            }
+            else
+            {
+                if (!valorDuplicado)
+                {
+                    if (!txtNumeroLei.getText().isEmpty() && !txtAnoLei.getText().isEmpty() && !jffDataLei.getText().isEmpty() && !jtaEmenta.getText().isEmpty() && !txtQuantidadeVagas.getText().isEmpty())
+                    {
+                        ControleCadastrarFundamento controle = new ControleCadastrarFundamento(txtNumeroLei.getText(), txtAnoLei.getText(), jffDataLei.getText(), jtaEmenta.getText(), cmbAto.getSelectedItem().toString(), txtQuantidadeVagas.getText(), tbFundamentoCriacaoExclusao, eUmaAlteracao, linhaSelecionada, txtValorDe.getText(), txtValorPara.getText(), jtp);
+                        this.dispose();
+                    }
                 }
             }
         }
-        else
+
+        if (jtp.getSelectedIndex() == 1)
         {
-            if (!valorDuplicado)
+            
+            boolean valorDuplicado = false;          
+            String numeroDaLeiNoRegistroDaTabelaReajuste, anoDaLeiNoRegistroDaTabelaReajuste;
+            
+            for (int j = 0; j < tbFundamentoReajuste.getRowCount(); j++)
             {
-                if (!txtNumeroLei.getText().isEmpty() && !txtAnoLei.getText().isEmpty() && !jffDataLei.getText().isEmpty() && !jtaEmenta.getText().isEmpty() && !txtQuantidadeVagas.getText().isEmpty())
+                System.out.println("entdfrou");
+                numeroDaLeiNoRegistroDaTabelaReajuste = tbFundamentoReajuste.getValueAt(j, 0).toString();
+                anoDaLeiNoRegistroDaTabelaReajuste = tbFundamentoReajuste.getValueAt(j, 1).toString();
+
+                //se o numero e ano da lei estiverem repetidos em algum registro da tabela barra a criação do novo registro
+                if (eUmaAlteracao == false && txtNumeroLei.getText().equals(numeroDaLeiNoRegistroDaTabelaReajuste) && !txtNumeroLei.getText().isEmpty() && txtAnoLei.getText().equals(anoDaLeiNoRegistroDaTabelaReajuste) && !txtAnoLei.getText().isEmpty())
                 {
-                    ControleCadastrarFundamento controle = new ControleCadastrarFundamento(txtNumeroLei.getText(), txtAnoLei.getText(), jffDataLei.getText(), jtaEmenta.getText(), cmbAto.getSelectedItem().toString(), txtQuantidadeVagas.getText(), tabela, eUmaAlteracao, linhaSelecionada);
-                    this.dispose();
+                    JOptionPane.showMessageDialog(null, "Registro duplicado na aba Reajuste!");
+                    valorDuplicado = true;
+                    break;
+                }
+
+                //se os campos estiverem em branco sera mostrado um aviso
+                if (eUmaAlteracao == false && txtNumeroLei.getText().isEmpty() || txtAnoLei.getText().isEmpty() || jffDataLei.getText().isEmpty() || txtQuantidadeVagas.getText().isEmpty() || jtaEmenta.getText().isEmpty())
+                {
+                    JOptionPane.showMessageDialog(null, "Preencha os campos para continuar.");
+                    break;
+                }
+            }
+            //script para lançar as informações das tabelas
+            if (eUmaAlteracao)
+            {
+                if (!valorDuplicado)
+                {
+                    if (!txtNumeroLei.getText().isEmpty() && !txtAnoLei.getText().isEmpty() && !jffDataLei.getText().isEmpty() && !jtaEmenta.getText().isEmpty() && !txtValorDe.getText().isEmpty() && !txtValorPara.getText().isEmpty())
+                    {
+                        ControleCadastrarFundamento controle = new ControleCadastrarFundamento(txtNumeroLei.getText(), txtAnoLei.getText(), jffDataLei.getText(), jtaEmenta.getText(), cmbAto.getSelectedItem().toString(), txtQuantidadeVagas.getText(), tbFundamentoCriacaoExclusao, eUmaAlteracao, linhaSelecionada, txtValorDe.getText(), txtValorPara.getText(), jtp);
+                        this.dispose();
+                    }
+                }
+            }
+            else
+            {
+                if (!valorDuplicado)
+                {
+                    if (!txtNumeroLei.getText().isEmpty() && !txtAnoLei.getText().isEmpty() && !jffDataLei.getText().isEmpty() && !jtaEmenta.getText().isEmpty() && !txtQuantidadeVagas.getText().isEmpty())
+                    {
+                        ControleCadastrarFundamento controle = new ControleCadastrarFundamento(txtNumeroLei.getText(), txtAnoLei.getText(), jffDataLei.getText(), jtaEmenta.getText(), cmbAto.getSelectedItem().toString(), txtQuantidadeVagas.getText(), tbFundamentoCriacaoExclusao, eUmaAlteracao, linhaSelecionada, txtValorDe.getText(), txtValorPara.getText(), jtp);
+                        this.dispose();
+                    }
                 }
             }
         }
@@ -510,7 +663,6 @@ public class frmCadastrarFundamento extends javax.swing.JDialog
         data = data.replaceAll("[^\\d]", ""); // Remove todos os caracteres que não são dígitos (espaços em branco e a barra)
         int numCaracteresPreenchidos = data.length(); // Conta o número de dígitos restantes
 
-        System.out.println(numCaracteresPreenchidos);
         if (numCaracteresPreenchidos != 4)
         {
             JOptionPane.showMessageDialog(null, "Campo ano não pode ser inferior a 4 digitos!");
@@ -529,6 +681,26 @@ public class frmCadastrarFundamento extends javax.swing.JDialog
     {//GEN-HEADEREND:event_txtAnoLeiFocusGained
         txtAnoLei.setFocusTraversalKeysEnabled(false);
     }//GEN-LAST:event_txtAnoLeiFocusGained
+
+    private void txtValorParaActionPerformed(java.awt.event.ActionEvent evt)//GEN-FIRST:event_txtValorParaActionPerformed
+    {//GEN-HEADEREND:event_txtValorParaActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_txtValorParaActionPerformed
+
+    private void txtValorParaKeyTyped(java.awt.event.KeyEvent evt)//GEN-FIRST:event_txtValorParaKeyTyped
+    {//GEN-HEADEREND:event_txtValorParaKeyTyped
+        // TODO add your handling code here:
+    }//GEN-LAST:event_txtValorParaKeyTyped
+
+    private void txtValorDeActionPerformed(java.awt.event.ActionEvent evt)//GEN-FIRST:event_txtValorDeActionPerformed
+    {//GEN-HEADEREND:event_txtValorDeActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_txtValorDeActionPerformed
+
+    private void txtValorDeKeyTyped(java.awt.event.KeyEvent evt)//GEN-FIRST:event_txtValorDeKeyTyped
+    {//GEN-HEADEREND:event_txtValorDeKeyTyped
+        // TODO add your handling code here:
+    }//GEN-LAST:event_txtValorDeKeyTyped
 
     /**
      * @param args the command line arguments
@@ -592,21 +764,25 @@ public class frmCadastrarFundamento extends javax.swing.JDialog
     private javax.swing.JButton btnCadastrar;
     private javax.swing.JButton btnCancelar;
     private javax.swing.JComboBox<String> cmbAto;
-    private javax.swing.JLabel jLabel1;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
-    private javax.swing.JPanel jPanel3;
-    private javax.swing.JPanel jPanel4;
     private javax.swing.JScrollPane jScrollPane1;
-    private javax.swing.JTabbedPane jTabbedPane1;
     private javax.swing.JFormattedTextField jffDataLei;
+    private javax.swing.JPanel jpCriacaoExclusao;
+    private javax.swing.JPanel jpReajuste;
     private javax.swing.JTextArea jtaEmenta;
+    private javax.swing.JTabbedPane jtpAto;
     private javax.swing.JLabel lblAnoLei;
     private javax.swing.JLabel lblDataLei;
     private javax.swing.JLabel lblNumeroLei;
     private javax.swing.JLabel lblQuantidadeVagas;
+    private javax.swing.JLabel lblTipo;
+    private javax.swing.JLabel lblValorDe;
+    private javax.swing.JLabel lblValorPara;
     private javax.swing.JTextField txtAnoLei;
     private javax.swing.JTextField txtNumeroLei;
     private javax.swing.JTextField txtQuantidadeVagas;
+    private javax.swing.JTextField txtValorDe;
+    private javax.swing.JTextField txtValorPara;
     // End of variables declaration//GEN-END:variables
 }

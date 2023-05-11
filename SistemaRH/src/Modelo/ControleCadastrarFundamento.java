@@ -1,24 +1,25 @@
 package Modelo;
 
 import DTO.CadastrarFundamentoDTO;
+import javax.swing.JTabbedPane;
 import javax.swing.table.DefaultTableModel;
 
 public class ControleCadastrarFundamento
 {
 
-    public ControleCadastrarFundamento(String numeroDaLei, String anoDaLei, String dataDaLei, String ementaDaLei, String atoDaLei, String qtdVagasDaLei, DefaultTableModel tabela, boolean eUmaAlteracao, int linhaSelecionada)
+    public ControleCadastrarFundamento(String numeroDaLei, String anoDaLei, String dataDaLei, String ementaDaLei, String atoDaLei, String qtdVagasDaLei, DefaultTableModel tabela, boolean eUmaAlteracao, int linhaSelecionada, String de, String para, JTabbedPane jtp)
     {
         if (eUmaAlteracao)
         {
-            alterar(numeroDaLei, anoDaLei, dataDaLei, ementaDaLei, atoDaLei, qtdVagasDaLei, tabela, eUmaAlteracao, linhaSelecionada);
+            alterar(numeroDaLei, anoDaLei, dataDaLei, ementaDaLei, atoDaLei, qtdVagasDaLei, tabela, eUmaAlteracao, linhaSelecionada, de, para);
         }
         else
         {
-            cadastrar(numeroDaLei, anoDaLei, dataDaLei, ementaDaLei, atoDaLei, qtdVagasDaLei, tabela, eUmaAlteracao, linhaSelecionada);
+            cadastrar(numeroDaLei, anoDaLei, dataDaLei, ementaDaLei, atoDaLei, qtdVagasDaLei, tabela, eUmaAlteracao, linhaSelecionada, de, para);
         }
     }
 
-    public void cadastrar(String numeroDaLei, String anoDaLei, String dataDaLei, String ementaDaLei, String atoDaLei, String qtdVagasDaLei, DefaultTableModel tabela, boolean eUmaAlteracao, int linhaSelecionada)
+    public void cadastrar(String numeroDaLei, String anoDaLei, String dataDaLei, String ementaDaLei, String atoDaLei, String qtdVagasDaLei, DefaultTableModel tabela, boolean eUmaAlteracao, int linhaSelecionada, String de, String para)
     {
         Object[] linha = new Object[6];
         linha[0] = numeroDaLei;
@@ -30,8 +31,9 @@ public class ControleCadastrarFundamento
         tabela.addRow(linha);
     }
 
-    public void alterar(String numeroDaLei, String anoDaLei, String dataDaLei, String ementaDaLei, String atoDaLei, String qtdVagasDaLei, DefaultTableModel tabela, boolean eUmaAlteracao, int linhaSelecionada)
+    public void alterar(String numeroDaLei, String anoDaLei, String dataDaLei, String ementaDaLei, String atoDaLei, String qtdVagasDaLei, DefaultTableModel tabela, boolean eUmaAlteracao, int linhaSelecionada, String de, String para)
     {
+      
         if (linhaSelecionada != -1)
         {
             tabela.setValueAt(numeroDaLei, linhaSelecionada, 0);

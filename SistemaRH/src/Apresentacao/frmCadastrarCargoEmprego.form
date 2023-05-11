@@ -947,7 +947,7 @@
 
                   <Layout class="org.netbeans.modules.form.compat2.layouts.support.JScrollPaneSupportLayout"/>
                   <SubComponents>
-                    <Component class="javax.swing.JTable" name="tbFundamento">
+                    <Component class="javax.swing.JTable" name="tbFundamentoCriacaoExclusao">
                       <Properties>
                         <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
                           <Font name="Segoe UI" size="12" style="1"/>
@@ -1004,20 +1004,19 @@
 
                   <Layout class="org.netbeans.modules.form.compat2.layouts.support.JScrollPaneSupportLayout"/>
                   <SubComponents>
-                    <Component class="javax.swing.JTable" name="tbFundamento1">
+                    <Component class="javax.swing.JTable" name="tbFundamentoReajuste">
                       <Properties>
                         <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
                           <Font name="Segoe UI" size="12" style="1"/>
                         </Property>
                         <Property name="model" type="javax.swing.table.TableModel" editor="org.netbeans.modules.form.editors2.TableModelEditor">
-                          <Table columnCount="7" rowCount="0">
+                          <Table columnCount="6" rowCount="0">
                             <Column editable="false" title="N&#xfa;mero" type="java.lang.Object"/>
                             <Column editable="false" title="Ano" type="java.lang.Object"/>
                             <Column editable="false" title="Data" type="java.lang.Object"/>
                             <Column editable="false" title="Ementa" type="java.lang.Object"/>
-                            <Column editable="false" title="Ato" type="java.lang.Object"/>
                             <Column editable="false" title="De " type="java.lang.Object"/>
-                            <Column editable="true" title="Para" type="java.lang.Object"/>
+                            <Column editable="false" title="Para" type="java.lang.Object"/>
                           </Table>
                         </Property>
                       </Properties>

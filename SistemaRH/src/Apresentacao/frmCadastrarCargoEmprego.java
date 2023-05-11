@@ -230,10 +230,10 @@ public class frmCadastrarCargoEmprego extends javax.swing.JInternalFrame
         jtpLegislacao = new javax.swing.JTabbedPane();
         jpLegislacao = new javax.swing.JPanel();
         jScrollPane3 = new javax.swing.JScrollPane();
-        tbFundamento = new javax.swing.JTable();
+        tbFundamentoCriacaoExclusao = new javax.swing.JTable();
         jPanel3 = new javax.swing.JPanel();
         jScrollPane4 = new javax.swing.JScrollPane();
-        tbFundamento1 = new javax.swing.JTable();
+        tbFundamentoReajuste = new javax.swing.JTable();
         jpOperacoes = new javax.swing.JPanel();
         btnCadastrarFundamento = new javax.swing.JButton();
         btnAlterarFundamento = new javax.swing.JButton();
@@ -605,8 +605,8 @@ public class frmCadastrarCargoEmprego extends javax.swing.JInternalFrame
 
         jpLegislacao.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Segoe UI", 1, 12))); // NOI18N
 
-        tbFundamento.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
-        tbFundamento.setModel(new javax.swing.table.DefaultTableModel(
+        tbFundamentoCriacaoExclusao.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
+        tbFundamentoCriacaoExclusao.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][]
             {
 
@@ -627,7 +627,7 @@ public class frmCadastrarCargoEmprego extends javax.swing.JInternalFrame
                 return canEdit [columnIndex];
             }
         });
-        jScrollPane3.setViewportView(tbFundamento);
+        jScrollPane3.setViewportView(tbFundamentoCriacaoExclusao);
 
         javax.swing.GroupLayout jpLegislacaoLayout = new javax.swing.GroupLayout(jpLegislacao);
         jpLegislacao.setLayout(jpLegislacaoLayout);
@@ -647,21 +647,21 @@ public class frmCadastrarCargoEmprego extends javax.swing.JInternalFrame
 
         jtpLegislacao.addTab("Criação/Exclusão", jpLegislacao);
 
-        tbFundamento1.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
-        tbFundamento1.setModel(new javax.swing.table.DefaultTableModel(
+        tbFundamentoReajuste.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
+        tbFundamentoReajuste.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][]
             {
 
             },
             new String []
             {
-                "Número", "Ano", "Data", "Ementa", "Ato", "De ", "Para"
+                "Número", "Ano", "Data", "Ementa", "De ", "Para"
             }
         )
         {
             boolean[] canEdit = new boolean []
             {
-                false, false, false, false, false, false, true
+                false, false, false, false, false, false
             };
 
             public boolean isCellEditable(int rowIndex, int columnIndex)
@@ -669,7 +669,7 @@ public class frmCadastrarCargoEmprego extends javax.swing.JInternalFrame
                 return canEdit [columnIndex];
             }
         });
-        jScrollPane4.setViewportView(tbFundamento1);
+        jScrollPane4.setViewportView(tbFundamentoReajuste);
 
         javax.swing.GroupLayout jPanel3Layout = new javax.swing.GroupLayout(jPanel3);
         jPanel3.setLayout(jPanel3Layout);
@@ -817,7 +817,16 @@ public class frmCadastrarCargoEmprego extends javax.swing.JInternalFrame
     {//GEN-HEADEREND:event_btnCadastrarFundamentoActionPerformed
         if (jtpLegislacao.getSelectedIndex() == 0)
         {
-            frmCadastrarFundamento frmCadastrarFundamento = new frmCadastrarFundamento(null, true, (DefaultTableModel) tbFundamento.getModel());
+
+            frmCadastrarFundamento frmCadastrarFundamento = new frmCadastrarFundamento(null, true, (DefaultTableModel) tbFundamentoCriacaoExclusao.getModel(), (DefaultTableModel) tbFundamentoReajuste.getModel(), jtpLegislacao);
+            frmCadastrarFundamento.setVisible(true);
+            frmCadastrarFundamento.setLocationRelativeTo(null);
+            frmCadastrarFundamento.setDefaultCloseOperation(DISPOSE_ON_CLOSE);
+        }
+        
+        if(jtpLegislacao.getSelectedIndex() == 1)
+        {
+            frmCadastrarFundamento frmCadastrarFundamento = new frmCadastrarFundamento(null, true, (DefaultTableModel) tbFundamentoCriacaoExclusao.getModel(), (DefaultTableModel) tbFundamentoReajuste.getModel(), jtpLegislacao);
             frmCadastrarFundamento.setVisible(true);
             frmCadastrarFundamento.setLocationRelativeTo(null);
             frmCadastrarFundamento.setDefaultCloseOperation(DISPOSE_ON_CLOSE);
@@ -826,9 +835,9 @@ public class frmCadastrarCargoEmprego extends javax.swing.JInternalFrame
 
     private void btnExcluirFundamentoActionPerformed(java.awt.event.ActionEvent evt)//GEN-FIRST:event_btnExcluirFundamentoActionPerformed
     {//GEN-HEADEREND:event_btnExcluirFundamentoActionPerformed
-        DefaultTableModel model = (DefaultTableModel) tbFundamento.getModel();
+        DefaultTableModel model = (DefaultTableModel) tbFundamentoCriacaoExclusao.getModel();
 
-        int linhaSelecionada = tbFundamento.getSelectedRow();
+        int linhaSelecionada = tbFundamentoCriacaoExclusao.getSelectedRow();
 
         if (linhaSelecionada != -1)
         {
@@ -838,9 +847,9 @@ public class frmCadastrarCargoEmprego extends javax.swing.JInternalFrame
 
     private void btnAlterarFundamentoActionPerformed(java.awt.event.ActionEvent evt)//GEN-FIRST:event_btnAlterarFundamentoActionPerformed
     {//GEN-HEADEREND:event_btnAlterarFundamentoActionPerformed
-        DefaultTableModel model = (DefaultTableModel) tbFundamento.getModel();
+        DefaultTableModel model = (DefaultTableModel) tbFundamentoCriacaoExclusao.getModel();
 
-        int linhaSelecionada = tbFundamento.getSelectedRow();
+        int linhaSelecionada = tbFundamentoCriacaoExclusao.getSelectedRow();
 
         if (linhaSelecionada != -1)
         {
@@ -852,7 +861,7 @@ public class frmCadastrarCargoEmprego extends javax.swing.JInternalFrame
             Object atoDaLei = model.getValueAt(linhaSelecionada, 4);
             Object quantidadeDaLei = model.getValueAt(linhaSelecionada, 5);
 
-            frmCadastrarFundamento frmCadastrarFundamento = new frmCadastrarFundamento(null, true, (DefaultTableModel) tbFundamento.getModel(), numeroDaLei.toString(), anoDaLei.toString(), dataDaLei.toString(), ementaDaLei.toString(), atoDaLei.toString(), quantidadeDaLei.toString(), linhaSelecionada);
+            frmCadastrarFundamento frmCadastrarFundamento = new frmCadastrarFundamento(null, true, (DefaultTableModel) tbFundamentoCriacaoExclusao.getModel(), (DefaultTableModel) tbFundamentoReajuste.getModel(), numeroDaLei.toString(), anoDaLei.toString(), dataDaLei.toString(), ementaDaLei.toString(), atoDaLei.toString(), quantidadeDaLei.toString(), linhaSelecionada, jtpLegislacao);
             frmCadastrarFundamento.setVisible(true);
             frmCadastrarFundamento.setLocationRelativeTo(null);
             frmCadastrarFundamento.setDefaultCloseOperation(DISPOSE_ON_CLOSE);
@@ -910,8 +919,8 @@ public class frmCadastrarCargoEmprego extends javax.swing.JInternalFrame
     private javax.swing.JLabel lblRs;
     private javax.swing.JLabel lblSemanal;
     private javax.swing.JLabel lblSemanal1;
-    private javax.swing.JTable tbFundamento;
-    private javax.swing.JTable tbFundamento1;
+    private javax.swing.JTable tbFundamentoCriacaoExclusao;
+    private javax.swing.JTable tbFundamentoReajuste;
     private javax.swing.JTable tbQuadro;
     private javax.swing.JTextArea txtAreaRequisitosProvimento;
     private javax.swing.JTextField txtCboCargoEmprego;
