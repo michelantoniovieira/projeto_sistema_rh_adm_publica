@@ -823,8 +823,8 @@ public class frmCadastrarCargoEmprego extends javax.swing.JInternalFrame
             frmCadastrarFundamento.setLocationRelativeTo(null);
             frmCadastrarFundamento.setDefaultCloseOperation(DISPOSE_ON_CLOSE);
         }
-        
-        if(jtpLegislacao.getSelectedIndex() == 1)
+
+        if (jtpLegislacao.getSelectedIndex() == 1)
         {
             frmCadastrarFundamento frmCadastrarFundamento = new frmCadastrarFundamento(null, true, (DefaultTableModel) tbFundamentoCriacaoExclusao.getModel(), (DefaultTableModel) tbFundamentoReajuste.getModel(), jtpLegislacao);
             frmCadastrarFundamento.setVisible(true);
@@ -835,36 +835,75 @@ public class frmCadastrarCargoEmprego extends javax.swing.JInternalFrame
 
     private void btnExcluirFundamentoActionPerformed(java.awt.event.ActionEvent evt)//GEN-FIRST:event_btnExcluirFundamentoActionPerformed
     {//GEN-HEADEREND:event_btnExcluirFundamentoActionPerformed
-        DefaultTableModel model = (DefaultTableModel) tbFundamentoCriacaoExclusao.getModel();
-
-        int linhaSelecionada = tbFundamentoCriacaoExclusao.getSelectedRow();
-
-        if (linhaSelecionada != -1)
+        if (jtpLegislacao.getSelectedIndex() == 0)
         {
-            model.removeRow(linhaSelecionada);
+            DefaultTableModel model = (DefaultTableModel) tbFundamentoCriacaoExclusao.getModel();
+
+            int linhaSelecionada = tbFundamentoCriacaoExclusao.getSelectedRow();
+
+            if (linhaSelecionada != -1)
+            {
+                model.removeRow(linhaSelecionada);
+            }
+        }
+        if (jtpLegislacao.getSelectedIndex() == 1)
+        {
+            DefaultTableModel model = (DefaultTableModel) tbFundamentoReajuste.getModel();
+
+            int linhaSelecionada = tbFundamentoReajuste.getSelectedRow();
+
+            if (linhaSelecionada != -1)
+            {
+                model.removeRow(linhaSelecionada);
+            }
         }
     }//GEN-LAST:event_btnExcluirFundamentoActionPerformed
 
     private void btnAlterarFundamentoActionPerformed(java.awt.event.ActionEvent evt)//GEN-FIRST:event_btnAlterarFundamentoActionPerformed
     {//GEN-HEADEREND:event_btnAlterarFundamentoActionPerformed
-        DefaultTableModel model = (DefaultTableModel) tbFundamentoCriacaoExclusao.getModel();
-
-        int linhaSelecionada = tbFundamentoCriacaoExclusao.getSelectedRow();
-
-        if (linhaSelecionada != -1)
+        if (jtpLegislacao.getSelectedIndex() == 0)
         {
-            // Obtenha os valores da linha selecionada
-            Object numeroDaLei = model.getValueAt(linhaSelecionada, 0);
-            Object anoDaLei = model.getValueAt(linhaSelecionada, 1);
-            Object dataDaLei = model.getValueAt(linhaSelecionada, 2);
-            Object ementaDaLei = model.getValueAt(linhaSelecionada, 3);
-            Object atoDaLei = model.getValueAt(linhaSelecionada, 4);
-            Object quantidadeDaLei = model.getValueAt(linhaSelecionada, 5);
+            DefaultTableModel model = (DefaultTableModel) tbFundamentoCriacaoExclusao.getModel();
 
-            frmCadastrarFundamento frmCadastrarFundamento = new frmCadastrarFundamento(null, true, (DefaultTableModel) tbFundamentoCriacaoExclusao.getModel(), (DefaultTableModel) tbFundamentoReajuste.getModel(), numeroDaLei.toString(), anoDaLei.toString(), dataDaLei.toString(), ementaDaLei.toString(), atoDaLei.toString(), quantidadeDaLei.toString(), linhaSelecionada, jtpLegislacao);
-            frmCadastrarFundamento.setVisible(true);
-            frmCadastrarFundamento.setLocationRelativeTo(null);
-            frmCadastrarFundamento.setDefaultCloseOperation(DISPOSE_ON_CLOSE);
+            int linhaSelecionada = tbFundamentoCriacaoExclusao.getSelectedRow();
+
+            if (linhaSelecionada != -1)
+            {
+                // Obtenha os valores da linha selecionada
+                Object numeroDaLei = model.getValueAt(linhaSelecionada, 0);
+                Object anoDaLei = model.getValueAt(linhaSelecionada, 1);
+                Object dataDaLei = model.getValueAt(linhaSelecionada, 2);
+                Object ementaDaLei = model.getValueAt(linhaSelecionada, 3);
+                Object atoDaLei = model.getValueAt(linhaSelecionada, 4);
+                Object quantidadeDaLei = model.getValueAt(linhaSelecionada, 5);
+
+                frmCadastrarFundamento frmCadastrarFundamento = new frmCadastrarFundamento(null, true, (DefaultTableModel) tbFundamentoCriacaoExclusao.getModel(), (DefaultTableModel) tbFundamentoReajuste.getModel(), numeroDaLei.toString(), anoDaLei.toString(), dataDaLei.toString(), ementaDaLei.toString(), atoDaLei.toString(), quantidadeDaLei.toString(), linhaSelecionada, jtpLegislacao);
+                frmCadastrarFundamento.setVisible(true);
+                frmCadastrarFundamento.setLocationRelativeTo(null);
+                frmCadastrarFundamento.setDefaultCloseOperation(DISPOSE_ON_CLOSE);
+            }
+        }
+        if (jtpLegislacao.getSelectedIndex() == 1)
+        {
+            DefaultTableModel model = (DefaultTableModel) tbFundamentoReajuste.getModel();
+
+            int linhaSelecionada = tbFundamentoReajuste.getSelectedRow();
+
+            if (linhaSelecionada != -1)
+            {
+                // Obtenha os valores da linha selecionada
+                Object numeroDaLei = model.getValueAt(linhaSelecionada, 0);
+                Object anoDaLei = model.getValueAt(linhaSelecionada, 1);
+                Object dataDaLei = model.getValueAt(linhaSelecionada, 2);
+                Object ementaDaLei = model.getValueAt(linhaSelecionada, 3);
+                Object de = model.getValueAt(linhaSelecionada, 4);
+                Object para = model.getValueAt(linhaSelecionada, 5);
+
+                frmCadastrarFundamento frmCadastrarFundamento = new frmCadastrarFundamento(null, true, (DefaultTableModel) tbFundamentoCriacaoExclusao.getModel(), (DefaultTableModel) tbFundamentoReajuste.getModel(), numeroDaLei.toString(), anoDaLei.toString(), dataDaLei.toString(), ementaDaLei.toString(), de.toString(), para.toString(), linhaSelecionada, jtpLegislacao, 0);
+                frmCadastrarFundamento.setVisible(true);
+                frmCadastrarFundamento.setLocationRelativeTo(null);
+                frmCadastrarFundamento.setDefaultCloseOperation(DISPOSE_ON_CLOSE);
+            }
         }
     }//GEN-LAST:event_btnAlterarFundamentoActionPerformed
 

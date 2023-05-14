@@ -6,8 +6,6 @@ package Apresentacao;
 
 import Modelo.ControleCadastrarFundamento;
 import Modelo.DefinirTamanhoMaximoCampoDeTexto;
-import java.awt.event.FocusAdapter;
-import java.awt.event.FocusEvent;
 import java.awt.event.KeyEvent;
 import javax.swing.JOptionPane;
 import javax.swing.JTabbedPane;
@@ -30,6 +28,8 @@ public class frmCadastrarFundamento extends javax.swing.JDialog
     private String atoDaLei = "";
     private String quantidadeCargosEmpregosDaLei = "";
     private JTabbedPane jtp;
+    private String de;
+    private String para;
 
     /**
      * Creates new form frmCadastrarFundamento
@@ -106,7 +106,47 @@ public class frmCadastrarFundamento extends javax.swing.JDialog
             jtpAto.setSelectedIndex(1);
             jtpAto.setEnabledAt(0, false);
         }
+        this.jtp = jtp;
+    }
 
+    public frmCadastrarFundamento(java.awt.Frame parent, boolean modal, DefaultTableModel tbFundamentoCriacaoExclusao, DefaultTableModel tbFundamentoReajuste, String numeroDaLei, String anoDaLei, String dataDaLei, String ementaDaLei, String de, String para, int linhaSelecionada, JTabbedPane jtp, int i)
+    {
+        super(parent, modal);
+        this.tbFundamentoCriacaoExclusao = tbFundamentoCriacaoExclusao;
+        this.tbFundamentoReajuste = tbFundamentoReajuste;
+        initComponents();
+        this.txtNumeroLei.setText(numeroDaLei);
+        this.numeroDaLei = numeroDaLei;
+        this.jffDataLei.setText(dataDaLei);
+        this.dataDaLei = dataDaLei;
+        this.jtaEmenta.setText(ementaDaLei);
+        this.ementaDaLei = ementaDaLei;
+        this.cmbAto.getSelectedItem().equals(atoDaLei);
+        this.de = de;
+        this.para = para;
+        this.eUmaAlteracao = true;
+        this.linhaSelecionada = linhaSelecionada;
+        this.txtAnoLei.setDocument(new DefinirTamanhoMaximoCampoDeTexto(4));
+        this.txtAnoLei.setText(anoDaLei);
+
+        //desativar campos
+        this.txtNumeroLei.setEnabled(false);
+        this.txtAnoLei.setEnabled(false);
+
+        //se a aba Criação/Exclusao do frmCadastrarCargoEmprego estiver visivel desativa a aba reajuste do jtpAto
+        if (jtp.getSelectedIndex() == 0)
+        {
+            //foca a aba Criação/Exclusao
+            jtpAto.setSelectedIndex(0);
+            jtpAto.setEnabledAt(1, false);
+        }
+        //se a aba Reajuste do frmCadastrarCargoEmprego estiver visivel desativa a aba Criação/Exclusao do jtpAto
+        else if (jtp.getSelectedIndex() == 1)
+        {
+            //foca a aba Reajuste
+            jtpAto.setSelectedIndex(1);
+            jtpAto.setEnabledAt(0, false);
+        }
         this.jtp = jtp;
     }
 
@@ -473,17 +513,14 @@ public class frmCadastrarFundamento extends javax.swing.JDialog
     {//GEN-HEADEREND:event_btnCadastrarActionPerformed
 
         boolean valorDuplicado = false;
-        String numeroDaLeiNoRegistroDaTabelaCriacaoExclusao, anoDaLeiNoRegistroDaTabelaCriacaoExclusao, numeroDaLeiNoRegistroDaTabelaReajuste, anoDaLeiNoRegistroDaTabelaReajuste;
 
         if (jtp.getSelectedIndex() == 0 && !valorDuplicado)
         {
-            for (int i = 0; i < tbFundamentoCriacaoExclusao.getRowCount(); i++)
+            //executa o for se tiver registro na tabela
+            for (int j = 0; j < tbFundamentoCriacaoExclusao.getRowCount(); j++)
             {
-                numeroDaLeiNoRegistroDaTabelaCriacaoExclusao = tbFundamentoCriacaoExclusao.getValueAt(i, 0).toString();
-                anoDaLeiNoRegistroDaTabelaCriacaoExclusao = tbFundamentoCriacaoExclusao.getValueAt(i, 1).toString();
-
                 //se o numero e ano da lei estiverem repetidos em algum registro da tabela barra a criação do novo registro
-                if (eUmaAlteracao == false && txtNumeroLei.getText().equals(numeroDaLeiNoRegistroDaTabelaCriacaoExclusao) && !txtNumeroLei.getText().isEmpty() && txtAnoLei.getText().equals(anoDaLeiNoRegistroDaTabelaCriacaoExclusao) && !txtAnoLei.getText().isEmpty())
+                if (eUmaAlteracao == false && !txtNumeroLei.getText().isEmpty() && txtNumeroLei.getText().equals(tbFundamentoCriacaoExclusao.getValueAt(j, 0)) && !txtAnoLei.getText().isEmpty() && txtAnoLei.getText().equals(tbFundamentoCriacaoExclusao.getValueAt(j, 1)))
                 {
                     JOptionPane.showMessageDialog(null, "Registro duplicado na aba Criação/Exclusão!");
                     valorDuplicado = true;
@@ -515,16 +552,8 @@ public class frmCadastrarFundamento extends javax.swing.JDialog
                 {
                     if (!txtNumeroLei.getText().isEmpty() && !txtAnoLei.getText().isEmpty() && !jffDataLei.getText().isEmpty() && !jtaEmenta.getText().isEmpty() && !txtQuantidadeVagas.getText().isEmpty())
                     {
-                        //se nao tiver nenhum registro nas tabelas passa direto e faz o cadastro
-                        if (tbFundamentoReajuste.getRowCount() > 0 && tbFundamentoReajuste.getValueAt(0,0).equals(txtNumeroLei.getText()))
-                        {
-                            JOptionPane.showMessageDialog(null, "Lei cadastrada na tabela Reajuste!");
-                        }
-                        else
-                        {
-                            ControleCadastrarFundamento controle = new ControleCadastrarFundamento(txtNumeroLei.getText(), txtAnoLei.getText(), jffDataLei.getText(), jtaEmenta.getText(), cmbAto.getSelectedItem().toString(), txtQuantidadeVagas.getText(), tbFundamentoCriacaoExclusao, eUmaAlteracao, linhaSelecionada, txtValorDe.getText(), txtValorPara.getText(), jtp);
-                            this.dispose();
-                        }
+                        ControleCadastrarFundamento controle = new ControleCadastrarFundamento(txtNumeroLei.getText(), txtAnoLei.getText(), jffDataLei.getText(), jtaEmenta.getText(), cmbAto.getSelectedItem().toString(), txtQuantidadeVagas.getText(), tbFundamentoCriacaoExclusao, eUmaAlteracao, linhaSelecionada, txtValorDe.getText(), txtValorPara.getText(), jtp);
+                        this.dispose();
                     }
                 }
             }
@@ -532,20 +561,17 @@ public class frmCadastrarFundamento extends javax.swing.JDialog
 
         if (jtp.getSelectedIndex() == 1 && !valorDuplicado)
         {
+            valorDuplicado = false;
             //executa o for se tiver registro na tabela
             for (int j = 0; j < tbFundamentoReajuste.getRowCount(); j++)
             {
-                numeroDaLeiNoRegistroDaTabelaReajuste = tbFundamentoReajuste.getValueAt(j, 0).toString();
-                anoDaLeiNoRegistroDaTabelaReajuste = tbFundamentoReajuste.getValueAt(j, 1).toString();
-
                 //se o numero e ano da lei estiverem repetidos em algum registro da tabela barra a criação do novo registro
-                if (eUmaAlteracao == false && txtNumeroLei.getText().equals(numeroDaLeiNoRegistroDaTabelaReajuste) && !txtNumeroLei.getText().isEmpty() && txtAnoLei.getText().equals(anoDaLeiNoRegistroDaTabelaReajuste) && !txtAnoLei.getText().isEmpty())
+                if (eUmaAlteracao == false && !txtNumeroLei.getText().isEmpty() && txtNumeroLei.getText().equals(tbFundamentoReajuste.getValueAt(j, 0)) && !txtAnoLei.getText().isEmpty() && txtAnoLei.getText().equals(tbFundamentoReajuste.getValueAt(j, 1)))
                 {
                     JOptionPane.showMessageDialog(null, "Registro duplicado na aba Reajuste!");
                     valorDuplicado = true;
                     break;
                 }
-
                 //se os campos estiverem em branco sera mostrado um aviso
                 if (eUmaAlteracao == false && txtNumeroLei.getText().isEmpty() || txtAnoLei.getText().isEmpty() || jffDataLei.getText().isEmpty() || txtValorDe.getText().isEmpty() || txtValorPara.getText().isEmpty() || jtaEmenta.getText().isEmpty())
                 {
@@ -568,18 +594,11 @@ public class frmCadastrarFundamento extends javax.swing.JDialog
             {
                 if (!valorDuplicado)
                 {
+
                     if (!txtNumeroLei.getText().isEmpty() && !txtAnoLei.getText().isEmpty() && !jffDataLei.getText().isEmpty() && !jtaEmenta.getText().isEmpty() && !txtValorDe.getText().isEmpty() && !txtValorPara.getText().isEmpty())
                     {
-                        //se nao tiver nenhum registro nas tabelas passa direto e faz o cadastro
-                        if (tbFundamentoCriacaoExclusao.getRowCount() > 0 && tbFundamentoCriacaoExclusao.getValueAt(0,0).equals(txtNumeroLei.getText()))
-                        {
-                            JOptionPane.showMessageDialog(null, "Lei cadastrada na tabela Criação/Exclusão!");
-                        }
-                        else
-                        {
-                            ControleCadastrarFundamento controle = new ControleCadastrarFundamento(txtNumeroLei.getText(), txtAnoLei.getText(), jffDataLei.getText(), jtaEmenta.getText(), txtValorDe.getText(), txtValorPara.getText(), tbFundamentoReajuste, eUmaAlteracao, linhaSelecionada, jtp);
-                            this.dispose();
-                        }
+                        ControleCadastrarFundamento controle = new ControleCadastrarFundamento(txtNumeroLei.getText(), txtAnoLei.getText(), jffDataLei.getText(), jtaEmenta.getText(), txtValorDe.getText(), txtValorPara.getText(), tbFundamentoReajuste, eUmaAlteracao, linhaSelecionada, jtp);
+                        this.dispose();
                     }
                 }
             }
@@ -732,24 +751,32 @@ public class frmCadastrarFundamento extends javax.swing.JDialog
                 {
                     javax.swing.UIManager.setLookAndFeel(info.getClassName());
                     break;
+
                 }
             }
         }
         catch (ClassNotFoundException ex)
         {
-            java.util.logging.Logger.getLogger(frmCadastrarFundamento.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(frmCadastrarFundamento.class
+                    .getName()).log(java.util.logging.Level.SEVERE, null, ex);
+
         }
         catch (InstantiationException ex)
         {
-            java.util.logging.Logger.getLogger(frmCadastrarFundamento.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(frmCadastrarFundamento.class
+                    .getName()).log(java.util.logging.Level.SEVERE, null, ex);
+
         }
         catch (IllegalAccessException ex)
         {
-            java.util.logging.Logger.getLogger(frmCadastrarFundamento.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(frmCadastrarFundamento.class
+                    .getName()).log(java.util.logging.Level.SEVERE, null, ex);
+
         }
         catch (javax.swing.UnsupportedLookAndFeelException ex)
         {
-            java.util.logging.Logger.getLogger(frmCadastrarFundamento.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(frmCadastrarFundamento.class
+                    .getName()).log(java.util.logging.Level.SEVERE, null, ex);
         }
         //</editor-fold>
 
