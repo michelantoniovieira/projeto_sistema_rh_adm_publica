@@ -6,11 +6,13 @@ package Apresentacao;
 
 import DTO.PesquisarBancaDTO;
 import DTO.PesquisarCargoEmpregoDTO;
+import Modelo.CadastrarCargoEmpregoControle;
 import Modelo.CentralizarJanela;
 import java.awt.Dimension;
 import java.awt.Point;
 import java.awt.Toolkit;
 import java.util.ArrayList;
+import javax.swing.JOptionPane;
 import javax.swing.event.InternalFrameAdapter;
 import javax.swing.event.InternalFrameEvent;
 import javax.swing.table.DefaultTableModel;
@@ -817,11 +819,16 @@ public class frmCadastrarCargoEmprego extends javax.swing.JInternalFrame
     {//GEN-HEADEREND:event_btnCadastrarFundamentoActionPerformed
         if (jtpLegislacao.getSelectedIndex() == 0)
         {
-
             frmCadastrarFundamento frmCadastrarFundamento = new frmCadastrarFundamento(null, true, (DefaultTableModel) tbFundamentoCriacaoExclusao.getModel(), (DefaultTableModel) tbFundamentoReajuste.getModel(), jtpLegislacao);
             frmCadastrarFundamento.setVisible(true);
             frmCadastrarFundamento.setLocationRelativeTo(null);
             frmCadastrarFundamento.setDefaultCloseOperation(DISPOSE_ON_CLOSE);
+            
+            //passar a quantidade de cargos no Quadro
+            CadastrarCargoEmpregoControle c = new CadastrarCargoEmpregoControle();
+            
+            tbQuadro.setValueAt(c.cadastrarCargoEmpregoNoQuadro(), 0, 0);
+
         }
 
         if (jtpLegislacao.getSelectedIndex() == 1)

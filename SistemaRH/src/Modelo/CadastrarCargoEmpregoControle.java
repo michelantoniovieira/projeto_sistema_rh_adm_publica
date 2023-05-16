@@ -9,9 +9,17 @@ import DTO.CadastrarCargoEmpregoDTO;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
+import javax.swing.JOptionPane;
+import javax.swing.JTable;
+import javax.swing.table.DefaultTableModel;
 
 public class CadastrarCargoEmpregoControle extends CadastrarCargoEmpregoDTO
 {
+
+    public CadastrarCargoEmpregoControle()
+    {
+
+    }
 
     public CadastrarCargoEmpregoControle(String nomeCargoEmprego)
     {
@@ -25,7 +33,6 @@ public class CadastrarCargoEmpregoControle extends CadastrarCargoEmpregoDTO
         this.setRegimeJuridicoCargoEmprego(regimeJuridico);
         this.setNumeroLeiCriaCargoEmprego(numeroLeiCargoEmprego);
         this.setDataLeiCriaCargoEmprego(dataLeiCargoEmprego);
-
     }
 
     public CadastrarCargoEmpregoControle(int codigoCargoEmprego, String nomeCargoEmprego, String regimeJuridico, String numeroLeiCargoEmprego, String dataLeiCargoEmprego, String referenciaSalarial)
@@ -35,10 +42,9 @@ public class CadastrarCargoEmpregoControle extends CadastrarCargoEmpregoDTO
         this.setRegimeJuridicoCargoEmprego(regimeJuridico);
         this.setNumeroLeiCriaCargoEmprego(numeroLeiCargoEmprego);
         this.setDataLeiCriaCargoEmprego(dataLeiCargoEmprego);
-  
     }
 
-    public void cadastrar()
+    public void cadastrarCargoEmprego()
     {
         CadastrarCargoEmpregoValidacao validacao = new CadastrarCargoEmpregoValidacao(this.getDescricaoCargoEmprego(), this.getRegimeJuridicoCargoEmprego(), this.getDescricaoCargoEmprego(), this.getDataLeiCriaCargoEmprego());
         this.setMensagem(validacao.getMensagem());
@@ -51,7 +57,6 @@ public class CadastrarCargoEmpregoControle extends CadastrarCargoEmpregoDTO
                 objcadastrarcargoempregoDTO.setRegimeJuridicoCargoEmprego(this.getRegimeJuridicoCargoEmprego());
                 objcadastrarcargoempregoDTO.setNumeroLeiCriaCargoEmprego(this.getNumeroLeiCriaCargoEmprego());
                 objcadastrarcargoempregoDTO.setDataLeiCriaCargoEmprego(this.getDataLeiCriaCargoEmprego());
-      
 
                 CadastrarCargoEmpregoDAO objcadastrarcargoempregoDAO = new CadastrarCargoEmpregoDAO();
                 ResultSet rscadastrarcargoempregodao = objcadastrarcargoempregoDAO.verificarAntesDeCadastrar(objcadastrarcargoempregoDTO);
@@ -60,24 +65,27 @@ public class CadastrarCargoEmpregoControle extends CadastrarCargoEmpregoDTO
                 {
                     //envia mensagem para o form falando que o funcionario esta no banco de dados
                     this.setMensagem("erro 1");
-                } else
+                }
+                else
                 {
                     //enviar mensagem dizendo que posso inserir no banco de dados 
                     this.setMensagem("ok");
                     objcadastrarcargoempregoDAO.CadastrarCargoEmpregoDAO(objcadastrarcargoempregoDTO);
                 }
 
-            } catch (SQLException erro)
+            }
+            catch (SQLException erro)
             {
 
             }
-        } else
+        }
+        else
         {
             this.setMensagem(validacao.getMensagem());
         }
     }
 
-    public void pesquisar(int index)
+    public void pesquisarCargoEmprego(int index)
     {
         CadastrarCargoEmpregoDAO pesquisar = new CadastrarCargoEmpregoDAO();
         ArrayList<CadastrarCargoEmpregoDTO> obj = new ArrayList<>();
@@ -92,12 +100,10 @@ public class CadastrarCargoEmpregoControle extends CadastrarCargoEmpregoDTO
             this.setRegimeJuridicoCargoEmprego(obj.get(index).getRegimeJuridicoCargoEmprego());
             this.setNumeroLeiCriaCargoEmprego(obj.get(index).getNumeroLeiCriaCargoEmprego());
             this.setDataLeiCriaCargoEmprego(obj.get(index).getDataLeiCriaCargoEmprego());
-   
         }
-
     }
 
-    public void alterar()
+    public void alterarCargoEmprego()
     {
         CadastrarCargoEmpregoDTO objcadastrarcargoemprego = new CadastrarCargoEmpregoDTO();
         objcadastrarcargoemprego.setCodigoCargoEmprego(this.getCodigoCargoEmprego());
@@ -105,19 +111,24 @@ public class CadastrarCargoEmpregoControle extends CadastrarCargoEmpregoDTO
         objcadastrarcargoemprego.setRegimeJuridicoCargoEmprego(this.getRegimeJuridicoCargoEmprego());
         objcadastrarcargoemprego.setNumeroLeiCriaCargoEmprego(this.getNumeroLeiCriaCargoEmprego());
         objcadastrarcargoemprego.setDataLeiCriaCargoEmprego(this.getDataLeiCriaCargoEmprego());
-     
 
         CadastrarCargoEmpregoDAO alterar = new CadastrarCargoEmpregoDAO();
         alterar.update(objcadastrarcargoemprego);
     }
 
-    public void excluir()
+    public void excluirCargoEmprego()
     {
         CadastrarCargoEmpregoDTO objcadastrarcargoempregoDTO = new CadastrarCargoEmpregoDTO();
         objcadastrarcargoempregoDTO.setDescricaoCargoEmprego(this.getDescricaoCargoEmprego());
 
         CadastrarCargoEmpregoDAO excluir = new CadastrarCargoEmpregoDAO();
         excluir.delete(objcadastrarcargoempregoDTO);
+    }
+
+    public String cadastrarCargoEmpregoNoQuadro()
+    {
+        ControleCadastrarFundamento controle = new ControleCadastrarFundamento();
+        return controle.getQuantidadeEmpregoCriada();
     }
 
 }

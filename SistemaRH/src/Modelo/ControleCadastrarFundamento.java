@@ -1,11 +1,20 @@
 package Modelo;
 
 import DTO.CadastrarFundamentoDTO;
+import javax.swing.JOptionPane;
 import javax.swing.JTabbedPane;
 import javax.swing.table.DefaultTableModel;
 
 public class ControleCadastrarFundamento
 {
+
+    public static Integer quantidadeEmpregoCriada = 0;
+    public static Integer quantidadeEmpregoCriadaAux = 0;
+
+    public ControleCadastrarFundamento()
+    {
+
+    }
 
     public ControleCadastrarFundamento(String numeroDaLei, String anoDaLei, String dataDaLei, String ementaDaLei, String atoDaLei, String qtdVagasDaLei, DefaultTableModel tabela, boolean eUmaAlteracao, int linhaSelecionada, String de, String para, JTabbedPane jtp)
     {
@@ -29,6 +38,7 @@ public class ControleCadastrarFundamento
         {
             cadastrarReajuste(numeroDaLei, anoDaLei, dataDaLei, ementaDaLei, de, para, tabela, eUmaAlteracao, linhaSelecionada);
         }
+
     }
 
     public void cadastrarLegislacao(String numeroDaLei, String anoDaLei, String dataDaLei, String ementaDaLei, String atoDaLei, String qtdVagasDaLei, DefaultTableModel tabela, boolean eUmaAlteracao, int linhaSelecionada, String de, String para)
@@ -41,6 +51,9 @@ public class ControleCadastrarFundamento
         linha[4] = atoDaLei;
         linha[5] = qtdVagasDaLei;
         tabela.addRow(linha);
+
+        setQuantidadeEmpregoCriada(Integer.parseInt(qtdVagasDaLei));
+        JOptionPane.showMessageDialog(null, qtdVagasDaLei);
     }
 
     public void alterarLegislacao(String numeroDaLei, String anoDaLei, String dataDaLei, String ementaDaLei, String atoDaLei, String qtdVagasDaLei, DefaultTableModel tabela, boolean eUmaAlteracao, int linhaSelecionada, String de, String para)
@@ -80,6 +93,18 @@ public class ControleCadastrarFundamento
             tabela.setValueAt(de, linhaSelecionada, 4);
             tabela.setValueAt(para, linhaSelecionada, 5);
         }
+    }
+
+    public String getQuantidadeEmpregoCriada()
+    {
+        return quantidadeEmpregoCriada.toString();
+    }
+
+    public void setQuantidadeEmpregoCriada(int quantidadeEmpregoCriada)
+    {
+        this.quantidadeEmpregoCriada = quantidadeEmpregoCriada + quantidadeEmpregoCriadaAux;
+        quantidadeEmpregoCriadaAux += quantidadeEmpregoCriada;
+        JOptionPane.showMessageDialog(null, quantidadeEmpregoCriadaAux);
     }
 
 }

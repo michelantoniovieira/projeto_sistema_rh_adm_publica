@@ -1,5 +1,7 @@
 package DTO;
 
+import javax.swing.table.DefaultTableModel;
+
 public class CadastrarCargoEmpregoDTO
 {
 
@@ -15,6 +17,7 @@ public class CadastrarCargoEmpregoDTO
     private String requisitosProvimentoCargoEmprego;
     private String escolariadeExigidaCargoEmprego;
     private String valorSalarioCargoEmprego;
+    private DefaultTableModel tbQuadro;
 
     public int getCodigoCargoEmprego()
     {
@@ -124,6 +127,16 @@ public class CadastrarCargoEmpregoDTO
     public void setCboCargoEmprego(String cboCargoEmprego)
     {
         this.cboCargoEmprego = cboCargoEmprego;
+    }
+
+    public DefaultTableModel getTbQuadro()
+    {
+        return tbQuadro;
+    }
+
+    public void setTbQuadro(DefaultTableModel tbQuadro)
+    {
+        this.tbQuadro = tbQuadro;
     }
 
 }
