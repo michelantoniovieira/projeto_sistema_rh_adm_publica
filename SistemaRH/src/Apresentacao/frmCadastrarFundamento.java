@@ -208,6 +208,10 @@ public class frmCadastrarFundamento extends javax.swing.JDialog
         });
         jffDataLei.addKeyListener(new java.awt.event.KeyAdapter()
         {
+            public void keyReleased(java.awt.event.KeyEvent evt)
+            {
+                jffDataLeiKeyReleased(evt);
+            }
             public void keyTyped(java.awt.event.KeyEvent evt)
             {
                 jffDataLeiKeyTyped(evt);
@@ -225,6 +229,10 @@ public class frmCadastrarFundamento extends javax.swing.JDialog
         });
         txtNumeroLei.addKeyListener(new java.awt.event.KeyAdapter()
         {
+            public void keyReleased(java.awt.event.KeyEvent evt)
+            {
+                txtNumeroLeiKeyReleased(evt);
+            }
             public void keyTyped(java.awt.event.KeyEvent evt)
             {
                 txtNumeroLeiKeyTyped(evt);
@@ -295,6 +303,13 @@ public class frmCadastrarFundamento extends javax.swing.JDialog
 
         jtaEmenta.setColumns(20);
         jtaEmenta.setRows(5);
+        jtaEmenta.addKeyListener(new java.awt.event.KeyAdapter()
+        {
+            public void keyReleased(java.awt.event.KeyEvent evt)
+            {
+                jtaEmentaKeyReleased(evt);
+            }
+        });
         jScrollPane1.setViewportView(jtaEmenta);
 
         javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
@@ -323,6 +338,7 @@ public class frmCadastrarFundamento extends javax.swing.JDialog
         });
 
         btnCadastrar.setText("CADASTRAR");
+        btnCadastrar.setEnabled(false);
         btnCadastrar.addActionListener(new java.awt.event.ActionListener()
         {
             public void actionPerformed(java.awt.event.ActionEvent evt)
@@ -344,6 +360,10 @@ public class frmCadastrarFundamento extends javax.swing.JDialog
         });
         txtQuantidadeVagas.addKeyListener(new java.awt.event.KeyAdapter()
         {
+            public void keyReleased(java.awt.event.KeyEvent evt)
+            {
+                txtQuantidadeVagasKeyReleased(evt);
+            }
             public void keyTyped(java.awt.event.KeyEvent evt)
             {
                 txtQuantidadeVagasKeyTyped(evt);
@@ -623,6 +643,12 @@ public class frmCadastrarFundamento extends javax.swing.JDialog
         }
     }//GEN-LAST:event_txtNumeroLeiKeyTyped
 
+    public void verificarSeOsCamposEstaoPreenchidos()
+    {
+        boolean camposPreenchidos = !txtNumeroLei.getText().isEmpty() && !txtAnoLei.getText().isEmpty() && !jffDataLei.getText().isEmpty() && !txtQuantidadeVagas.getText().isEmpty() && !jtaEmenta.getText().isEmpty();
+        btnCadastrar.setEnabled(camposPreenchidos);
+    }
+
     private void txtAnoLeiKeyTyped(java.awt.event.KeyEvent evt)//GEN-FIRST:event_txtAnoLeiKeyTyped
     {//GEN-HEADEREND:event_txtAnoLeiKeyTyped
         //Esse código verifica se o caractere digitado é uma letra, um backspace ou um delete. Se não for, o método consume() é chamado no evento, o que impede que o caractere seja inserido no campo de texto.
@@ -705,7 +731,7 @@ public class frmCadastrarFundamento extends javax.swing.JDialog
 
     private void txtAnoLeiKeyReleased(java.awt.event.KeyEvent evt)//GEN-FIRST:event_txtAnoLeiKeyReleased
     {//GEN-HEADEREND:event_txtAnoLeiKeyReleased
-
+        verificarSeOsCamposEstaoPreenchidos();
     }//GEN-LAST:event_txtAnoLeiKeyReleased
 
     private void txtAnoLeiFocusGained(java.awt.event.FocusEvent evt)//GEN-FIRST:event_txtAnoLeiFocusGained
@@ -732,6 +758,26 @@ public class frmCadastrarFundamento extends javax.swing.JDialog
     {//GEN-HEADEREND:event_txtValorDeKeyTyped
         // TODO add your handling code here:
     }//GEN-LAST:event_txtValorDeKeyTyped
+
+    private void txtNumeroLeiKeyReleased(java.awt.event.KeyEvent evt)//GEN-FIRST:event_txtNumeroLeiKeyReleased
+    {//GEN-HEADEREND:event_txtNumeroLeiKeyReleased
+        verificarSeOsCamposEstaoPreenchidos();
+    }//GEN-LAST:event_txtNumeroLeiKeyReleased
+
+    private void jffDataLeiKeyReleased(java.awt.event.KeyEvent evt)//GEN-FIRST:event_jffDataLeiKeyReleased
+    {//GEN-HEADEREND:event_jffDataLeiKeyReleased
+        verificarSeOsCamposEstaoPreenchidos();
+    }//GEN-LAST:event_jffDataLeiKeyReleased
+
+    private void txtQuantidadeVagasKeyReleased(java.awt.event.KeyEvent evt)//GEN-FIRST:event_txtQuantidadeVagasKeyReleased
+    {//GEN-HEADEREND:event_txtQuantidadeVagasKeyReleased
+        verificarSeOsCamposEstaoPreenchidos();
+    }//GEN-LAST:event_txtQuantidadeVagasKeyReleased
+
+    private void jtaEmentaKeyReleased(java.awt.event.KeyEvent evt)//GEN-FIRST:event_jtaEmentaKeyReleased
+    {//GEN-HEADEREND:event_jtaEmentaKeyReleased
+        verificarSeOsCamposEstaoPreenchidos();
+    }//GEN-LAST:event_jtaEmentaKeyReleased
 
     /**
      * @param args the command line arguments

@@ -52,7 +52,7 @@ public class ControleCadastrarFundamento
         linha[5] = qtdVagasDaLei;
         tabela.addRow(linha);
 
-        setQuantidadeEmpregoCriada(Integer.parseInt(qtdVagasDaLei));
+        cadastrarCargoEmpregoNoQuadro(Integer.parseInt(qtdVagasDaLei));
         JOptionPane.showMessageDialog(null, qtdVagasDaLei);
     }
 
@@ -100,11 +100,46 @@ public class ControleCadastrarFundamento
         return quantidadeEmpregoCriada.toString();
     }
 
-    public void setQuantidadeEmpregoCriada(int quantidadeEmpregoCriada)
+    public void cadastrarCargoEmpregoNoQuadro(int quantidadeEmpregoCriada)
     {
-        this.quantidadeEmpregoCriada = quantidadeEmpregoCriada + quantidadeEmpregoCriadaAux;
-        quantidadeEmpregoCriadaAux += quantidadeEmpregoCriada;
-        JOptionPane.showMessageDialog(null, quantidadeEmpregoCriadaAux);
+        if (quantidadeEmpregoCriada <= 0)
+        {
+            this.quantidadeEmpregoCriada = 0;
+            this.quantidadeEmpregoCriadaAux = 0;
+        }
+        else
+        {
+            this.quantidadeEmpregoCriada = quantidadeEmpregoCriada + quantidadeEmpregoCriadaAux;
+            quantidadeEmpregoCriadaAux += quantidadeEmpregoCriada;
+        }
     }
 
+    public void excluirCargoEmpregoDoQuadro(DefaultTableModel tabela, int linhaSelecionada, int colunaComAInformacaoASerExcluida)
+    {
+        if (quantidadeEmpregoCriada <= 0)
+        {
+            this.quantidadeEmpregoCriada = 0;
+            this.quantidadeEmpregoCriadaAux = 0;
+        }
+        else
+        {
+            Object quantidadeASerExcluida = tabela.getValueAt(linhaSelecionada, colunaComAInformacaoASerExcluida);
+            //primeiro converter para String
+            String qtdExcStr = String.valueOf(quantidadeASerExcluida);
+            //depois converter para int
+            int qtdExcInt = Integer.parseInt(qtdExcStr);
+            this.quantidadeEmpregoCriada = quantidadeEmpregoCriada - qtdExcInt;
+            quantidadeEmpregoCriadaAux -= qtdExcInt;
+        }
+    }
+
+    public void alterarCargoEmpregoDoQuadro(DefaultTableModel tabela, int linhaSelecionada, int colunaComAInformacaoASerExcluida, String quantidadeCargoEmpregoASerAlterada)
+    {
+        quantidadeEmpregoCriada = 0;
+        for (int i = 0; i < tabela.getRowCount(); i++)
+        {
+            quantidadeEmpregoCriada = quantidadeEmpregoCriada + Integer.parseInt(tabela.getValueAt(i, colunaComAInformacaoASerExcluida).toString());
+            JOptionPane.showMessageDialog(null, quantidadeEmpregoCriada);
+        }
+    }
 }

@@ -4,17 +4,13 @@
  */
 package Apresentacao;
 
-import DTO.PesquisarBancaDTO;
 import DTO.PesquisarCargoEmpregoDTO;
 import Modelo.CadastrarCargoEmpregoControle;
 import Modelo.CentralizarJanela;
-import java.awt.Dimension;
-import java.awt.Point;
-import java.awt.Toolkit;
 import java.util.ArrayList;
-import javax.swing.JOptionPane;
-import javax.swing.event.InternalFrameAdapter;
-import javax.swing.event.InternalFrameEvent;
+import javax.swing.JTable;
+import javax.swing.SwingConstants;
+import javax.swing.table.DefaultTableCellRenderer;
 import javax.swing.table.DefaultTableModel;
 
 /**
@@ -174,6 +170,16 @@ public class frmCadastrarCargoEmprego extends javax.swing.JInternalFrame
         this.itemSelecionadoNoComboBox = itemSelecionadoNoComboBox;
     }
 
+    public void gerenciadorDeTabelas(JTable table)
+    {
+        DefaultTableCellRenderer centralizarCelulas = new DefaultTableCellRenderer();
+        centralizarCelulas.setHorizontalAlignment(SwingConstants.CENTER);
+        for (int i = 0; i < table.getColumnCount(); i++)
+        {
+            table.getColumnModel().getColumn(i).setCellRenderer(centralizarCelulas);
+        }
+    }
+
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -253,6 +259,31 @@ public class frmCadastrarCargoEmprego extends javax.swing.JInternalFrame
                 formAncestorMoved(evt);
             }
             public void ancestorRemoved(javax.swing.event.AncestorEvent evt)
+            {
+            }
+        });
+        addInternalFrameListener(new javax.swing.event.InternalFrameListener()
+        {
+            public void internalFrameActivated(javax.swing.event.InternalFrameEvent evt)
+            {
+            }
+            public void internalFrameClosed(javax.swing.event.InternalFrameEvent evt)
+            {
+                formInternalFrameClosed(evt);
+            }
+            public void internalFrameClosing(javax.swing.event.InternalFrameEvent evt)
+            {
+            }
+            public void internalFrameDeactivated(javax.swing.event.InternalFrameEvent evt)
+            {
+            }
+            public void internalFrameDeiconified(javax.swing.event.InternalFrameEvent evt)
+            {
+            }
+            public void internalFrameIconified(javax.swing.event.InternalFrameEvent evt)
+            {
+            }
+            public void internalFrameOpened(javax.swing.event.InternalFrameEvent evt)
             {
             }
         });
@@ -819,15 +850,19 @@ public class frmCadastrarCargoEmprego extends javax.swing.JInternalFrame
     {//GEN-HEADEREND:event_btnCadastrarFundamentoActionPerformed
         if (jtpLegislacao.getSelectedIndex() == 0)
         {
+            //para centralizar as celulas da tabela
+            gerenciadorDeTabelas(tbFundamentoCriacaoExclusao);
             frmCadastrarFundamento frmCadastrarFundamento = new frmCadastrarFundamento(null, true, (DefaultTableModel) tbFundamentoCriacaoExclusao.getModel(), (DefaultTableModel) tbFundamentoReajuste.getModel(), jtpLegislacao);
             frmCadastrarFundamento.setVisible(true);
             frmCadastrarFundamento.setLocationRelativeTo(null);
             frmCadastrarFundamento.setDefaultCloseOperation(DISPOSE_ON_CLOSE);
-            
+
             //passar a quantidade de cargos no Quadro
             CadastrarCargoEmpregoControle c = new CadastrarCargoEmpregoControle();
-            
             tbQuadro.setValueAt(c.cadastrarCargoEmpregoNoQuadro(), 0, 0);
+
+            //para centralizar as celulas da tabela
+            gerenciadorDeTabelas(tbQuadro);
 
         }
 
@@ -850,7 +885,10 @@ public class frmCadastrarCargoEmprego extends javax.swing.JInternalFrame
 
             if (linhaSelecionada != -1)
             {
+                CadastrarCargoEmpregoControle c = new CadastrarCargoEmpregoControle();
+                c.excluirCargoEmpregoDoQuadro(model, linhaSelecionada, 5);
                 model.removeRow(linhaSelecionada);
+                tbQuadro.setValueAt(c.cadastrarCargoEmpregoNoQuadro(), 0, 0);
             }
         }
         if (jtpLegislacao.getSelectedIndex() == 1)
@@ -887,6 +925,9 @@ public class frmCadastrarCargoEmprego extends javax.swing.JInternalFrame
                 frmCadastrarFundamento frmCadastrarFundamento = new frmCadastrarFundamento(null, true, (DefaultTableModel) tbFundamentoCriacaoExclusao.getModel(), (DefaultTableModel) tbFundamentoReajuste.getModel(), numeroDaLei.toString(), anoDaLei.toString(), dataDaLei.toString(), ementaDaLei.toString(), atoDaLei.toString(), quantidadeDaLei.toString(), linhaSelecionada, jtpLegislacao);
                 frmCadastrarFundamento.setVisible(true);
                 frmCadastrarFundamento.setLocationRelativeTo(null);
+
+                CadastrarCargoEmpregoControle c = new CadastrarCargoEmpregoControle();
+                tbQuadro.setValueAt(c.alterarCargoEmpregoDoQuadro(model, linhaSelecionada, 5, model.getValueAt(linhaSelecionada, 5).toString()), 0, 0);
                 frmCadastrarFundamento.setDefaultCloseOperation(DISPOSE_ON_CLOSE);
             }
         }
@@ -914,6 +955,16 @@ public class frmCadastrarCargoEmprego extends javax.swing.JInternalFrame
         }
     }//GEN-LAST:event_btnAlterarFundamentoActionPerformed
 
+    private void formInternalFrameClosed(javax.swing.event.InternalFrameEvent evt)//GEN-FIRST:event_formInternalFrameClosed
+    {//GEN-HEADEREND:event_formInternalFrameClosed
+        limparTabelas(tbQuadro);
+        limparTabelas(tbFundamentoCriacaoExclusao);
+    }//GEN-LAST:event_formInternalFrameClosed
+    public void limparTabelas(JTable tabela)
+    {
+        DefaultTableModel limparTabela = (DefaultTableModel) tabela.getModel();
+        limparTabela.setRowCount(0);
+    }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnAlterarFundamento;

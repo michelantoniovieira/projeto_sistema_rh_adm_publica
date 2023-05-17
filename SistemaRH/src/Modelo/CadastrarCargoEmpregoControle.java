@@ -130,5 +130,19 @@ public class CadastrarCargoEmpregoControle extends CadastrarCargoEmpregoDTO
         ControleCadastrarFundamento controle = new ControleCadastrarFundamento();
         return controle.getQuantidadeEmpregoCriada();
     }
+    
+    public String excluirCargoEmpregoDoQuadro(DefaultTableModel tabela, int linhaSelecionada, int colunaComAInformacaoASerExcluida)
+    {
+        ControleCadastrarFundamento controle = new ControleCadastrarFundamento();
+        controle.excluirCargoEmpregoDoQuadro(tabela, linhaSelecionada, colunaComAInformacaoASerExcluida);
+        return controle.getQuantidadeEmpregoCriada();
+    }
+    
+    public String alterarCargoEmpregoDoQuadro(DefaultTableModel tabela, int linhaSelecionada, int colunaComAInformacaoASerAlterada, String quantidadeCargoEmpregoASerAlterada)
+    {
+        ControleCadastrarFundamento controle = new ControleCadastrarFundamento();
+        controle.alterarCargoEmpregoDoQuadro(tabela, linhaSelecionada, colunaComAInformacaoASerAlterada, quantidadeCargoEmpregoASerAlterada);
+        return controle.getQuantidadeEmpregoCriada();
+    }
 
 }
