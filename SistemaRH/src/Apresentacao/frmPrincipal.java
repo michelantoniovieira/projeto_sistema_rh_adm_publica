@@ -762,7 +762,7 @@ public class frmPrincipal extends javax.swing.JFrame
         {
             //quando eu digitar nos campos da janela CadastrarConcurso e clicar no icone salvar da janela principal entra aqui e manda gravar registro que significa que os dados dos campos serão passados para as variaveis que eu acesso por aqui para mandar para a variavel controle           
             CadastrarCargoEmpregoControle controle = new CadastrarCargoEmpregoControle(frmCCE.getNomeCargoEmprego(), frmCCE.getRegimeJuridico(), frmCCE.getNumeroLeiCriaCargoEmprego(), frmCCE.getDataLeiCriaCargoEmprego(), frmCCE.getReferenciaSalarial());
-            controle.cadastrar();
+            //controle.cadastrar();
             if (controle.getMensagem().equals("erro 1"))
             {
                 JOptionPane.showMessageDialog(null, "Esta banca já foi cadastrada!");
@@ -781,7 +781,7 @@ public class frmPrincipal extends javax.swing.JFrame
         {
 
             CadastrarCargoEmpregoControle controle = new CadastrarCargoEmpregoControle(Integer.parseInt(frmCCE.getCodigoCargoEmprego()), frmCCE.getNomeCargoEmprego(), frmCCE.getRegimeJuridico(), frmCCE.getNumeroLeiCriaCargoEmprego(), frmCCE.getDataLeiCriaCargoEmprego(), frmCCE.getReferenciaSalarial());
-            controle.alterar();
+            //controle.alterar();
             gravarAlteracaoFrmCCE = false;
             frmCCE.limparCampos();
             frmCCE.desativarCampos();
@@ -1003,7 +1003,7 @@ public class frmPrincipal extends javax.swing.JFrame
         if (frmCCE.isVisible() && desativarBotoesFrmCCE == false)
         {
             CadastrarCargoEmpregoControle controle = new CadastrarCargoEmpregoControle(frmCCE.getNomeCargoEmprego());
-            controle.pesquisar(index);
+            //controle.pesquisar(index);
 
             if (!frmCCE.getCodigoCargoEmprego().equals(""))
             {
@@ -1109,7 +1109,7 @@ public class frmPrincipal extends javax.swing.JFrame
             if (resposta == JOptionPane.YES_OPTION)
             {
                 CadastrarCargoEmpregoControle controle = new CadastrarCargoEmpregoControle(frmCCE.getNomeCargoEmprego());
-                controle.excluir();
+                //controle.excluir();
                 JOptionPane.showMessageDialog(null, "Exclusão realizada com sucesso!");
                 frmCCE.limparCampos();
             }

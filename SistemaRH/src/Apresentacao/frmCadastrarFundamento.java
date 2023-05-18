@@ -417,6 +417,10 @@ public class frmCadastrarFundamento extends javax.swing.JDialog
         });
         txtValorPara.addKeyListener(new java.awt.event.KeyAdapter()
         {
+            public void keyReleased(java.awt.event.KeyEvent evt)
+            {
+                txtValorParaKeyReleased(evt);
+            }
             public void keyTyped(java.awt.event.KeyEvent evt)
             {
                 txtValorParaKeyTyped(evt);
@@ -432,6 +436,10 @@ public class frmCadastrarFundamento extends javax.swing.JDialog
         });
         txtValorDe.addKeyListener(new java.awt.event.KeyAdapter()
         {
+            public void keyReleased(java.awt.event.KeyEvent evt)
+            {
+                txtValorDeKeyReleased(evt);
+            }
             public void keyTyped(java.awt.event.KeyEvent evt)
             {
                 txtValorDeKeyTyped(evt);
@@ -645,8 +653,17 @@ public class frmCadastrarFundamento extends javax.swing.JDialog
 
     public void verificarSeOsCamposEstaoPreenchidos()
     {
-        boolean camposPreenchidos = !txtNumeroLei.getText().isEmpty() && !txtAnoLei.getText().isEmpty() && !jffDataLei.getText().isEmpty() && !txtQuantidadeVagas.getText().isEmpty() && !jtaEmenta.getText().isEmpty();
-        btnCadastrar.setEnabled(camposPreenchidos);
+        if (jtpAto.getSelectedIndex() == 0)
+        {
+            boolean camposPreenchidos = !txtNumeroLei.getText().isEmpty() && !txtAnoLei.getText().isEmpty() && !jffDataLei.getText().isEmpty() && !txtQuantidadeVagas.getText().isEmpty() && !jtaEmenta.getText().isEmpty();
+            btnCadastrar.setEnabled(camposPreenchidos);
+        }
+        else if (jtpAto.getSelectedIndex() == 1)
+        {
+            
+            boolean camposPreenchidos = !txtNumeroLei.getText().isEmpty() && !txtAnoLei.getText().isEmpty() && !jffDataLei.getText().isEmpty() && !jtaEmenta.getText().isEmpty() && !txtValorDe.getText().isEmpty() && !txtValorPara.getText().isEmpty();
+            btnCadastrar.setEnabled(camposPreenchidos);
+        }
     }
 
     private void txtAnoLeiKeyTyped(java.awt.event.KeyEvent evt)//GEN-FIRST:event_txtAnoLeiKeyTyped
@@ -778,6 +795,16 @@ public class frmCadastrarFundamento extends javax.swing.JDialog
     {//GEN-HEADEREND:event_jtaEmentaKeyReleased
         verificarSeOsCamposEstaoPreenchidos();
     }//GEN-LAST:event_jtaEmentaKeyReleased
+
+    private void txtValorDeKeyReleased(java.awt.event.KeyEvent evt)//GEN-FIRST:event_txtValorDeKeyReleased
+    {//GEN-HEADEREND:event_txtValorDeKeyReleased
+        verificarSeOsCamposEstaoPreenchidos();
+    }//GEN-LAST:event_txtValorDeKeyReleased
+
+    private void txtValorParaKeyReleased(java.awt.event.KeyEvent evt)//GEN-FIRST:event_txtValorParaKeyReleased
+    {//GEN-HEADEREND:event_txtValorParaKeyReleased
+        verificarSeOsCamposEstaoPreenchidos();
+    }//GEN-LAST:event_txtValorParaKeyReleased
 
     /**
      * @param args the command line arguments

@@ -7,6 +7,7 @@ package Apresentacao;
 import DTO.PesquisarCargoEmpregoDTO;
 import Modelo.CadastrarCargoEmpregoControle;
 import Modelo.CentralizarJanela;
+import Modelo.ControleCadastrarFundamento;
 import java.util.ArrayList;
 import javax.swing.JTable;
 import javax.swing.SwingConstants;
@@ -850,6 +851,12 @@ public class frmCadastrarCargoEmprego extends javax.swing.JInternalFrame
     {//GEN-HEADEREND:event_btnCadastrarFundamentoActionPerformed
         if (jtpLegislacao.getSelectedIndex() == 0)
         {
+            DefaultTableModel tabelaQuadro = (DefaultTableModel) tbQuadro.getModel();
+            DefaultTableModel tabelaFundamento = (DefaultTableModel) tbFundamentoCriacaoExclusao.getModel();
+            if (tbQuadro.getRowCount() == 0)
+            {
+                tabelaQuadro.addRow(new Object[]{});
+            }
             //para centralizar as celulas da tabela
             gerenciadorDeTabelas(tbFundamentoCriacaoExclusao);
             frmCadastrarFundamento frmCadastrarFundamento = new frmCadastrarFundamento(null, true, (DefaultTableModel) tbFundamentoCriacaoExclusao.getModel(), (DefaultTableModel) tbFundamentoReajuste.getModel(), jtpLegislacao);
@@ -859,11 +866,10 @@ public class frmCadastrarCargoEmprego extends javax.swing.JInternalFrame
 
             //passar a quantidade de cargos no Quadro
             CadastrarCargoEmpregoControle c = new CadastrarCargoEmpregoControle();
-            tbQuadro.setValueAt(c.cadastrarCargoEmpregoNoQuadro(), 0, 0);
+            tbQuadro.setValueAt(c.cadastrarCargoEmpregoNoQuadro(tabelaQuadro, tabelaFundamento), 0, 0);
 
             //para centralizar as celulas da tabela
             gerenciadorDeTabelas(tbQuadro);
-
         }
 
         if (jtpLegislacao.getSelectedIndex() == 1)
@@ -879,16 +885,17 @@ public class frmCadastrarCargoEmprego extends javax.swing.JInternalFrame
     {//GEN-HEADEREND:event_btnExcluirFundamentoActionPerformed
         if (jtpLegislacao.getSelectedIndex() == 0)
         {
-            DefaultTableModel model = (DefaultTableModel) tbFundamentoCriacaoExclusao.getModel();
+            DefaultTableModel tabelaQuadro = (DefaultTableModel) tbQuadro.getModel();
+            DefaultTableModel tabelaFundamento = (DefaultTableModel) tbFundamentoCriacaoExclusao.getModel();
 
             int linhaSelecionada = tbFundamentoCriacaoExclusao.getSelectedRow();
 
             if (linhaSelecionada != -1)
             {
                 CadastrarCargoEmpregoControle c = new CadastrarCargoEmpregoControle();
-                c.excluirCargoEmpregoDoQuadro(model, linhaSelecionada, 5);
-                model.removeRow(linhaSelecionada);
-                tbQuadro.setValueAt(c.cadastrarCargoEmpregoNoQuadro(), 0, 0);
+                c.excluirCargoEmpregoDoQuadro(tabelaFundamento, linhaSelecionada, 5);
+                tabelaFundamento.removeRow(linhaSelecionada);
+                tbQuadro.setValueAt(c.cadastrarCargoEmpregoNoQuadro(tabelaQuadro, tabelaFundamento), 0, 0);
             }
         }
         if (jtpLegislacao.getSelectedIndex() == 1)
@@ -908,26 +915,27 @@ public class frmCadastrarCargoEmprego extends javax.swing.JInternalFrame
     {//GEN-HEADEREND:event_btnAlterarFundamentoActionPerformed
         if (jtpLegislacao.getSelectedIndex() == 0)
         {
-            DefaultTableModel model = (DefaultTableModel) tbFundamentoCriacaoExclusao.getModel();
+            DefaultTableModel tabelaQuadro = (DefaultTableModel) tbQuadro.getModel();
+            DefaultTableModel tabelaFundamento = (DefaultTableModel) tbFundamentoCriacaoExclusao.getModel();
 
             int linhaSelecionada = tbFundamentoCriacaoExclusao.getSelectedRow();
 
             if (linhaSelecionada != -1)
             {
                 // Obtenha os valores da linha selecionada
-                Object numeroDaLei = model.getValueAt(linhaSelecionada, 0);
-                Object anoDaLei = model.getValueAt(linhaSelecionada, 1);
-                Object dataDaLei = model.getValueAt(linhaSelecionada, 2);
-                Object ementaDaLei = model.getValueAt(linhaSelecionada, 3);
-                Object atoDaLei = model.getValueAt(linhaSelecionada, 4);
-                Object quantidadeDaLei = model.getValueAt(linhaSelecionada, 5);
+                Object numeroDaLei = tabelaFundamento.getValueAt(linhaSelecionada, 0);
+                Object anoDaLei = tabelaFundamento.getValueAt(linhaSelecionada, 1);
+                Object dataDaLei = tabelaFundamento.getValueAt(linhaSelecionada, 2);
+                Object ementaDaLei = tabelaFundamento.getValueAt(linhaSelecionada, 3);
+                Object atoDaLei = tabelaFundamento.getValueAt(linhaSelecionada, 4);
+                Object quantidadeDaLei = tabelaFundamento.getValueAt(linhaSelecionada, 5);
 
                 frmCadastrarFundamento frmCadastrarFundamento = new frmCadastrarFundamento(null, true, (DefaultTableModel) tbFundamentoCriacaoExclusao.getModel(), (DefaultTableModel) tbFundamentoReajuste.getModel(), numeroDaLei.toString(), anoDaLei.toString(), dataDaLei.toString(), ementaDaLei.toString(), atoDaLei.toString(), quantidadeDaLei.toString(), linhaSelecionada, jtpLegislacao);
                 frmCadastrarFundamento.setVisible(true);
                 frmCadastrarFundamento.setLocationRelativeTo(null);
 
                 CadastrarCargoEmpregoControle c = new CadastrarCargoEmpregoControle();
-                tbQuadro.setValueAt(c.alterarCargoEmpregoDoQuadro(model, linhaSelecionada, 5, model.getValueAt(linhaSelecionada, 5).toString()), 0, 0);
+                tbQuadro.setValueAt(c.alterarCargoEmpregoDoQuadro(tabelaQuadro, tabelaFundamento, linhaSelecionada, 5, tabelaFundamento.getValueAt(linhaSelecionada, 5).toString()), 0, 0);
                 frmCadastrarFundamento.setDefaultCloseOperation(DISPOSE_ON_CLOSE);
             }
         }
@@ -959,6 +967,8 @@ public class frmCadastrarCargoEmprego extends javax.swing.JInternalFrame
     {//GEN-HEADEREND:event_formInternalFrameClosed
         limparTabelas(tbQuadro);
         limparTabelas(tbFundamentoCriacaoExclusao);
+        limparTabelas(tbFundamentoReajuste);
+        ControleCadastrarFundamento.quantidadeEmpregoCriada = 0;
     }//GEN-LAST:event_formInternalFrameClosed
     public void limparTabelas(JTable tabela)
     {
