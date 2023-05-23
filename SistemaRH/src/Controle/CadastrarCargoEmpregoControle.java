@@ -32,7 +32,7 @@ public class CadastrarCargoEmpregoControle extends CadastrarCargoEmpregoDTO
         this.frm = frm;
     }
 
-    public void cadastrarCargoEmprego()
+    public void cadastrarCargoEmprego() throws SQLException
     {
         //cria o dto
         CadastrarCargoEmpregoDTO dto = new CadastrarCargoEmpregoDTO();
@@ -43,10 +43,21 @@ public class CadastrarCargoEmpregoControle extends CadastrarCargoEmpregoDTO
         dto.setChkAtivoCargoEmprego(frm.getChkAtivo().isSelected());
 
         CadastrarCargoEmpregoValidacao val = new CadastrarCargoEmpregoValidacao(dto);
-        if (val.validar(dto).equals("ok"))
+        if (val.getMensagem().equals("ok"))
         {
-            //mando para o dao
-            cadastrarCargoEmpregoDAO.CadastrarCargoEmpregoDAO(dto);
+
+            ResultSet rs = cadastrarCargoEmpregoDAO.verificarAntesDeCadastrar(dto);
+            if (rs.next())
+            {
+                JOptionPane.showMessageDialog(null, "Cadastro ja realizado.");
+            }
+            else
+            {
+                //mando para o dao
+                cadastrarCargoEmpregoDAO.CadastrarCargoEmpregoDAO(dto);
+                JOptionPane.showMessageDialog(null, "Cadastro realizado com sucesso!");
+            }
+
         }
     }
 

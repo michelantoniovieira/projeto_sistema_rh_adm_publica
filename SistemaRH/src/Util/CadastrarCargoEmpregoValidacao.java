@@ -1,7 +1,3 @@
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
- */
 package Util;
 
 import DTO.CadastrarCargoEmpregoDTO;
@@ -12,50 +8,52 @@ import javax.swing.JOptionPane;
 public class CadastrarCargoEmpregoValidacao extends CadastrarCargoEmpregoDTO
 {
 
-    String mensagem = "";
+    private String mensagem = "";
 
     public CadastrarCargoEmpregoValidacao(CadastrarCargoEmpregoDTO dto)
     {
         validar(dto);
     }
 
-    public String validar(CadastrarCargoEmpregoDTO dto)
+    public void validar(CadastrarCargoEmpregoDTO dto)
     {
-        try
+        List<String> camposVazios = new ArrayList<>();
+
+        if (dto.getDescricaoCargoEmprego().isEmpty())
         {
-
+            camposVazios.add("nome cargo/emprego");
         }
-        catch (Exception ex)
+
+        if (dto.getCboCargoEmprego().isEmpty() && !camposVazios.contains("cbo"))
         {
-            List<String> camposVazios = new ArrayList<>();
-
-            if (dto.getDescricaoCargoEmprego().isEmpty())
-            {
-                camposVazios.add("nome cargo/emprego");
-            }
-
-            if (dto.getCboCargoEmprego().isEmpty())
-            {
-                camposVazios.add("cbo");
-            }
-
-            if (dto.getRegimeJuridicoCargoEmprego().isEmpty())
-            {
-                camposVazios.add("regime jurídico");
-            }
-
-            // Exibir os campos sem informações
-            if (!camposVazios.isEmpty())
-            {
-                mensagem = "Os seguintes campos estão sem informações:\n";
-                for (String campo : camposVazios)
-                {
-                    mensagem += campo + "\n";
-                }
-                JOptionPane.showMessageDialog(null, mensagem, "Campos Vazios", JOptionPane.WARNING_MESSAGE);
-            }
+            camposVazios.add("cbo");
         }
+
+        // Exibir os campos sem informações
+        if (!camposVazios.isEmpty())
+        {
+            this.mensagem = "Os seguintes campos estão sem informações:\n";
+            for (String campo : camposVazios)
+            {
+                System.out.println(campo);
+                this.mensagem += campo;
+            }
+            JOptionPane.showMessageDialog(null, mensagem, "Campos Vazios", JOptionPane.WARNING_MESSAGE);
+        }
+        else
+        {
+            this.setMensagem("ok");
+        }
+    }
+
+    public String getMensagem()
+    {
         return mensagem;
+    }
+
+    public void setMensagem(String mensagem)
+    {
+        this.mensagem = mensagem;
     }
 
 }

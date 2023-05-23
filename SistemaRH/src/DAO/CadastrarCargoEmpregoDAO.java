@@ -20,7 +20,7 @@ public class CadastrarCargoEmpregoDAO
         conn = new ConexaoDAO().conectaBD();
         try
         {
-            String sql = "SELECT * FROM cargo_emprego WHERE nome_cargo_emprego = ?";
+            String sql = "SELECT * FROM cargo_emprego WHERE descricao_cargo_emprego = ?";
 
             PreparedStatement pstm = conn.prepareStatement(sql);
             pstm.setString(1, cadastrarcargoempregodto.getDescricaoCargoEmprego());

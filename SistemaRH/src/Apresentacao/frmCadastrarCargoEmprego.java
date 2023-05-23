@@ -154,6 +154,9 @@ public class frmCadastrarCargoEmprego extends javax.swing.JInternalFrame
         this.setDescricaoCargoEmprego("");
         cmbRegimeJuridico.setSelectedIndex(1);
         this.setRegimeJuridico("0");
+        txtCboCargoEmprego.setText("");
+        cmbRegimeJuridico.setSelectedIndex(0);
+        chkAtivo.setSelected(true);
 
     }
 
