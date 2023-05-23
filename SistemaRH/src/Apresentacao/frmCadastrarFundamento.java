@@ -220,13 +220,6 @@ public class frmCadastrarFundamento extends javax.swing.JDialog
 
         lblNumeroLei.setText("Número:");
 
-        txtNumeroLei.addActionListener(new java.awt.event.ActionListener()
-        {
-            public void actionPerformed(java.awt.event.ActionEvent evt)
-            {
-                txtNumeroLeiActionPerformed(evt);
-            }
-        });
         txtNumeroLei.addKeyListener(new java.awt.event.KeyAdapter()
         {
             public void keyReleased(java.awt.event.KeyEvent evt)
@@ -521,11 +514,6 @@ public class frmCadastrarFundamento extends javax.swing.JDialog
         pack();
         setLocationRelativeTo(null);
     }// </editor-fold>//GEN-END:initComponents
-
-    private void txtNumeroLeiActionPerformed(java.awt.event.ActionEvent evt)//GEN-FIRST:event_txtNumeroLeiActionPerformed
-    {//GEN-HEADEREND:event_txtNumeroLeiActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_txtNumeroLeiActionPerformed
 
     private void txtQuantidadeVagasActionPerformed(java.awt.event.ActionEvent evt)//GEN-FIRST:event_txtQuantidadeVagasActionPerformed
     {//GEN-HEADEREND:event_txtQuantidadeVagasActionPerformed

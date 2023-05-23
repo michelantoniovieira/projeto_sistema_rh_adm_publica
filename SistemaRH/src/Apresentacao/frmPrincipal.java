@@ -4,8 +4,8 @@
  */
 package Apresentacao;
 
+import Controle.CadastrarCargoEmpregoControle;
 import Modelo.CadastrarBancaControle;
-import Modelo.CadastrarCargoEmpregoControle;
 import Modelo.CadastrarConcursoControle;
 import Modelo.GerenciadorDeCoresDaInterface;
 import Modelo.GerenciadorDeJanelas;
@@ -45,7 +45,6 @@ public class frmPrincipal extends javax.swing.JFrame
     frmCadastrarBanca frmCB;
     frmCadastrarCargoEmprego frmCCE;
     frmCadastrarConcurso frmCC;
-
 
     //gerenciadores
     GerenciadorDeJanelas gerenciador;
@@ -758,11 +757,12 @@ public class frmPrincipal extends javax.swing.JFrame
         desativarBotoesFrmCCE = false;
 
         //entra aqui quando for gravar o primeiro cadastro
-        if (frmCCE.isVisible() && !frmCCE.getNomeCargoEmprego().equals("") && gravarAlteracaoFrmCCE == false)
+        if (frmCCE.isVisible() && !frmCCE.getDescricaoCargoEmprego().equals("") && gravarAlteracaoFrmCCE == false)
         {
-            //quando eu digitar nos campos da janela CadastrarConcurso e clicar no icone salvar da janela principal entra aqui e manda gravar registro que significa que os dados dos campos serão passados para as variaveis que eu acesso por aqui para mandar para a variavel controle           
-            CadastrarCargoEmpregoControle controle = new CadastrarCargoEmpregoControle(frmCCE.getNomeCargoEmprego(), frmCCE.getRegimeJuridico(), frmCCE.getNumeroLeiCriaCargoEmprego(), frmCCE.getDataLeiCriaCargoEmprego(), frmCCE.getReferenciaSalarial());
-            //controle.cadastrar();
+
+            //quando eu digitar nos campos da janela CadastrarConcursoCargoEmprego e clicar no icone salvar da janela principal entra aqui e manda gravar registro que significa que os dados dos campos serão passados para as variaveis que eu acesso por aqui para mandar para a variavel controle           
+            CadastrarCargoEmpregoControle controle = new CadastrarCargoEmpregoControle(frmCCE);
+            controle.cadastrarCargoEmprego();
             if (controle.getMensagem().equals("erro 1"))
             {
                 JOptionPane.showMessageDialog(null, "Esta banca já foi cadastrada!");
@@ -780,8 +780,7 @@ public class frmPrincipal extends javax.swing.JFrame
         if (frmCCE.isVisible() && !frmCCE.getCodigoCargoEmprego().equals("") && gravarAlteracaoFrmCCE == true)
         {
 
-            CadastrarCargoEmpregoControle controle = new CadastrarCargoEmpregoControle(Integer.parseInt(frmCCE.getCodigoCargoEmprego()), frmCCE.getNomeCargoEmprego(), frmCCE.getRegimeJuridico(), frmCCE.getNumeroLeiCriaCargoEmprego(), frmCCE.getDataLeiCriaCargoEmprego(), frmCCE.getReferenciaSalarial());
-            //controle.alterar();
+            //CadastrarCargoEmpregoControle controle = new CadastrarCargoEmpregoControle(Integer.parseInt(frmCCE.getCodigoCargoEmprego()), frmCCE.getNomeCargoEmprego(), frmCCE.getRegimeJuridico(), frmCCE.getNumeroLeiCriaCargoEmprego(), frmCCE.getDataLeiCriaCargoEmprego(), frmCCE.getReferenciaSalarial());
             gravarAlteracaoFrmCCE = false;
             frmCCE.limparCampos();
             frmCCE.desativarCampos();
@@ -1002,11 +1001,12 @@ public class frmPrincipal extends javax.swing.JFrame
         //tela cadastrar cargo/emprego
         if (frmCCE.isVisible() && desativarBotoesFrmCCE == false)
         {
-            CadastrarCargoEmpregoControle controle = new CadastrarCargoEmpregoControle(frmCCE.getNomeCargoEmprego());
+            //CadastrarCargoEmpregoControle controle = new CadastrarCargoEmpregoControle(frmCCE.getNomeCargoEmprego());
             //controle.pesquisar(index);
 
             if (!frmCCE.getCodigoCargoEmprego().equals(""))
             {
+                /*
                 frmCCE.setCodigoCargoEmprego(String.valueOf(controle.getCodigoCargoEmprego()));
                 frmCCE.setNomeCargoEmprego(String.valueOf(controle.getDescricaoCargoEmprego()));
                 frmCCE.setRegimeJuridico(String.valueOf(controle.getRegimeJuridicoCargoEmprego()));
@@ -1014,6 +1014,7 @@ public class frmPrincipal extends javax.swing.JFrame
                 frmCCE.setDataLeiCriaCargoEmprego(String.valueOf(controle.getDataLeiCriaCargoEmprego()));
                 //frmCCE.setReferenciaSalarial(String.valueOf(controle.getReferenciaSalarial()));
                 frmCCE.preencherCampos();
+                 */
             }
         }
     }
@@ -1102,13 +1103,13 @@ public class frmPrincipal extends javax.swing.JFrame
         }
 
         //cadastrar cargo/emprego
-        if (frmCCE.isVisible() && !frmCCE.getNomeCargoEmprego().equals("") && desativarBotoesFrmCCE == false)
+        if (frmCCE.isVisible() && !frmCCE.getDescricaoCargoEmprego().equals("") && desativarBotoesFrmCCE == false)
         {
             int resposta = JOptionPane.showConfirmDialog(null, "Deseja realizar a exclusão do registro?", "Sair", JOptionPane.YES_NO_OPTION, 2);
 
             if (resposta == JOptionPane.YES_OPTION)
             {
-                CadastrarCargoEmpregoControle controle = new CadastrarCargoEmpregoControle(frmCCE.getNomeCargoEmprego());
+                //CadastrarCargoEmpregoControle controle = new CadastrarCargoEmpregoControle(frmCCE.getNomeCargoEmprego());
                 //controle.excluir();
                 JOptionPane.showMessageDialog(null, "Exclusão realizada com sucesso!");
                 frmCCE.limparCampos();
@@ -1141,7 +1142,7 @@ public class frmPrincipal extends javax.swing.JFrame
         }
 
         //janela cadastrar cargo/emprego
-        if (frmCCE.isVisible() && !frmCCE.getNomeCargoEmprego().equals("") && gravarAlteracaoFrmCCE == false)
+        if (frmCCE.isVisible() && !frmCCE.getDescricaoCargoEmprego().equals("") && gravarAlteracaoFrmCCE == false)
         {
             frmCCE.ativarCampos();
             gravarAlteracaoFrmCCE = true;
@@ -1209,11 +1210,10 @@ public class frmPrincipal extends javax.swing.JFrame
                 {
                     //coloco na tela de cadastro de concurso, seto na variavel a lista e o index puxado direto da tela frmPesquisarConcurso 
                     frmCCE.setCodigoCargoEmprego(String.valueOf(frmPCE.getLista().get(frmPCE.getIndex()).getCodigoCargoEmprego()));
-                    frmCCE.setNomeCargoEmprego(String.valueOf(frmPCE.getLista().get(frmPCE.getIndex()).getDescricaoCargoEmprego()));
+                    frmCCE.setDescricaoCargoEmprego(String.valueOf(frmPCE.getLista().get(frmPCE.getIndex()).getDescricaoCargoEmprego()));
                     frmCCE.setRegimeJuridico(String.valueOf(frmPCE.getLista().get(frmPCE.getIndex()).getRegimeJuridicoCargoEmprego()));
                     frmCCE.setNumeroLeiCriaCargoEmprego(String.valueOf(frmPCE.getLista().get(frmPCE.getIndex()).getNumeroLeiCriaCargoEmprego()));
                     frmCCE.setDataLeiCriaCargoEmprego(String.valueOf(frmPCE.getLista().get(frmPCE.getIndex()).getDataLeiCriaCargoEmprego()));
-                    frmCCE.setReferenciaSalarial(String.valueOf(frmPCE.getLista().get(frmPCE.getIndex()).getReferenciaSalarialCargoEmprego()));
 
                     frmCCE.preencherCampos();
                     frmCCE.desativarCampos();
@@ -1331,7 +1331,7 @@ public class frmPrincipal extends javax.swing.JFrame
         }
         else
         {
-            frmCCE.setLocation((jdkpPrincipal.getWidth() - frmCCE.getWidth())/2,(jdkpPrincipal.getHeight()- frmCCE.getHeight())/2);
+            frmCCE.setLocation((jdkpPrincipal.getWidth() - frmCCE.getWidth()) / 2, (jdkpPrincipal.getHeight() - frmCCE.getHeight()) / 2);
             frmCCE.pack();
             jdkpPrincipal.add(frmCCE, 2);
             gerenciadorJanelasAbertas(gerenciador, frmCCE);

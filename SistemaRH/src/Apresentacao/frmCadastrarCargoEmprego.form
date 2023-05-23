@@ -195,6 +195,9 @@
           </Layout>
           <SubComponents>
             <Component class="javax.swing.JTextField" name="txtDescricaoCargoEmprego">
+              <Events>
+                <EventHandler event="keyTyped" listener="java.awt.event.KeyListener" parameters="java.awt.event.KeyEvent" handler="txtDescricaoCargoEmpregoKeyTyped"/>
+              </Events>
             </Component>
             <Component class="javax.swing.JLabel" name="lblDescricaoCargoEmprego">
               <Properties>
@@ -202,6 +205,9 @@
               </Properties>
             </Component>
             <Component class="javax.swing.JTextField" name="txtCodigoCargoEmprego">
+              <Events>
+                <EventHandler event="keyTyped" listener="java.awt.event.KeyListener" parameters="java.awt.event.KeyEvent" handler="txtCodigoCargoEmpregoKeyTyped"/>
+              </Events>
             </Component>
             <Component class="javax.swing.JLabel" name="lblCodigoCargoEmprego">
               <Properties>
@@ -232,6 +238,10 @@
               </Properties>
             </Component>
             <Component class="javax.swing.JTextField" name="txtCboCargoEmprego">
+              <Events>
+                <EventHandler event="focusLost" listener="java.awt.event.FocusListener" parameters="java.awt.event.FocusEvent" handler="txtCboCargoEmpregoFocusLost"/>
+                <EventHandler event="keyTyped" listener="java.awt.event.KeyListener" parameters="java.awt.event.KeyEvent" handler="txtCboCargoEmpregoKeyTyped"/>
+              </Events>
             </Component>
             <Component class="javax.swing.JCheckBox" name="chkAtivo">
               <Properties>
@@ -323,7 +333,7 @@
                       <Group type="103" groupAlignment="0" attributes="0">
                           <Group type="102" attributes="0">
                               <EmptySpace min="-2" pref="15" max="-2" attributes="0"/>
-                              <Component id="lblSemanal1" min="-2" max="-2" attributes="0"/>
+                              <Component id="lblMensal" min="-2" max="-2" attributes="0"/>
                           </Group>
                           <Group type="102" alignment="0" attributes="0">
                               <EmptySpace max="-2" attributes="0"/>
@@ -348,7 +358,7 @@
                       </Group>
                       <EmptySpace min="-2" max="-2" attributes="0"/>
                       <Group type="103" groupAlignment="3" attributes="0">
-                          <Component id="lblSemanal1" alignment="3" min="-2" max="-2" attributes="0"/>
+                          <Component id="lblMensal" alignment="3" min="-2" max="-2" attributes="0"/>
                           <Component id="cmbCargaHorariaMensal" alignment="3" max="32767" attributes="0"/>
                       </Group>
                       <EmptySpace min="-2" max="-2" attributes="0"/>
@@ -362,7 +372,7 @@
                 <Property name="text" type="java.lang.String" value="Semanal:"/>
               </Properties>
             </Component>
-            <Component class="javax.swing.JLabel" name="lblSemanal1">
+            <Component class="javax.swing.JLabel" name="lblMensal">
               <Properties>
                 <Property name="text" type="java.lang.String" value="Mensal:"/>
               </Properties>
@@ -450,10 +460,10 @@
                   <Properties>
                     <Property name="model" type="javax.swing.table.TableModel" editor="org.netbeans.modules.form.editors2.TableModelEditor">
                       <Table columnCount="4" rowCount="1">
-                        <Column editable="true" title="Vagas Criadas" type="java.lang.Object"/>
-                        <Column editable="true" title="Vagas Providas" type="java.lang.Object"/>
-                        <Column editable="true" title="Vagas Reservadas" type="java.lang.Object"/>
-                        <Column editable="true" title="Vagas Disponiveis" type="java.lang.Object"/>
+                        <Column editable="false" title="Vagas Criadas" type="java.lang.Object"/>
+                        <Column editable="false" title="Vagas Providas" type="java.lang.Object"/>
+                        <Column editable="false" title="Vagas Reservadas" type="java.lang.Object"/>
+                        <Column editable="false" title="Vagas Disponiveis" type="java.lang.Object"/>
                       </Table>
                     </Property>
                   </Properties>
@@ -846,10 +856,10 @@
                       <EmptySpace max="-2" attributes="0"/>
                       <Group type="103" groupAlignment="0" attributes="0">
                           <Group type="102" attributes="0">
-                              <Component id="jLabel1" min="-2" max="-2" attributes="0"/>
+                              <Component id="lblCarreira" min="-2" max="-2" attributes="0"/>
                               <EmptySpace min="0" pref="0" max="32767" attributes="0"/>
                           </Group>
-                          <Component id="jComboBox1" max="32767" attributes="0"/>
+                          <Component id="cmbCarreira" max="32767" attributes="0"/>
                       </Group>
                       <EmptySpace max="-2" attributes="0"/>
                   </Group>
@@ -858,16 +868,16 @@
             <DimensionLayout dim="1">
               <Group type="103" groupAlignment="0" attributes="0">
                   <Group type="102" alignment="0" attributes="0">
-                      <Component id="jLabel1" min="-2" max="-2" attributes="0"/>
+                      <Component id="lblCarreira" min="-2" max="-2" attributes="0"/>
                       <EmptySpace max="-2" attributes="0"/>
-                      <Component id="jComboBox1" min="-2" max="-2" attributes="0"/>
+                      <Component id="cmbCarreira" min="-2" max="-2" attributes="0"/>
                       <EmptySpace min="0" pref="0" max="32767" attributes="0"/>
                   </Group>
               </Group>
             </DimensionLayout>
           </Layout>
           <SubComponents>
-            <Component class="javax.swing.JComboBox" name="jComboBox1">
+            <Component class="javax.swing.JComboBox" name="cmbCarreira">
               <Properties>
                 <Property name="model" type="javax.swing.ComboBoxModel" editor="org.netbeans.modules.form.editors2.ComboBoxModelEditor">
                   <StringArray count="5">
@@ -883,7 +893,7 @@
                 <AuxValue name="JavaCodeGenerator_TypeParameters" type="java.lang.String" value="&lt;String&gt;"/>
               </AuxValues>
             </Component>
-            <Component class="javax.swing.JLabel" name="jLabel1">
+            <Component class="javax.swing.JLabel" name="lblCarreira">
               <Properties>
                 <Property name="text" type="java.lang.String" value="Tipo:"/>
               </Properties>
@@ -969,7 +979,7 @@
                 </Container>
               </SubComponents>
             </Container>
-            <Container class="javax.swing.JPanel" name="jPanel3">
+            <Container class="javax.swing.JPanel" name="jpReajuste">
               <Constraints>
                 <Constraint layoutClass="org.netbeans.modules.form.compat2.layouts.support.JTabbedPaneSupportLayout" value="org.netbeans.modules.form.compat2.layouts.support.JTabbedPaneSupportLayout$JTabbedPaneConstraintsDescription">
                   <JTabbedPaneConstraints tabName="Reajuste">

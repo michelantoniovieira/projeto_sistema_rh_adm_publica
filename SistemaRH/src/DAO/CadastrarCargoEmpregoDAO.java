@@ -1,7 +1,4 @@
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
- */
+
 package DAO;
 
 import DTO.CadastrarCargoEmpregoDTO;
@@ -12,13 +9,8 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 import javax.swing.JOptionPane;
 
-/**
- *
- * @author miche
- */
 public class CadastrarCargoEmpregoDAO
 {
-
     Connection conn;
     PreparedStatement pstm;
     ResultSet rs;
@@ -44,16 +36,16 @@ public class CadastrarCargoEmpregoDAO
 
     public void CadastrarCargoEmpregoDAO(CadastrarCargoEmpregoDTO cadastrarcargoempregodto)
     {
-        String sql = "INSERT INTO cargo_emprego (nome_cargo_emprego, regime_juridico, numero_lei_cria_cargo_emprego, data_lei_cria_cargo_emprego, referencia_salarial) values (?,?,?,?,?)";
+        String sql = "INSERT INTO cargo_emprego (descricao_cargo_emprego, cbo_cargo_emprego, regime_juridico_cargo_emprego, esta_ativo_cargo_emprego) values (?,?,?,?)";
         conn = new ConexaoDAO().conectaBD();
 
         try
         {
             pstm = conn.prepareStatement(sql);
             pstm.setString(1, cadastrarcargoempregodto.getDescricaoCargoEmprego());
-            pstm.setString(2, cadastrarcargoempregodto.getRegimeJuridicoCargoEmprego());
-            pstm.setString(3, cadastrarcargoempregodto.getNumeroLeiCriaCargoEmprego());
-            pstm.setString(4, cadastrarcargoempregodto.getDataLeiCriaCargoEmprego());
+            pstm.setString(2, cadastrarcargoempregodto.getCboCargoEmprego());
+            pstm.setString(3, cadastrarcargoempregodto.getRegimeJuridicoCargoEmprego());
+            pstm.setBoolean(4, cadastrarcargoempregodto.isChkAtivoCargoEmprego());
        
 
             pstm.execute();
@@ -74,8 +66,6 @@ public class CadastrarCargoEmpregoDAO
                 stmt = conexao.prepareStatement("UPDATE cargo_emprego SET nome_cargo_emprego = ?, regime_juridico = ?, numero_lei_cria_cargo_emprego = ?, data_lei_cria_cargo_emprego = ?, referencia_salarial = ?  WHERE codigo_cargo_emprego = '" + cadastrarcargoempregodto.getCodigoCargoEmprego()+ "'");
                 stmt.setString(1, cadastrarcargoempregodto.getDescricaoCargoEmprego());
                 stmt.setString(2, cadastrarcargoempregodto.getRegimeJuridicoCargoEmprego());
-                stmt.setString(3, cadastrarcargoempregodto.getNumeroLeiCriaCargoEmprego());
-                stmt.setString(4, cadastrarcargoempregodto.getDataLeiCriaCargoEmprego());
                 stmt.executeUpdate();
             } catch (SQLException erro)
             {
@@ -122,8 +112,6 @@ public class CadastrarCargoEmpregoDAO
                 cbdto.setCodigoCargoEmprego(rs.getInt("codigo_cargo_emprego"));
                 cbdto.setDescricaoCargoEmprego(rs.getString("nome_cargo_emprego"));
                 cbdto.setRegimeJuridicoCargoEmprego(rs.getString("regime_juridico"));
-                cbdto.setNumeroLeiCriaCargoEmprego(rs.getString("numero_lei_cria_cargo_emprego"));
-                cbdto.setDataLeiCriaCargoEmprego(rs.getString("data_lei_cria_cargo_emprego"));
                 
                 objcadastrarcargoempregodto.add(cbdto);
             }

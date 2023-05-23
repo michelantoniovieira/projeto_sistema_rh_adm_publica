@@ -5,12 +5,28 @@
 package Apresentacao;
 
 import DTO.PesquisarCargoEmpregoDTO;
-import Modelo.CadastrarCargoEmpregoControle;
+import Controle.CadastrarCargoEmpregoControle;
 import Modelo.CentralizarJanela;
 import Modelo.ControleCadastrarFundamento;
+import java.awt.event.KeyEvent;
 import java.util.ArrayList;
+import javax.accessibility.AccessibleContext;
+import javax.swing.Icon;
+import javax.swing.JButton;
+import javax.swing.JCheckBox;
+import javax.swing.JComboBox;
+import javax.swing.JLabel;
+import javax.swing.JOptionPane;
+import javax.swing.JPanel;
+import javax.swing.JRootPane;
+import javax.swing.JScrollPane;
+import javax.swing.JTabbedPane;
 import javax.swing.JTable;
+import javax.swing.JTextArea;
+import javax.swing.JTextField;
 import javax.swing.SwingConstants;
+import javax.swing.event.EventListenerList;
+import javax.swing.plaf.ComponentUI;
 import javax.swing.table.DefaultTableCellRenderer;
 import javax.swing.table.DefaultTableModel;
 
@@ -21,9 +37,61 @@ import javax.swing.table.DefaultTableModel;
 public class frmCadastrarCargoEmprego extends javax.swing.JInternalFrame
 {
 
+    //cargo emprego
     private String codigoCargoEmprego;
-    private String nomeCargoEmprego;
+    private String descricaoCargoEmprego;
+    private String cboCargoEmprego;
     private String regimeJuridico;
+    private boolean cargoEmpregoEstaAtivo;
+
+    //carreira
+    private String tipoDeCarreira;
+
+    //carga horária
+    private String cargaHorariaSemanalCargoEmprego;
+    private String cargaHorariaMensalCargoEmprego;
+
+    //escolaridade
+    private String escolaridadeCargoEmprego;
+
+    //tabela - quadro cargo emprego
+    private String quantidadeCargoEmpregoCriada;
+    private String quantidadeCargoEmpregoProvida;
+    private String quantidadeCargoEmpregoReservada;
+    private String quantidadeCargoEmpregoDisponivel;
+
+    //tabela - remuneração - tabela de vencimentos
+    private String referenciaTecnicoCargoEmprego;
+    private String grauTecnicoCargoEmprego;
+    private String valorTecnicoCargoEmprego;
+
+    //tabela - remuneração - escala de vencimentos docente
+    private String faixaProfessorCargoEmprego;
+    private String grauProfessorCargoEmprego;
+    private String valorProfessorCargoEmprego;
+
+    //tabela - remuneração - insalubridade
+    private String grauInsalubridade;
+
+    //tabela - legislação - criação/exclusão
+    private String numeroLegislacaoCriacaoExclusaoCargoEmprego;
+    private String anoLegislacaoCriacaoExclusaoCargoEmprego;
+    private String dataLegislacaoCriacaoExclusaoCargoEmprego;
+    private String ementaLegislacaoCriacaoExclusaoCargoEmprego;
+    private String atoLegislacaoCriacaoExclusaoCargoEmprego;
+    private String quantidadeLegislacaoCriacaoExclusaoCargoEmprego;
+
+    //tabela - legislação - reajuste
+    private String numeroLegislacaoReajusteCargoEmprego;
+    private String anoLegislacaoReajusteCargoEmprego;
+    private String dataLegislacaoReajusteCargoEmprego;
+    private String ementaLegislacaoReajusteCargoEmprego;
+    private String deLegislacaoReajusteCargoEmprego;
+    private String paraLegislacaoReajusteCargoEmprego;
+
+    //provimento cargo emprego
+    private String requisitoProvimentoCargoEmprego;
+
     private String numeroLeiCriaCargoEmprego;
     private String dataLeiCriaCargoEmprego;
     private String referenciaSalarial = "";
@@ -38,7 +106,7 @@ public class frmCadastrarCargoEmprego extends javax.swing.JInternalFrame
     public void gravarRegistro()
     {
         setCodigoCargoEmprego(txtCodigoCargoEmprego.getText());
-        setNomeCargoEmprego(txtDescricaoCargoEmprego.getText());
+        setDescricaoCargoEmprego(txtDescricaoCargoEmprego.getText());
         itemSelecionadoNoComboBox = cmbRegimeJuridico.getSelectedItem().toString();
         setRegimeJuridico(itemSelecionadoNoComboBox);
     }
@@ -47,18 +115,17 @@ public class frmCadastrarCargoEmprego extends javax.swing.JInternalFrame
     {
         this.setLista(lista);
         setCodigoCargoEmprego(String.valueOf(getLista().get(index).getCodigoCargoEmprego()));
-        setNomeCargoEmprego(String.valueOf(getLista().get(index).getDescricaoCargoEmprego()));
+        setDescricaoCargoEmprego(String.valueOf(getLista().get(index).getDescricaoCargoEmprego()));
         setRegimeJuridico(String.valueOf(getLista().get(index).getRegimeJuridicoCargoEmprego()));
         setNumeroLeiCriaCargoEmprego(String.valueOf(getLista().get(index).getNumeroLeiCriaCargoEmprego()));
         setDataLeiCriaCargoEmprego(String.valueOf(getLista().get(index).getDataLeiCriaCargoEmprego()));
-        setReferenciaSalarial(String.valueOf(getLista().get(index).getReferenciaSalarialCargoEmprego()));
         preencherCampos();
     }
 
     public void preencherCampos()
     {
         txtCodigoCargoEmprego.setText(getCodigoCargoEmprego());
-        txtDescricaoCargoEmprego.setText(getNomeCargoEmprego());
+        txtDescricaoCargoEmprego.setText(getDescricaoCargoEmprego());
         cmbRegimeJuridico.setSelectedItem(getRegimeJuridico());
     }
 
@@ -84,7 +151,7 @@ public class frmCadastrarCargoEmprego extends javax.swing.JInternalFrame
         txtCodigoCargoEmprego.setText("");
         this.setCodigoCargoEmprego("");
         txtDescricaoCargoEmprego.setText("");
-        this.setNomeCargoEmprego("");
+        this.setDescricaoCargoEmprego("");
         cmbRegimeJuridico.setSelectedIndex(1);
         this.setRegimeJuridico("0");
 
@@ -92,33 +159,52 @@ public class frmCadastrarCargoEmprego extends javax.swing.JInternalFrame
 
     public String getCodigoCargoEmprego()
     {
-        return codigoCargoEmprego;
+        return txtCodigoCargoEmprego.getText();
     }
 
-    public String setCodigoCargoEmprego(String codigoCargoEmprego)
+    public void setCodigoCargoEmprego(String codigoCargoEmprego)
     {
         this.codigoCargoEmprego = codigoCargoEmprego;
-        return null;
     }
 
-    public String getNomeCargoEmprego()
+    public String getDescricaoCargoEmprego()
     {
-        return nomeCargoEmprego;
+        return txtDescricaoCargoEmprego.getText();
     }
 
-    public void setNomeCargoEmprego(String nomeCargoEmprego)
+    public void setDescricaoCargoEmprego(String descricaoCargoEmprego)
     {
-        this.nomeCargoEmprego = nomeCargoEmprego;
+        this.descricaoCargoEmprego = descricaoCargoEmprego;
+    }
+
+    public String getCboCargoEmprego()
+    {
+        return txtCboCargoEmprego.getText();
+    }
+
+    public void setCboCargoEmprego(String cboCargoEmprego)
+    {
+        this.cboCargoEmprego = cboCargoEmprego;
     }
 
     public String getRegimeJuridico()
     {
-        return regimeJuridico;
+        return cmbRegimeJuridico.getSelectedItem().toString();
     }
 
     public void setRegimeJuridico(String regimeJuridico)
     {
         this.regimeJuridico = regimeJuridico;
+    }
+
+    public JCheckBox getChkAtivo()
+    {
+        return chkAtivo;
+    }
+
+    public void setChkAtivo(JCheckBox chkAtivo)
+    {
+        this.chkAtivo = chkAtivo;
     }
 
     public String getNumeroLeiCriaCargoEmprego()
@@ -149,26 +235,6 @@ public class frmCadastrarCargoEmprego extends javax.swing.JInternalFrame
     public void setLista(ArrayList<PesquisarCargoEmpregoDTO> lista)
     {
         this.lista = lista;
-    }
-
-    public String getReferenciaSalarial()
-    {
-        return referenciaSalarial;
-    }
-
-    public void setReferenciaSalarial(String referenciaSalarial)
-    {
-        this.referenciaSalarial = referenciaSalarial;
-    }
-
-    public String getItemSelecionadoNoComboBox()
-    {
-        return itemSelecionadoNoComboBox;
-    }
-
-    public void setItemSelecionadoNoComboBox(String itemSelecionadoNoComboBox)
-    {
-        this.itemSelecionadoNoComboBox = itemSelecionadoNoComboBox;
     }
 
     public void gerenciadorDeTabelas(JTable table)
@@ -207,7 +273,7 @@ public class frmCadastrarCargoEmprego extends javax.swing.JInternalFrame
         lblEscolaridade = new javax.swing.JLabel();
         jpCargaHoraria = new javax.swing.JPanel();
         lblSemanal = new javax.swing.JLabel();
-        lblSemanal1 = new javax.swing.JLabel();
+        lblMensal = new javax.swing.JLabel();
         cmbCargaHorariaSemanal = new javax.swing.JComboBox<>();
         cmbCargaHorariaMensal = new javax.swing.JComboBox<>();
         jpQuadro = new javax.swing.JPanel();
@@ -234,13 +300,13 @@ public class frmCadastrarCargoEmprego extends javax.swing.JInternalFrame
         jScrollPane1 = new javax.swing.JScrollPane();
         txtAreaRequisitosProvimento = new javax.swing.JTextArea();
         jpCarreira = new javax.swing.JPanel();
-        jComboBox1 = new javax.swing.JComboBox<>();
-        jLabel1 = new javax.swing.JLabel();
+        cmbCarreira = new javax.swing.JComboBox<>();
+        lblCarreira = new javax.swing.JLabel();
         jtpLegislacao = new javax.swing.JTabbedPane();
         jpLegislacao = new javax.swing.JPanel();
         jScrollPane3 = new javax.swing.JScrollPane();
         tbFundamentoCriacaoExclusao = new javax.swing.JTable();
-        jPanel3 = new javax.swing.JPanel();
+        jpReajuste = new javax.swing.JPanel();
         jScrollPane4 = new javax.swing.JScrollPane();
         tbFundamentoReajuste = new javax.swing.JTable();
         jpOperacoes = new javax.swing.JPanel();
@@ -293,7 +359,23 @@ public class frmCadastrarCargoEmprego extends javax.swing.JInternalFrame
 
         jpCargoEmprego.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "Cargo/Emprego", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Segoe UI", 1, 12))); // NOI18N
 
+        txtDescricaoCargoEmprego.addKeyListener(new java.awt.event.KeyAdapter()
+        {
+            public void keyTyped(java.awt.event.KeyEvent evt)
+            {
+                txtDescricaoCargoEmpregoKeyTyped(evt);
+            }
+        });
+
         lblDescricaoCargoEmprego.setText("Descrição:");
+
+        txtCodigoCargoEmprego.addKeyListener(new java.awt.event.KeyAdapter()
+        {
+            public void keyTyped(java.awt.event.KeyEvent evt)
+            {
+                txtCodigoCargoEmpregoKeyTyped(evt);
+            }
+        });
 
         lblCodigoCargoEmprego.setText("Código:");
 
@@ -302,6 +384,21 @@ public class frmCadastrarCargoEmprego extends javax.swing.JInternalFrame
         cmbRegimeJuridico.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "ESTATUTÁRIO", "CELETISTA" }));
 
         lblCboCargoEmprego.setText("CBO:");
+
+        txtCboCargoEmprego.addFocusListener(new java.awt.event.FocusAdapter()
+        {
+            public void focusLost(java.awt.event.FocusEvent evt)
+            {
+                txtCboCargoEmpregoFocusLost(evt);
+            }
+        });
+        txtCboCargoEmprego.addKeyListener(new java.awt.event.KeyAdapter()
+        {
+            public void keyTyped(java.awt.event.KeyEvent evt)
+            {
+                txtCboCargoEmpregoKeyTyped(evt);
+            }
+        });
 
         chkAtivo.setSelected(true);
         chkAtivo.setText("Ativo");
@@ -391,7 +488,7 @@ public class frmCadastrarCargoEmprego extends javax.swing.JInternalFrame
 
         lblSemanal.setText("Semanal:");
 
-        lblSemanal1.setText("Mensal:");
+        lblMensal.setText("Mensal:");
 
         cmbCargaHorariaSemanal.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "10h", "20h", "30h", "40h", "44h", "12x36" }));
         cmbCargaHorariaSemanal.setSelectedIndex(4);
@@ -407,7 +504,7 @@ public class frmCadastrarCargoEmprego extends javax.swing.JInternalFrame
                 .addGroup(jpCargaHorariaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jpCargaHorariaLayout.createSequentialGroup()
                         .addGap(15, 15, 15)
-                        .addComponent(lblSemanal1))
+                        .addComponent(lblMensal))
                     .addGroup(jpCargaHorariaLayout.createSequentialGroup()
                         .addContainerGap()
                         .addComponent(lblSemanal)))
@@ -425,7 +522,7 @@ public class frmCadastrarCargoEmprego extends javax.swing.JInternalFrame
                     .addComponent(cmbCargaHorariaSemanal, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(jpCargaHorariaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(lblSemanal1)
+                    .addComponent(lblMensal)
                     .addComponent(cmbCargaHorariaMensal))
                 .addContainerGap())
         );
@@ -441,7 +538,18 @@ public class frmCadastrarCargoEmprego extends javax.swing.JInternalFrame
             {
                 "Vagas Criadas", "Vagas Providas", "Vagas Reservadas", "Vagas Disponiveis"
             }
-        ));
+        )
+        {
+            boolean[] canEdit = new boolean []
+            {
+                false, false, false, false
+            };
+
+            public boolean isCellEditable(int rowIndex, int columnIndex)
+            {
+                return canEdit [columnIndex];
+            }
+        });
         jScrollPane5.setViewportView(tbQuadro);
 
         javax.swing.GroupLayout jpQuadroLayout = new javax.swing.GroupLayout(jpQuadro);
@@ -609,9 +717,9 @@ public class frmCadastrarCargoEmprego extends javax.swing.JInternalFrame
 
         jpCarreira.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "Carreira", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Segoe UI", 1, 12))); // NOI18N
 
-        jComboBox1.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Técnico", "Professor", "Eletivo", "Comissão", "Aposentado" }));
+        cmbCarreira.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Técnico", "Professor", "Eletivo", "Comissão", "Aposentado" }));
 
-        jLabel1.setText("Tipo:");
+        lblCarreira.setText("Tipo:");
 
         javax.swing.GroupLayout jpCarreiraLayout = new javax.swing.GroupLayout(jpCarreira);
         jpCarreira.setLayout(jpCarreiraLayout);
@@ -621,17 +729,17 @@ public class frmCadastrarCargoEmprego extends javax.swing.JInternalFrame
                 .addContainerGap()
                 .addGroup(jpCarreiraLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jpCarreiraLayout.createSequentialGroup()
-                        .addComponent(jLabel1)
+                        .addComponent(lblCarreira)
                         .addGap(0, 0, Short.MAX_VALUE))
-                    .addComponent(jComboBox1, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                    .addComponent(cmbCarreira, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 .addContainerGap())
         );
         jpCarreiraLayout.setVerticalGroup(
             jpCarreiraLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jpCarreiraLayout.createSequentialGroup()
-                .addComponent(jLabel1)
+                .addComponent(lblCarreira)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jComboBox1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(cmbCarreira, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(0, 0, Short.MAX_VALUE))
         );
 
@@ -705,23 +813,23 @@ public class frmCadastrarCargoEmprego extends javax.swing.JInternalFrame
         });
         jScrollPane4.setViewportView(tbFundamentoReajuste);
 
-        javax.swing.GroupLayout jPanel3Layout = new javax.swing.GroupLayout(jPanel3);
-        jPanel3.setLayout(jPanel3Layout);
-        jPanel3Layout.setHorizontalGroup(
-            jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel3Layout.createSequentialGroup()
+        javax.swing.GroupLayout jpReajusteLayout = new javax.swing.GroupLayout(jpReajuste);
+        jpReajuste.setLayout(jpReajusteLayout);
+        jpReajusteLayout.setHorizontalGroup(
+            jpReajusteLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jpReajusteLayout.createSequentialGroup()
                 .addContainerGap()
                 .addComponent(jScrollPane4, javax.swing.GroupLayout.DEFAULT_SIZE, 522, Short.MAX_VALUE)
                 .addContainerGap())
         );
-        jPanel3Layout.setVerticalGroup(
-            jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel3Layout.createSequentialGroup()
+        jpReajusteLayout.setVerticalGroup(
+            jpReajusteLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jpReajusteLayout.createSequentialGroup()
                 .addComponent(jScrollPane4, javax.swing.GroupLayout.DEFAULT_SIZE, 143, Short.MAX_VALUE)
                 .addContainerGap())
         );
 
-        jtpLegislacao.addTab("Reajuste", jPanel3);
+        jtpLegislacao.addTab("Reajuste", jpReajuste);
 
         jpOperacoes.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "Operações", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Segoe UI", 1, 12))); // NOI18N
 
@@ -855,7 +963,9 @@ public class frmCadastrarCargoEmprego extends javax.swing.JInternalFrame
             DefaultTableModel tabelaFundamento = (DefaultTableModel) tbFundamentoCriacaoExclusao.getModel();
             if (tbQuadro.getRowCount() == 0)
             {
-                tabelaQuadro.addRow(new Object[]{});
+                tabelaQuadro.addRow(new Object[]
+                {
+                });
             }
             //para centralizar as celulas da tabela
             gerenciadorDeTabelas(tbFundamentoCriacaoExclusao);
@@ -878,6 +988,9 @@ public class frmCadastrarCargoEmprego extends javax.swing.JInternalFrame
             frmCadastrarFundamento.setVisible(true);
             frmCadastrarFundamento.setLocationRelativeTo(null);
             frmCadastrarFundamento.setDefaultCloseOperation(DISPOSE_ON_CLOSE);
+
+            //para centralizar as celulas da tabela
+            gerenciadorDeTabelas(tbFundamentoReajuste);
         }
     }//GEN-LAST:event_btnCadastrarFundamentoActionPerformed
 
@@ -897,6 +1010,7 @@ public class frmCadastrarCargoEmprego extends javax.swing.JInternalFrame
                 tabelaFundamento.removeRow(linhaSelecionada);
                 tbQuadro.setValueAt(c.cadastrarCargoEmpregoNoQuadro(tabelaQuadro, tabelaFundamento), 0, 0);
             }
+
         }
         if (jtpLegislacao.getSelectedIndex() == 1)
         {
@@ -960,6 +1074,7 @@ public class frmCadastrarCargoEmprego extends javax.swing.JInternalFrame
                 frmCadastrarFundamento.setLocationRelativeTo(null);
                 frmCadastrarFundamento.setDefaultCloseOperation(DISPOSE_ON_CLOSE);
             }
+
         }
     }//GEN-LAST:event_btnAlterarFundamentoActionPerformed
 
@@ -970,6 +1085,55 @@ public class frmCadastrarCargoEmprego extends javax.swing.JInternalFrame
         limparTabelas(tbFundamentoReajuste);
         ControleCadastrarFundamento.quantidadeEmpregoCriada = 0;
     }//GEN-LAST:event_formInternalFrameClosed
+
+    private void txtDescricaoCargoEmpregoKeyTyped(java.awt.event.KeyEvent evt)//GEN-FIRST:event_txtDescricaoCargoEmpregoKeyTyped
+    {//GEN-HEADEREND:event_txtDescricaoCargoEmpregoKeyTyped
+        //Esse código verifica se o caractere digitado é uma letra, se for ok. Se não for, o método consume() é chamado no evento, o que impede que o digito seja inserido no campo de texto.
+        char c = evt.getKeyChar();
+        if (Character.isDigit(c) || (!Character.isLetter(c) && c != ' '))
+        {
+            evt.consume();
+        }
+
+        //automaticamente troca a letra para caixa alta caso ela seja minuscula
+        if (Character.isLowerCase(c))
+        {
+            evt.setKeyChar(Character.toUpperCase(c));
+        }
+    }//GEN-LAST:event_txtDescricaoCargoEmpregoKeyTyped
+
+    private void txtCboCargoEmpregoKeyTyped(java.awt.event.KeyEvent evt)//GEN-FIRST:event_txtCboCargoEmpregoKeyTyped
+    {//GEN-HEADEREND:event_txtCboCargoEmpregoKeyTyped
+        //Esse código verifica se o caractere digitado é um numero, se for ok. Se não for, o método consume() é chamado no evento, o que impede que a letra seja inserido no campo de texto.
+        char c = evt.getKeyChar();
+        if (!Character.isDigit(c))
+        {
+            evt.consume();
+        }
+        else
+        {
+            String text = txtCboCargoEmprego.getText();
+            if (text.length() >= 6)
+            {
+                evt.consume();
+            }
+        }
+    }//GEN-LAST:event_txtCboCargoEmpregoKeyTyped
+
+    private void txtCodigoCargoEmpregoKeyTyped(java.awt.event.KeyEvent evt)//GEN-FIRST:event_txtCodigoCargoEmpregoKeyTyped
+    {//GEN-HEADEREND:event_txtCodigoCargoEmpregoKeyTyped
+        //Esse código verifica se o caractere digitado é um numero, se for ok. Se não for, o método consume() é chamado no evento, o que impede que a letra seja inserido no campo de texto.
+        char c = evt.getKeyChar();
+        if (!Character.isDigit(c))
+        {
+            evt.consume();
+        }
+    }//GEN-LAST:event_txtCodigoCargoEmpregoKeyTyped
+
+    private void txtCboCargoEmpregoFocusLost(java.awt.event.FocusEvent evt)//GEN-FIRST:event_txtCboCargoEmpregoFocusLost
+    {//GEN-HEADEREND:event_txtCboCargoEmpregoFocusLost
+
+    }//GEN-LAST:event_txtCboCargoEmpregoFocusLost
     public void limparTabelas(JTable tabela)
     {
         DefaultTableModel limparTabela = (DefaultTableModel) tabela.getModel();
@@ -983,19 +1147,17 @@ public class frmCadastrarCargoEmprego extends javax.swing.JInternalFrame
     private javax.swing.JCheckBox chkAtivo;
     private javax.swing.JComboBox<String> cmbCargaHorariaMensal;
     private javax.swing.JComboBox<String> cmbCargaHorariaSemanal;
+    private javax.swing.JComboBox<String> cmbCarreira;
     private javax.swing.JComboBox<String> cmbEscolaridade;
     private javax.swing.JComboBox<String> cmbFaixaSalarial;
     private javax.swing.JComboBox<String> cmbGrau;
     private javax.swing.JComboBox<String> cmbGrauSalario;
     private javax.swing.JComboBox<String> cmbReferenciaSalarial;
     private javax.swing.JComboBox<String> cmbRegimeJuridico;
-    private javax.swing.JComboBox<String> jComboBox1;
     private javax.swing.JComboBox<String> jComboBox2;
-    private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
-    private javax.swing.JPanel jPanel3;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JScrollPane jScrollPane3;
     private javax.swing.JScrollPane jScrollPane4;
@@ -1010,10 +1172,12 @@ public class frmCadastrarCargoEmprego extends javax.swing.JInternalFrame
     private javax.swing.JPanel jpLegislacao;
     private javax.swing.JPanel jpOperacoes;
     private javax.swing.JPanel jpQuadro;
+    private javax.swing.JPanel jpReajuste;
     private javax.swing.JPanel jpRequisitosDeProvimento;
     private javax.swing.JPanel jpTabelaVencimentos;
     private javax.swing.JTabbedPane jtpLegislacao;
     private javax.swing.JTabbedPane jtpRemuneracao;
+    private javax.swing.JLabel lblCarreira;
     private javax.swing.JLabel lblCboCargoEmprego;
     private javax.swing.JLabel lblCodigoCargoEmprego;
     private javax.swing.JLabel lblDescricaoCargoEmprego;
@@ -1021,11 +1185,11 @@ public class frmCadastrarCargoEmprego extends javax.swing.JInternalFrame
     private javax.swing.JLabel lblFaixa;
     private javax.swing.JLabel lblGrau;
     private javax.swing.JLabel lblGrauProf;
+    private javax.swing.JLabel lblMensal;
     private javax.swing.JLabel lblReferenciaSalarial;
     private javax.swing.JLabel lblRegimeJuridicoCargoEmprego;
     private javax.swing.JLabel lblRs;
     private javax.swing.JLabel lblSemanal;
-    private javax.swing.JLabel lblSemanal1;
     private javax.swing.JTable tbFundamentoCriacaoExclusao;
     private javax.swing.JTable tbFundamentoReajuste;
     private javax.swing.JTable tbQuadro;
