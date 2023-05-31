@@ -827,172 +827,78 @@ public class frmPrincipal extends javax.swing.JFrame
     }//GEN-LAST:event_btnSalvarActionPerformed
 
     private void btnPrimeiroActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnPrimeiroActionPerformed
-        //tela cadastrar banca
-        if (frmCB.isVisible() && desativarBotoesFrmCC == false)
-        {
-            index = 0;
-            preencherTelaCadastroBanca(index);
-        }
 
-        //tela cadastrar cargo/emprego
-        if (frmCCE.isVisible() && desativarBotoesFrmCCE == false)
-        {
-            index = 0;
-            preencherTelaCadastroCargoEmprego(index);
-        }
+        JInternalFrame janelaFocada = jdkpPrincipal.getSelectedFrame();
 
-        //tela cadastrar concurso
-        if (frmCC.isVisible() && desativarBotoesFrmCC == false)
+        switch (janelaFocada.getTitle())
         {
-            index = 0;
-            preencherTelaCadastroConcurso(index);
+            case "Manutenção de Cargos e Empregos":
+                if (frmCCE.isVisible())
+                {
+                    frmCCE.gerenciadorNavegacao("primeiro");
+                }
+
+                break;
+
+            default:
+                throw new AssertionError();
         }
     }//GEN-LAST:event_btnPrimeiroActionPerformed
 
     private void btnAnteriorActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAnteriorActionPerformed
-        //tela cadastrar banca
-        if (frmCB.isVisible() && desativarBotoesFrmCC == false)
-        {
-            index--;
-            if (index >= 0)
-            {
-                preencherTelaCadastroBanca(index);
-            }
-            else
-            {
-                index = 0;
-            }
-        }
 
-        //tela cadastrar cargo/emprego
-        if (frmCCE.isVisible() && desativarBotoesFrmCCE == false)
-        {
-            index--;
-            if (index >= 0)
-            {
-                preencherTelaCadastroCargoEmprego(index);
-            }
-            else
-            {
-                index = 0;
-            }
-        }
+        JInternalFrame janelaFocada = jdkpPrincipal.getSelectedFrame();
 
-        //tela cadastrar concurso
-        if (frmCC.isVisible() && desativarBotoesFrmCC == false)
+        switch (janelaFocada.getTitle())
         {
-            index--;
-            if (index >= 0)
-            {
-                preencherTelaCadastroConcurso(index);
-            }
-            else
-            {
-                index = 0;
-            }
+            case "Manutenção de Cargos e Empregos":
+                if (frmCCE.isVisible())
+                {
+                    frmCCE.gerenciadorNavegacao("anterior");
+                }
+
+                break;
+
+            default:
+                throw new AssertionError();
         }
     }//GEN-LAST:event_btnAnteriorActionPerformed
 
     private void btnProximoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnProximoActionPerformed
 
-        //tela cadastrar banca
-        if (frmCB.isVisible() && desativarBotoesFrmCC == false)
-        {
-            if (index == null)
-            {
-                index = 1;
-            }
-            else
-            {
-                index += 0;
-            }
-            index++;
-            //este bloco de comando não deixa a seleção ser maior que o último registro do banco
-            if (index > frmPesquisarBanca.ultimoRegistro)
-            {
-                index = frmPesquisarBanca.ultimoRegistro;
-            }
-            preencherTelaCadastroBanca(index);
-        }
+        JInternalFrame janelaFocada = jdkpPrincipal.getSelectedFrame();
 
-        //tela cadastrar cargo/emprego
-        if (frmCCE.isVisible() && desativarBotoesFrmCCE == false)
+        switch (janelaFocada.getTitle())
         {
-            if (index == null)
-            {
-                index = 1;
-            }
-            else
-            {
-                index += 0;
-            }
-            index++;
-            //este bloco de comando não deixa a seleção ser maior que o último registro do banco
-            if (index > frmPesquisarCargoEmprego.ultimoRegistro)
-            {
-                index = frmPesquisarCargoEmprego.ultimoRegistro;
-            }
-            preencherTelaCadastroCargoEmprego(index);
-        }
+            case "Manutenção de Cargos e Empregos":
+                if (frmCCE.isVisible())
+                {
+                    frmCCE.gerenciadorNavegacao("proximo");
+                }
 
-        //tela cadastrar concurso
-        if (frmCC.isVisible() && desativarBotoesFrmCC == false)
-        {
-            if (index == null)
-            {
-                index = 1;
-            }
-            else
-            {
-                index += 0;
-            }
-            index++;
-            System.out.println("index" + index);
-            //este bloco de comando não deixa a seleção ser maior que o último registro do banco
-            if (index > frmPesquisarConcurso.ultimoRegistro)
-            {
-                index = frmPesquisarConcurso.ultimoRegistro;
-            }
-            preencherTelaCadastroConcurso(index);
+                break;
+
+            default:
+                throw new AssertionError();
         }
 
     }//GEN-LAST:event_btnProximoActionPerformed
 
     private void btnUltimoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnUltimoActionPerformed
-        //tela cadastrar banca
-        if (frmCB.isVisible() && desativarBotoesFrmCC == false)
-        {
-            index = frmPesquisarBanca.ultimoRegistro;
-            //este bloco de comando não deixa a seleção ser maior que o último registro do banco
-            if (index > frmPesquisarBanca.ultimoRegistro)
-            {
-                index = frmPesquisarBanca.ultimoRegistro;
-            }
-            preencherTelaCadastroBanca(index);
-        }
+        JInternalFrame janelaFocada = jdkpPrincipal.getSelectedFrame();
 
-        //tela cadastrar cargo/emprego
-        if (frmCCE.isVisible() && desativarBotoesFrmCCE == false)
+        switch (janelaFocada.getTitle())
         {
-            index = frmPesquisarCargoEmprego.ultimoRegistro;
-            //este bloco de comando não deixa a seleção ser maior que o último registro do banco
-            if (index > frmPesquisarCargoEmprego.ultimoRegistro)
-            {
-                index = frmPesquisarCargoEmprego.ultimoRegistro;
-            }
-            preencherTelaCadastroCargoEmprego(index);
-        }
+            case "Manutenção de Cargos e Empregos":
+                if (frmCCE.isVisible())
+                {
+                    frmCCE.gerenciadorNavegacao("ultimo");
+                }
 
-        //tela cadastrar concurso
-        if (frmCC.isVisible() && desativarBotoesFrmCC == false)
-        {
-            index = frmPesquisarConcurso.ultimoRegistro;
-            //este bloco de comando não deixa a seleção ser maior que o último registro do banco
-            if (index > frmPesquisarConcurso.ultimoRegistro)
-            {
-                index = frmPesquisarConcurso.ultimoRegistro;
-            }
-            preencherTelaCadastroConcurso(index);
+                break;
+
+            default:
+                throw new AssertionError();
         }
     }//GEN-LAST:event_btnUltimoActionPerformed
     //prencher tela cadastro cargo emprego
@@ -1215,7 +1121,7 @@ public class frmPrincipal extends javax.swing.JFrame
                     frmCCE.setNumeroLeiCriaCargoEmprego(String.valueOf(frmPCE.getLista().get(frmPCE.getIndex()).getNumeroLeiCriaCargoEmprego()));
                     frmCCE.setDataLeiCriaCargoEmprego(String.valueOf(frmPCE.getLista().get(frmPCE.getIndex()).getDataLeiCriaCargoEmprego()));
 
-                    frmCCE.preencherCampos();
+                    frmCCE.preencherCamposListaPesquisa(frmPCE.getLista());
                     frmCCE.desativarCampos();
                     desativarBotoesFrmCCE = false;
                     gravarAlteracaoFrmCCE = false;//este botão serve para quando o usuario selecionar algum registro e clicar em alterar e caso clique no botão pesquisar e depois alterar ele consegue realizar a alteração

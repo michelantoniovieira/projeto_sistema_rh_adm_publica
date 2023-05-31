@@ -206,6 +206,7 @@
             </Component>
             <Component class="javax.swing.JTextField" name="txtCodigoCargoEmprego">
               <Events>
+                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="txtCodigoCargoEmpregoActionPerformed"/>
                 <EventHandler event="keyTyped" listener="java.awt.event.KeyListener" parameters="java.awt.event.KeyEvent" handler="txtCodigoCargoEmpregoKeyTyped"/>
               </Events>
             </Component>
@@ -507,9 +508,9 @@
                           <EmptySpace type="unrelated" max="-2" attributes="0"/>
                           <Component id="cmbGrau" min="-2" pref="43" max="-2" attributes="0"/>
                           <EmptySpace min="-2" pref="31" max="-2" attributes="0"/>
-                          <Component id="jLabel3" min="-2" max="-2" attributes="0"/>
+                          <Component id="lblRsVencimentos" min="-2" max="-2" attributes="0"/>
                           <EmptySpace type="separate" max="-2" attributes="0"/>
-                          <Component id="jLabel4" min="-2" max="-2" attributes="0"/>
+                          <Component id="lblRemuneracao" min="-2" max="-2" attributes="0"/>
                           <EmptySpace max="32767" attributes="0"/>
                       </Group>
                   </Group>
@@ -519,12 +520,12 @@
                       <Group type="102" alignment="0" attributes="0">
                           <EmptySpace min="-2" pref="3" max="-2" attributes="0"/>
                           <Group type="103" groupAlignment="3" attributes="0">
-                              <Component id="jLabel4" alignment="3" min="-2" pref="35" max="-2" attributes="0"/>
+                              <Component id="lblRemuneracao" alignment="3" min="-2" pref="35" max="-2" attributes="0"/>
                               <Component id="cmbGrau" alignment="3" min="-2" max="-2" attributes="0"/>
                               <Component id="lblGrau" alignment="3" min="-2" max="-2" attributes="0"/>
                               <Component id="cmbReferenciaSalarial" alignment="3" min="-2" max="-2" attributes="0"/>
                               <Component id="lblReferenciaSalarial" alignment="3" min="-2" max="-2" attributes="0"/>
-                              <Component id="jLabel3" alignment="3" max="32767" attributes="0"/>
+                              <Component id="lblRsVencimentos" alignment="3" max="32767" attributes="0"/>
                           </Group>
                           <EmptySpace max="32767" attributes="0"/>
                       </Group>
@@ -607,7 +608,7 @@
                     <AuxValue name="JavaCodeGenerator_TypeParameters" type="java.lang.String" value="&lt;String&gt;"/>
                   </AuxValues>
                 </Component>
-                <Component class="javax.swing.JLabel" name="jLabel3">
+                <Component class="javax.swing.JLabel" name="lblRsVencimentos">
                   <Properties>
                     <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
                       <Font name="Segoe UI" size="18" style="1"/>
@@ -615,7 +616,7 @@
                     <Property name="text" type="java.lang.String" value="R$:"/>
                   </Properties>
                 </Component>
-                <Component class="javax.swing.JLabel" name="jLabel4">
+                <Component class="javax.swing.JLabel" name="lblRemuneracao">
                   <Properties>
                     <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
                       <Font name="Segoe UI" size="18" style="1"/>
@@ -647,7 +648,7 @@
                           <EmptySpace max="-2" attributes="0"/>
                           <Component id="cmbGrauSalario" min="-2" max="-2" attributes="0"/>
                           <EmptySpace type="unrelated" max="-2" attributes="0"/>
-                          <Component id="lblRs" min="-2" max="-2" attributes="0"/>
+                          <Component id="lblRsDocente" min="-2" max="-2" attributes="0"/>
                           <EmptySpace max="32767" attributes="0"/>
                       </Group>
                   </Group>
@@ -661,7 +662,7 @@
                               <Component id="cmbFaixaSalarial" alignment="3" min="-2" max="-2" attributes="0"/>
                               <Component id="lblGrauProf" alignment="3" min="-2" max="-2" attributes="0"/>
                               <Component id="cmbGrauSalario" alignment="3" min="-2" max="-2" attributes="0"/>
-                              <Component id="lblRs" alignment="3" max="32767" attributes="0"/>
+                              <Component id="lblRsDocente" alignment="3" max="32767" attributes="0"/>
                           </Group>
                           <EmptySpace max="32767" attributes="0"/>
                       </Group>
@@ -719,7 +720,7 @@
                     <AuxValue name="JavaCodeGenerator_TypeParameters" type="java.lang.String" value="&lt;String&gt;"/>
                   </AuxValues>
                 </Component>
-                <Component class="javax.swing.JLabel" name="lblRs">
+                <Component class="javax.swing.JLabel" name="lblRsDocente">
                   <Properties>
                     <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
                       <Font name="Segoe UI" size="18" style="1"/>
@@ -743,9 +744,9 @@
                   <Group type="103" groupAlignment="0" attributes="0">
                       <Group type="102" alignment="0" attributes="0">
                           <EmptySpace min="-2" pref="18" max="-2" attributes="0"/>
-                          <Component id="jLabel2" min="-2" max="-2" attributes="0"/>
+                          <Component id="lblGrauInsalubridade" min="-2" max="-2" attributes="0"/>
                           <EmptySpace type="separate" max="-2" attributes="0"/>
-                          <Component id="jComboBox2" min="-2" max="-2" attributes="0"/>
+                          <Component id="cmbGrauInsalubridade" min="-2" max="-2" attributes="0"/>
                           <EmptySpace pref="283" max="32767" attributes="0"/>
                       </Group>
                   </Group>
@@ -755,8 +756,8 @@
                       <Group type="102" alignment="0" attributes="0">
                           <EmptySpace min="-2" pref="14" max="-2" attributes="0"/>
                           <Group type="103" groupAlignment="3" attributes="0">
-                              <Component id="jLabel2" alignment="3" min="-2" max="-2" attributes="0"/>
-                              <Component id="jComboBox2" alignment="3" min="-2" max="-2" attributes="0"/>
+                              <Component id="lblGrauInsalubridade" alignment="3" min="-2" max="-2" attributes="0"/>
+                              <Component id="cmbGrauInsalubridade" alignment="3" min="-2" max="-2" attributes="0"/>
                           </Group>
                           <EmptySpace max="32767" attributes="0"/>
                       </Group>
@@ -764,12 +765,12 @@
                 </DimensionLayout>
               </Layout>
               <SubComponents>
-                <Component class="javax.swing.JLabel" name="jLabel2">
+                <Component class="javax.swing.JLabel" name="lblGrauInsalubridade">
                   <Properties>
                     <Property name="text" type="java.lang.String" value="Grau:"/>
                   </Properties>
                 </Component>
-                <Component class="javax.swing.JComboBox" name="jComboBox2">
+                <Component class="javax.swing.JComboBox" name="cmbGrauInsalubridade">
                   <Properties>
                     <Property name="model" type="javax.swing.ComboBoxModel" editor="org.netbeans.modules.form.editors2.ComboBoxModelEditor">
                       <StringArray count="4">

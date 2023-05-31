@@ -5,7 +5,7 @@ import javax.swing.table.DefaultTableModel;
 public class CadastrarCargoEmpregoDTO
 {
     private String mensagem;
-    private int codigoCargoEmprego;
+    private static int codigoCargoEmprego;
     private String descricaoCargoEmprego;
     private String cboCargoEmprego;
     private String regimeJuridicoCargoEmprego;

@@ -6,10 +6,12 @@ package Apresentacao;
 
 import DTO.PesquisarCargoEmpregoDTO;
 import Controle.CadastrarCargoEmpregoControle;
+import DTO.CadastrarCargoEmpregoDTO;
 import Modelo.CentralizarJanela;
 import Modelo.ControleCadastrarFundamento;
 import java.awt.event.KeyEvent;
 import java.util.ArrayList;
+import java.util.List;
 import javax.accessibility.AccessibleContext;
 import javax.swing.Icon;
 import javax.swing.JButton;
@@ -101,6 +103,9 @@ public class frmCadastrarCargoEmprego extends javax.swing.JInternalFrame
     public frmCadastrarCargoEmprego()
     {
         initComponents();
+        gerenciadorDeTabelas(tbQuadro);
+        gerenciadorDeTabelas(tbFundamentoCriacaoExclusao);
+        gerenciadorDeTabelas(tbFundamentoReajuste);
     }
 
     public void gravarRegistro()
@@ -119,30 +124,79 @@ public class frmCadastrarCargoEmprego extends javax.swing.JInternalFrame
         setRegimeJuridico(String.valueOf(getLista().get(index).getRegimeJuridicoCargoEmprego()));
         setNumeroLeiCriaCargoEmprego(String.valueOf(getLista().get(index).getNumeroLeiCriaCargoEmprego()));
         setDataLeiCriaCargoEmprego(String.valueOf(getLista().get(index).getDataLeiCriaCargoEmprego()));
-        preencherCampos();
+        preencherCamposListaPesquisa(lista);
     }
 
-    public void preencherCampos()
+    public void preencherCamposListaPesquisa(ArrayList<PesquisarCargoEmpregoDTO> lista)
     {
-        txtCodigoCargoEmprego.setText(getCodigoCargoEmprego());
-        txtDescricaoCargoEmprego.setText(getDescricaoCargoEmprego());
-        cmbRegimeJuridico.setSelectedItem(getRegimeJuridico());
+        JOptionPane.showMessageDialog(null, true);
+        txtCodigoCargoEmprego.setText(String.valueOf(lista.get(0).getDescricaoCargoEmprego()));
+        txtDescricaoCargoEmprego.setText(String.valueOf(lista.get(0).getDescricaoCargoEmprego()));
+    }
+
+    public void preencherCamposLista(List<CadastrarCargoEmpregoDTO> lista)
+    {
+        txtCodigoCargoEmprego.setText(String.valueOf(lista.get(0).getCodigoCargoEmprego()));
+        txtDescricaoCargoEmprego.setText(String.valueOf(lista.get(0).getDescricaoCargoEmprego()));
+        txtCboCargoEmprego.setText(String.valueOf(lista.get(0).getCboCargoEmprego()));
+        cmbRegimeJuridico.setSelectedItem(String.valueOf(lista.get(0).getRegimeJuridicoCargoEmprego()));
     }
 
     //liberar os campos para edição
     public void ativarCampos()
     {
-        txtCodigoCargoEmprego.setEnabled(false);
+        txtCodigoCargoEmprego.setEnabled(true);
+        tbQuadro.setEnabled(true);
+        tbFundamentoCriacaoExclusao.setEnabled(true);
+        tbFundamentoReajuste.setEnabled(true);
         txtDescricaoCargoEmprego.setEnabled(true);
+        txtCboCargoEmprego.setEnabled(true);
         cmbRegimeJuridico.setEnabled(true);
+        chkAtivo.setEnabled(true);
+        cmbCarreira.setEnabled(true);
+        cmbCargaHorariaSemanal.setEnabled(true);
+        cmbCargaHorariaMensal.setEnabled(true);
+        cmbEscolaridade.setEnabled(true);
+        cmbReferenciaSalarial.setEnabled(true);
+        cmbGrau.setEnabled(true);
+        lblRsVencimentos.setEnabled(true);
+        lblRemuneracao.setEnabled(true);
+        cmbFaixaSalarial.setEnabled(true);
+        cmbGrauSalario.setEnabled(true);
+        lblRsDocente.setEnabled(true);
+        cmbGrauInsalubridade.setEnabled(true);
+        btnCadastrarFundamento.setEnabled(true);
+        btnAlterarFundamento.setEnabled(true);
+        btnExcluirFundamento.setEnabled(true);
+
     }
 
     //travar os campos para edição
     public void desativarCampos()
     {
-        txtCodigoCargoEmprego.setEnabled(false);
+        txtCodigoCargoEmprego.setEnabled(true);
+        tbQuadro.setEnabled(false);
+        tbFundamentoCriacaoExclusao.setEnabled(false);
+        tbFundamentoReajuste.setEnabled(false);
         txtDescricaoCargoEmprego.setEnabled(false);
+        txtCboCargoEmprego.setEnabled(false);
         cmbRegimeJuridico.setEnabled(false);
+        chkAtivo.setEnabled(false);
+        cmbCarreira.setEnabled(false);
+        cmbCargaHorariaSemanal.setEnabled(false);
+        cmbCargaHorariaMensal.setEnabled(false);
+        cmbEscolaridade.setEnabled(false);
+        cmbReferenciaSalarial.setEnabled(false);
+        cmbGrau.setEnabled(false);
+        lblRsVencimentos.setEnabled(false);
+        lblRemuneracao.setEnabled(false);
+        cmbFaixaSalarial.setEnabled(false);
+        cmbGrauSalario.setEnabled(false);
+        lblRsDocente.setEnabled(false);
+        cmbGrauInsalubridade.setEnabled(false);
+        btnCadastrarFundamento.setEnabled(false);
+        btnAlterarFundamento.setEnabled(false);
+        btnExcluirFundamento.setEnabled(false);
     }
 
     public void limparCampos()
@@ -244,17 +298,21 @@ public class frmCadastrarCargoEmprego extends javax.swing.JInternalFrame
     {
         DefaultTableCellRenderer centralizarCelulas = new DefaultTableCellRenderer();
         centralizarCelulas.setHorizontalAlignment(SwingConstants.CENTER);
+        table.getTableHeader().setReorderingAllowed(false);
         for (int i = 0; i < table.getColumnCount(); i++)
         {
+            table.getColumnModel().getColumn(i).setResizable(false);
             table.getColumnModel().getColumn(i).setCellRenderer(centralizarCelulas);
         }
     }
+    
+    public void gerenciadorNavegacao(String acao)
+    {
+        CadastrarCargoEmpregoControle controle = new CadastrarCargoEmpregoControle();
+        controle.navegarEntreRegistros(acao);
+        preencherCamposLista(controle.getObjPuxadoDaPesquisaDeCargoEmprego());
+    }
 
-    /**
-     * This method is called from within the constructor to initialize the form.
-     * WARNING: Do NOT modify this code. The content of this method is always
-     * regenerated by the Form Editor.
-     */
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents()
@@ -288,17 +346,17 @@ public class frmCadastrarCargoEmprego extends javax.swing.JInternalFrame
         cmbReferenciaSalarial = new javax.swing.JComboBox<>();
         lblGrau = new javax.swing.JLabel();
         cmbGrau = new javax.swing.JComboBox<>();
-        jLabel3 = new javax.swing.JLabel();
-        jLabel4 = new javax.swing.JLabel();
+        lblRsVencimentos = new javax.swing.JLabel();
+        lblRemuneracao = new javax.swing.JLabel();
         jpEscalaVencimentosDocente = new javax.swing.JPanel();
         lblFaixa = new javax.swing.JLabel();
         cmbFaixaSalarial = new javax.swing.JComboBox<>();
         lblGrauProf = new javax.swing.JLabel();
         cmbGrauSalario = new javax.swing.JComboBox<>();
-        lblRs = new javax.swing.JLabel();
+        lblRsDocente = new javax.swing.JLabel();
         jpInsalubridade = new javax.swing.JPanel();
-        jLabel2 = new javax.swing.JLabel();
-        jComboBox2 = new javax.swing.JComboBox<>();
+        lblGrauInsalubridade = new javax.swing.JLabel();
+        cmbGrauInsalubridade = new javax.swing.JComboBox<>();
         jpRequisitosDeProvimento = new javax.swing.JPanel();
         jScrollPane1 = new javax.swing.JScrollPane();
         txtAreaRequisitosProvimento = new javax.swing.JTextArea();
@@ -372,6 +430,13 @@ public class frmCadastrarCargoEmprego extends javax.swing.JInternalFrame
 
         lblDescricaoCargoEmprego.setText("Descrição:");
 
+        txtCodigoCargoEmprego.addActionListener(new java.awt.event.ActionListener()
+        {
+            public void actionPerformed(java.awt.event.ActionEvent evt)
+            {
+                txtCodigoCargoEmpregoActionPerformed(evt);
+            }
+        });
         txtCodigoCargoEmprego.addKeyListener(new java.awt.event.KeyAdapter()
         {
             public void keyTyped(java.awt.event.KeyEvent evt)
@@ -583,11 +648,11 @@ public class frmCadastrarCargoEmprego extends javax.swing.JInternalFrame
 
         cmbGrau.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "A", "B", "C", "D", "E", "F", "G" }));
 
-        jLabel3.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
-        jLabel3.setText("R$:");
+        lblRsVencimentos.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
+        lblRsVencimentos.setText("R$:");
 
-        jLabel4.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
-        jLabel4.setText("3.917,95");
+        lblRemuneracao.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
+        lblRemuneracao.setText("3.917,95");
 
         javax.swing.GroupLayout jpTabelaVencimentosLayout = new javax.swing.GroupLayout(jpTabelaVencimentos);
         jpTabelaVencimentos.setLayout(jpTabelaVencimentosLayout);
@@ -603,9 +668,9 @@ public class frmCadastrarCargoEmprego extends javax.swing.JInternalFrame
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(cmbGrau, javax.swing.GroupLayout.PREFERRED_SIZE, 43, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(31, 31, 31)
-                .addComponent(jLabel3)
+                .addComponent(lblRsVencimentos)
                 .addGap(18, 18, 18)
-                .addComponent(jLabel4)
+                .addComponent(lblRemuneracao)
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         jpTabelaVencimentosLayout.setVerticalGroup(
@@ -613,12 +678,12 @@ public class frmCadastrarCargoEmprego extends javax.swing.JInternalFrame
             .addGroup(jpTabelaVencimentosLayout.createSequentialGroup()
                 .addGap(3, 3, 3)
                 .addGroup(jpTabelaVencimentosLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel4, javax.swing.GroupLayout.PREFERRED_SIZE, 35, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(lblRemuneracao, javax.swing.GroupLayout.PREFERRED_SIZE, 35, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(cmbGrau, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(lblGrau)
                     .addComponent(cmbReferenciaSalarial, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(lblReferenciaSalarial)
-                    .addComponent(jLabel3, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                    .addComponent(lblRsVencimentos, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
@@ -632,8 +697,8 @@ public class frmCadastrarCargoEmprego extends javax.swing.JInternalFrame
 
         cmbGrauSalario.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "ADM", "A", "B", "C", "D", "E", "F" }));
 
-        lblRs.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
-        lblRs.setText("R$:");
+        lblRsDocente.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
+        lblRsDocente.setText("R$:");
 
         javax.swing.GroupLayout jpEscalaVencimentosDocenteLayout = new javax.swing.GroupLayout(jpEscalaVencimentosDocente);
         jpEscalaVencimentosDocente.setLayout(jpEscalaVencimentosDocenteLayout);
@@ -649,7 +714,7 @@ public class frmCadastrarCargoEmprego extends javax.swing.JInternalFrame
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(cmbGrauSalario, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(lblRs)
+                .addComponent(lblRsDocente)
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         jpEscalaVencimentosDocenteLayout.setVerticalGroup(
@@ -661,15 +726,15 @@ public class frmCadastrarCargoEmprego extends javax.swing.JInternalFrame
                     .addComponent(cmbFaixaSalarial, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(lblGrauProf)
                     .addComponent(cmbGrauSalario, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(lblRs, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                    .addComponent(lblRsDocente, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
         jtpRemuneracao.addTab("Escala de Vencimentos - Docente", jpEscalaVencimentosDocente);
 
-        jLabel2.setText("Grau:");
+        lblGrauInsalubridade.setText("Grau:");
 
-        jComboBox2.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "-", "Leve - 10%", "Médio - 20%", "Máximo - 40%" }));
+        cmbGrauInsalubridade.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "-", "Leve - 10%", "Médio - 20%", "Máximo - 40%" }));
 
         javax.swing.GroupLayout jpInsalubridadeLayout = new javax.swing.GroupLayout(jpInsalubridade);
         jpInsalubridade.setLayout(jpInsalubridadeLayout);
@@ -677,9 +742,9 @@ public class frmCadastrarCargoEmprego extends javax.swing.JInternalFrame
             jpInsalubridadeLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jpInsalubridadeLayout.createSequentialGroup()
                 .addGap(18, 18, 18)
-                .addComponent(jLabel2)
+                .addComponent(lblGrauInsalubridade)
                 .addGap(18, 18, 18)
-                .addComponent(jComboBox2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(cmbGrauInsalubridade, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap(283, Short.MAX_VALUE))
         );
         jpInsalubridadeLayout.setVerticalGroup(
@@ -687,8 +752,8 @@ public class frmCadastrarCargoEmprego extends javax.swing.JInternalFrame
             .addGroup(jpInsalubridadeLayout.createSequentialGroup()
                 .addGap(14, 14, 14)
                 .addGroup(jpInsalubridadeLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel2)
-                    .addComponent(jComboBox2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(lblGrauInsalubridade)
+                    .addComponent(cmbGrauInsalubridade, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
@@ -1137,6 +1202,13 @@ public class frmCadastrarCargoEmprego extends javax.swing.JInternalFrame
     {//GEN-HEADEREND:event_txtCboCargoEmpregoFocusLost
 
     }//GEN-LAST:event_txtCboCargoEmpregoFocusLost
+//ao colocar a matrícula ele faz a consulta no banco de dados e retonar no formulario
+    private void txtCodigoCargoEmpregoActionPerformed(java.awt.event.ActionEvent evt)//GEN-FIRST:event_txtCodigoCargoEmpregoActionPerformed
+    {//GEN-HEADEREND:event_txtCodigoCargoEmpregoActionPerformed
+        CadastrarCargoEmpregoControle controle = new CadastrarCargoEmpregoControle();
+        controle.pesquisarCargoEmprego(txtCodigoCargoEmprego.getText());
+        preencherCamposLista(controle.getObjPuxadoDaPesquisaDeCargoEmprego());
+    }//GEN-LAST:event_txtCodigoCargoEmpregoActionPerformed
     public void limparTabelas(JTable tabela)
     {
         DefaultTableModel limparTabela = (DefaultTableModel) tabela.getModel();
@@ -1154,13 +1226,10 @@ public class frmCadastrarCargoEmprego extends javax.swing.JInternalFrame
     private javax.swing.JComboBox<String> cmbEscolaridade;
     private javax.swing.JComboBox<String> cmbFaixaSalarial;
     private javax.swing.JComboBox<String> cmbGrau;
+    private javax.swing.JComboBox<String> cmbGrauInsalubridade;
     private javax.swing.JComboBox<String> cmbGrauSalario;
     private javax.swing.JComboBox<String> cmbReferenciaSalarial;
     private javax.swing.JComboBox<String> cmbRegimeJuridico;
-    private javax.swing.JComboBox<String> jComboBox2;
-    private javax.swing.JLabel jLabel2;
-    private javax.swing.JLabel jLabel3;
-    private javax.swing.JLabel jLabel4;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JScrollPane jScrollPane3;
     private javax.swing.JScrollPane jScrollPane4;
@@ -1187,11 +1256,14 @@ public class frmCadastrarCargoEmprego extends javax.swing.JInternalFrame
     private javax.swing.JLabel lblEscolaridade;
     private javax.swing.JLabel lblFaixa;
     private javax.swing.JLabel lblGrau;
+    private javax.swing.JLabel lblGrauInsalubridade;
     private javax.swing.JLabel lblGrauProf;
     private javax.swing.JLabel lblMensal;
     private javax.swing.JLabel lblReferenciaSalarial;
     private javax.swing.JLabel lblRegimeJuridicoCargoEmprego;
-    private javax.swing.JLabel lblRs;
+    private javax.swing.JLabel lblRemuneracao;
+    private javax.swing.JLabel lblRsDocente;
+    private javax.swing.JLabel lblRsVencimentos;
     private javax.swing.JLabel lblSemanal;
     private javax.swing.JTable tbFundamentoCriacaoExclusao;
     private javax.swing.JTable tbFundamentoReajuste;

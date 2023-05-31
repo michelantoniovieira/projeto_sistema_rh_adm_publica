@@ -12,6 +12,7 @@ import Util.CadastrarCargoEmpregoValidacao;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
+import java.util.List;
 import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
 
@@ -20,10 +21,11 @@ public class CadastrarCargoEmpregoControle extends CadastrarCargoEmpregoDTO
 
     private frmCadastrarCargoEmprego frm;
     private CadastrarCargoEmpregoDAO cadastrarCargoEmpregoDAO;
+    private List<CadastrarCargoEmpregoDTO> objPuxadoDaPesquisaDeCargoEmprego;
 
     public CadastrarCargoEmpregoControle()
     {
-
+        cadastrarCargoEmpregoDAO = new CadastrarCargoEmpregoDAO();
     }
 
     public CadastrarCargoEmpregoControle(frmCadastrarCargoEmprego frm)
@@ -54,14 +56,30 @@ public class CadastrarCargoEmpregoControle extends CadastrarCargoEmpregoDTO
             else
             {
                 //mando para o dao
-                cadastrarCargoEmpregoDAO.CadastrarCargoEmpregoDAO(dto);
+                cadastrarCargoEmpregoDAO.cadastrar(dto);
                 JOptionPane.showMessageDialog(null, "Cadastro realizado com sucesso!");
             }
-
         }
     }
 
-    public void pesquisarCargoEmprego(int index)
+    // pesquisar cargo pelo codigo inserido
+    public void pesquisarCargoEmprego(String codigoCargoEmprego)
+    {
+        List<CadastrarCargoEmpregoDTO> cargosEmpregos = cadastrarCargoEmpregoDAO.pesquisar(codigoCargoEmprego);
+
+        if (!cargosEmpregos.isEmpty())
+        {
+            this.setCodigoCargoEmprego(Integer.parseInt(codigoCargoEmprego));
+            this.objPuxadoDaPesquisaDeCargoEmprego = cargosEmpregos;
+        }
+        else
+        {
+            JOptionPane.showMessageDialog(null, "Cargo não encontrado.");
+        }
+    }
+
+    //pesquisar pela janela contendo todos os cargos e empregos
+    public void pesquisarCargoEmpregoLista(int index)
     {
         CadastrarCargoEmpregoDAO pesquisar = new CadastrarCargoEmpregoDAO();
         ArrayList<CadastrarCargoEmpregoDTO> obj = new ArrayList<>();
@@ -70,10 +88,67 @@ public class CadastrarCargoEmpregoControle extends CadastrarCargoEmpregoDTO
 
         for (int i = 0; i < obj.size(); i++)
         {
-            //estou passo o indice para quando apertar os botões primeiro, anterior, proximo e ultimo conseguir navegar entre as opções
+            //passo o indice para quando apertar os botões primeiro, anterior, proximo e ultimo conseguir navegar entre as opções
             this.setCodigoCargoEmprego(obj.get(index).getCodigoCargoEmprego());
             this.setDescricaoCargoEmprego(obj.get(index).getDescricaoCargoEmprego());
             this.setRegimeJuridicoCargoEmprego(obj.get(index).getRegimeJuridicoCargoEmprego());
+        }
+    }
+
+    public void navegarEntreRegistros(String acao)
+    {
+        switch (acao)
+        {
+            case "primeiro":
+                if (getCodigoCargoEmprego() > 0)
+                {
+                    pesquisarCargoEmprego(String.valueOf(cadastrarCargoEmpregoDAO.pesquisarPrimeiroRegistro()));
+
+                }
+                else if (getCodigoCargoEmprego() < cadastrarCargoEmpregoDAO.pesquisarUltimoRegistro())
+                {
+                    pesquisarCargoEmprego(String.valueOf(getCodigoCargoEmprego() + 1));
+                }
+                break;
+
+            case "anterior":
+                if (getCodigoCargoEmprego() == 0)
+                {
+                    pesquisarCargoEmprego("1");
+
+                }
+                else if (getCodigoCargoEmprego() > 1)
+                {
+                    pesquisarCargoEmprego(String.valueOf(getCodigoCargoEmprego() - 1));
+                }
+                break;
+
+            case "proximo":
+                if (getCodigoCargoEmprego() == 0)
+                {
+                    pesquisarCargoEmprego("1");
+
+                }
+                else if (getCodigoCargoEmprego() < cadastrarCargoEmpregoDAO.pesquisarUltimoRegistro())
+                {
+                    pesquisarCargoEmprego(String.valueOf(getCodigoCargoEmprego() + 1));
+                }
+                break;
+
+            case "ultimo":
+                if (getCodigoCargoEmprego() > 0)
+                {
+                    pesquisarCargoEmprego(String.valueOf(cadastrarCargoEmpregoDAO.pesquisarUltimoRegistro()));
+
+                }
+                else if (getCodigoCargoEmprego() < cadastrarCargoEmpregoDAO.pesquisarUltimoRegistro())
+                {
+                    pesquisarCargoEmprego(String.valueOf(getCodigoCargoEmprego() - 1));
+                }
+                break;
+
+            default:
+                throw new AssertionError();
         }
     }
 
@@ -96,6 +171,22 @@ public class CadastrarCargoEmpregoControle extends CadastrarCargoEmpregoDTO
         ControleCadastrarFundamento controle = new ControleCadastrarFundamento();
         controle.contabilizarTotais(tabelaQuadro, tabelaFundamento);
         return controle.getQuantidadeEmpregoCriada();
+    }
+
+    //informações legislação
+    public String pesquisarRemuneracao()
+    {
+        return null;
+    }
+
+    public List<CadastrarCargoEmpregoDTO> getObjPuxadoDaPesquisaDeCargoEmprego()
+    {
+        return objPuxadoDaPesquisaDeCargoEmprego;
+    }
+
+    public void setObjPuxadoDaPesquisaDeCargoEmprego(List<CadastrarCargoEmpregoDTO> objPuxadoDaPesquisaDeCargoEmprego)
+    {
+        this.objPuxadoDaPesquisaDeCargoEmprego = objPuxadoDaPesquisaDeCargoEmprego;
     }
 
 }
