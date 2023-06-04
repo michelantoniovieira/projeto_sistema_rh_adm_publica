@@ -102,7 +102,11 @@ public class CadastrarCargoEmpregoDAO
                 cargoEmprego.setDescricaoCargoEmprego(rs.getString("descricao_cargo_emprego"));
                 cargoEmprego.setCboCargoEmprego(rs.getString("cbo_cargo_emprego"));
                 cargoEmprego.setRegimeJuridicoCargoEmprego(rs.getString("regime_juridico_cargo_emprego"));
-
+                cargoEmprego.setChkAtivoCargoEmprego(rs.getBoolean("esta_ativo_cargo_emprego"));
+                cargoEmprego.setTipoCarreira(rs.getString("tipo_carreira_cargo_emprego"));
+                cargoEmprego.setCargaHorariaSemanal(rs.getString("carga_horaria_semanal_cargo_emprego"));
+                cargoEmprego.setCargaHorariaMensal(rs.getString("carga_horaria_mensal_cargo_emprego"));
+                cargoEmprego.setEscolaridade(rs.getString("escolaridade_cargo_emprego"));
                 // Adicionar o objeto CargoEmprego à lista
                 cargosEmpregos.add(cargoEmprego);
             }
@@ -139,7 +143,7 @@ public class CadastrarCargoEmpregoDAO
 
     public void cadastrar(CadastrarCargoEmpregoDTO cadastrarcargoempregodto)
     {
-        String sql = "INSERT INTO cargo_emprego (descricao_cargo_emprego, cbo_cargo_emprego, regime_juridico_cargo_emprego, esta_ativo_cargo_emprego) values (?,?,?,?)";
+        String sql = "INSERT INTO cargo_emprego (descricao_cargo_emprego, cbo_cargo_emprego, regime_juridico_cargo_emprego, esta_ativo_cargo_emprego, tipo_carreira_cargo_emprego, carga_horaria_semanal_cargo_emprego, carga_horaria_mensal_cargo_emprego, escolaridade_cargo_emprego) values (?,?,?,?,?,?,?,?)";
         conn = new ConexaoDAO().conectaBD();
 
         try
@@ -148,7 +152,11 @@ public class CadastrarCargoEmpregoDAO
             pstm.setString(1, cadastrarcargoempregodto.getDescricaoCargoEmprego());
             pstm.setString(2, cadastrarcargoempregodto.getCboCargoEmprego());
             pstm.setString(3, cadastrarcargoempregodto.getRegimeJuridicoCargoEmprego());
-            pstm.setBoolean(4, cadastrarcargoempregodto.isChkAtivoCargoEmprego());
+            pstm.setBoolean(4, cadastrarcargoempregodto.getChkAtivoCargoEmprego());
+            pstm.setString(5, cadastrarcargoempregodto.getTipoCarreira());
+            pstm.setString(6, cadastrarcargoempregodto.getCargaHorariaSemanal());
+            pstm.setString(7, cadastrarcargoempregodto.getCargaHorariaMensal());
+            pstm.setString(8, cadastrarcargoempregodto.getEscolaridade());
 
             pstm.execute();
             pstm.close();

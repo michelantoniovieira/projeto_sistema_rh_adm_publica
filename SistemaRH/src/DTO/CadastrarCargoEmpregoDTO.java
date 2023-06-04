@@ -10,6 +10,11 @@ public class CadastrarCargoEmpregoDTO
     private String cboCargoEmprego;
     private String regimeJuridicoCargoEmprego;
     private boolean chkAtivoCargoEmprego;
+    private String tipoCarreira;
+    private String cargaHorariaSemanal;
+    private String cargaHorariaMensal;
+    private String escolaridade;
+    
 
     public String getMensagem()
     {
@@ -61,7 +66,7 @@ public class CadastrarCargoEmpregoDTO
         this.regimeJuridicoCargoEmprego = regimeJuridicoCargoEmprego;
     }
 
-    public boolean isChkAtivoCargoEmprego()
+    public boolean getChkAtivoCargoEmprego()
     {
         return chkAtivoCargoEmprego;
     }
@@ -70,5 +75,47 @@ public class CadastrarCargoEmpregoDTO
     {
         this.chkAtivoCargoEmprego = chkAtivoCargoEmprego;
     }
+
+    public String getTipoCarreira()
+    {
+        return tipoCarreira;
+    }
+
+    public void setTipoCarreira(String tipoCarreira)
+    {
+        this.tipoCarreira = tipoCarreira;
+    }
+
+    public String getCargaHorariaSemanal()
+    {
+        return cargaHorariaSemanal;
+    }
+
+    public void setCargaHorariaSemanal(String cargaHorariaSemanal)
+    {
+        this.cargaHorariaSemanal = cargaHorariaSemanal;
+    }
+
+    public String getCargaHorariaMensal()
+    {
+        return cargaHorariaMensal;
+    }
+
+    public void setCargaHorariaMensal(String cargaHorariaMensal)
+    {
+        this.cargaHorariaMensal = cargaHorariaMensal;
+    }
+
+    public String getEscolaridade()
+    {
+        return escolaridade;
+    }
+
+    public void setEscolaridade(String escolaridade)
+    {
+        this.escolaridade = escolaridade;
+    }
+    
+    
 
 }

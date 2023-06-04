@@ -129,17 +129,30 @@ public class frmCadastrarCargoEmprego extends javax.swing.JInternalFrame
 
     public void preencherCamposListaPesquisa(ArrayList<PesquisarCargoEmpregoDTO> lista)
     {
-        JOptionPane.showMessageDialog(null, true);
+        if (lista.isEmpty())
+        {
+            limparCampos();
+        }
         txtCodigoCargoEmprego.setText(String.valueOf(lista.get(0).getDescricaoCargoEmprego()));
         txtDescricaoCargoEmprego.setText(String.valueOf(lista.get(0).getDescricaoCargoEmprego()));
     }
 
     public void preencherCamposLista(List<CadastrarCargoEmpregoDTO> lista)
     {
+        if (lista.isEmpty())
+        {
+            limparCampos();
+        }
+
         txtCodigoCargoEmprego.setText(String.valueOf(lista.get(0).getCodigoCargoEmprego()));
         txtDescricaoCargoEmprego.setText(String.valueOf(lista.get(0).getDescricaoCargoEmprego()));
         txtCboCargoEmprego.setText(String.valueOf(lista.get(0).getCboCargoEmprego()));
         cmbRegimeJuridico.setSelectedItem(String.valueOf(lista.get(0).getRegimeJuridicoCargoEmprego()));
+        chkAtivo.setSelected(lista.get(0).getChkAtivoCargoEmprego());
+        cmbCarreira.setSelectedItem(String.valueOf(lista.get(0).getTipoCarreira()));
+        cmbCargaHorariaSemanal.setSelectedItem(String.valueOf(lista.get(0).getCargaHorariaSemanal()));
+        cmbCargaHorariaMensal.setSelectedItem(String.valueOf(lista.get(0).getCargaHorariaMensal()));
+        cmbEscolaridade.setSelectedItem(String.valueOf(lista.get(0).getEscolaridade()));
     }
 
     //liberar os campos para edição
@@ -168,7 +181,6 @@ public class frmCadastrarCargoEmprego extends javax.swing.JInternalFrame
         btnCadastrarFundamento.setEnabled(true);
         btnAlterarFundamento.setEnabled(true);
         btnExcluirFundamento.setEnabled(true);
-
     }
 
     //travar os campos para edição
@@ -201,17 +213,19 @@ public class frmCadastrarCargoEmprego extends javax.swing.JInternalFrame
 
     public void limparCampos()
     {
-        //this.setCodigoConcurso("");
         txtCodigoCargoEmprego.setText("");
-        this.setCodigoCargoEmprego("");
         txtDescricaoCargoEmprego.setText("");
-        this.setDescricaoCargoEmprego("");
-        cmbRegimeJuridico.setSelectedIndex(1);
-        this.setRegimeJuridico("0");
         txtCboCargoEmprego.setText("");
         cmbRegimeJuridico.setSelectedIndex(0);
-        chkAtivo.setSelected(true);
-
+        chkAtivo.setEnabled(true);
+        cmbCarreira.setEnabled(true);
+        cmbCargaHorariaSemanal.setSelectedIndex(4);
+        cmbCargaHorariaMensal.setSelectedIndex(4);
+        cmbEscolaridade.setSelectedIndex(2);
+        limparTabelas(tbQuadro);
+        limparTabelas(tbFundamentoCriacaoExclusao);
+        limparTabelas(tbFundamentoReajuste);
+        txtAreaRequisitosProvimento.setText("");
     }
 
     public String getCodigoCargoEmprego()
@@ -254,14 +268,54 @@ public class frmCadastrarCargoEmprego extends javax.swing.JInternalFrame
         this.regimeJuridico = regimeJuridico;
     }
 
-    public JCheckBox getChkAtivo()
+    public Boolean getChkAtivoCargoEmprego()
     {
-        return chkAtivo;
+        return chkAtivo.isSelected();
     }
 
-    public void setChkAtivo(JCheckBox chkAtivo)
+    public void setChkAtivoCargoEmprego(Boolean cargoEmpregoEstaAtivo)
     {
-        this.chkAtivo = chkAtivo;
+        this.cargoEmpregoEstaAtivo = cargoEmpregoEstaAtivo;
+    }
+
+    public String getCarreira()
+    {
+        return cmbCarreira.getSelectedItem().toString();
+    }
+
+    public void setCarreira(String tipoDeCarreira)
+    {
+        this.tipoDeCarreira = tipoDeCarreira;
+    }
+
+    public String getCargaHorariaMensal()
+    {
+        return cmbCargaHorariaMensal.getSelectedItem().toString();
+    }
+
+    public void setCargaHorariaMensal(String cargaHorariaMensalCargoEmprego)
+    {
+        this.cargaHorariaMensalCargoEmprego = cargaHorariaMensalCargoEmprego;
+    }
+
+    public String getCargaHorariaSemanal()
+    {
+        return cmbCargaHorariaSemanal.getSelectedItem().toString();
+    }
+
+    public void setCargaHorariaSemanal(String cargaHorariaSemanalCargoEmprego)
+    {
+        this.cargaHorariaSemanalCargoEmprego = cargaHorariaSemanalCargoEmprego;
+    }
+
+    public String getEscolaridade()
+    {
+        return cmbEscolaridade.getSelectedItem().toString();
+    }
+
+    public void setEscolaridade(String escolaridadeCargoEmprego)
+    {
+        this.escolaridadeCargoEmprego = escolaridadeCargoEmprego;
     }
 
     public String getNumeroLeiCriaCargoEmprego()
@@ -305,7 +359,7 @@ public class frmCadastrarCargoEmprego extends javax.swing.JInternalFrame
             table.getColumnModel().getColumn(i).setCellRenderer(centralizarCelulas);
         }
     }
-    
+
     public void gerenciadorNavegacao(String acao)
     {
         CadastrarCargoEmpregoControle controle = new CadastrarCargoEmpregoControle();

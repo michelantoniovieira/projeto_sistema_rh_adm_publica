@@ -760,19 +760,24 @@ public class frmPrincipal extends javax.swing.JFrame
         if (frmCCE.isVisible() && !frmCCE.getDescricaoCargoEmprego().equals("") && gravarAlteracaoFrmCCE == false)
         {
 
-            //quando eu digitar nos campos da janela CadastrarConcursoCargoEmprego e clicar no icone salvar da janela principal entra aqui e manda gravar registro que significa que os dados dos campos serão passados para as variaveis que eu acesso por aqui para mandar para a variavel controle           
-            CadastrarCargoEmpregoControle controle = new CadastrarCargoEmpregoControle(frmCCE);
-            controle.cadastrarCargoEmprego();
-            if (controle.getMensagem().equals("erro 1"))
-            {
-                JOptionPane.showMessageDialog(null, "Esta banca já foi cadastrada!");
+            try {
+                //quando eu digitar nos campos da janela CadastrarConcursoCargoEmprego e clicar no icone salvar da janela principal entra aqui e manda gravar registro que significa que os dados dos campos serão passados para as variaveis que eu acesso por aqui para mandar para a variavel controle
+                CadastrarCargoEmpregoControle controle = new CadastrarCargoEmpregoControle(frmCCE);
+                controle.cadastrarCargoEmprego();
+                if (controle.getMensagem().equals("erro 1"))
+                {
+                    JOptionPane.showMessageDialog(null, "Esta banca já foi cadastrada!");
+                }
+                else if (controle.getMensagem().equals("ok"))
+                {
+                    JOptionPane.showMessageDialog(null, "Banca cadastrada com sucesso.");
+                    frmCCE.limparCampos();
+                    frmCCE.desativarCampos();
+                    frmCCE.desativarCampos();
+                }
             }
-            else if (controle.getMensagem().equals("ok"))
-            {
-                JOptionPane.showMessageDialog(null, "Banca cadastrada com sucesso.");
-                frmCCE.limparCampos();
-                frmCCE.desativarCampos();
-                frmCCE.desativarCampos();
+            catch (SQLException ex) {
+                Logger.getLogger(frmPrincipal.class.getName()).log(Level.SEVERE, null, ex);
             }
         }
 

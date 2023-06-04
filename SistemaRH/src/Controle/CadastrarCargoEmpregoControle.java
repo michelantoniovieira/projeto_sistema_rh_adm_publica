@@ -42,7 +42,11 @@ public class CadastrarCargoEmpregoControle extends CadastrarCargoEmpregoDTO
         dto.setDescricaoCargoEmprego(frm.getDescricaoCargoEmprego());
         dto.setCboCargoEmprego(frm.getCboCargoEmprego());
         dto.setRegimeJuridicoCargoEmprego(frm.getRegimeJuridico());
-        dto.setChkAtivoCargoEmprego(frm.getChkAtivo().isSelected());
+        dto.setChkAtivoCargoEmprego(frm.getChkAtivoCargoEmprego());
+        dto.setTipoCarreira(frm.getCarreira());
+        dto.setCargaHorariaSemanal(frm.getCargaHorariaSemanal());
+        dto.setCargaHorariaMensal(frm.getCargaHorariaMensal());
+        dto.setEscolaridade(frm.getEscolaridade());
 
         CadastrarCargoEmpregoValidacao val = new CadastrarCargoEmpregoValidacao(dto);
         if (val.getMensagem().equals("ok"))
@@ -69,11 +73,11 @@ public class CadastrarCargoEmpregoControle extends CadastrarCargoEmpregoDTO
 
         if (!cargosEmpregos.isEmpty())
         {
-            this.setCodigoCargoEmprego(Integer.parseInt(codigoCargoEmprego));
             this.objPuxadoDaPesquisaDeCargoEmprego = cargosEmpregos;
         }
         else
         {
+            this.objPuxadoDaPesquisaDeCargoEmprego = cargosEmpregos;
             JOptionPane.showMessageDialog(null, "Cargo não encontrado.");
         }
     }
