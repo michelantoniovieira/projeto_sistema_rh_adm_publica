@@ -99,7 +99,7 @@ public class frmCadastrarCargoEmprego extends javax.swing.JInternalFrame impleme
     private String referenciaSalarial = "";
     private ArrayList<PesquisarCargoEmpregoDTO> lista;
     private String itemSelecionadoNoComboBox = "";
-    
+
     public static int indiceConsultaCargoEmprego = 0;
 
     public frmCadastrarCargoEmprego()
@@ -365,8 +365,10 @@ public class frmCadastrarCargoEmprego extends javax.swing.JInternalFrame impleme
     public void gerenciadorNavegacao(String acao)
     {
         CadastrarCargoEmpregoControle controle = new CadastrarCargoEmpregoControle();
-        controle.navegarEntreRegistros(acao);
-        preencherCamposLista(controle.getObjPuxadoDaPesquisaDeCargoEmprego());
+        if (controle.navegarEntreRegistros(acao).equals("ok"))
+        {
+            preencherCamposLista(controle.getObjPuxadoDaPesquisaDeCargoEmprego());
+        }
     }
 
     @SuppressWarnings("unchecked")

@@ -99,17 +99,19 @@ public class CadastrarCargoEmpregoControle extends CadastrarCargoEmpregoDTO
         }
     }
 
-    public void navegarEntreRegistros(String acao)
+    public String navegarEntreRegistros(String acao)
     {
         List<Integer> cargosEmpregos = cadastrarCargoEmpregoDAO.consultarCodigosDosCargosEmpregosNoBanco();
         int primeiroItemDaLista = cargosEmpregos.get(0);
         int ultimoItemDaLista = cargosEmpregos.size() - 1;
+        String tudoCerto = "";
 
         switch (acao)
         {
             case "primeiro":
                 frm.indiceConsultaCargoEmprego = 0;
                 pesquisarCargoEmprego(String.valueOf(cargosEmpregos.get(0)));
+                tudoCerto = "ok";
                 break;
 
             case "anterior":
@@ -117,6 +119,7 @@ public class CadastrarCargoEmpregoControle extends CadastrarCargoEmpregoDTO
                 {
                     frm.indiceConsultaCargoEmprego--;
                     pesquisarCargoEmprego(String.valueOf(cargosEmpregos.get(frm.indiceConsultaCargoEmprego)));
+                    tudoCerto = "ok";
                 }
                 break;
 
@@ -125,17 +128,20 @@ public class CadastrarCargoEmpregoControle extends CadastrarCargoEmpregoDTO
                 {
                     frm.indiceConsultaCargoEmprego++;
                     pesquisarCargoEmprego(String.valueOf(cargosEmpregos.get(frm.indiceConsultaCargoEmprego)));
+                    tudoCerto = "ok";
                 }
                 break;
 
             case "ultimo":
                 frm.indiceConsultaCargoEmprego = ultimoItemDaLista;
                 pesquisarCargoEmprego(String.valueOf(cargosEmpregos.get(ultimoItemDaLista)));
+                tudoCerto = "ok";
                 break;
 
             default:
                 throw new AssertionError();
         }
+        return tudoCerto;
     }
 
     //informações do quadro

@@ -135,7 +135,7 @@ public class frmPrincipal extends javax.swing.JFrame
         btnSalvar = new javax.swing.JButton();
         jLabel3 = new javax.swing.JLabel();
         btnPrimeiro = new javax.swing.JButton();
-        jLabel4 = new javax.swing.JLabel();
+        lblPrimeiro = new javax.swing.JLabel();
         btnAnterior = new javax.swing.JButton();
         jLabel5 = new javax.swing.JLabel();
         btnProximo = new javax.swing.JButton();
@@ -232,7 +232,7 @@ public class frmPrincipal extends javax.swing.JFrame
             }
         });
 
-        jLabel4.setText("Primeiro (F9)");
+        lblPrimeiro.setText("Primeiro (F7)");
 
         btnAnterior.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Icones/anterior 1.png"))); // NOI18N
         btnAnterior.setToolTipText("Sair");
@@ -245,7 +245,8 @@ public class frmPrincipal extends javax.swing.JFrame
             }
         });
 
-        jLabel5.setText("Anterior (F7)");
+        jLabel5.setText("Anterior (F8)");
+        jLabel5.setToolTipText("");
 
         btnProximo.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Icones/proximo 1.png"))); // NOI18N
         btnProximo.setToolTipText("Sair");
@@ -271,7 +272,7 @@ public class frmPrincipal extends javax.swing.JFrame
             }
         });
 
-        jLabel6.setText("Próximo (F8)");
+        jLabel6.setText("Próximo (F9)");
 
         btnExcluir.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Icones/excluir.png"))); // NOI18N
         btnExcluir.setToolTipText("Sair");
@@ -364,7 +365,7 @@ public class frmPrincipal extends javax.swing.JFrame
                     .addGroup(pnMenuLayout.createSequentialGroup()
                         .addGap(12, 12, 12)
                         .addComponent(btnPrimeiro))
-                    .addComponent(jLabel4))
+                    .addComponent(lblPrimeiro))
                 .addGap(34, 34, 34)
                 .addGroup(pnMenuLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(pnMenuLayout.createSequentialGroup()
@@ -394,7 +395,7 @@ public class frmPrincipal extends javax.swing.JFrame
                         .addComponent(btnUltimo, javax.swing.GroupLayout.PREFERRED_SIZE, 45, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(jLabel7))
-                    .addComponent(jLabel4)
+                    .addComponent(lblPrimeiro)
                     .addGroup(pnMenuLayout.createSequentialGroup()
                         .addGroup(pnMenuLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                             .addComponent(btnAnterior, javax.swing.GroupLayout.PREFERRED_SIZE, 45, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -1299,7 +1300,7 @@ public class frmPrincipal extends javax.swing.JFrame
 
     public void atalhoPrimeiro()
     {
-        rootPane.getInputMap(JComponent.WHEN_IN_FOCUSED_WINDOW).put(KeyStroke.getKeyStroke(KeyEvent.VK_F9, 0), "PRIMEIRO");
+        rootPane.getInputMap(JComponent.WHEN_IN_FOCUSED_WINDOW).put(KeyStroke.getKeyStroke(KeyEvent.VK_F7, 0), "PRIMEIRO");
         rootPane.getRootPane().getActionMap().put("PRIMEIRO", new AbstractAction("PRIMEIRO")
         {
             @Override
@@ -1313,7 +1314,7 @@ public class frmPrincipal extends javax.swing.JFrame
 
     public void atalhoAnterior()
     {
-        rootPane.getInputMap(JComponent.WHEN_IN_FOCUSED_WINDOW).put(KeyStroke.getKeyStroke(KeyEvent.VK_F7, 0), "ANTERIOR");
+        rootPane.getInputMap(JComponent.WHEN_IN_FOCUSED_WINDOW).put(KeyStroke.getKeyStroke(KeyEvent.VK_F8, 0), "ANTERIOR");
         rootPane.getRootPane().getActionMap().put("ANTERIOR", new AbstractAction("ANTERIOR")
         {
             @Override
@@ -1327,7 +1328,7 @@ public class frmPrincipal extends javax.swing.JFrame
 
     public void atalhoProximo()
     {
-        rootPane.getInputMap(JComponent.WHEN_IN_FOCUSED_WINDOW).put(KeyStroke.getKeyStroke(KeyEvent.VK_F8, 0), "PROXIMO");
+        rootPane.getInputMap(JComponent.WHEN_IN_FOCUSED_WINDOW).put(KeyStroke.getKeyStroke(KeyEvent.VK_F9, 0), "PROXIMO");
         rootPane.getRootPane().getActionMap().put("PROXIMO", new AbstractAction("PROXIMO")
         {
             @Override
@@ -1404,7 +1405,7 @@ public class frmPrincipal extends javax.swing.JFrame
     {
         JInternalFrame janelaFocada = jdkpPrincipal.getSelectedFrame();
 
-        if (frm.getTitle().equals(tituloJanela) && frm.isVisible())
+        if (frm.getTitle().equals(tituloJanela) && frm.equals(janelaFocada))
         {
             mtd.gerenciadorNavegacao(acao);
         }
@@ -1424,7 +1425,6 @@ public class frmPrincipal extends javax.swing.JFrame
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
-    private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel5;
     private javax.swing.JLabel jLabel6;
     private javax.swing.JLabel jLabel7;
@@ -1433,6 +1433,7 @@ public class frmPrincipal extends javax.swing.JFrame
     private javax.swing.JDesktopPane jdkpRodape;
     private javax.swing.JLabel lblAlterar;
     private javax.swing.JLabel lblPesquisar;
+    private javax.swing.JLabel lblPrimeiro;
     private javax.swing.JLabel lblSair;
     private javax.swing.JLabel lblUsuario;
     private javax.swing.JLabel lblUsuarioConectado;

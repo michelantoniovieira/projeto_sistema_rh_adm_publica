@@ -251,7 +251,7 @@
                               <EmptySpace min="-2" pref="12" max="-2" attributes="0"/>
                               <Component id="btnPrimeiro" min="-2" max="-2" attributes="0"/>
                           </Group>
-                          <Component id="jLabel4" alignment="0" min="-2" max="-2" attributes="0"/>
+                          <Component id="lblPrimeiro" alignment="0" min="-2" max="-2" attributes="0"/>
                       </Group>
                       <EmptySpace min="-2" pref="34" max="-2" attributes="0"/>
                       <Group type="103" groupAlignment="0" attributes="0">
@@ -291,7 +291,7 @@
                               <EmptySpace max="-2" attributes="0"/>
                               <Component id="jLabel7" min="-2" max="-2" attributes="0"/>
                           </Group>
-                          <Component id="jLabel4" alignment="1" min="-2" max="-2" attributes="0"/>
+                          <Component id="lblPrimeiro" alignment="1" min="-2" max="-2" attributes="0"/>
                           <Group type="102" alignment="1" attributes="0">
                               <Group type="103" groupAlignment="1" attributes="0">
                                   <Component id="btnAnterior" alignment="1" min="-2" pref="45" max="-2" attributes="0"/>
@@ -406,9 +406,9 @@
                 <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btnPrimeiroActionPerformed"/>
               </Events>
             </Component>
-            <Component class="javax.swing.JLabel" name="jLabel4">
+            <Component class="javax.swing.JLabel" name="lblPrimeiro">
               <Properties>
-                <Property name="text" type="java.lang.String" value="Primeiro (F9)"/>
+                <Property name="text" type="java.lang.String" value="Primeiro (F7)"/>
               </Properties>
             </Component>
             <Component class="javax.swing.JButton" name="btnAnterior">
@@ -427,7 +427,8 @@
             </Component>
             <Component class="javax.swing.JLabel" name="jLabel5">
               <Properties>
-                <Property name="text" type="java.lang.String" value="Anterior (F7)"/>
+                <Property name="text" type="java.lang.String" value="Anterior (F8)"/>
+                <Property name="toolTipText" type="java.lang.String" value=""/>
               </Properties>
             </Component>
             <Component class="javax.swing.JButton" name="btnProximo">
@@ -465,7 +466,7 @@
             </Component>
             <Component class="javax.swing.JLabel" name="jLabel6">
               <Properties>
-                <Property name="text" type="java.lang.String" value="Pr&#xf3;ximo (F8)"/>
+                <Property name="text" type="java.lang.String" value="Pr&#xf3;ximo (F9)"/>
               </Properties>
             </Component>
             <Component class="javax.swing.JButton" name="btnExcluir">
