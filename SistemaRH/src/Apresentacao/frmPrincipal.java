@@ -10,6 +10,7 @@ import Modelo.CadastrarConcursoControle;
 import Modelo.GerenciadorDeCoresDaInterface;
 import Modelo.GerenciadorDeJanelas;
 import Modelo.GerenciadorDeJanelas;
+import Modelo.MetodosComunsParaTodosOsJIF;
 import java.awt.Color;
 import java.awt.event.ActionEvent;
 import java.awt.event.KeyEvent;
@@ -760,7 +761,8 @@ public class frmPrincipal extends javax.swing.JFrame
         if (frmCCE.isVisible() && !frmCCE.getDescricaoCargoEmprego().equals("") && gravarAlteracaoFrmCCE == false)
         {
 
-            try {
+            try
+            {
                 //quando eu digitar nos campos da janela CadastrarConcursoCargoEmprego e clicar no icone salvar da janela principal entra aqui e manda gravar registro que significa que os dados dos campos serão passados para as variaveis que eu acesso por aqui para mandar para a variavel controle
                 CadastrarCargoEmpregoControle controle = new CadastrarCargoEmpregoControle(frmCCE);
                 controle.cadastrarCargoEmprego();
@@ -776,7 +778,8 @@ public class frmPrincipal extends javax.swing.JFrame
                     frmCCE.desativarCampos();
                 }
             }
-            catch (SQLException ex) {
+            catch (SQLException ex)
+            {
                 Logger.getLogger(frmPrincipal.class.getName()).log(Level.SEVERE, null, ex);
             }
         }
@@ -832,79 +835,19 @@ public class frmPrincipal extends javax.swing.JFrame
     }//GEN-LAST:event_btnSalvarActionPerformed
 
     private void btnPrimeiroActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnPrimeiroActionPerformed
-
-        JInternalFrame janelaFocada = jdkpPrincipal.getSelectedFrame();
-
-        switch (janelaFocada.getTitle())
-        {
-            case "Manutenção de Cargos e Empregos":
-                if (frmCCE.isVisible())
-                {
-                    frmCCE.gerenciadorNavegacao("primeiro");
-                }
-
-                break;
-
-            default:
-                throw new AssertionError();
-        }
+        gerenciadorNavegacao(frmCCE, frmCCE, "Manutenção de Cargos e Empregos", "primeiro");
     }//GEN-LAST:event_btnPrimeiroActionPerformed
 
     private void btnAnteriorActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAnteriorActionPerformed
-
-        JInternalFrame janelaFocada = jdkpPrincipal.getSelectedFrame();
-
-        switch (janelaFocada.getTitle())
-        {
-            case "Manutenção de Cargos e Empregos":
-                if (frmCCE.isVisible())
-                {
-                    frmCCE.gerenciadorNavegacao("anterior");
-                }
-
-                break;
-
-            default:
-                throw new AssertionError();
-        }
+        gerenciadorNavegacao(frmCCE, frmCCE, "Manutenção de Cargos e Empregos", "anterior");
     }//GEN-LAST:event_btnAnteriorActionPerformed
 
     private void btnProximoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnProximoActionPerformed
-
-        JInternalFrame janelaFocada = jdkpPrincipal.getSelectedFrame();
-
-        switch (janelaFocada.getTitle())
-        {
-            case "Manutenção de Cargos e Empregos":
-                if (frmCCE.isVisible())
-                {
-                    frmCCE.gerenciadorNavegacao("proximo");
-                }
-
-                break;
-
-            default:
-                throw new AssertionError();
-        }
-
+        gerenciadorNavegacao(frmCCE, frmCCE, "Manutenção de Cargos e Empregos", "proximo");
     }//GEN-LAST:event_btnProximoActionPerformed
 
     private void btnUltimoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnUltimoActionPerformed
-        JInternalFrame janelaFocada = jdkpPrincipal.getSelectedFrame();
-
-        switch (janelaFocada.getTitle())
-        {
-            case "Manutenção de Cargos e Empregos":
-                if (frmCCE.isVisible())
-                {
-                    frmCCE.gerenciadorNavegacao("ultimo");
-                }
-
-                break;
-
-            default:
-                throw new AssertionError();
-        }
+        gerenciadorNavegacao(frmCCE, frmCCE, "Manutenção de Cargos e Empregos", "ultimo");
     }//GEN-LAST:event_btnUltimoActionPerformed
     //prencher tela cadastro cargo emprego
     private void preencherTelaCadastroCargoEmprego(int index)
@@ -1455,9 +1398,17 @@ public class frmPrincipal extends javax.swing.JFrame
     {
         gerenciador.gerenciadorJanela(janela, jdkpPrincipal, menuJanela, fecharTodasJanelas, organizarJanelas);
         redesenhar();
-
     }
 
+    public void gerenciadorNavegacao(MetodosComunsParaTodosOsJIF mtd, JInternalFrame frm, String tituloJanela, String acao)
+    {
+        JInternalFrame janelaFocada = jdkpPrincipal.getSelectedFrame();
+
+        if (frm.getTitle().equals(tituloJanela) && frm.isVisible())
+        {
+            mtd.gerenciadorNavegacao(acao);
+        }
+    }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnAlterar;

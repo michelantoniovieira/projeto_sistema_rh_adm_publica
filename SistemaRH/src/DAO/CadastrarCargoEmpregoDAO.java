@@ -31,9 +31,34 @@ public class CadastrarCargoEmpregoDAO
         }
         catch (SQLException erro)
         {
-            JOptionPane.showMessageDialog(null, "Erro ao pesquisar Concurso" + erro);
+            JOptionPane.showMessageDialog(null, "Erro ao pesquisar Cargos e Empregos" + erro);
             return null;
         }
+    }
+    
+    public List<Integer> consultarCodigosDosCargosEmpregosNoBanco()
+    {
+        
+        List<Integer> codigosCargos = new ArrayList<>();
+        conn = new ConexaoDAO().conectaBD();
+        try
+        {
+            String sql = "SELECT * FROM cargo_emprego";
+            PreparedStatement pstm = conn.prepareStatement(sql);
+            ResultSet rs = pstm.executeQuery();
+
+            while (rs.next())
+            {
+                int codigoCargoEmprego = rs.getInt("codigo_cargo_emprego");
+                codigosCargos.add(codigoCargoEmprego);
+            }
+        }
+        catch (SQLException erro)
+        {
+            JOptionPane.showMessageDialog(null, "Erro ao pesquisar Codigo dos Cargos e Empregos" + erro);
+        }
+        
+        return codigosCargos;
     }
 
     public Integer pesquisarPrimeiroRegistro()

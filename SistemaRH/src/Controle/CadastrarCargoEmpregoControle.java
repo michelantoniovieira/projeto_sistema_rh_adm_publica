@@ -101,54 +101,36 @@ public class CadastrarCargoEmpregoControle extends CadastrarCargoEmpregoDTO
 
     public void navegarEntreRegistros(String acao)
     {
+        List<Integer> cargosEmpregos = cadastrarCargoEmpregoDAO.consultarCodigosDosCargosEmpregosNoBanco();
+        int primeiroItemDaLista = cargosEmpregos.get(0);
+        int ultimoItemDaLista = cargosEmpregos.size() - 1;
+
         switch (acao)
         {
             case "primeiro":
-                if (getCodigoCargoEmprego() > 0)
-                {
-                    pesquisarCargoEmprego(String.valueOf(cadastrarCargoEmpregoDAO.pesquisarPrimeiroRegistro()));
-
-                }
-                else if (getCodigoCargoEmprego() < cadastrarCargoEmpregoDAO.pesquisarUltimoRegistro())
-                {
-                    pesquisarCargoEmprego(String.valueOf(getCodigoCargoEmprego() + 1));
-                }
+                frm.indiceConsultaCargoEmprego = 0;
+                pesquisarCargoEmprego(String.valueOf(cargosEmpregos.get(0)));
                 break;
 
             case "anterior":
-                if (getCodigoCargoEmprego() == 0)
+                if (frm.indiceConsultaCargoEmprego >= primeiroItemDaLista)
                 {
-                    pesquisarCargoEmprego("1");
-
-                }
-                else if (getCodigoCargoEmprego() > 1)
-                {
-                    pesquisarCargoEmprego(String.valueOf(getCodigoCargoEmprego() - 1));
+                    frm.indiceConsultaCargoEmprego--;
+                    pesquisarCargoEmprego(String.valueOf(cargosEmpregos.get(frm.indiceConsultaCargoEmprego)));
                 }
                 break;
 
             case "proximo":
-                if (getCodigoCargoEmprego() == 0)
+                if (frm.indiceConsultaCargoEmprego < ultimoItemDaLista)
                 {
-                    pesquisarCargoEmprego("1");
-
-                }
-                else if (getCodigoCargoEmprego() < cadastrarCargoEmpregoDAO.pesquisarUltimoRegistro())
-                {
-                    pesquisarCargoEmprego(String.valueOf(getCodigoCargoEmprego() + 1));
+                    frm.indiceConsultaCargoEmprego++;
+                    pesquisarCargoEmprego(String.valueOf(cargosEmpregos.get(frm.indiceConsultaCargoEmprego)));
                 }
                 break;
 
             case "ultimo":
-                if (getCodigoCargoEmprego() > 0)
-                {
-                    pesquisarCargoEmprego(String.valueOf(cadastrarCargoEmpregoDAO.pesquisarUltimoRegistro()));
-
-                }
-                else if (getCodigoCargoEmprego() < cadastrarCargoEmpregoDAO.pesquisarUltimoRegistro())
-                {
-                    pesquisarCargoEmprego(String.valueOf(getCodigoCargoEmprego() - 1));
-                }
+                frm.indiceConsultaCargoEmprego = ultimoItemDaLista;
+                pesquisarCargoEmprego(String.valueOf(cargosEmpregos.get(ultimoItemDaLista)));
                 break;
 
             default:

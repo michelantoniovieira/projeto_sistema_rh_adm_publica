@@ -36,7 +36,7 @@ import javax.swing.table.DefaultTableModel;
  *
  * @author miche
  */
-public class frmCadastrarCargoEmprego extends javax.swing.JInternalFrame
+public class frmCadastrarCargoEmprego extends javax.swing.JInternalFrame implements Modelo.MetodosComunsParaTodosOsJIF
 {
 
     //cargo emprego
@@ -99,6 +99,8 @@ public class frmCadastrarCargoEmprego extends javax.swing.JInternalFrame
     private String referenciaSalarial = "";
     private ArrayList<PesquisarCargoEmpregoDTO> lista;
     private String itemSelecionadoNoComboBox = "";
+    
+    public static int indiceConsultaCargoEmprego = 0;
 
     public frmCadastrarCargoEmprego()
     {
@@ -1260,6 +1262,7 @@ public class frmCadastrarCargoEmprego extends javax.swing.JInternalFrame
     private void txtCodigoCargoEmpregoActionPerformed(java.awt.event.ActionEvent evt)//GEN-FIRST:event_txtCodigoCargoEmpregoActionPerformed
     {//GEN-HEADEREND:event_txtCodigoCargoEmpregoActionPerformed
         CadastrarCargoEmpregoControle controle = new CadastrarCargoEmpregoControle();
+        indiceConsultaCargoEmprego = Integer.parseInt(txtCodigoCargoEmprego.getText());
         controle.pesquisarCargoEmprego(txtCodigoCargoEmprego.getText());
         preencherCamposLista(controle.getObjPuxadoDaPesquisaDeCargoEmprego());
     }//GEN-LAST:event_txtCodigoCargoEmpregoActionPerformed
