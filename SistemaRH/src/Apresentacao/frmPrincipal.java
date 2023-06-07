@@ -13,7 +13,10 @@ import Modelo.GerenciadorDeJanelas;
 import Modelo.MetodosComunsParaTodosOsJIF;
 import java.awt.Color;
 import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+import java.awt.event.KeyAdapter;
 import java.awt.event.KeyEvent;
+import java.awt.event.KeyListener;
 import java.awt.event.WindowEvent;
 import java.awt.event.WindowListener;
 import java.sql.SQLException;
@@ -30,6 +33,7 @@ import javax.swing.JOptionPane;
 import javax.swing.JSeparator;
 import javax.swing.JTabbedPane;
 import javax.swing.KeyStroke;
+import javax.swing.Timer;
 
 /**
  *
@@ -64,14 +68,16 @@ public class frmPrincipal extends javax.swing.JFrame
     }
     private boolean desativarBotoesFrmCCE = true;
 
-    Integer index = 0;
-
     //cadastrar banca
     public boolean gravarAlteracaoFrmCB = false;
     //cadastrar cargo e emprego
     public boolean gravarAlteracaoFrmCCE = false;
     //cadastrar concurso
     public boolean gravarAlteracaoFrmCC = false;
+
+    Integer index = 0;
+    private Timer timer;
+    private boolean isRunning = false;
 
     public void setGravarAlteracaoFrmCC(boolean gravarAlteracaoFrmCC)
     {
@@ -1186,6 +1192,7 @@ public class frmPrincipal extends javax.swing.JFrame
         }
         else
         {
+            frmCCE.indiceConsultaCargoEmprego = 0;
             frmCCE.setLocation((jdkpPrincipal.getWidth() - frmCCE.getWidth()) / 2, (jdkpPrincipal.getHeight() - frmCCE.getHeight()) / 2);
             frmCCE.pack();
             jdkpPrincipal.add(frmCCE, 2);
@@ -1306,36 +1313,99 @@ public class frmPrincipal extends javax.swing.JFrame
             @Override
             public void actionPerformed(ActionEvent e)
             {
-                btnPrimeiro.doClick();//Aqui é onde ocorre o evento simulando o click do botão através da tecla ENTER
-                // Mas o indicado é você criar um método para realizar essa tarefa e chama-lo onde for necessário.
+                gerenciadorNavegacao(frmCCE, frmCCE, "Manutenção de Cargos e Empregos", "primeiro");
             }
         });
     }
 
     public void atalhoAnterior()
     {
-        rootPane.getInputMap(JComponent.WHEN_IN_FOCUSED_WINDOW).put(KeyStroke.getKeyStroke(KeyEvent.VK_F8, 0), "ANTERIOR");
-        rootPane.getRootPane().getActionMap().put("ANTERIOR", new AbstractAction("ANTERIOR")
+        rootPane.getInputMap(JComponent.WHEN_IN_FOCUSED_WINDOW).put(KeyStroke.getKeyStroke(KeyEvent.VK_F8, 0, false), "ANTERIOR_PRESSED");
+        rootPane.getInputMap(JComponent.WHEN_IN_FOCUSED_WINDOW).put(KeyStroke.getKeyStroke(KeyEvent.VK_F8, 0, true), "ANTERIOR_RELEASED");
+
+        rootPane.getRootPane().getActionMap().put("ANTERIOR_PRESSED", new AbstractAction("ANTERIOR_PRESSED")
+        {
+
+            @Override
+            public void actionPerformed(ActionEvent e)
+            {
+                if (!isRunning)
+                {
+                    isRunning = true;
+                    timer = new Timer(340, new ActionListener()
+                    {
+                        @Override
+                        public void actionPerformed(ActionEvent e)
+                        {
+                            gerenciadorNavegacao(frmCCE, frmCCE, "Manutenção de Cargos e Empregos", "anterior");
+                        }
+                    });
+                    timer.setInitialDelay(0);
+                    timer.start();
+                }
+            }
+        });
+
+        rootPane.getRootPane().getActionMap().put("ANTERIOR_RELEASED", new AbstractAction("ANTERIOR_RELEASED")
         {
             @Override
             public void actionPerformed(ActionEvent e)
             {
-                btnAnterior.doClick();//Aqui é onde ocorre o evento simulando o click do botão através da tecla ENTER
-                // Mas o indicado é você criar um método para realizar essa tarefa e chama-lo onde for necessário.
+                if (isRunning)
+                {
+                    isRunning = false;
+                    if (timer != null)
+                    {
+                        timer.stop();
+                        timer = null;
+                    }
+                }
             }
         });
     }
 
     public void atalhoProximo()
     {
-        rootPane.getInputMap(JComponent.WHEN_IN_FOCUSED_WINDOW).put(KeyStroke.getKeyStroke(KeyEvent.VK_F9, 0), "PROXIMO");
-        rootPane.getRootPane().getActionMap().put("PROXIMO", new AbstractAction("PROXIMO")
+        rootPane.getInputMap(JComponent.WHEN_IN_FOCUSED_WINDOW).put(KeyStroke.getKeyStroke(KeyEvent.VK_F9, 0, false), "PROXIMO_PRESSED");
+        rootPane.getInputMap(JComponent.WHEN_IN_FOCUSED_WINDOW).put(KeyStroke.getKeyStroke(KeyEvent.VK_F9, 0, true), "PROXIMO_RELEASED");
+
+        rootPane.getRootPane().getActionMap().put("PROXIMO_PRESSED", new AbstractAction("PROXIMO_PRESSED")
+        {
+
+            @Override
+            public void actionPerformed(ActionEvent e)
+            {
+                if (!isRunning)
+                {
+                    isRunning = true;
+                    timer = new Timer(340, new ActionListener()
+                    {
+                        @Override
+                        public void actionPerformed(ActionEvent e)
+                        {
+                            gerenciadorNavegacao(frmCCE, frmCCE, "Manutenção de Cargos e Empregos", "proximo");
+                        }
+                    });
+                    timer.setInitialDelay(0);
+                    timer.start();
+                }
+            }
+        });
+
+        rootPane.getRootPane().getActionMap().put("PROXIMO_RELEASED", new AbstractAction("PROXIMO_RELEASED")
         {
             @Override
             public void actionPerformed(ActionEvent e)
             {
-                btnProximo.doClick();//Aqui é onde ocorre o evento simulando o click do botão através da tecla ENTER
-                // Mas o indicado é você criar um método para realizar essa tarefa e chama-lo onde for necessário.
+                if (isRunning)
+                {
+                    isRunning = false;
+                    if (timer != null)
+                    {
+                        timer.stop();
+                        timer = null;
+                    }
+                }
             }
         });
     }
@@ -1348,8 +1418,7 @@ public class frmPrincipal extends javax.swing.JFrame
             @Override
             public void actionPerformed(ActionEvent e)
             {
-                btnUltimo.doClick();//Aqui é onde ocorre o evento simulando o click do botão através da tecla ENTER
-                // Mas o indicado é você criar um método para realizar essa tarefa e chama-lo onde for necessário.
+                gerenciadorNavegacao(frmCCE, frmCCE, "Manutenção de Cargos e Empregos", "ultimo");
             }
         });
     }
@@ -1410,6 +1479,7 @@ public class frmPrincipal extends javax.swing.JFrame
             mtd.gerenciadorNavegacao(acao);
         }
     }
+
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnAlterar;

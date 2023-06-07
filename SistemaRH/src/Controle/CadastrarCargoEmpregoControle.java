@@ -105,7 +105,6 @@ public class CadastrarCargoEmpregoControle extends CadastrarCargoEmpregoDTO
         int primeiroItemDaLista = cargosEmpregos.get(0);
         int ultimoItemDaLista = cargosEmpregos.size() - 1;
         String tudoCerto = "";
-
         switch (acao)
         {
             case "primeiro":
@@ -121,13 +120,18 @@ public class CadastrarCargoEmpregoControle extends CadastrarCargoEmpregoDTO
                     pesquisarCargoEmprego(String.valueOf(cargosEmpregos.get(frm.indiceConsultaCargoEmprego)));
                     tudoCerto = "ok";
                 }
+                else
+                {
+                    pesquisarCargoEmprego(String.valueOf(cargosEmpregos.get(0)));
+                    tudoCerto = "ok";
+                }
                 break;
 
             case "proximo":
-                if (frm.indiceConsultaCargoEmprego < ultimoItemDaLista)
+                if (frm.indiceConsultaCargoEmprego <= ultimoItemDaLista)
                 {
-                    frm.indiceConsultaCargoEmprego++;
                     pesquisarCargoEmprego(String.valueOf(cargosEmpregos.get(frm.indiceConsultaCargoEmprego)));
+                    frm.indiceConsultaCargoEmprego++;
                     tudoCerto = "ok";
                 }
                 break;
