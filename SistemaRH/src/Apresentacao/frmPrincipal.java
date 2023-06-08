@@ -154,6 +154,10 @@ public class frmPrincipal extends javax.swing.JFrame
         lblAlterar = new javax.swing.JLabel();
         btnPesquisar = new javax.swing.JButton();
         btnNovo = new javax.swing.JButton();
+        btnProximoRapido = new javax.swing.JButton();
+        btnAnteriorRapido1 = new javax.swing.JButton();
+        lblRapido = new javax.swing.JLabel();
+        lblRapido1 = new javax.swing.JLabel();
         jdkpPrincipal = new javax.swing.JDesktopPane();
         jdkpRodape = new javax.swing.JDesktopPane();
         pnRodape = new javax.swing.JPanel();
@@ -192,7 +196,8 @@ public class frmPrincipal extends javax.swing.JFrame
 
         btnSair.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Icones/sair.png"))); // NOI18N
         btnSair.setToolTipText("Sair");
-        btnSair.setBorder(null);
+        btnSair.setAlignmentY(0.1F);
+        btnSair.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED));
         btnSair.addActionListener(new java.awt.event.ActionListener()
         {
             public void actionPerformed(java.awt.event.ActionEvent evt)
@@ -208,15 +213,24 @@ public class frmPrincipal extends javax.swing.JFrame
             }
         });
 
-        lblSair.setText("Sair (backspace)");
+        lblSair.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        lblSair.setText("<html><div style='text-align: center;'>Sair<br>(backspace)</div></html>\n");
+        lblSair.setAlignmentY(0.1F);
 
-        jLabel1.setText("Novo (F5)");
+        jLabel1.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        jLabel1.setText("<html><div style='text-align: center'>Novo <br>(F5)</div></html>");
+        jLabel1.setAlignmentY(0.1F);
+        jLabel1.setMinimumSize(new java.awt.Dimension(31, 32));
+        jLabel1.setPreferredSize(new java.awt.Dimension(31, 32));
 
-        jLabel2.setText("Excluir (F11)");
+        jLabel2.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        jLabel2.setText("<html><div style='text-align: center'>Excluir <br> (F11) </div></html>");
+        jLabel2.setAlignmentY(0.1F);
 
         btnSalvar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Icones/salvar.png"))); // NOI18N
         btnSalvar.setToolTipText("Sair");
-        btnSalvar.setBorder(null);
+        btnSalvar.setAlignmentY(0.1F);
+        btnSalvar.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED));
         btnSalvar.addActionListener(new java.awt.event.ActionListener()
         {
             public void actionPerformed(java.awt.event.ActionEvent evt)
@@ -225,11 +239,14 @@ public class frmPrincipal extends javax.swing.JFrame
             }
         });
 
-        jLabel3.setText("Salvar (F2)");
+        jLabel3.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        jLabel3.setText("<html><div style='text-align: center'>Salvar <br>(F2) </div></html>");
+        jLabel3.setAlignmentY(0.1F);
 
         btnPrimeiro.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Icones/anterior 2.png"))); // NOI18N
         btnPrimeiro.setToolTipText("Sair");
-        btnPrimeiro.setBorder(null);
+        btnPrimeiro.setAlignmentY(0.1F);
+        btnPrimeiro.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED));
         btnPrimeiro.addActionListener(new java.awt.event.ActionListener()
         {
             public void actionPerformed(java.awt.event.ActionEvent evt)
@@ -238,11 +255,14 @@ public class frmPrincipal extends javax.swing.JFrame
             }
         });
 
-        lblPrimeiro.setText("Primeiro (F7)");
+        lblPrimeiro.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        lblPrimeiro.setText("<html><div style='text-align: center'>Primeiro <br>(F7)</div></html>");
+        lblPrimeiro.setAlignmentY(0.1F);
 
         btnAnterior.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Icones/anterior 1.png"))); // NOI18N
         btnAnterior.setToolTipText("Sair");
-        btnAnterior.setBorder(null);
+        btnAnterior.setAlignmentY(0.1F);
+        btnAnterior.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED));
         btnAnterior.addActionListener(new java.awt.event.ActionListener()
         {
             public void actionPerformed(java.awt.event.ActionEvent evt)
@@ -251,12 +271,15 @@ public class frmPrincipal extends javax.swing.JFrame
             }
         });
 
-        jLabel5.setText("Anterior (F8)");
+        jLabel5.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        jLabel5.setText("<html><div style='text-align: center'>Anterior <br> (F8) </div></html>");
         jLabel5.setToolTipText("");
+        jLabel5.setAlignmentY(0.1F);
 
         btnProximo.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Icones/proximo 1.png"))); // NOI18N
         btnProximo.setToolTipText("Sair");
-        btnProximo.setBorder(null);
+        btnProximo.setAlignmentY(0.1F);
+        btnProximo.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED));
         btnProximo.addActionListener(new java.awt.event.ActionListener()
         {
             public void actionPerformed(java.awt.event.ActionEvent evt)
@@ -265,11 +288,14 @@ public class frmPrincipal extends javax.swing.JFrame
             }
         });
 
-        jLabel7.setText("Último (F10)");
+        jLabel7.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        jLabel7.setText("<html><div style='text-align: center'>Último <br>(F10) </div></html>");
+        jLabel7.setAlignmentY(0.1F);
 
         btnUltimo.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Icones/proximo 2.png"))); // NOI18N
         btnUltimo.setToolTipText("Sair");
-        btnUltimo.setBorder(null);
+        btnUltimo.setAlignmentY(0.1F);
+        btnUltimo.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED));
         btnUltimo.addActionListener(new java.awt.event.ActionListener()
         {
             public void actionPerformed(java.awt.event.ActionEvent evt)
@@ -278,11 +304,14 @@ public class frmPrincipal extends javax.swing.JFrame
             }
         });
 
-        jLabel6.setText("Próximo (F9)");
+        jLabel6.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        jLabel6.setText("<html><div style='text-align: center'>Próximo <br>(F9)</div></html>");
+        jLabel6.setAlignmentY(0.1F);
 
         btnExcluir.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Icones/excluir.png"))); // NOI18N
         btnExcluir.setToolTipText("Sair");
-        btnExcluir.setBorder(null);
+        btnExcluir.setAlignmentY(0.1F);
+        btnExcluir.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED));
         btnExcluir.addActionListener(new java.awt.event.ActionListener()
         {
             public void actionPerformed(java.awt.event.ActionEvent evt)
@@ -293,7 +322,8 @@ public class frmPrincipal extends javax.swing.JFrame
 
         btnAlterar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Icones/alterar.png"))); // NOI18N
         btnAlterar.setToolTipText("Sair");
-        btnAlterar.setBorder(null);
+        btnAlterar.setAlignmentY(0.1F);
+        btnAlterar.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED));
         btnAlterar.addActionListener(new java.awt.event.ActionListener()
         {
             public void actionPerformed(java.awt.event.ActionEvent evt)
@@ -302,13 +332,19 @@ public class frmPrincipal extends javax.swing.JFrame
             }
         });
 
-        lblPesquisar.setText("Pesquisar (F6)");
+        lblPesquisar.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        lblPesquisar.setText("<html><div style='text-align: center'>Pesquisar <br>(F6)</div></html>");
+        lblPesquisar.setAlignmentY(0.1F);
+        lblPesquisar.setMinimumSize(new java.awt.Dimension(29, 32));
 
-        lblAlterar.setText("Alterar (F7)");
+        lblAlterar.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        lblAlterar.setText("<html><div style='text-align: center'>Alterar <br> (F7)</div></html>");
+        lblAlterar.setAlignmentY(0.1F);
 
         btnPesquisar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Icones/pesquisar.png"))); // NOI18N
         btnPesquisar.setToolTipText("Sair");
-        btnPesquisar.setBorder(null);
+        btnPesquisar.setAlignmentY(0.1F);
+        btnPesquisar.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED));
         btnPesquisar.addActionListener(new java.awt.event.ActionListener()
         {
             public void actionPerformed(java.awt.event.ActionEvent evt)
@@ -319,7 +355,8 @@ public class frmPrincipal extends javax.swing.JFrame
 
         btnNovo.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Icones/novo.png"))); // NOI18N
         btnNovo.setToolTipText("Sair");
-        btnNovo.setBorder(null);
+        btnNovo.setAlignmentY(0.1F);
+        btnNovo.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED));
         btnNovo.addActionListener(new java.awt.event.ActionListener()
         {
             public void actionPerformed(java.awt.event.ActionEvent evt)
@@ -328,112 +365,143 @@ public class frmPrincipal extends javax.swing.JFrame
             }
         });
 
+        btnProximoRapido.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Icones/proximo 3.png"))); // NOI18N
+        btnProximoRapido.setToolTipText("Sair");
+        btnProximoRapido.setAlignmentY(0.1F);
+        btnProximoRapido.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED));
+        btnProximoRapido.addActionListener(new java.awt.event.ActionListener()
+        {
+            public void actionPerformed(java.awt.event.ActionEvent evt)
+            {
+                btnProximoRapidoActionPerformed(evt);
+            }
+        });
+
+        btnAnteriorRapido1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Icones/anterior 3.png"))); // NOI18N
+        btnAnteriorRapido1.setToolTipText("Sair");
+        btnAnteriorRapido1.setAlignmentY(0.1F);
+        btnAnteriorRapido1.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED));
+        btnAnteriorRapido1.addActionListener(new java.awt.event.ActionListener()
+        {
+            public void actionPerformed(java.awt.event.ActionEvent evt)
+            {
+                btnAnteriorRapido1ActionPerformed(evt);
+            }
+        });
+
+        lblRapido.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        lblRapido.setText("<html><div style='text-align: center'>Anterior <br> Rápido </div></html>");
+        lblRapido.setToolTipText("");
+        lblRapido.setAlignmentY(0.1F);
+
+        lblRapido1.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        lblRapido1.setText("<html><div style='text-align: center'>Próximo<br> Rápido </div></html>");
+        lblRapido1.setToolTipText("");
+        lblRapido1.setAlignmentY(0.1F);
+
         javax.swing.GroupLayout pnMenuLayout = new javax.swing.GroupLayout(pnMenu);
         pnMenu.setLayout(pnMenuLayout);
         pnMenuLayout.setHorizontalGroup(
             pnMenuLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(pnMenuLayout.createSequentialGroup()
-                .addGap(59, 59, 59)
+                .addGap(17, 17, 17)
                 .addGroup(pnMenuLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(lblSair)
-                    .addGroup(pnMenuLayout.createSequentialGroup()
-                        .addGap(20, 20, 20)
-                        .addComponent(btnSair)))
-                .addGap(30, 30, 30)
-                .addGroup(pnMenuLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addComponent(jLabel1)
-                    .addComponent(btnNovo))
+                    .addComponent(lblSair, javax.swing.GroupLayout.PREFERRED_SIZE, 102, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(btnSair, javax.swing.GroupLayout.PREFERRED_SIZE, 102, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(pnMenuLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(pnMenuLayout.createSequentialGroup()
-                        .addGap(49, 49, 49)
-                        .addComponent(lblPesquisar)
-                        .addGap(36, 36, 36))
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, pnMenuLayout.createSequentialGroup()
-                        .addGap(62, 62, 62)
-                        .addComponent(btnPesquisar)
-                        .addGap(52, 52, 52)))
-                .addGroup(pnMenuLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addComponent(lblAlterar)
-                    .addComponent(btnAlterar))
-                .addGap(46, 46, 46)
+                    .addComponent(jLabel3, javax.swing.GroupLayout.PREFERRED_SIZE, 87, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(btnSalvar, javax.swing.GroupLayout.PREFERRED_SIZE, 87, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(pnMenuLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(pnMenuLayout.createSequentialGroup()
-                        .addComponent(jLabel2)
-                        .addGap(34, 34, 34))
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, pnMenuLayout.createSequentialGroup()
-                        .addComponent(btnExcluir)
-                        .addGap(42, 42, 42)))
+                    .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 91, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(btnNovo, javax.swing.GroupLayout.PREFERRED_SIZE, 91, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(pnMenuLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(btnSalvar)
-                    .addComponent(jLabel3))
-                .addGap(34, 34, 34)
+                    .addComponent(lblPesquisar, javax.swing.GroupLayout.PREFERRED_SIZE, 89, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(btnPesquisar, javax.swing.GroupLayout.PREFERRED_SIZE, 89, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(pnMenuLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(pnMenuLayout.createSequentialGroup()
-                        .addGap(12, 12, 12)
-                        .addComponent(btnPrimeiro))
-                    .addComponent(lblPrimeiro))
-                .addGap(34, 34, 34)
+                    .addComponent(lblAlterar, javax.swing.GroupLayout.PREFERRED_SIZE, 89, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(btnAlterar, javax.swing.GroupLayout.PREFERRED_SIZE, 89, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(pnMenuLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(pnMenuLayout.createSequentialGroup()
-                        .addGap(9, 9, 9)
-                        .addComponent(btnAnterior))
-                    .addComponent(jLabel5))
-                .addGap(35, 35, 35)
+                    .addComponent(btnExcluir, javax.swing.GroupLayout.PREFERRED_SIZE, 87, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 87, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(pnMenuLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(pnMenuLayout.createSequentialGroup()
-                        .addGap(9, 9, 9)
-                        .addComponent(btnProximo))
+                    .addComponent(lblPrimeiro, javax.swing.GroupLayout.PREFERRED_SIZE, 87, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(btnPrimeiro, javax.swing.GroupLayout.PREFERRED_SIZE, 87, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(pnMenuLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                    .addComponent(lblRapido, javax.swing.GroupLayout.DEFAULT_SIZE, 87, Short.MAX_VALUE)
+                    .addComponent(btnAnteriorRapido1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(pnMenuLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(btnAnterior, javax.swing.GroupLayout.PREFERRED_SIZE, 87, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jLabel5, javax.swing.GroupLayout.PREFERRED_SIZE, 87, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(pnMenuLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                    .addComponent(btnProximo, javax.swing.GroupLayout.DEFAULT_SIZE, 94, Short.MAX_VALUE)
                     .addComponent(jLabel6))
-                .addGap(34, 34, 34)
-                .addGroup(pnMenuLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(pnMenuLayout.createSequentialGroup()
-                        .addGap(10, 10, 10)
-                        .addComponent(btnUltimo))
-                    .addComponent(jLabel7))
-                .addContainerGap(70, Short.MAX_VALUE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(pnMenuLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                    .addComponent(lblRapido1)
+                    .addComponent(btnProximoRapido, javax.swing.GroupLayout.DEFAULT_SIZE, 87, Short.MAX_VALUE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(pnMenuLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                    .addComponent(jLabel7, javax.swing.GroupLayout.DEFAULT_SIZE, 101, Short.MAX_VALUE)
+                    .addComponent(btnUltimo, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addContainerGap(94, Short.MAX_VALUE))
         );
+
+        pnMenuLayout.linkSize(javax.swing.SwingConstants.HORIZONTAL, new java.awt.Component[] {btnUltimo, jLabel7});
+
+        pnMenuLayout.linkSize(javax.swing.SwingConstants.HORIZONTAL, new java.awt.Component[] {btnPrimeiro, lblPrimeiro, lblRapido});
+
         pnMenuLayout.setVerticalGroup(
             pnMenuLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(pnMenuLayout.createSequentialGroup()
-                .addGroup(pnMenuLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addComponent(jLabel6)
+                .addContainerGap()
+                .addGroup(pnMenuLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(pnMenuLayout.createSequentialGroup()
-                        .addComponent(btnUltimo, javax.swing.GroupLayout.PREFERRED_SIZE, 45, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(jLabel7))
-                    .addComponent(lblPrimeiro)
-                    .addGroup(pnMenuLayout.createSequentialGroup()
-                        .addGroup(pnMenuLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                            .addComponent(btnAnterior, javax.swing.GroupLayout.PREFERRED_SIZE, 45, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(btnPrimeiro, javax.swing.GroupLayout.PREFERRED_SIZE, 45, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(btnSalvar, javax.swing.GroupLayout.PREFERRED_SIZE, 45, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(jLabel5))
-                    .addGroup(pnMenuLayout.createSequentialGroup()
-                        .addComponent(btnProximo, javax.swing.GroupLayout.PREFERRED_SIZE, 45, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(22, 22, 22))
-                    .addGroup(pnMenuLayout.createSequentialGroup()
-                        .addComponent(btnAlterar)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(lblAlterar))
-                    .addGroup(pnMenuLayout.createSequentialGroup()
-                        .addComponent(btnExcluir, javax.swing.GroupLayout.PREFERRED_SIZE, 45, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addGroup(pnMenuLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(jLabel2)
-                            .addComponent(jLabel3)))
-                    .addGroup(pnMenuLayout.createSequentialGroup()
-                        .addGroup(pnMenuLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                            .addComponent(btnPesquisar)
-                            .addComponent(btnSair)
-                            .addComponent(btnNovo))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addGroup(pnMenuLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, pnMenuLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                                .addComponent(lblSair)
-                                .addComponent(jLabel1))
-                            .addComponent(lblPesquisar, javax.swing.GroupLayout.Alignment.TRAILING))))
-                .addGap(0, 5, Short.MAX_VALUE))
+                            .addGroup(pnMenuLayout.createSequentialGroup()
+                                .addGroup(pnMenuLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(btnPesquisar, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                    .addComponent(btnSair, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                    .addComponent(btnNovo, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                    .addComponent(btnAlterar, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                    .addComponent(btnSalvar, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                    .addComponent(btnPrimeiro, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                    .addComponent(btnExcluir, javax.swing.GroupLayout.DEFAULT_SIZE, 83, Short.MAX_VALUE))
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED))
+                            .addGroup(pnMenuLayout.createSequentialGroup()
+                                .addComponent(btnAnteriorRapido1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED))
+                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, pnMenuLayout.createSequentialGroup()
+                                .addGroup(pnMenuLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                                    .addComponent(btnProximoRapido, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                    .addComponent(btnProximo, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                    .addComponent(btnUltimo, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                                .addGap(6, 6, 6)))
+                        .addGroup(pnMenuLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(jLabel3)
+                            .addComponent(lblSair)
+                            .addComponent(jLabel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(lblPesquisar, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(lblAlterar)
+                            .addComponent(jLabel2)
+                            .addComponent(lblPrimeiro)
+                            .addComponent(lblRapido)
+                            .addComponent(jLabel5)
+                            .addComponent(jLabel6)
+                            .addComponent(lblRapido1)
+                            .addComponent(jLabel7))
+                        .addGap(14, 14, 14))
+                    .addGroup(pnMenuLayout.createSequentialGroup()
+                        .addComponent(btnAnterior, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addGap(52, 52, 52))))
         );
 
         btnSalvar.getAccessibleContext().setAccessibleDescription("Salvar");
@@ -449,9 +517,8 @@ public class frmPrincipal extends javax.swing.JFrame
         jdkpCabecalhoLayout.setVerticalGroup(
             jdkpCabecalhoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jdkpCabecalhoLayout.createSequentialGroup()
-                .addContainerGap()
                 .addComponent(pnMenu, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(15, Short.MAX_VALUE))
+                .addGap(0, 0, Short.MAX_VALUE))
         );
 
         jdkpPrincipal.setBorder(javax.swing.BorderFactory.createEtchedBorder());
@@ -467,11 +534,11 @@ public class frmPrincipal extends javax.swing.JFrame
         jdkpPrincipal.setLayout(jdkpPrincipalLayout);
         jdkpPrincipalLayout.setHorizontalGroup(
             jdkpPrincipalLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 1114, Short.MAX_VALUE)
+            .addGap(0, 0, Short.MAX_VALUE)
         );
         jdkpPrincipalLayout.setVerticalGroup(
             jdkpPrincipalLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 526, Short.MAX_VALUE)
+            .addGap(0, 638, Short.MAX_VALUE)
         );
 
         jdkpRodape.setBorder(javax.swing.BorderFactory.createEtchedBorder());
@@ -500,7 +567,7 @@ public class frmPrincipal extends javax.swing.JFrame
                 .addGroup(pnRodapeLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(lblUsuario)
                     .addComponent(lblUsuarioConectado))
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addContainerGap(12, Short.MAX_VALUE))
         );
 
         jdkpRodape.setLayer(pnRodape, javax.swing.JLayeredPane.DEFAULT_LAYER);
@@ -509,11 +576,11 @@ public class frmPrincipal extends javax.swing.JFrame
         jdkpRodape.setLayout(jdkpRodapeLayout);
         jdkpRodapeLayout.setHorizontalGroup(
             jdkpRodapeLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(pnRodape, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+            .addComponent(pnRodape, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
         );
         jdkpRodapeLayout.setVerticalGroup(
             jdkpRodapeLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(pnRodape, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+            .addComponent(pnRodape, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
         );
 
         mnAdministracao.setText("Administração");
@@ -626,21 +693,17 @@ public class frmPrincipal extends javax.swing.JFrame
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addComponent(jdkpCabecalho)
+            .addComponent(jdkpPrincipal)
             .addComponent(jdkpRodape)
-            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                .addComponent(jdkpPrincipal))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addComponent(jdkpCabecalho, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 784, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jdkpPrincipal, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jdkpRodape, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                .addGroup(layout.createSequentialGroup()
-                    .addGap(102, 102, 102)
-                    .addComponent(jdkpPrincipal, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addContainerGap(288, Short.MAX_VALUE)))
         );
 
         pack();
@@ -844,10 +907,6 @@ public class frmPrincipal extends javax.swing.JFrame
     private void btnPrimeiroActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnPrimeiroActionPerformed
         gerenciadorNavegacao(frmCCE, frmCCE, "Manutenção de Cargos e Empregos", "primeiro");
     }//GEN-LAST:event_btnPrimeiroActionPerformed
-
-    private void btnAnteriorActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAnteriorActionPerformed
-        gerenciadorNavegacao(frmCCE, frmCCE, "Manutenção de Cargos e Empregos", "anterior");
-    }//GEN-LAST:event_btnAnteriorActionPerformed
 
     private void btnProximoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnProximoActionPerformed
         gerenciadorNavegacao(frmCCE, frmCCE, "Manutenção de Cargos e Empregos", "proximo");
@@ -1208,6 +1267,21 @@ public class frmPrincipal extends javax.swing.JFrame
         // TODO add your handling code here:
     }//GEN-LAST:event_jdkpPrincipalPropertyChange
 
+    private void btnAnteriorActionPerformed(java.awt.event.ActionEvent evt)//GEN-FIRST:event_btnAnteriorActionPerformed
+    {//GEN-HEADEREND:event_btnAnteriorActionPerformed
+        gerenciadorNavegacao(frmCCE, frmCCE, "Manutenção de Cargos e Empregos", "anterior");
+    }//GEN-LAST:event_btnAnteriorActionPerformed
+
+    private void btnProximoRapidoActionPerformed(java.awt.event.ActionEvent evt)//GEN-FIRST:event_btnProximoRapidoActionPerformed
+    {//GEN-HEADEREND:event_btnProximoRapidoActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_btnProximoRapidoActionPerformed
+
+    private void btnAnteriorRapido1ActionPerformed(java.awt.event.ActionEvent evt)//GEN-FIRST:event_btnAnteriorRapido1ActionPerformed
+    {//GEN-HEADEREND:event_btnAnteriorRapido1ActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_btnAnteriorRapido1ActionPerformed
+
     public static void main(String args[])
     {
 
@@ -1484,11 +1558,13 @@ public class frmPrincipal extends javax.swing.JFrame
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnAlterar;
     private javax.swing.JButton btnAnterior;
+    private javax.swing.JButton btnAnteriorRapido1;
     private javax.swing.JButton btnExcluir;
     private javax.swing.JButton btnNovo;
     private javax.swing.JButton btnPesquisar;
     private javax.swing.JButton btnPrimeiro;
     private javax.swing.JButton btnProximo;
+    private javax.swing.JButton btnProximoRapido;
     private javax.swing.JButton btnSair;
     private javax.swing.JButton btnSalvar;
     private javax.swing.JButton btnUltimo;
@@ -1504,6 +1580,8 @@ public class frmPrincipal extends javax.swing.JFrame
     private javax.swing.JLabel lblAlterar;
     private javax.swing.JLabel lblPesquisar;
     private javax.swing.JLabel lblPrimeiro;
+    private javax.swing.JLabel lblRapido;
+    private javax.swing.JLabel lblRapido1;
     private javax.swing.JLabel lblSair;
     private javax.swing.JLabel lblUsuario;
     private javax.swing.JLabel lblUsuarioConectado;

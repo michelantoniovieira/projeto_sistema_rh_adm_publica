@@ -139,26 +139,19 @@
   <Layout>
     <DimensionLayout dim="0">
       <Group type="103" groupAlignment="0" attributes="0">
-          <Component id="jdkpCabecalho" max="32767" attributes="0"/>
+          <Component id="jdkpCabecalho" alignment="0" max="32767" attributes="0"/>
+          <Component id="jdkpPrincipal" max="32767" attributes="0"/>
           <Component id="jdkpRodape" alignment="0" max="32767" attributes="0"/>
-          <Group type="103" rootIndex="1" groupAlignment="0" attributes="0">
-              <Component id="jdkpPrincipal" alignment="0" max="32767" attributes="0"/>
-          </Group>
       </Group>
     </DimensionLayout>
     <DimensionLayout dim="1">
       <Group type="103" groupAlignment="0" attributes="0">
-          <Group type="102" alignment="0" attributes="0">
+          <Group type="102" attributes="0">
               <Component id="jdkpCabecalho" min="-2" max="-2" attributes="0"/>
-              <EmptySpace pref="784" max="32767" attributes="0"/>
+              <EmptySpace max="-2" attributes="0"/>
+              <Component id="jdkpPrincipal" min="-2" max="-2" attributes="0"/>
+              <EmptySpace max="-2" attributes="0"/>
               <Component id="jdkpRodape" min="-2" max="-2" attributes="0"/>
-          </Group>
-          <Group type="103" rootIndex="1" groupAlignment="0" attributes="0">
-              <Group type="102" alignment="0" attributes="0">
-                  <EmptySpace min="-2" pref="102" max="-2" attributes="0"/>
-                  <Component id="jdkpPrincipal" min="-2" max="-2" attributes="0"/>
-                  <EmptySpace pref="288" max="32767" attributes="0"/>
-              </Group>
           </Group>
       </Group>
     </DimensionLayout>
@@ -182,9 +175,8 @@
         <DimensionLayout dim="1">
           <Group type="103" groupAlignment="0" attributes="0">
               <Group type="102" alignment="0" attributes="0">
-                  <EmptySpace max="-2" attributes="0"/>
                   <Component id="pnMenu" min="-2" max="-2" attributes="0"/>
-                  <EmptySpace pref="15" max="32767" attributes="0"/>
+                  <EmptySpace min="0" pref="0" max="32767" attributes="0"/>
               </Group>
           </Group>
         </DimensionLayout>
@@ -200,141 +192,124 @@
           <Layout>
             <DimensionLayout dim="0">
               <Group type="103" groupAlignment="0" attributes="0">
-                  <Group type="102" alignment="0" attributes="0">
-                      <EmptySpace min="-2" pref="59" max="-2" attributes="0"/>
+                  <Group type="102" attributes="0">
+                      <EmptySpace min="-2" pref="17" max="-2" attributes="0"/>
                       <Group type="103" groupAlignment="0" attributes="0">
-                          <Component id="lblSair" alignment="0" min="-2" max="-2" attributes="0"/>
-                          <Group type="102" alignment="0" attributes="0">
-                              <EmptySpace min="-2" pref="20" max="-2" attributes="0"/>
-                              <Component id="btnSair" min="-2" max="-2" attributes="0"/>
-                          </Group>
+                          <Component id="lblSair" min="-2" pref="102" max="-2" attributes="0"/>
+                          <Component id="btnSair" min="-2" pref="102" max="-2" attributes="0"/>
                       </Group>
-                      <EmptySpace min="-2" pref="30" max="-2" attributes="0"/>
-                      <Group type="103" groupAlignment="1" attributes="0">
-                          <Component id="jLabel1" min="-2" max="-2" attributes="0"/>
-                          <Component id="btnNovo" min="-2" max="-2" attributes="0"/>
-                      </Group>
+                      <EmptySpace min="-2" max="-2" attributes="0"/>
                       <Group type="103" groupAlignment="0" attributes="0">
-                          <Group type="102" alignment="0" attributes="0">
-                              <EmptySpace min="-2" pref="49" max="-2" attributes="0"/>
-                              <Component id="lblPesquisar" min="-2" max="-2" attributes="0"/>
-                              <EmptySpace min="-2" pref="36" max="-2" attributes="0"/>
-                          </Group>
-                          <Group type="102" alignment="1" attributes="0">
-                              <EmptySpace min="-2" pref="62" max="-2" attributes="0"/>
-                              <Component id="btnPesquisar" min="-2" max="-2" attributes="0"/>
-                              <EmptySpace min="-2" pref="52" max="-2" attributes="0"/>
-                          </Group>
+                          <Component id="jLabel3" min="-2" pref="87" max="-2" attributes="0"/>
+                          <Component id="btnSalvar" min="-2" pref="87" max="-2" attributes="0"/>
                       </Group>
-                      <Group type="103" groupAlignment="1" attributes="0">
-                          <Component id="lblAlterar" min="-2" max="-2" attributes="0"/>
-                          <Component id="btnAlterar" min="-2" max="-2" attributes="0"/>
-                      </Group>
-                      <EmptySpace min="-2" pref="46" max="-2" attributes="0"/>
+                      <EmptySpace min="-2" max="-2" attributes="0"/>
                       <Group type="103" groupAlignment="0" attributes="0">
-                          <Group type="102" alignment="0" attributes="0">
-                              <Component id="jLabel2" min="-2" max="-2" attributes="0"/>
-                              <EmptySpace min="-2" pref="34" max="-2" attributes="0"/>
-                          </Group>
-                          <Group type="102" alignment="1" attributes="0">
-                              <Component id="btnExcluir" min="-2" max="-2" attributes="0"/>
-                              <EmptySpace min="-2" pref="42" max="-2" attributes="0"/>
-                          </Group>
+                          <Component id="jLabel1" min="-2" pref="91" max="-2" attributes="0"/>
+                          <Component id="btnNovo" min="-2" pref="91" max="-2" attributes="0"/>
                       </Group>
+                      <EmptySpace min="-2" max="-2" attributes="0"/>
                       <Group type="103" groupAlignment="0" attributes="0">
-                          <Component id="btnSalvar" min="-2" max="-2" attributes="0"/>
-                          <Component id="jLabel3" min="-2" max="-2" attributes="0"/>
+                          <Component id="lblPesquisar" min="-2" pref="89" max="-2" attributes="0"/>
+                          <Component id="btnPesquisar" min="-2" pref="89" max="-2" attributes="0"/>
                       </Group>
-                      <EmptySpace min="-2" pref="34" max="-2" attributes="0"/>
+                      <EmptySpace min="-2" max="-2" attributes="0"/>
                       <Group type="103" groupAlignment="0" attributes="0">
-                          <Group type="102" alignment="0" attributes="0">
-                              <EmptySpace min="-2" pref="12" max="-2" attributes="0"/>
-                              <Component id="btnPrimeiro" min="-2" max="-2" attributes="0"/>
-                          </Group>
-                          <Component id="lblPrimeiro" alignment="0" min="-2" max="-2" attributes="0"/>
+                          <Component id="lblAlterar" min="-2" pref="89" max="-2" attributes="0"/>
+                          <Component id="btnAlterar" min="-2" pref="89" max="-2" attributes="0"/>
                       </Group>
-                      <EmptySpace min="-2" pref="34" max="-2" attributes="0"/>
+                      <EmptySpace min="-2" max="-2" attributes="0"/>
                       <Group type="103" groupAlignment="0" attributes="0">
-                          <Group type="102" alignment="0" attributes="0">
-                              <EmptySpace min="-2" pref="9" max="-2" attributes="0"/>
-                              <Component id="btnAnterior" min="-2" max="-2" attributes="0"/>
-                          </Group>
-                          <Component id="jLabel5" alignment="0" min="-2" max="-2" attributes="0"/>
+                          <Component id="btnExcluir" min="-2" pref="87" max="-2" attributes="0"/>
+                          <Component id="jLabel2" min="-2" pref="87" max="-2" attributes="0"/>
                       </Group>
-                      <EmptySpace min="-2" pref="35" max="-2" attributes="0"/>
+                      <EmptySpace min="-2" max="-2" attributes="0"/>
                       <Group type="103" groupAlignment="0" attributes="0">
-                          <Group type="102" alignment="0" attributes="0">
-                              <EmptySpace min="-2" pref="9" max="-2" attributes="0"/>
-                              <Component id="btnProximo" min="-2" max="-2" attributes="0"/>
-                          </Group>
-                          <Component id="jLabel6" alignment="0" min="-2" max="-2" attributes="0"/>
+                          <Component id="lblPrimeiro" linkSize="11" min="-2" pref="87" max="-2" attributes="0"/>
+                          <Component id="btnPrimeiro" linkSize="11" min="-2" pref="87" max="-2" attributes="0"/>
                       </Group>
-                      <EmptySpace min="-2" pref="34" max="-2" attributes="0"/>
+                      <EmptySpace max="-2" attributes="0"/>
+                      <Group type="103" groupAlignment="0" max="-2" attributes="0">
+                          <Component id="lblRapido" linkSize="11" pref="87" max="32767" attributes="0"/>
+                          <Component id="btnAnteriorRapido1" max="32767" attributes="0"/>
+                      </Group>
+                      <EmptySpace max="-2" attributes="0"/>
                       <Group type="103" groupAlignment="0" attributes="0">
-                          <Group type="102" alignment="0" attributes="0">
-                              <EmptySpace min="-2" pref="10" max="-2" attributes="0"/>
-                              <Component id="btnUltimo" min="-2" max="-2" attributes="0"/>
-                          </Group>
-                          <Component id="jLabel7" alignment="0" min="-2" max="-2" attributes="0"/>
+                          <Component id="btnAnterior" min="-2" pref="87" max="-2" attributes="0"/>
+                          <Component id="jLabel5" min="-2" pref="87" max="-2" attributes="0"/>
                       </Group>
-                      <EmptySpace pref="70" max="32767" attributes="0"/>
+                      <EmptySpace max="-2" attributes="0"/>
+                      <Group type="103" groupAlignment="0" max="-2" attributes="0">
+                          <Component id="btnProximo" pref="94" max="32767" attributes="0"/>
+                          <Component id="jLabel6" max="32767" attributes="0"/>
+                      </Group>
+                      <EmptySpace max="-2" attributes="0"/>
+                      <Group type="103" groupAlignment="0" max="-2" attributes="0">
+                          <Component id="lblRapido1" max="32767" attributes="0"/>
+                          <Component id="btnProximoRapido" pref="87" max="32767" attributes="0"/>
+                      </Group>
+                      <EmptySpace max="-2" attributes="0"/>
+                      <Group type="103" groupAlignment="0" max="-2" attributes="0">
+                          <Component id="jLabel7" linkSize="1" pref="101" max="32767" attributes="0"/>
+                          <Component id="btnUltimo" linkSize="1" max="32767" attributes="0"/>
+                      </Group>
+                      <EmptySpace pref="94" max="32767" attributes="0"/>
                   </Group>
               </Group>
             </DimensionLayout>
             <DimensionLayout dim="1">
               <Group type="103" groupAlignment="0" attributes="0">
                   <Group type="102" alignment="0" attributes="0">
-                      <Group type="103" groupAlignment="1" attributes="0">
-                          <Component id="jLabel6" alignment="1" min="-2" max="-2" attributes="0"/>
-                          <Group type="102" alignment="1" attributes="0">
-                              <Component id="btnUltimo" min="-2" pref="45" max="-2" attributes="0"/>
-                              <EmptySpace max="-2" attributes="0"/>
-                              <Component id="jLabel7" min="-2" max="-2" attributes="0"/>
-                          </Group>
-                          <Component id="lblPrimeiro" alignment="1" min="-2" max="-2" attributes="0"/>
-                          <Group type="102" alignment="1" attributes="0">
-                              <Group type="103" groupAlignment="1" attributes="0">
-                                  <Component id="btnAnterior" alignment="1" min="-2" pref="45" max="-2" attributes="0"/>
-                                  <Component id="btnPrimeiro" alignment="1" min="-2" pref="45" max="-2" attributes="0"/>
-                                  <Component id="btnSalvar" alignment="1" min="-2" pref="45" max="-2" attributes="0"/>
-                              </Group>
-                              <EmptySpace max="-2" attributes="0"/>
-                              <Component id="jLabel5" min="-2" max="-2" attributes="0"/>
-                          </Group>
-                          <Group type="102" alignment="1" attributes="0">
-                              <Component id="btnProximo" min="-2" pref="45" max="-2" attributes="0"/>
-                              <EmptySpace min="22" pref="22" max="-2" attributes="0"/>
-                          </Group>
-                          <Group type="102" alignment="1" attributes="0">
-                              <Component id="btnAlterar" min="-2" max="-2" attributes="0"/>
-                              <EmptySpace max="-2" attributes="0"/>
-                              <Component id="lblAlterar" min="-2" max="-2" attributes="0"/>
-                          </Group>
-                          <Group type="102" alignment="1" attributes="0">
-                              <Component id="btnExcluir" min="-2" pref="45" max="-2" attributes="0"/>
-                              <EmptySpace max="-2" attributes="0"/>
-                              <Group type="103" groupAlignment="3" attributes="0">
-                                  <Component id="jLabel2" alignment="3" min="-2" max="-2" attributes="0"/>
-                                  <Component id="jLabel3" alignment="3" min="-2" max="-2" attributes="0"/>
-                              </Group>
-                          </Group>
-                          <Group type="102" alignment="1" attributes="0">
-                              <Group type="103" groupAlignment="1" attributes="0">
-                                  <Component id="btnPesquisar" min="-2" max="-2" attributes="0"/>
-                                  <Component id="btnSair" min="-2" max="-2" attributes="0"/>
-                                  <Component id="btnNovo" min="-2" max="-2" attributes="0"/>
-                              </Group>
-                              <EmptySpace max="-2" attributes="0"/>
+                      <EmptySpace min="-2" max="-2" attributes="0"/>
+                      <Group type="103" groupAlignment="0" attributes="0">
+                          <Group type="102" attributes="0">
                               <Group type="103" groupAlignment="0" attributes="0">
-                                  <Group type="103" alignment="1" groupAlignment="3" attributes="0">
-                                      <Component id="lblSair" alignment="3" min="-2" max="-2" attributes="0"/>
-                                      <Component id="jLabel1" alignment="3" min="-2" max="-2" attributes="0"/>
+                                  <Group type="102" attributes="0">
+                                      <Group type="103" groupAlignment="0" attributes="0">
+                                          <Component id="btnPesquisar" alignment="1" max="32767" attributes="0"/>
+                                          <Component id="btnSair" alignment="0" max="32767" attributes="0"/>
+                                          <Component id="btnNovo" alignment="0" max="32767" attributes="0"/>
+                                          <Component id="btnAlterar" alignment="0" max="32767" attributes="0"/>
+                                          <Component id="btnSalvar" alignment="0" max="32767" attributes="0"/>
+                                          <Component id="btnPrimeiro" alignment="0" max="32767" attributes="0"/>
+                                          <Component id="btnExcluir" alignment="0" pref="83" max="32767" attributes="0"/>
+                                      </Group>
+                                      <EmptySpace min="-2" max="-2" attributes="0"/>
                                   </Group>
-                                  <Component id="lblPesquisar" alignment="1" min="-2" max="-2" attributes="0"/>
+                                  <Group type="102" attributes="0">
+                                      <Component id="btnAnteriorRapido1" max="32767" attributes="0"/>
+                                      <EmptySpace max="-2" attributes="0"/>
+                                  </Group>
+                                  <Group type="102" alignment="1" attributes="0">
+                                      <Group type="103" groupAlignment="1" attributes="0">
+                                          <Component id="btnProximoRapido" alignment="0" max="32767" attributes="0"/>
+                                          <Component id="btnProximo" max="32767" attributes="0"/>
+                                          <Component id="btnUltimo" alignment="1" max="32767" attributes="0"/>
+                                      </Group>
+                                      <EmptySpace min="-2" pref="6" max="-2" attributes="0"/>
+                                  </Group>
                               </Group>
+                              <Group type="103" groupAlignment="3" attributes="0">
+                                  <Component id="jLabel3" alignment="3" max="32767" attributes="0"/>
+                                  <Component id="lblSair" alignment="3" max="32767" attributes="0"/>
+                                  <Component id="jLabel1" alignment="1" max="32767" attributes="0"/>
+                                  <Component id="lblPesquisar" alignment="3" max="32767" attributes="0"/>
+                                  <Component id="lblAlterar" alignment="3" max="32767" attributes="0"/>
+                                  <Component id="jLabel2" alignment="3" max="32767" attributes="0"/>
+                                  <Component id="lblPrimeiro" alignment="3" max="32767" attributes="0"/>
+                                  <Component id="lblRapido" alignment="3" max="32767" attributes="0"/>
+                                  <Component id="jLabel5" alignment="3" max="32767" attributes="0"/>
+                                  <Component id="jLabel6" alignment="3" max="32767" attributes="0"/>
+                                  <Component id="lblRapido1" alignment="3" max="32767" attributes="0"/>
+                                  <Component id="jLabel7" alignment="3" max="32767" attributes="0"/>
+                              </Group>
+                              <EmptySpace min="-2" pref="14" max="-2" attributes="0"/>
+                          </Group>
+                          <Group type="102" attributes="0">
+                              <Component id="btnAnterior" max="32767" attributes="0"/>
+                              <EmptySpace min="-2" pref="52" max="-2" attributes="0"/>
                           </Group>
                       </Group>
-                      <EmptySpace min="0" pref="5" max="32767" attributes="0"/>
                   </Group>
               </Group>
             </DimensionLayout>
@@ -346,8 +321,11 @@
                   <Image iconType="3" name="/Icones/sair.png"/>
                 </Property>
                 <Property name="toolTipText" type="java.lang.String" value="Sair"/>
+                <Property name="alignmentY" type="float" value="0.1"/>
                 <Property name="border" type="javax.swing.border.Border" editor="org.netbeans.modules.form.editors2.BorderEditor">
-                  <Border info="null"/>
+                  <Border info="org.netbeans.modules.form.compat2.border.BevelBorderInfo">
+                    <BevelBorder/>
+                  </Border>
                 </Property>
               </Properties>
               <Events>
@@ -357,17 +335,29 @@
             </Component>
             <Component class="javax.swing.JLabel" name="lblSair">
               <Properties>
-                <Property name="text" type="java.lang.String" value="Sair (backspace)"/>
+                <Property name="horizontalAlignment" type="int" value="0"/>
+                <Property name="text" type="java.lang.String" value="&lt;html&gt;&lt;div style=&apos;text-align: center;&apos;&gt;Sair&lt;br&gt;(backspace)&lt;/div&gt;&lt;/html&gt;&#xa;"/>
+                <Property name="alignmentY" type="float" value="0.1"/>
               </Properties>
             </Component>
             <Component class="javax.swing.JLabel" name="jLabel1">
               <Properties>
-                <Property name="text" type="java.lang.String" value="Novo (F5)"/>
+                <Property name="horizontalAlignment" type="int" value="0"/>
+                <Property name="text" type="java.lang.String" value="&lt;html&gt;&lt;div style=&apos;text-align: center&apos;&gt;Novo &lt;br&gt;(F5)&lt;/div&gt;&lt;/html&gt;"/>
+                <Property name="alignmentY" type="float" value="0.1"/>
+                <Property name="minimumSize" type="java.awt.Dimension" editor="org.netbeans.beaninfo.editors.DimensionEditor">
+                  <Dimension value="[31, 32]"/>
+                </Property>
+                <Property name="preferredSize" type="java.awt.Dimension" editor="org.netbeans.beaninfo.editors.DimensionEditor">
+                  <Dimension value="[31, 32]"/>
+                </Property>
               </Properties>
             </Component>
             <Component class="javax.swing.JLabel" name="jLabel2">
               <Properties>
-                <Property name="text" type="java.lang.String" value="Excluir (F11)"/>
+                <Property name="horizontalAlignment" type="int" value="0"/>
+                <Property name="text" type="java.lang.String" value="&lt;html&gt;&lt;div style=&apos;text-align: center&apos;&gt;Excluir &lt;br&gt; (F11) &lt;/div&gt;&lt;/html&gt;"/>
+                <Property name="alignmentY" type="float" value="0.1"/>
               </Properties>
             </Component>
             <Component class="javax.swing.JButton" name="btnSalvar">
@@ -376,8 +366,11 @@
                   <Image iconType="3" name="/Icones/salvar.png"/>
                 </Property>
                 <Property name="toolTipText" type="java.lang.String" value="Sair"/>
+                <Property name="alignmentY" type="float" value="0.1"/>
                 <Property name="border" type="javax.swing.border.Border" editor="org.netbeans.modules.form.editors2.BorderEditor">
-                  <Border info="null"/>
+                  <Border info="org.netbeans.modules.form.compat2.border.BevelBorderInfo">
+                    <BevelBorder/>
+                  </Border>
                 </Property>
               </Properties>
               <AccessibilityProperties>
@@ -389,7 +382,9 @@
             </Component>
             <Component class="javax.swing.JLabel" name="jLabel3">
               <Properties>
-                <Property name="text" type="java.lang.String" value="Salvar (F2)"/>
+                <Property name="horizontalAlignment" type="int" value="0"/>
+                <Property name="text" type="java.lang.String" value="&lt;html&gt;&lt;div style=&apos;text-align: center&apos;&gt;Salvar &lt;br&gt;(F2) &lt;/div&gt;&lt;/html&gt;"/>
+                <Property name="alignmentY" type="float" value="0.1"/>
               </Properties>
             </Component>
             <Component class="javax.swing.JButton" name="btnPrimeiro">
@@ -398,8 +393,11 @@
                   <Image iconType="3" name="/Icones/anterior 2.png"/>
                 </Property>
                 <Property name="toolTipText" type="java.lang.String" value="Sair"/>
+                <Property name="alignmentY" type="float" value="0.1"/>
                 <Property name="border" type="javax.swing.border.Border" editor="org.netbeans.modules.form.editors2.BorderEditor">
-                  <Border info="null"/>
+                  <Border info="org.netbeans.modules.form.compat2.border.BevelBorderInfo">
+                    <BevelBorder/>
+                  </Border>
                 </Property>
               </Properties>
               <Events>
@@ -408,7 +406,9 @@
             </Component>
             <Component class="javax.swing.JLabel" name="lblPrimeiro">
               <Properties>
-                <Property name="text" type="java.lang.String" value="Primeiro (F7)"/>
+                <Property name="horizontalAlignment" type="int" value="0"/>
+                <Property name="text" type="java.lang.String" value="&lt;html&gt;&lt;div style=&apos;text-align: center&apos;&gt;Primeiro &lt;br&gt;(F7)&lt;/div&gt;&lt;/html&gt;"/>
+                <Property name="alignmentY" type="float" value="0.1"/>
               </Properties>
             </Component>
             <Component class="javax.swing.JButton" name="btnAnterior">
@@ -417,8 +417,11 @@
                   <Image iconType="3" name="/Icones/anterior 1.png"/>
                 </Property>
                 <Property name="toolTipText" type="java.lang.String" value="Sair"/>
+                <Property name="alignmentY" type="float" value="0.1"/>
                 <Property name="border" type="javax.swing.border.Border" editor="org.netbeans.modules.form.editors2.BorderEditor">
-                  <Border info="null"/>
+                  <Border info="org.netbeans.modules.form.compat2.border.BevelBorderInfo">
+                    <BevelBorder/>
+                  </Border>
                 </Property>
               </Properties>
               <Events>
@@ -427,8 +430,10 @@
             </Component>
             <Component class="javax.swing.JLabel" name="jLabel5">
               <Properties>
-                <Property name="text" type="java.lang.String" value="Anterior (F8)"/>
+                <Property name="horizontalAlignment" type="int" value="0"/>
+                <Property name="text" type="java.lang.String" value="&lt;html&gt;&lt;div style=&apos;text-align: center&apos;&gt;Anterior &lt;br&gt; (F8) &lt;/div&gt;&lt;/html&gt;"/>
                 <Property name="toolTipText" type="java.lang.String" value=""/>
+                <Property name="alignmentY" type="float" value="0.1"/>
               </Properties>
             </Component>
             <Component class="javax.swing.JButton" name="btnProximo">
@@ -437,8 +442,11 @@
                   <Image iconType="3" name="/Icones/proximo 1.png"/>
                 </Property>
                 <Property name="toolTipText" type="java.lang.String" value="Sair"/>
+                <Property name="alignmentY" type="float" value="0.1"/>
                 <Property name="border" type="javax.swing.border.Border" editor="org.netbeans.modules.form.editors2.BorderEditor">
-                  <Border info="null"/>
+                  <Border info="org.netbeans.modules.form.compat2.border.BevelBorderInfo">
+                    <BevelBorder/>
+                  </Border>
                 </Property>
               </Properties>
               <Events>
@@ -447,7 +455,9 @@
             </Component>
             <Component class="javax.swing.JLabel" name="jLabel7">
               <Properties>
-                <Property name="text" type="java.lang.String" value="&#xda;ltimo (F10)"/>
+                <Property name="horizontalAlignment" type="int" value="0"/>
+                <Property name="text" type="java.lang.String" value="&lt;html&gt;&lt;div style=&apos;text-align: center&apos;&gt;&#xda;ltimo &lt;br&gt;(F10) &lt;/div&gt;&lt;/html&gt;"/>
+                <Property name="alignmentY" type="float" value="0.1"/>
               </Properties>
             </Component>
             <Component class="javax.swing.JButton" name="btnUltimo">
@@ -456,8 +466,11 @@
                   <Image iconType="3" name="/Icones/proximo 2.png"/>
                 </Property>
                 <Property name="toolTipText" type="java.lang.String" value="Sair"/>
+                <Property name="alignmentY" type="float" value="0.1"/>
                 <Property name="border" type="javax.swing.border.Border" editor="org.netbeans.modules.form.editors2.BorderEditor">
-                  <Border info="null"/>
+                  <Border info="org.netbeans.modules.form.compat2.border.BevelBorderInfo">
+                    <BevelBorder/>
+                  </Border>
                 </Property>
               </Properties>
               <Events>
@@ -466,7 +479,9 @@
             </Component>
             <Component class="javax.swing.JLabel" name="jLabel6">
               <Properties>
-                <Property name="text" type="java.lang.String" value="Pr&#xf3;ximo (F9)"/>
+                <Property name="horizontalAlignment" type="int" value="0"/>
+                <Property name="text" type="java.lang.String" value="&lt;html&gt;&lt;div style=&apos;text-align: center&apos;&gt;Pr&#xf3;ximo &lt;br&gt;(F9)&lt;/div&gt;&lt;/html&gt;"/>
+                <Property name="alignmentY" type="float" value="0.1"/>
               </Properties>
             </Component>
             <Component class="javax.swing.JButton" name="btnExcluir">
@@ -475,8 +490,11 @@
                   <Image iconType="3" name="/Icones/excluir.png"/>
                 </Property>
                 <Property name="toolTipText" type="java.lang.String" value="Sair"/>
+                <Property name="alignmentY" type="float" value="0.1"/>
                 <Property name="border" type="javax.swing.border.Border" editor="org.netbeans.modules.form.editors2.BorderEditor">
-                  <Border info="null"/>
+                  <Border info="org.netbeans.modules.form.compat2.border.BevelBorderInfo">
+                    <BevelBorder/>
+                  </Border>
                 </Property>
               </Properties>
               <Events>
@@ -489,8 +507,11 @@
                   <Image iconType="3" name="/Icones/alterar.png"/>
                 </Property>
                 <Property name="toolTipText" type="java.lang.String" value="Sair"/>
+                <Property name="alignmentY" type="float" value="0.1"/>
                 <Property name="border" type="javax.swing.border.Border" editor="org.netbeans.modules.form.editors2.BorderEditor">
-                  <Border info="null"/>
+                  <Border info="org.netbeans.modules.form.compat2.border.BevelBorderInfo">
+                    <BevelBorder/>
+                  </Border>
                 </Property>
               </Properties>
               <Events>
@@ -499,12 +520,19 @@
             </Component>
             <Component class="javax.swing.JLabel" name="lblPesquisar">
               <Properties>
-                <Property name="text" type="java.lang.String" value="Pesquisar (F6)"/>
+                <Property name="horizontalAlignment" type="int" value="0"/>
+                <Property name="text" type="java.lang.String" value="&lt;html&gt;&lt;div style=&apos;text-align: center&apos;&gt;Pesquisar &lt;br&gt;(F6)&lt;/div&gt;&lt;/html&gt;"/>
+                <Property name="alignmentY" type="float" value="0.1"/>
+                <Property name="minimumSize" type="java.awt.Dimension" editor="org.netbeans.beaninfo.editors.DimensionEditor">
+                  <Dimension value="[29, 32]"/>
+                </Property>
               </Properties>
             </Component>
             <Component class="javax.swing.JLabel" name="lblAlterar">
               <Properties>
-                <Property name="text" type="java.lang.String" value="Alterar (F7)"/>
+                <Property name="horizontalAlignment" type="int" value="0"/>
+                <Property name="text" type="java.lang.String" value="&lt;html&gt;&lt;div style=&apos;text-align: center&apos;&gt;Alterar &lt;br&gt; (F7)&lt;/div&gt;&lt;/html&gt;"/>
+                <Property name="alignmentY" type="float" value="0.1"/>
               </Properties>
             </Component>
             <Component class="javax.swing.JButton" name="btnPesquisar">
@@ -513,8 +541,11 @@
                   <Image iconType="3" name="/Icones/pesquisar.png"/>
                 </Property>
                 <Property name="toolTipText" type="java.lang.String" value="Sair"/>
+                <Property name="alignmentY" type="float" value="0.1"/>
                 <Property name="border" type="javax.swing.border.Border" editor="org.netbeans.modules.form.editors2.BorderEditor">
-                  <Border info="null"/>
+                  <Border info="org.netbeans.modules.form.compat2.border.BevelBorderInfo">
+                    <BevelBorder/>
+                  </Border>
                 </Property>
               </Properties>
               <Events>
@@ -527,13 +558,66 @@
                   <Image iconType="3" name="/Icones/novo.png"/>
                 </Property>
                 <Property name="toolTipText" type="java.lang.String" value="Sair"/>
+                <Property name="alignmentY" type="float" value="0.1"/>
                 <Property name="border" type="javax.swing.border.Border" editor="org.netbeans.modules.form.editors2.BorderEditor">
-                  <Border info="null"/>
+                  <Border info="org.netbeans.modules.form.compat2.border.BevelBorderInfo">
+                    <BevelBorder/>
+                  </Border>
                 </Property>
               </Properties>
               <Events>
                 <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btnNovoActionPerformed"/>
               </Events>
+            </Component>
+            <Component class="javax.swing.JButton" name="btnProximoRapido">
+              <Properties>
+                <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
+                  <Image iconType="3" name="/Icones/proximo 3.png"/>
+                </Property>
+                <Property name="toolTipText" type="java.lang.String" value="Sair"/>
+                <Property name="alignmentY" type="float" value="0.1"/>
+                <Property name="border" type="javax.swing.border.Border" editor="org.netbeans.modules.form.editors2.BorderEditor">
+                  <Border info="org.netbeans.modules.form.compat2.border.BevelBorderInfo">
+                    <BevelBorder/>
+                  </Border>
+                </Property>
+              </Properties>
+              <Events>
+                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btnProximoRapidoActionPerformed"/>
+              </Events>
+            </Component>
+            <Component class="javax.swing.JButton" name="btnAnteriorRapido1">
+              <Properties>
+                <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
+                  <Image iconType="3" name="/Icones/anterior 3.png"/>
+                </Property>
+                <Property name="toolTipText" type="java.lang.String" value="Sair"/>
+                <Property name="alignmentY" type="float" value="0.1"/>
+                <Property name="border" type="javax.swing.border.Border" editor="org.netbeans.modules.form.editors2.BorderEditor">
+                  <Border info="org.netbeans.modules.form.compat2.border.BevelBorderInfo">
+                    <BevelBorder/>
+                  </Border>
+                </Property>
+              </Properties>
+              <Events>
+                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btnAnteriorRapido1ActionPerformed"/>
+              </Events>
+            </Component>
+            <Component class="javax.swing.JLabel" name="lblRapido">
+              <Properties>
+                <Property name="horizontalAlignment" type="int" value="0"/>
+                <Property name="text" type="java.lang.String" value="&lt;html&gt;&lt;div style=&apos;text-align: center&apos;&gt;Anterior &lt;br&gt; R&#xe1;pido &lt;/div&gt;&lt;/html&gt;"/>
+                <Property name="toolTipText" type="java.lang.String" value=""/>
+                <Property name="alignmentY" type="float" value="0.1"/>
+              </Properties>
+            </Component>
+            <Component class="javax.swing.JLabel" name="lblRapido1">
+              <Properties>
+                <Property name="horizontalAlignment" type="int" value="0"/>
+                <Property name="text" type="java.lang.String" value="&lt;html&gt;&lt;div style=&apos;text-align: center&apos;&gt;Pr&#xf3;ximo&lt;br&gt; R&#xe1;pido &lt;/div&gt;&lt;/html&gt;"/>
+                <Property name="toolTipText" type="java.lang.String" value=""/>
+                <Property name="alignmentY" type="float" value="0.1"/>
+              </Properties>
             </Component>
           </SubComponents>
         </Container>
@@ -557,12 +641,12 @@
       <Layout>
         <DimensionLayout dim="0">
           <Group type="103" groupAlignment="0" attributes="0">
-              <EmptySpace min="0" pref="1114" max="32767" attributes="0"/>
+              <EmptySpace min="0" pref="0" max="32767" attributes="0"/>
           </Group>
         </DimensionLayout>
         <DimensionLayout dim="1">
           <Group type="103" groupAlignment="0" attributes="0">
-              <EmptySpace min="0" pref="526" max="32767" attributes="0"/>
+              <EmptySpace min="0" pref="638" max="32767" attributes="0"/>
           </Group>
         </DimensionLayout>
       </Layout>
@@ -579,12 +663,12 @@
       <Layout>
         <DimensionLayout dim="0">
           <Group type="103" groupAlignment="0" attributes="0">
-              <Component id="pnRodape" alignment="1" max="32767" attributes="0"/>
+              <Component id="pnRodape" alignment="0" max="32767" attributes="0"/>
           </Group>
         </DimensionLayout>
         <DimensionLayout dim="1">
           <Group type="103" groupAlignment="0" attributes="0">
-              <Component id="pnRodape" min="-2" max="-2" attributes="0"/>
+              <Component id="pnRodape" alignment="0" max="32767" attributes="0"/>
           </Group>
         </DimensionLayout>
       </Layout>
@@ -616,7 +700,7 @@
                           <Component id="lblUsuario" alignment="3" min="-2" max="-2" attributes="0"/>
                           <Component id="lblUsuarioConectado" alignment="3" min="-2" max="-2" attributes="0"/>
                       </Group>
-                      <EmptySpace max="32767" attributes="0"/>
+                      <EmptySpace pref="12" max="32767" attributes="0"/>
                   </Group>
               </Group>
             </DimensionLayout>

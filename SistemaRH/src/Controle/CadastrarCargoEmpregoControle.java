@@ -108,30 +108,26 @@ public class CadastrarCargoEmpregoControle extends CadastrarCargoEmpregoDTO
         switch (acao)
         {
             case "primeiro":
+
                 frm.indiceConsultaCargoEmprego = 0;
-                pesquisarCargoEmprego(String.valueOf(cargosEmpregos.get(0)));
+                pesquisarCargoEmprego(String.valueOf(cargosEmpregos.get(frm.indiceConsultaCargoEmprego)));
                 tudoCerto = "ok";
                 break;
 
             case "anterior":
                 if (frm.indiceConsultaCargoEmprego >= primeiroItemDaLista)
                 {
-                    frm.indiceConsultaCargoEmprego--;
+                    frm.indiceConsultaCargoEmprego = frm.indiceConsultaCargoEmprego - 1;
                     pesquisarCargoEmprego(String.valueOf(cargosEmpregos.get(frm.indiceConsultaCargoEmprego)));
-                    tudoCerto = "ok";
-                }
-                else
-                {
-                    pesquisarCargoEmprego(String.valueOf(cargosEmpregos.get(0)));
                     tudoCerto = "ok";
                 }
                 break;
 
             case "proximo":
-                if (frm.indiceConsultaCargoEmprego <= ultimoItemDaLista)
+                if (frm.indiceConsultaCargoEmprego < ultimoItemDaLista)
                 {
+                    frm.indiceConsultaCargoEmprego = frm.indiceConsultaCargoEmprego + 1;
                     pesquisarCargoEmprego(String.valueOf(cargosEmpregos.get(frm.indiceConsultaCargoEmprego)));
-                    frm.indiceConsultaCargoEmprego++;
                     tudoCerto = "ok";
                 }
                 break;
