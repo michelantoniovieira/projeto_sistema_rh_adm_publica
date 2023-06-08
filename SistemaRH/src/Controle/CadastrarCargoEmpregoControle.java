@@ -121,6 +121,11 @@ public class CadastrarCargoEmpregoControle extends CadastrarCargoEmpregoDTO
                     pesquisarCargoEmprego(String.valueOf(cargosEmpregos.get(frm.indiceConsultaCargoEmprego)));
                     tudoCerto = "ok";
                 }
+                else if (frm.indiceConsultaCargoEmprego == 0)
+                {
+                    pesquisarCargoEmprego(String.valueOf(cargosEmpregos.get(frm.indiceConsultaCargoEmprego)));
+                    tudoCerto = "ok";
+                }
                 break;
 
             case "proximo":

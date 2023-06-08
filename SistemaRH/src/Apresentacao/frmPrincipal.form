@@ -229,85 +229,94 @@
                           <Component id="btnPrimeiro" linkSize="11" min="-2" pref="87" max="-2" attributes="0"/>
                       </Group>
                       <EmptySpace max="-2" attributes="0"/>
-                      <Group type="103" groupAlignment="0" max="-2" attributes="0">
-                          <Component id="lblRapido" linkSize="11" pref="87" max="32767" attributes="0"/>
+                      <Group type="103" groupAlignment="0" attributes="0">
+                          <Component id="lblRapido" pref="88" max="32767" attributes="0"/>
                           <Component id="btnAnteriorRapido1" max="32767" attributes="0"/>
                       </Group>
                       <EmptySpace max="-2" attributes="0"/>
                       <Group type="103" groupAlignment="0" attributes="0">
-                          <Component id="btnAnterior" min="-2" pref="87" max="-2" attributes="0"/>
-                          <Component id="jLabel5" min="-2" pref="87" max="-2" attributes="0"/>
+                          <Component id="btnAnterior" pref="88" max="32767" attributes="0"/>
+                          <Component id="jLabel5" pref="88" max="32767" attributes="0"/>
                       </Group>
                       <EmptySpace max="-2" attributes="0"/>
-                      <Group type="103" groupAlignment="0" max="-2" attributes="0">
-                          <Component id="btnProximo" pref="94" max="32767" attributes="0"/>
-                          <Component id="jLabel6" max="32767" attributes="0"/>
+                      <Group type="103" groupAlignment="0" attributes="0">
+                          <Component id="btnAnterior1" alignment="0" pref="90" max="32767" attributes="0"/>
+                          <Component id="jLabel8" alignment="0" pref="90" max="32767" attributes="0"/>
+                      </Group>
+                      <EmptySpace max="-2" attributes="0"/>
+                      <Group type="103" groupAlignment="0" attributes="0">
+                          <Component id="btnProximo" max="32767" attributes="0"/>
+                          <Component id="jLabel6" pref="95" max="32767" attributes="0"/>
                       </Group>
                       <EmptySpace max="-2" attributes="0"/>
                       <Group type="103" groupAlignment="0" max="-2" attributes="0">
                           <Component id="lblRapido1" max="32767" attributes="0"/>
-                          <Component id="btnProximoRapido" pref="87" max="32767" attributes="0"/>
+                          <Component id="btnProximoRapido" min="-2" pref="87" max="-2" attributes="0"/>
                       </Group>
-                      <EmptySpace max="-2" attributes="0"/>
+                      <EmptySpace min="-2" max="-2" attributes="0"/>
                       <Group type="103" groupAlignment="0" max="-2" attributes="0">
                           <Component id="jLabel7" linkSize="1" pref="101" max="32767" attributes="0"/>
                           <Component id="btnUltimo" linkSize="1" max="32767" attributes="0"/>
                       </Group>
-                      <EmptySpace pref="94" max="32767" attributes="0"/>
+                      <EmptySpace min="-2" max="-2" attributes="0"/>
                   </Group>
               </Group>
             </DimensionLayout>
             <DimensionLayout dim="1">
               <Group type="103" groupAlignment="0" attributes="0">
                   <Group type="102" alignment="0" attributes="0">
-                      <EmptySpace min="-2" max="-2" attributes="0"/>
-                      <Group type="103" groupAlignment="0" attributes="0">
-                          <Group type="102" attributes="0">
+                      <EmptySpace max="-2" attributes="0"/>
+                      <Group type="103" groupAlignment="1" attributes="0">
+                          <Group type="102" alignment="1" attributes="0">
                               <Group type="103" groupAlignment="0" attributes="0">
-                                  <Group type="102" attributes="0">
-                                      <Group type="103" groupAlignment="0" attributes="0">
-                                          <Component id="btnPesquisar" alignment="1" max="32767" attributes="0"/>
-                                          <Component id="btnSair" alignment="0" max="32767" attributes="0"/>
-                                          <Component id="btnNovo" alignment="0" max="32767" attributes="0"/>
-                                          <Component id="btnAlterar" alignment="0" max="32767" attributes="0"/>
-                                          <Component id="btnSalvar" alignment="0" max="32767" attributes="0"/>
-                                          <Component id="btnPrimeiro" alignment="0" max="32767" attributes="0"/>
-                                          <Component id="btnExcluir" alignment="0" pref="83" max="32767" attributes="0"/>
-                                      </Group>
-                                      <EmptySpace min="-2" max="-2" attributes="0"/>
-                                  </Group>
-                                  <Group type="102" attributes="0">
-                                      <Component id="btnAnteriorRapido1" max="32767" attributes="0"/>
-                                      <EmptySpace max="-2" attributes="0"/>
-                                  </Group>
-                                  <Group type="102" alignment="1" attributes="0">
-                                      <Group type="103" groupAlignment="1" attributes="0">
-                                          <Component id="btnProximoRapido" alignment="0" max="32767" attributes="0"/>
-                                          <Component id="btnProximo" max="32767" attributes="0"/>
-                                          <Component id="btnUltimo" alignment="1" max="32767" attributes="0"/>
-                                      </Group>
-                                      <EmptySpace min="-2" pref="6" max="-2" attributes="0"/>
-                                  </Group>
+                                  <Component id="btnPesquisar" alignment="1" max="32767" attributes="0"/>
+                                  <Component id="btnSair" alignment="0" max="32767" attributes="0"/>
+                                  <Component id="btnNovo" alignment="0" max="32767" attributes="0"/>
+                                  <Component id="btnAlterar" alignment="0" max="32767" attributes="0"/>
+                                  <Component id="btnSalvar" alignment="0" max="32767" attributes="0"/>
+                                  <Component id="btnPrimeiro" alignment="0" max="32767" attributes="0"/>
+                                  <Component id="btnExcluir" alignment="0" pref="83" max="32767" attributes="0"/>
+                                  <Component id="btnAnteriorRapido1" max="32767" attributes="0"/>
+                                  <Component id="btnAnterior" alignment="1" max="32767" attributes="0"/>
                               </Group>
-                              <Group type="103" groupAlignment="3" attributes="0">
-                                  <Component id="jLabel3" alignment="3" max="32767" attributes="0"/>
-                                  <Component id="lblSair" alignment="3" max="32767" attributes="0"/>
+                              <EmptySpace type="unrelated" max="-2" attributes="0"/>
+                              <Group type="103" groupAlignment="0" attributes="0">
                                   <Component id="jLabel1" alignment="1" max="32767" attributes="0"/>
-                                  <Component id="lblPesquisar" alignment="3" max="32767" attributes="0"/>
-                                  <Component id="lblAlterar" alignment="3" max="32767" attributes="0"/>
-                                  <Component id="jLabel2" alignment="3" max="32767" attributes="0"/>
-                                  <Component id="lblPrimeiro" alignment="3" max="32767" attributes="0"/>
-                                  <Component id="lblRapido" alignment="3" max="32767" attributes="0"/>
-                                  <Component id="jLabel5" alignment="3" max="32767" attributes="0"/>
-                                  <Component id="jLabel6" alignment="3" max="32767" attributes="0"/>
-                                  <Component id="lblRapido1" alignment="3" max="32767" attributes="0"/>
-                                  <Component id="jLabel7" alignment="3" max="32767" attributes="0"/>
+                                  <Group type="103" groupAlignment="3" attributes="0">
+                                      <Component id="jLabel3" alignment="3" max="32767" attributes="0"/>
+                                      <Component id="lblSair" alignment="3" max="32767" attributes="0"/>
+                                      <Component id="lblPesquisar" alignment="3" max="32767" attributes="0"/>
+                                      <Component id="lblAlterar" alignment="3" max="32767" attributes="0"/>
+                                      <Component id="jLabel2" alignment="3" max="32767" attributes="0"/>
+                                      <Component id="lblPrimeiro" alignment="3" max="32767" attributes="0"/>
+                                      <Component id="lblRapido" alignment="3" max="32767" attributes="0"/>
+                                      <Component id="jLabel5" alignment="3" max="32767" attributes="0"/>
+                                  </Group>
                               </Group>
                               <EmptySpace min="-2" pref="14" max="-2" attributes="0"/>
                           </Group>
-                          <Group type="102" attributes="0">
-                              <Component id="btnAnterior" max="32767" attributes="0"/>
-                              <EmptySpace min="-2" pref="52" max="-2" attributes="0"/>
+                          <Group type="102" alignment="1" attributes="0">
+                              <Group type="103" groupAlignment="1" attributes="0">
+                                  <Component id="btnProximoRapido" alignment="0" max="32767" attributes="0"/>
+                                  <Component id="btnProximo" alignment="0" max="32767" attributes="0"/>
+                                  <Component id="btnAnterior1" max="32767" attributes="0"/>
+                                  <Component id="btnUltimo" max="32767" attributes="0"/>
+                              </Group>
+                              <EmptySpace type="unrelated" max="-2" attributes="0"/>
+                              <Group type="103" groupAlignment="3" attributes="0">
+                                  <Group type="102" attributes="0">
+                                      <Component id="jLabel8" min="-2" pref="32" max="-2" attributes="0"/>
+                                      <EmptySpace min="-2" pref="14" max="-2" attributes="0"/>
+                                  </Group>
+                                  <Group type="102" attributes="0">
+                                      <Group type="103" groupAlignment="3" attributes="0">
+                                          <Component id="jLabel6" alignment="3" max="32767" attributes="0"/>
+                                          <Component id="lblRapido1" alignment="3" max="32767" attributes="0"/>
+                                          <Component id="jLabel7" alignment="3" max="32767" attributes="0"/>
+                                      </Group>
+                                      <EmptySpace min="14" pref="14" max="-2" attributes="0"/>
+                                  </Group>
+                              </Group>
                           </Group>
                       </Group>
                   </Group>
@@ -615,6 +624,31 @@
               <Properties>
                 <Property name="horizontalAlignment" type="int" value="0"/>
                 <Property name="text" type="java.lang.String" value="&lt;html&gt;&lt;div style=&apos;text-align: center&apos;&gt;Pr&#xf3;ximo&lt;br&gt; R&#xe1;pido &lt;/div&gt;&lt;/html&gt;"/>
+                <Property name="toolTipText" type="java.lang.String" value=""/>
+                <Property name="alignmentY" type="float" value="0.1"/>
+              </Properties>
+            </Component>
+            <Component class="javax.swing.JButton" name="btnAnterior1">
+              <Properties>
+                <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
+                  <Image iconType="3" name="/Icones/pausar.png"/>
+                </Property>
+                <Property name="toolTipText" type="java.lang.String" value="Sair"/>
+                <Property name="alignmentY" type="float" value="0.1"/>
+                <Property name="border" type="javax.swing.border.Border" editor="org.netbeans.modules.form.editors2.BorderEditor">
+                  <Border info="org.netbeans.modules.form.compat2.border.BevelBorderInfo">
+                    <BevelBorder/>
+                  </Border>
+                </Property>
+              </Properties>
+              <Events>
+                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btnAnterior1ActionPerformed"/>
+              </Events>
+            </Component>
+            <Component class="javax.swing.JLabel" name="jLabel8">
+              <Properties>
+                <Property name="horizontalAlignment" type="int" value="0"/>
+                <Property name="text" type="java.lang.String" value="&lt;html&gt;&lt;div style=&apos;text-align: center&apos;&gt;Parar &lt;/div&gt;&lt;/html&gt;"/>
                 <Property name="toolTipText" type="java.lang.String" value=""/>
                 <Property name="alignmentY" type="float" value="0.1"/>
               </Properties>
