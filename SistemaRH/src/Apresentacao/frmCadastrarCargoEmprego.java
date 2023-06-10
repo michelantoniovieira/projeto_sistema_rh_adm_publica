@@ -102,6 +102,8 @@ public class frmCadastrarCargoEmprego extends javax.swing.JInternalFrame impleme
 
     public static int indiceConsultaCargoEmprego = 0;
 
+    private List<Integer> codigoCargosEmpregos;
+
     public frmCadastrarCargoEmprego()
     {
         initComponents();
@@ -362,13 +364,16 @@ public class frmCadastrarCargoEmprego extends javax.swing.JInternalFrame impleme
         }
     }
 
-    public void gerenciadorNavegacao(String acao)
+    @Override
+    public List<Integer> gerenciadorNavegacao(String acao)
     {
         CadastrarCargoEmpregoControle controle = new CadastrarCargoEmpregoControle();
         if (controle.navegarEntreRegistros(acao).equals("ok"))
         {
             preencherCamposLista(controle.getObjPuxadoDaPesquisaDeCargoEmprego());
+            this.codigoCargosEmpregos = controle.getCodigoCargosEmpregos();
         }
+        return codigoCargosEmpregos;
     }
 
     @SuppressWarnings("unchecked")

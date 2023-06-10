@@ -21,6 +21,8 @@ import java.awt.event.WindowEvent;
 import java.awt.event.WindowListener;
 import java.sql.SQLException;
 import java.util.ArrayList;
+import java.util.TimerTask;
+import java.util.concurrent.TimeUnit;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.AbstractAction;
@@ -34,6 +36,14 @@ import javax.swing.JSeparator;
 import javax.swing.JTabbedPane;
 import javax.swing.KeyStroke;
 import javax.swing.Timer;
+import static org.apache.poi.hssf.usermodel.HeaderFooter.time;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+import java.util.List;
+import java.util.concurrent.Executors;
+import java.util.concurrent.ScheduledExecutorService;
+import java.util.concurrent.TimeUnit;
+import javax.swing.SwingUtilities;
 
 /**
  *
@@ -78,6 +88,11 @@ public class frmPrincipal extends javax.swing.JFrame
     Integer index = 0;
     private Timer timer;
     private boolean isRunning = false;
+    private static ScheduledExecutorService executor;
+    private List<Integer> quantidadeDeCodigosSalvosNoBancoDeDados;
+    int numeroAtual;
+    int contadorProximo = 0;
+    int contadorAnterior = 0;
 
     public void setGravarAlteracaoFrmCC(boolean gravarAlteracaoFrmCC)
     {
@@ -155,11 +170,11 @@ public class frmPrincipal extends javax.swing.JFrame
         btnPesquisar = new javax.swing.JButton();
         btnNovo = new javax.swing.JButton();
         btnProximoRapido = new javax.swing.JButton();
-        btnAnteriorRapido1 = new javax.swing.JButton();
-        lblRapido = new javax.swing.JLabel();
-        lblRapido1 = new javax.swing.JLabel();
-        btnAnterior1 = new javax.swing.JButton();
-        jLabel8 = new javax.swing.JLabel();
+        btnAnteriorRapido = new javax.swing.JButton();
+        lblAnteriorRapido = new javax.swing.JLabel();
+        lblProximoRapido = new javax.swing.JLabel();
+        btnParar = new javax.swing.JButton();
+        lblParar = new javax.swing.JLabel();
         jdkpPrincipal = new javax.swing.JDesktopPane();
         jdkpRodape = new javax.swing.JDesktopPane();
         pnRodape = new javax.swing.JPanel();
@@ -379,44 +394,44 @@ public class frmPrincipal extends javax.swing.JFrame
             }
         });
 
-        btnAnteriorRapido1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Icones/anterior 3.png"))); // NOI18N
-        btnAnteriorRapido1.setToolTipText("Sair");
-        btnAnteriorRapido1.setAlignmentY(0.1F);
-        btnAnteriorRapido1.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED));
-        btnAnteriorRapido1.addActionListener(new java.awt.event.ActionListener()
+        btnAnteriorRapido.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Icones/anterior 3.png"))); // NOI18N
+        btnAnteriorRapido.setToolTipText("Sair");
+        btnAnteriorRapido.setAlignmentY(0.1F);
+        btnAnteriorRapido.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED));
+        btnAnteriorRapido.addActionListener(new java.awt.event.ActionListener()
         {
             public void actionPerformed(java.awt.event.ActionEvent evt)
             {
-                btnAnteriorRapido1ActionPerformed(evt);
+                btnAnteriorRapidoActionPerformed(evt);
             }
         });
 
-        lblRapido.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        lblRapido.setText("<html><div style='text-align: center'>Anterior <br> Rápido </div></html>");
-        lblRapido.setToolTipText("");
-        lblRapido.setAlignmentY(0.1F);
+        lblAnteriorRapido.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        lblAnteriorRapido.setText("<html><div style='text-align: center'>Anterior <br> Rápido </div></html>");
+        lblAnteriorRapido.setToolTipText("");
+        lblAnteriorRapido.setAlignmentY(0.1F);
 
-        lblRapido1.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        lblRapido1.setText("<html><div style='text-align: center'>Próximo<br> Rápido </div></html>");
-        lblRapido1.setToolTipText("");
-        lblRapido1.setAlignmentY(0.1F);
+        lblProximoRapido.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        lblProximoRapido.setText("<html><div style='text-align: center'>Próximo<br> Rápido </div></html>");
+        lblProximoRapido.setToolTipText("");
+        lblProximoRapido.setAlignmentY(0.1F);
 
-        btnAnterior1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Icones/pausar.png"))); // NOI18N
-        btnAnterior1.setToolTipText("Sair");
-        btnAnterior1.setAlignmentY(0.1F);
-        btnAnterior1.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED));
-        btnAnterior1.addActionListener(new java.awt.event.ActionListener()
+        btnParar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Icones/pausar.png"))); // NOI18N
+        btnParar.setToolTipText("Sair");
+        btnParar.setAlignmentY(0.1F);
+        btnParar.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED));
+        btnParar.addActionListener(new java.awt.event.ActionListener()
         {
             public void actionPerformed(java.awt.event.ActionEvent evt)
             {
-                btnAnterior1ActionPerformed(evt);
+                btnPararActionPerformed(evt);
             }
         });
 
-        jLabel8.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        jLabel8.setText("<html><div style='text-align: center'>Parar </div></html>");
-        jLabel8.setToolTipText("");
-        jLabel8.setAlignmentY(0.1F);
+        lblParar.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        lblParar.setText("<html><div style='text-align: center'>Parar </div></html>");
+        lblParar.setToolTipText("");
+        lblParar.setAlignmentY(0.1F);
 
         javax.swing.GroupLayout pnMenuLayout = new javax.swing.GroupLayout(pnMenu);
         pnMenu.setLayout(pnMenuLayout);
@@ -453,23 +468,23 @@ public class frmPrincipal extends javax.swing.JFrame
                     .addComponent(btnPrimeiro, javax.swing.GroupLayout.PREFERRED_SIZE, 87, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(pnMenuLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(lblRapido, javax.swing.GroupLayout.DEFAULT_SIZE, 88, Short.MAX_VALUE)
-                    .addComponent(btnAnteriorRapido1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                    .addComponent(lblAnteriorRapido, javax.swing.GroupLayout.DEFAULT_SIZE, 88, Short.MAX_VALUE)
+                    .addComponent(btnAnteriorRapido, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(pnMenuLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(btnAnterior, javax.swing.GroupLayout.DEFAULT_SIZE, 88, Short.MAX_VALUE)
                     .addComponent(jLabel5, javax.swing.GroupLayout.DEFAULT_SIZE, 88, Short.MAX_VALUE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(pnMenuLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(btnAnterior1, javax.swing.GroupLayout.DEFAULT_SIZE, 90, Short.MAX_VALUE)
-                    .addComponent(jLabel8, javax.swing.GroupLayout.DEFAULT_SIZE, 90, Short.MAX_VALUE))
+                    .addComponent(btnParar, javax.swing.GroupLayout.DEFAULT_SIZE, 90, Short.MAX_VALUE)
+                    .addComponent(lblParar, javax.swing.GroupLayout.DEFAULT_SIZE, 90, Short.MAX_VALUE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(pnMenuLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(btnProximo, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(jLabel6, javax.swing.GroupLayout.DEFAULT_SIZE, 95, Short.MAX_VALUE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(pnMenuLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                    .addComponent(lblRapido1)
+                    .addComponent(lblProximoRapido)
                     .addComponent(btnProximoRapido, javax.swing.GroupLayout.PREFERRED_SIZE, 87, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(pnMenuLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
@@ -496,7 +511,7 @@ public class frmPrincipal extends javax.swing.JFrame
                             .addComponent(btnSalvar, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                             .addComponent(btnPrimeiro, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                             .addComponent(btnExcluir, javax.swing.GroupLayout.DEFAULT_SIZE, 83, Short.MAX_VALUE)
-                            .addComponent(btnAnteriorRapido1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(btnAnteriorRapido, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                             .addComponent(btnAnterior, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                         .addGroup(pnMenuLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -508,26 +523,22 @@ public class frmPrincipal extends javax.swing.JFrame
                                 .addComponent(lblAlterar)
                                 .addComponent(jLabel2)
                                 .addComponent(lblPrimeiro)
-                                .addComponent(lblRapido)
-                                .addComponent(jLabel5)))
-                        .addGap(14, 14, 14))
+                                .addComponent(lblAnteriorRapido)
+                                .addComponent(jLabel5))))
                     .addGroup(pnMenuLayout.createSequentialGroup()
                         .addGroup(pnMenuLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                             .addComponent(btnProximoRapido, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                             .addComponent(btnProximo, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .addComponent(btnAnterior1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(btnParar, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                             .addComponent(btnUltimo, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addGroup(pnMenuLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addGroup(pnMenuLayout.createSequentialGroup()
-                                .addComponent(jLabel8, javax.swing.GroupLayout.PREFERRED_SIZE, 32, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addGap(14, 14, 14))
-                            .addGroup(pnMenuLayout.createSequentialGroup()
-                                .addGroup(pnMenuLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                                    .addComponent(jLabel6)
-                                    .addComponent(lblRapido1)
-                                    .addComponent(jLabel7))
-                                .addGap(14, 14, 14))))))
+                        .addGroup(pnMenuLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(lblParar, javax.swing.GroupLayout.PREFERRED_SIZE, 32, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addGroup(pnMenuLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                                .addComponent(jLabel6)
+                                .addComponent(lblProximoRapido)
+                                .addComponent(jLabel7)))))
+                .addGap(14, 14, 14))
         );
 
         btnSalvar.getAccessibleContext().setAccessibleDescription("Salvar");
@@ -1296,22 +1307,85 @@ public class frmPrincipal extends javax.swing.JFrame
     private void btnAnteriorActionPerformed(java.awt.event.ActionEvent evt)//GEN-FIRST:event_btnAnteriorActionPerformed
     {//GEN-HEADEREND:event_btnAnteriorActionPerformed
         gerenciadorNavegacao(frmCCE, frmCCE, "Manutenção de Cargos e Empregos", "anterior");
+        //caso o usuario fique voltando o contador volta tambem no caso do avançar e retornar rapido
+        if (contadorProximo >= 0)
+        {
+            contadorProximo--;
+        }
+        else
+        {
+            contadorProximo = 0;
+        }
     }//GEN-LAST:event_btnAnteriorActionPerformed
 
     private void btnProximoRapidoActionPerformed(java.awt.event.ActionEvent evt)//GEN-FIRST:event_btnProximoRapidoActionPerformed
     {//GEN-HEADEREND:event_btnProximoRapidoActionPerformed
-        // TODO add your handling code here:
+        executor = Executors.newSingleThreadScheduledExecutor();
+        executor.scheduleAtFixedRate(new Runnable()
+        {
+            @Override
+            public void run()
+            {
+                SwingUtilities.invokeLater(new Runnable()
+                {
+                    public void run()
+                    {
+                        gerenciadorNavegacao(frmCCE, frmCCE, "Manutenção de Cargos e Empregos", "proximo");
+
+                        int primeiraMatricula = quantidadeDeCodigosSalvosNoBancoDeDados.get(0);
+                        int ultimaMatricula = quantidadeDeCodigosSalvosNoBancoDeDados.size() - 1;
+                        int matriculaAtual = quantidadeDeCodigosSalvosNoBancoDeDados.get(contadorProximo);
+                        contadorProximo++;
+
+                        System.out.println(matriculaAtual);
+                        if (contadorProximo >= ultimaMatricula)
+                        {
+                            executor.shutdown();
+                            contadorProximo = 0;
+                        }
+
+                    }
+                });
+            }
+        }, 0, 1, TimeUnit.SECONDS);
     }//GEN-LAST:event_btnProximoRapidoActionPerformed
 
-    private void btnAnteriorRapido1ActionPerformed(java.awt.event.ActionEvent evt)//GEN-FIRST:event_btnAnteriorRapido1ActionPerformed
-    {//GEN-HEADEREND:event_btnAnteriorRapido1ActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_btnAnteriorRapido1ActionPerformed
+    private void btnAnteriorRapidoActionPerformed(java.awt.event.ActionEvent evt)//GEN-FIRST:event_btnAnteriorRapidoActionPerformed
+    {//GEN-HEADEREND:event_btnAnteriorRapidoActionPerformed
+        executor = Executors.newSingleThreadScheduledExecutor();
+        executor.scheduleAtFixedRate(new Runnable()
+        {
+            @Override
+            public void run()
+            {
+                SwingUtilities.invokeLater(new Runnable()
+                {
+                    public void run()
+                    {
+                        gerenciadorNavegacao(frmCCE, frmCCE, "Manutenção de Cargos e Empregos", "anterior");
 
-    private void btnAnterior1ActionPerformed(java.awt.event.ActionEvent evt)//GEN-FIRST:event_btnAnterior1ActionPerformed
-    {//GEN-HEADEREND:event_btnAnterior1ActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_btnAnterior1ActionPerformed
+                        int primeiraMatricula = quantidadeDeCodigosSalvosNoBancoDeDados.get(0);
+                        int ultimaMatricula = quantidadeDeCodigosSalvosNoBancoDeDados.size() - 1;
+                        int matriculaAtual = quantidadeDeCodigosSalvosNoBancoDeDados.get(contador);
+                        contadorAnterior++;
+
+
+                        if (contadorAnterior >= ultimaMatricula)
+                        {
+                            executor.shutdown();
+                            contadorAnterior = 0;
+                        }
+
+                    }
+                });
+            }
+        }, 0, 1, TimeUnit.SECONDS);
+    }//GEN-LAST:event_btnAnteriorRapidoActionPerformed
+
+    private void btnPararActionPerformed(java.awt.event.ActionEvent evt)//GEN-FIRST:event_btnPararActionPerformed
+    {//GEN-HEADEREND:event_btnPararActionPerformed
+        executor.shutdown();
+    }//GEN-LAST:event_btnPararActionPerformed
 
     public static void main(String args[])
     {
@@ -1443,6 +1517,11 @@ public class frmPrincipal extends javax.swing.JFrame
                         public void actionPerformed(ActionEvent e)
                         {
                             gerenciadorNavegacao(frmCCE, frmCCE, "Manutenção de Cargos e Empregos", "anterior");
+                            //caso o usuario fique voltando o contador volta tambem no caso do avançar e retornar rapido
+                            if (contador >= 0)
+                            {
+                                contador--;
+                            }
                         }
                     });
                     timer.setInitialDelay(0);
@@ -1581,7 +1660,7 @@ public class frmPrincipal extends javax.swing.JFrame
 
         if (frm.getTitle().equals(tituloJanela) && frm.equals(janelaFocada))
         {
-            mtd.gerenciadorNavegacao(acao);
+            quantidadeDeCodigosSalvosNoBancoDeDados = mtd.gerenciadorNavegacao(acao);
         }
     }
 
@@ -1589,10 +1668,10 @@ public class frmPrincipal extends javax.swing.JFrame
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnAlterar;
     private javax.swing.JButton btnAnterior;
-    private javax.swing.JButton btnAnterior1;
-    private javax.swing.JButton btnAnteriorRapido1;
+    private javax.swing.JButton btnAnteriorRapido;
     private javax.swing.JButton btnExcluir;
     private javax.swing.JButton btnNovo;
+    private javax.swing.JButton btnParar;
     private javax.swing.JButton btnPesquisar;
     private javax.swing.JButton btnPrimeiro;
     private javax.swing.JButton btnProximo;
@@ -1606,15 +1685,15 @@ public class frmPrincipal extends javax.swing.JFrame
     private javax.swing.JLabel jLabel5;
     private javax.swing.JLabel jLabel6;
     private javax.swing.JLabel jLabel7;
-    private javax.swing.JLabel jLabel8;
     private javax.swing.JDesktopPane jdkpCabecalho;
     public static javax.swing.JDesktopPane jdkpPrincipal;
     private javax.swing.JDesktopPane jdkpRodape;
     private javax.swing.JLabel lblAlterar;
+    private javax.swing.JLabel lblAnteriorRapido;
+    private javax.swing.JLabel lblParar;
     private javax.swing.JLabel lblPesquisar;
     private javax.swing.JLabel lblPrimeiro;
-    private javax.swing.JLabel lblRapido;
-    private javax.swing.JLabel lblRapido1;
+    private javax.swing.JLabel lblProximoRapido;
     private javax.swing.JLabel lblSair;
     private javax.swing.JLabel lblUsuario;
     private javax.swing.JLabel lblUsuarioConectado;

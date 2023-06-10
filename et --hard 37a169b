@@ -1,0 +1,53 @@
+[33m37a169b[m[33m ([m[1;36mHEAD -> [m[1;32mmaster[m[33m, [m[1;31morigin/master[m[33m)[m HEAD@{0}: commit: inclusao de mais um botão
+[33m234ead6[m HEAD@{1}: commit: atualizacao dos botoes de menu
+[33mdee182d[m HEAD@{2}: commit: finalizacao da primeira parte da atualizacao dos botoes
+[33m6460ae7[m HEAD@{3}: commit: atualizacao dos botões e da janela de cadastro de cargos e empregos
+[33m4c1245e[m HEAD@{4}: commit: atualizacao da janela de cadastro de cargos e empregos e reformulação do botões
+[33m3a8ad55[m HEAD@{5}: commit: atualização da pesquisa de cargos
+[33mefb6b46[m HEAD@{6}: commit: atualizações dos botoes superiores
+[33m1610c21[m HEAD@{7}: commit: atualização da janela cadastrar concurso
+[33m7ec8a44[m HEAD@{8}: commit: atualizacação da janela concurso
+[33m5236d94[m HEAD@{9}: commit: termino das alterações iniciais da quantidade de cargo, tela fundamentos e operações
+[33m404e768[m HEAD@{10}: commit: atualização da janela de criacao de cargo/emprego
+[33m4de7a60[m HEAD@{11}: commit: atualizacao do quadro da janela criacao de cargo emprego
+[33m981f2cf[m HEAD@{12}: commit: termino da tabela cadastrar fundamento
+[33m29ea908[m HEAD@{13}: commit: atualização da janela fundamento
+[33m314ab54[m HEAD@{14}: commit: atualização ja nala cadastrar fundamento
+[33ma17ad56[m HEAD@{15}: commit: atualizacao da janela fundamento
+[33m2179806[m HEAD@{16}: commit: atualização da janela de cargo/emprego
+[33me5151d5[m HEAD@{17}: commit: atualização da janela criação de cargo]
+[33m5b4b192[m HEAD@{18}: commit: atualização das validações da janela cadastrar cargo emprego
+[33m218f501[m HEAD@{19}: commit: atualização da janela de criação de cargo
+[33m569a09b[m HEAD@{20}: commit: alteração do gerenciador de janelas
+[33m63422f9[m HEAD@{21}: commit: inicio parte visual
+[33m8b78619[m HEAD@{22}: commit: atualização do gerenciador de janelas
+[33md79e234[m HEAD@{23}: commit: atualização do gerenciador de janelas
+[33m08b4844[m HEAD@{24}: commit: atualizacao da janela
+[33mc037bdb[m HEAD@{25}: commit: atualizacao do sistema de janelas
+[33mebb516e[m HEAD@{26}: commit: reeconstrução do banco de dados
+[33m184d002[m HEAD@{27}: commit: atualizacao na janela cadastrar concurso
+[33m034a449[m HEAD@{28}: commit: correção da exclusão da banca, não deixando excluir banca vinculada com concurso
+[33mb39ce6b[m HEAD@{29}: commit: correção da tela cadastrar concurso e cadastrar banca
+[33m35aa217[m HEAD@{30}: commit: backup aqui, caso de problema
+[33mfc6327a[m HEAD@{31}: commit: atualizacão da janela cadastrar concurso
+[33m6e3ac14[m HEAD@{32}: commit: atualizacao da janela cadastrar concurso
+[33me58ddd7[m HEAD@{33}: checkout: moving from staging to master
+[33me58ddd7[m HEAD@{34}: reset: moving to e58ddd7
+[33me58ddd7[m HEAD@{35}: reset: moving to e58ddd7
+[33m51dc92e[m[33m ([m[1;31morigin/staging[m[33m)[m HEAD@{36}: checkout: moving from master to staging
+[33me58ddd7[m HEAD@{37}: commit: atualizacao da tela cadastrar concurso - botão excluir
+[33ma7441fa[m HEAD@{38}: checkout: moving from staging to master
+[33m51dc92e[m[33m ([m[1;31morigin/staging[m[33m)[m HEAD@{39}: reset: moving to HEAD
+[33m51dc92e[m[33m ([m[1;31morigin/staging[m[33m)[m HEAD@{40}: commit: atualizacao da tela de cadastro concurso - botao excluir
+[33ma7441fa[m HEAD@{41}: checkout: moving from master to staging
+[33ma7441fa[m HEAD@{42}: merge staging: Fast-forward
+[33m1afb454[m HEAD@{43}: checkout: moving from staging to master
+[33ma7441fa[m HEAD@{44}: commit: correção da janel cadastro de concurso
+[33m1afb454[m HEAD@{45}: checkout: moving from staging to staging
+[33m1afb454[m HEAD@{46}: reset: moving to 1afb454
+[33m9a23637[m HEAD@{47}: checkout: moving from staging to staging
+[33m9a23637[m HEAD@{48}: checkout: moving from master to staging
+[33m1afb454[m HEAD@{49}: commit: atualização da janela de criação de concurso
+[33m5535920[m HEAD@{50}: commit: listando nomes das bancas no combobox
+[33m9a23637[m HEAD@{51}: reset: moving to 9a23637
+[33m9a23637[m HEAD@{52}: reset: moving to 9a23637

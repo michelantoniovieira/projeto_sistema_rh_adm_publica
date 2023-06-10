@@ -4,11 +4,13 @@
  */
 package Modelo;
 
+import java.util.List;
+
 /**
  *
  * @author miche
  */
 public interface MetodosComunsParaTodosOsJIF
 {
-    public void gerenciadorNavegacao(String acao);
+    public List<Integer> gerenciadorNavegacao(String acao);
 }

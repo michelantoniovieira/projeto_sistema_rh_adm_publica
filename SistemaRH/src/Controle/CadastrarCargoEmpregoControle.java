@@ -22,6 +22,7 @@ public class CadastrarCargoEmpregoControle extends CadastrarCargoEmpregoDTO
     private frmCadastrarCargoEmprego frm;
     private CadastrarCargoEmpregoDAO cadastrarCargoEmpregoDAO;
     private List<CadastrarCargoEmpregoDTO> objPuxadoDaPesquisaDeCargoEmprego;
+    private List<Integer> codigoCargosEmpregos;
 
     public CadastrarCargoEmpregoControle()
     {
@@ -101,16 +102,16 @@ public class CadastrarCargoEmpregoControle extends CadastrarCargoEmpregoDTO
 
     public String navegarEntreRegistros(String acao)
     {
-        List<Integer> cargosEmpregos = cadastrarCargoEmpregoDAO.consultarCodigosDosCargosEmpregosNoBanco();
-        int primeiroItemDaLista = cargosEmpregos.get(0);
-        int ultimoItemDaLista = cargosEmpregos.size() - 1;
+        codigoCargosEmpregos = cadastrarCargoEmpregoDAO.consultarCodigosDosCargosEmpregosNoBanco();
+        int primeiroItemDaLista = codigoCargosEmpregos.get(0);
+        int ultimoItemDaLista = codigoCargosEmpregos.size() - 1;
         String tudoCerto = "";
         switch (acao)
         {
             case "primeiro":
 
                 frm.indiceConsultaCargoEmprego = 0;
-                pesquisarCargoEmprego(String.valueOf(cargosEmpregos.get(frm.indiceConsultaCargoEmprego)));
+                pesquisarCargoEmprego(String.valueOf(codigoCargosEmpregos.get(frm.indiceConsultaCargoEmprego)));
                 tudoCerto = "ok";
                 break;
 
@@ -118,12 +119,12 @@ public class CadastrarCargoEmpregoControle extends CadastrarCargoEmpregoDTO
                 if (frm.indiceConsultaCargoEmprego >= primeiroItemDaLista)
                 {
                     frm.indiceConsultaCargoEmprego = frm.indiceConsultaCargoEmprego - 1;
-                    pesquisarCargoEmprego(String.valueOf(cargosEmpregos.get(frm.indiceConsultaCargoEmprego)));
+                    pesquisarCargoEmprego(String.valueOf(codigoCargosEmpregos.get(frm.indiceConsultaCargoEmprego)));
                     tudoCerto = "ok";
                 }
                 else if (frm.indiceConsultaCargoEmprego == 0)
                 {
-                    pesquisarCargoEmprego(String.valueOf(cargosEmpregos.get(frm.indiceConsultaCargoEmprego)));
+                    pesquisarCargoEmprego(String.valueOf(codigoCargosEmpregos.get(frm.indiceConsultaCargoEmprego)));
                     tudoCerto = "ok";
                 }
                 break;
@@ -132,14 +133,14 @@ public class CadastrarCargoEmpregoControle extends CadastrarCargoEmpregoDTO
                 if (frm.indiceConsultaCargoEmprego < ultimoItemDaLista)
                 {
                     frm.indiceConsultaCargoEmprego = frm.indiceConsultaCargoEmprego + 1;
-                    pesquisarCargoEmprego(String.valueOf(cargosEmpregos.get(frm.indiceConsultaCargoEmprego)));
+                    pesquisarCargoEmprego(String.valueOf(codigoCargosEmpregos.get(frm.indiceConsultaCargoEmprego)));
                     tudoCerto = "ok";
                 }
                 break;
 
             case "ultimo":
                 frm.indiceConsultaCargoEmprego = ultimoItemDaLista;
-                pesquisarCargoEmprego(String.valueOf(cargosEmpregos.get(ultimoItemDaLista)));
+                pesquisarCargoEmprego(String.valueOf(codigoCargosEmpregos.get(ultimoItemDaLista)));
                 tudoCerto = "ok";
                 break;
 
@@ -185,5 +186,17 @@ public class CadastrarCargoEmpregoControle extends CadastrarCargoEmpregoDTO
     {
         this.objPuxadoDaPesquisaDeCargoEmprego = objPuxadoDaPesquisaDeCargoEmprego;
     }
+
+    public List<Integer> getCodigoCargosEmpregos()
+    {
+        return codigoCargosEmpregos;
+    }
+
+    public void setCodigoCargosEmpregos(List<Integer> codigoCargosEmpregos)
+    {
+        this.codigoCargosEmpregos = codigoCargosEmpregos;
+    }
+    
+    
 
 }

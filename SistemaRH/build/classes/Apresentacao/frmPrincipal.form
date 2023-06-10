@@ -230,8 +230,8 @@
                       </Group>
                       <EmptySpace max="-2" attributes="0"/>
                       <Group type="103" groupAlignment="0" attributes="0">
-                          <Component id="lblRapido" pref="88" max="32767" attributes="0"/>
-                          <Component id="btnAnteriorRapido1" max="32767" attributes="0"/>
+                          <Component id="lblAnteriorRapido" pref="88" max="32767" attributes="0"/>
+                          <Component id="btnAnteriorRapido" max="32767" attributes="0"/>
                       </Group>
                       <EmptySpace max="-2" attributes="0"/>
                       <Group type="103" groupAlignment="0" attributes="0">
@@ -240,8 +240,8 @@
                       </Group>
                       <EmptySpace max="-2" attributes="0"/>
                       <Group type="103" groupAlignment="0" attributes="0">
-                          <Component id="btnAnterior1" alignment="0" pref="90" max="32767" attributes="0"/>
-                          <Component id="jLabel8" alignment="0" pref="90" max="32767" attributes="0"/>
+                          <Component id="btnParar" alignment="0" pref="90" max="32767" attributes="0"/>
+                          <Component id="lblParar" alignment="0" pref="90" max="32767" attributes="0"/>
                       </Group>
                       <EmptySpace max="-2" attributes="0"/>
                       <Group type="103" groupAlignment="0" attributes="0">
@@ -250,7 +250,7 @@
                       </Group>
                       <EmptySpace max="-2" attributes="0"/>
                       <Group type="103" groupAlignment="0" max="-2" attributes="0">
-                          <Component id="lblRapido1" max="32767" attributes="0"/>
+                          <Component id="lblProximoRapido" max="32767" attributes="0"/>
                           <Component id="btnProximoRapido" min="-2" pref="87" max="-2" attributes="0"/>
                       </Group>
                       <EmptySpace min="-2" max="-2" attributes="0"/>
@@ -276,7 +276,7 @@
                                   <Component id="btnSalvar" alignment="0" max="32767" attributes="0"/>
                                   <Component id="btnPrimeiro" alignment="0" max="32767" attributes="0"/>
                                   <Component id="btnExcluir" alignment="0" pref="83" max="32767" attributes="0"/>
-                                  <Component id="btnAnteriorRapido1" max="32767" attributes="0"/>
+                                  <Component id="btnAnteriorRapido" max="32767" attributes="0"/>
                                   <Component id="btnAnterior" alignment="1" max="32767" attributes="0"/>
                               </Group>
                               <EmptySpace type="unrelated" max="-2" attributes="0"/>
@@ -289,36 +289,30 @@
                                       <Component id="lblAlterar" alignment="3" max="32767" attributes="0"/>
                                       <Component id="jLabel2" alignment="3" max="32767" attributes="0"/>
                                       <Component id="lblPrimeiro" alignment="3" max="32767" attributes="0"/>
-                                      <Component id="lblRapido" alignment="3" max="32767" attributes="0"/>
+                                      <Component id="lblAnteriorRapido" alignment="3" max="32767" attributes="0"/>
                                       <Component id="jLabel5" alignment="3" max="32767" attributes="0"/>
                                   </Group>
                               </Group>
-                              <EmptySpace min="-2" pref="14" max="-2" attributes="0"/>
                           </Group>
                           <Group type="102" alignment="1" attributes="0">
                               <Group type="103" groupAlignment="1" attributes="0">
                                   <Component id="btnProximoRapido" alignment="0" max="32767" attributes="0"/>
                                   <Component id="btnProximo" alignment="0" max="32767" attributes="0"/>
-                                  <Component id="btnAnterior1" max="32767" attributes="0"/>
+                                  <Component id="btnParar" max="32767" attributes="0"/>
                                   <Component id="btnUltimo" max="32767" attributes="0"/>
                               </Group>
                               <EmptySpace type="unrelated" max="-2" attributes="0"/>
-                              <Group type="103" groupAlignment="3" attributes="0">
-                                  <Group type="102" attributes="0">
-                                      <Component id="jLabel8" min="-2" pref="32" max="-2" attributes="0"/>
-                                      <EmptySpace min="-2" pref="14" max="-2" attributes="0"/>
-                                  </Group>
-                                  <Group type="102" attributes="0">
-                                      <Group type="103" groupAlignment="3" attributes="0">
-                                          <Component id="jLabel6" alignment="3" max="32767" attributes="0"/>
-                                          <Component id="lblRapido1" alignment="3" max="32767" attributes="0"/>
-                                          <Component id="jLabel7" alignment="3" max="32767" attributes="0"/>
-                                      </Group>
-                                      <EmptySpace min="14" pref="14" max="-2" attributes="0"/>
+                              <Group type="103" groupAlignment="0" attributes="0">
+                                  <Component id="lblParar" alignment="0" min="-2" pref="32" max="-2" attributes="0"/>
+                                  <Group type="103" alignment="0" groupAlignment="3" attributes="0">
+                                      <Component id="jLabel6" alignment="3" max="32767" attributes="0"/>
+                                      <Component id="lblProximoRapido" alignment="3" max="32767" attributes="0"/>
+                                      <Component id="jLabel7" alignment="3" max="32767" attributes="0"/>
                                   </Group>
                               </Group>
                           </Group>
                       </Group>
+                      <EmptySpace min="14" pref="14" max="-2" attributes="0"/>
                   </Group>
               </Group>
             </DimensionLayout>
@@ -595,7 +589,7 @@
                 <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btnProximoRapidoActionPerformed"/>
               </Events>
             </Component>
-            <Component class="javax.swing.JButton" name="btnAnteriorRapido1">
+            <Component class="javax.swing.JButton" name="btnAnteriorRapido">
               <Properties>
                 <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
                   <Image iconType="3" name="/Icones/anterior 3.png"/>
@@ -609,10 +603,10 @@
                 </Property>
               </Properties>
               <Events>
-                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btnAnteriorRapido1ActionPerformed"/>
+                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btnAnteriorRapidoActionPerformed"/>
               </Events>
             </Component>
-            <Component class="javax.swing.JLabel" name="lblRapido">
+            <Component class="javax.swing.JLabel" name="lblAnteriorRapido">
               <Properties>
                 <Property name="horizontalAlignment" type="int" value="0"/>
                 <Property name="text" type="java.lang.String" value="&lt;html&gt;&lt;div style=&apos;text-align: center&apos;&gt;Anterior &lt;br&gt; R&#xe1;pido &lt;/div&gt;&lt;/html&gt;"/>
@@ -620,7 +614,7 @@
                 <Property name="alignmentY" type="float" value="0.1"/>
               </Properties>
             </Component>
-            <Component class="javax.swing.JLabel" name="lblRapido1">
+            <Component class="javax.swing.JLabel" name="lblProximoRapido">
               <Properties>
                 <Property name="horizontalAlignment" type="int" value="0"/>
                 <Property name="text" type="java.lang.String" value="&lt;html&gt;&lt;div style=&apos;text-align: center&apos;&gt;Pr&#xf3;ximo&lt;br&gt; R&#xe1;pido &lt;/div&gt;&lt;/html&gt;"/>
@@ -628,7 +622,7 @@
                 <Property name="alignmentY" type="float" value="0.1"/>
               </Properties>
             </Component>
-            <Component class="javax.swing.JButton" name="btnAnterior1">
+            <Component class="javax.swing.JButton" name="btnParar">
               <Properties>
                 <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
                   <Image iconType="3" name="/Icones/pausar.png"/>
@@ -642,10 +636,10 @@
                 </Property>
               </Properties>
               <Events>
-                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btnAnterior1ActionPerformed"/>
+                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btnPararActionPerformed"/>
               </Events>
             </Component>
-            <Component class="javax.swing.JLabel" name="jLabel8">
+            <Component class="javax.swing.JLabel" name="lblParar">
               <Properties>
                 <Property name="horizontalAlignment" type="int" value="0"/>
                 <Property name="text" type="java.lang.String" value="&lt;html&gt;&lt;div style=&apos;text-align: center&apos;&gt;Parar &lt;/div&gt;&lt;/html&gt;"/>
