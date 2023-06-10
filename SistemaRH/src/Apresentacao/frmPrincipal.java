@@ -1320,6 +1320,8 @@ public class frmPrincipal extends javax.swing.JFrame
 
     private void btnProximoRapidoActionPerformed(java.awt.event.ActionEvent evt)//GEN-FIRST:event_btnProximoRapidoActionPerformed
     {//GEN-HEADEREND:event_btnProximoRapidoActionPerformed
+        btnAnteriorRapido.setEnabled(false);
+        btnProximoRapido.setEnabled(false);
         executor = Executors.newSingleThreadScheduledExecutor();
         executor.scheduleAtFixedRate(new Runnable()
         {
@@ -1335,13 +1337,19 @@ public class frmPrincipal extends javax.swing.JFrame
                         int primeiraMatricula = quantidadeDeCodigosSalvosNoBancoDeDados.get(0);
                         int ultimaMatricula = quantidadeDeCodigosSalvosNoBancoDeDados.size() - 1;
                         int matriculaAtual = quantidadeDeCodigosSalvosNoBancoDeDados.get(contadorProximo);
-                        contadorProximo++;
+                        if (matriculaAtual <= ultimaMatricula)
+                        {
+                            contadorProximo++;
+                        }
 
                         System.out.println(matriculaAtual);
-                        if (contadorProximo >= ultimaMatricula)
+                        if (matriculaAtual >= ultimaMatricula)
                         {
                             executor.shutdown();
                             contadorProximo = 0;
+                            btnAnteriorRapido.setEnabled(true);
+                            btnProximoRapido.setEnabled(true);
+
                         }
 
                     }
@@ -1352,6 +1360,11 @@ public class frmPrincipal extends javax.swing.JFrame
 
     private void btnAnteriorRapidoActionPerformed(java.awt.event.ActionEvent evt)//GEN-FIRST:event_btnAnteriorRapidoActionPerformed
     {//GEN-HEADEREND:event_btnAnteriorRapidoActionPerformed
+        btnAnteriorRapido.setEnabled(false);
+        btnProximoRapido.setEnabled(false);
+        int ultimaMatricula = quantidadeDeCodigosSalvosNoBancoDeDados.size() - 1;
+        contadorAnterior = ultimaMatricula;
+
         executor = Executors.newSingleThreadScheduledExecutor();
         executor.scheduleAtFixedRate(new Runnable()
         {
@@ -1365,21 +1378,24 @@ public class frmPrincipal extends javax.swing.JFrame
                         gerenciadorNavegacao(frmCCE, frmCCE, "Manutenção de Cargos e Empregos", "anterior");
 
                         int primeiraMatricula = quantidadeDeCodigosSalvosNoBancoDeDados.get(0);
-                        int ultimaMatricula = quantidadeDeCodigosSalvosNoBancoDeDados.size() - 1;
-                        int matriculaAtual = quantidadeDeCodigosSalvosNoBancoDeDados.get(contador);
-                        contadorAnterior++;
-
-
-                        if (contadorAnterior >= ultimaMatricula)
+                        int matriculaAtual = quantidadeDeCodigosSalvosNoBancoDeDados.get(contadorAnterior);
+                        if (matriculaAtual > primeiraMatricula)
+                        {
+                            contadorAnterior--;
+                        }
+                        if (matriculaAtual <= primeiraMatricula)
                         {
                             executor.shutdown();
                             contadorAnterior = 0;
+                            btnAnteriorRapido.setEnabled(true);
+                            btnProximoRapido.setEnabled(true);
                         }
-
                     }
-                });
+                }
+                );
             }
-        }, 0, 1, TimeUnit.SECONDS);
+        }, 0, 1, TimeUnit.SECONDS
+        );
     }//GEN-LAST:event_btnAnteriorRapidoActionPerformed
 
     private void btnPararActionPerformed(java.awt.event.ActionEvent evt)//GEN-FIRST:event_btnPararActionPerformed
