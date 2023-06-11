@@ -947,6 +947,16 @@ public class frmPrincipal extends javax.swing.JFrame
 
     private void btnProximoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnProximoActionPerformed
         gerenciadorNavegacao(frmCCE, frmCCE, "Manutenção de Cargos e Empregos", "proximo");
+        
+               //caso o usuario fique voltando o contador volta tambem no caso do avançar e retornar rapido
+        if (contadorAnterior < quantidadeDeCodigosSalvosNoBancoDeDados.size()-1)
+        {
+            contadorAnterior++;
+        }
+        else
+        {
+             contadorAnterior = contadorAnterior + 0;
+        }
     }//GEN-LAST:event_btnProximoActionPerformed
 
     private void btnUltimoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnUltimoActionPerformed
@@ -1308,7 +1318,7 @@ public class frmPrincipal extends javax.swing.JFrame
     {//GEN-HEADEREND:event_btnAnteriorActionPerformed
         gerenciadorNavegacao(frmCCE, frmCCE, "Manutenção de Cargos e Empregos", "anterior");
         //caso o usuario fique voltando o contador volta tambem no caso do avançar e retornar rapido
-        if (contadorProximo >= 0)
+        if (contadorProximo > 0)
         {
             contadorProximo--;
         }
