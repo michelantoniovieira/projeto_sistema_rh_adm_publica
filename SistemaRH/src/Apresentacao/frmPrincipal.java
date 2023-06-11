@@ -943,24 +943,41 @@ public class frmPrincipal extends javax.swing.JFrame
 
     private void btnPrimeiroActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnPrimeiroActionPerformed
         gerenciadorNavegacao(frmCCE, frmCCE, "Manutenção de Cargos e Empregos", "primeiro");
+        if (contadorProximo > 0)
+        {
+            contadorProximo--;
+        }
+        else
+        {
+            contadorProximo = 0;
+        }
     }//GEN-LAST:event_btnPrimeiroActionPerformed
 
     private void btnProximoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnProximoActionPerformed
         gerenciadorNavegacao(frmCCE, frmCCE, "Manutenção de Cargos e Empregos", "proximo");
-        
-               //caso o usuario fique voltando o contador volta tambem no caso do avançar e retornar rapido
-        if (contadorAnterior < quantidadeDeCodigosSalvosNoBancoDeDados.size()-1)
+
+        //caso o usuario fique voltando o contador volta tambem no caso do avançar e retornar rapido
+        if (contadorAnterior < quantidadeDeCodigosSalvosNoBancoDeDados.size() - 1)
         {
             contadorAnterior++;
         }
         else
         {
-             contadorAnterior = contadorAnterior + 0;
+            contadorAnterior = contadorAnterior + 0;
         }
     }//GEN-LAST:event_btnProximoActionPerformed
 
     private void btnUltimoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnUltimoActionPerformed
         gerenciadorNavegacao(frmCCE, frmCCE, "Manutenção de Cargos e Empregos", "ultimo");
+
+        if (contadorAnterior < quantidadeDeCodigosSalvosNoBancoDeDados.size() - 1)
+        {
+            contadorAnterior++;
+        }
+        else
+        {
+            contadorAnterior = contadorAnterior + 0;
+        }
     }//GEN-LAST:event_btnUltimoActionPerformed
     //prencher tela cadastro cargo emprego
     private void preencherTelaCadastroCargoEmprego(int index)
@@ -1359,7 +1376,6 @@ public class frmPrincipal extends javax.swing.JFrame
                             contadorProximo = 0;
                             btnAnteriorRapido.setEnabled(true);
                             btnProximoRapido.setEnabled(true);
-
                         }
 
                     }
@@ -1411,6 +1427,8 @@ public class frmPrincipal extends javax.swing.JFrame
     private void btnPararActionPerformed(java.awt.event.ActionEvent evt)//GEN-FIRST:event_btnPararActionPerformed
     {//GEN-HEADEREND:event_btnPararActionPerformed
         executor.shutdown();
+        btnAnteriorRapido.setEnabled(true);
+        btnProximoRapido.setEnabled(true);
     }//GEN-LAST:event_btnPararActionPerformed
 
     public static void main(String args[])
@@ -1519,6 +1537,15 @@ public class frmPrincipal extends javax.swing.JFrame
             public void actionPerformed(ActionEvent e)
             {
                 gerenciadorNavegacao(frmCCE, frmCCE, "Manutenção de Cargos e Empregos", "primeiro");
+
+                if (contadorProximo > 0)
+                {
+                    contadorProximo--;
+                }
+                else
+                {
+                    contadorProximo = 0;
+                }
             }
         });
     }
@@ -1544,9 +1571,13 @@ public class frmPrincipal extends javax.swing.JFrame
                         {
                             gerenciadorNavegacao(frmCCE, frmCCE, "Manutenção de Cargos e Empregos", "anterior");
                             //caso o usuario fique voltando o contador volta tambem no caso do avançar e retornar rapido
-                            if (contador >= 0)
+                            if (contadorProximo > 0)
                             {
-                                contador--;
+                                contadorProximo--;
+                            }
+                            else
+                            {
+                                contadorProximo = 0;
                             }
                         }
                     });
@@ -1594,6 +1625,16 @@ public class frmPrincipal extends javax.swing.JFrame
                         public void actionPerformed(ActionEvent e)
                         {
                             gerenciadorNavegacao(frmCCE, frmCCE, "Manutenção de Cargos e Empregos", "proximo");
+
+                            //caso o usuario fique voltando o contador volta tambem no caso do avançar e retornar rapido
+                            if (contadorAnterior < quantidadeDeCodigosSalvosNoBancoDeDados.size() - 1)
+                            {
+                                contadorAnterior++;
+                            }
+                            else
+                            {
+                                contadorAnterior = contadorAnterior + 0;
+                            }
                         }
                     });
                     timer.setInitialDelay(0);
