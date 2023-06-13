@@ -942,42 +942,15 @@ public class frmPrincipal extends javax.swing.JFrame
     }//GEN-LAST:event_btnSalvarActionPerformed
 
     private void btnPrimeiroActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnPrimeiroActionPerformed
-        gerenciadorNavegacao(frmCCE, frmCCE, "Manutenção de Cargos e Empregos", "primeiro");
-        if (contadorProximo > 0)
-        {
-            contadorProximo--;
-        }
-        else
-        {
-            contadorProximo = 0;
-        }
+        gerenciadorNavegacao(frmCCE, frmCCE, "Manutenção de Cargos e Empregos", "primeiro", false);
     }//GEN-LAST:event_btnPrimeiroActionPerformed
 
     private void btnProximoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnProximoActionPerformed
-        gerenciadorNavegacao(frmCCE, frmCCE, "Manutenção de Cargos e Empregos", "proximo");
-
-        //caso o usuario fique voltando o contador volta tambem no caso do avançar e retornar rapido
-        if (contadorAnterior < quantidadeDeCodigosSalvosNoBancoDeDados.size() - 1)
-        {
-            contadorAnterior++;
-        }
-        else
-        {
-            contadorAnterior = contadorAnterior + 0;
-        }
+        gerenciadorNavegacao(frmCCE, frmCCE, "Manutenção de Cargos e Empregos", "proximo", false);
     }//GEN-LAST:event_btnProximoActionPerformed
 
     private void btnUltimoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnUltimoActionPerformed
-        gerenciadorNavegacao(frmCCE, frmCCE, "Manutenção de Cargos e Empregos", "ultimo");
-
-        if (contadorAnterior < quantidadeDeCodigosSalvosNoBancoDeDados.size() - 1)
-        {
-            contadorAnterior++;
-        }
-        else
-        {
-            contadorAnterior = contadorAnterior + 0;
-        }
+        gerenciadorNavegacao(frmCCE, frmCCE, "Manutenção de Cargos e Empregos", "ultimo", false);
     }//GEN-LAST:event_btnUltimoActionPerformed
     //prencher tela cadastro cargo emprego
     private void preencherTelaCadastroCargoEmprego(int index)
@@ -1333,16 +1306,7 @@ public class frmPrincipal extends javax.swing.JFrame
 
     private void btnAnteriorActionPerformed(java.awt.event.ActionEvent evt)//GEN-FIRST:event_btnAnteriorActionPerformed
     {//GEN-HEADEREND:event_btnAnteriorActionPerformed
-        gerenciadorNavegacao(frmCCE, frmCCE, "Manutenção de Cargos e Empregos", "anterior");
-        //caso o usuario fique voltando o contador volta tambem no caso do avançar e retornar rapido
-        if (contadorProximo > 0)
-        {
-            contadorProximo--;
-        }
-        else
-        {
-            contadorProximo = 0;
-        }
+        gerenciadorNavegacao(frmCCE, frmCCE, "Manutenção de Cargos e Empregos", "anterior", false);
     }//GEN-LAST:event_btnAnteriorActionPerformed
 
     private void btnProximoRapidoActionPerformed(java.awt.event.ActionEvent evt)//GEN-FIRST:event_btnProximoRapidoActionPerformed
@@ -1359,25 +1323,7 @@ public class frmPrincipal extends javax.swing.JFrame
                 {
                     public void run()
                     {
-                        gerenciadorNavegacao(frmCCE, frmCCE, "Manutenção de Cargos e Empregos", "proximo");
-
-                        int primeiraMatricula = quantidadeDeCodigosSalvosNoBancoDeDados.get(0);
-                        int ultimaMatricula = quantidadeDeCodigosSalvosNoBancoDeDados.size() - 1;
-                        int matriculaAtual = quantidadeDeCodigosSalvosNoBancoDeDados.get(contadorProximo);
-                        if (matriculaAtual <= ultimaMatricula)
-                        {
-                            contadorProximo++;
-                        }
-
-                        System.out.println(matriculaAtual);
-                        if (matriculaAtual >= ultimaMatricula)
-                        {
-                            executor.shutdown();
-                            contadorProximo = 0;
-                            btnAnteriorRapido.setEnabled(true);
-                            btnProximoRapido.setEnabled(true);
-                        }
-
+                        gerenciadorNavegacao(frmCCE, frmCCE, "Manutenção de Cargos e Empregos", "proximo", true);
                     }
                 });
             }
@@ -1388,7 +1334,15 @@ public class frmPrincipal extends javax.swing.JFrame
     {//GEN-HEADEREND:event_btnAnteriorRapidoActionPerformed
         btnAnteriorRapido.setEnabled(false);
         btnProximoRapido.setEnabled(false);
-        int ultimaMatricula = quantidadeDeCodigosSalvosNoBancoDeDados.size() - 1;
+        int ultimaMatricula;
+        if (quantidadeDeCodigosSalvosNoBancoDeDados == null)
+        {
+            ultimaMatricula = 0;
+        }
+        else
+        {
+            ultimaMatricula = quantidadeDeCodigosSalvosNoBancoDeDados.size() - 1;
+        }
         contadorAnterior = ultimaMatricula;
 
         executor = Executors.newSingleThreadScheduledExecutor();
@@ -1401,21 +1355,7 @@ public class frmPrincipal extends javax.swing.JFrame
                 {
                     public void run()
                     {
-                        gerenciadorNavegacao(frmCCE, frmCCE, "Manutenção de Cargos e Empregos", "anterior");
-
-                        int primeiraMatricula = quantidadeDeCodigosSalvosNoBancoDeDados.get(0);
-                        int matriculaAtual = quantidadeDeCodigosSalvosNoBancoDeDados.get(contadorAnterior);
-                        if (matriculaAtual > primeiraMatricula)
-                        {
-                            contadorAnterior--;
-                        }
-                        if (matriculaAtual <= primeiraMatricula)
-                        {
-                            executor.shutdown();
-                            contadorAnterior = 0;
-                            btnAnteriorRapido.setEnabled(true);
-                            btnProximoRapido.setEnabled(true);
-                        }
+                        gerenciadorNavegacao(frmCCE, frmCCE, "Manutenção de Cargos e Empregos", "anterior", true);
                     }
                 }
                 );
@@ -1441,6 +1381,20 @@ public class frmPrincipal extends javax.swing.JFrame
                 new frmPrincipal().setVisible(true);
             }
         });
+    }
+
+    //metodo utilizado para saber qual é o indice que o valor se encontra, esse metodo é utilizado para que o frmprincipal saiba quando parar de executar o botão anterior rápido e primeiro rápido
+    public int encontrarIndicePeloValor(List<Integer> lista, int valor)
+    {
+        for (int i = 0; i <= lista.size(); i++)
+        {
+            if (lista.get(i) == valor)
+            {
+                return i;
+            }
+        }
+
+        return -1;
     }
 
     //para este metodo funcionar eu devo chamalo no método construtor
@@ -1536,7 +1490,7 @@ public class frmPrincipal extends javax.swing.JFrame
             @Override
             public void actionPerformed(ActionEvent e)
             {
-                gerenciadorNavegacao(frmCCE, frmCCE, "Manutenção de Cargos e Empregos", "primeiro");
+                gerenciadorNavegacao(frmCCE, frmCCE, "Manutenção de Cargos e Empregos", "primeiro", false);
 
                 if (contadorProximo > 0)
                 {
@@ -1569,7 +1523,7 @@ public class frmPrincipal extends javax.swing.JFrame
                         @Override
                         public void actionPerformed(ActionEvent e)
                         {
-                            gerenciadorNavegacao(frmCCE, frmCCE, "Manutenção de Cargos e Empregos", "anterior");
+                            gerenciadorNavegacao(frmCCE, frmCCE, "Manutenção de Cargos e Empregos", "anterior", false);
                             //caso o usuario fique voltando o contador volta tambem no caso do avançar e retornar rapido
                             if (contadorProximo > 0)
                             {
@@ -1624,7 +1578,7 @@ public class frmPrincipal extends javax.swing.JFrame
                         @Override
                         public void actionPerformed(ActionEvent e)
                         {
-                            gerenciadorNavegacao(frmCCE, frmCCE, "Manutenção de Cargos e Empregos", "proximo");
+                            gerenciadorNavegacao(frmCCE, frmCCE, "Manutenção de Cargos e Empregos", "proximo", false);
 
                             //caso o usuario fique voltando o contador volta tambem no caso do avançar e retornar rapido
                             if (contadorAnterior < quantidadeDeCodigosSalvosNoBancoDeDados.size() - 1)
@@ -1669,7 +1623,7 @@ public class frmPrincipal extends javax.swing.JFrame
             @Override
             public void actionPerformed(ActionEvent e)
             {
-                gerenciadorNavegacao(frmCCE, frmCCE, "Manutenção de Cargos e Empregos", "ultimo");
+                gerenciadorNavegacao(frmCCE, frmCCE, "Manutenção de Cargos e Empregos", "ultimo", false);
             }
         });
     }
@@ -1721,13 +1675,105 @@ public class frmPrincipal extends javax.swing.JFrame
         redesenhar();
     }
 
-    public void gerenciadorNavegacao(MetodosComunsParaTodosOsJIF mtd, JInternalFrame frm, String tituloJanela, String acao)
+    public void gerenciadorNavegacao(MetodosComunsParaTodosOsJIF mtd, JInternalFrame frm, String tituloJanela, String acao, boolean rapido)
     {
         JInternalFrame janelaFocada = jdkpPrincipal.getSelectedFrame();
 
         if (frm.getTitle().equals(tituloJanela) && frm.equals(janelaFocada))
         {
             quantidadeDeCodigosSalvosNoBancoDeDados = mtd.gerenciadorNavegacao(acao);
+        }
+
+        switch (acao)
+        {
+            case "primeiro":
+                if (contadorProximo > 0)
+                {
+                    contadorProximo--;
+                }
+                else
+                {
+                    contadorProximo = 0;
+                }
+                break;
+
+            case "anterior":
+                if (rapido)
+                {
+                    //bloco de comando do botão anterior rapido
+                    int primeiraMatricula = quantidadeDeCodigosSalvosNoBancoDeDados.get(0);
+
+                    //esse bloco de comando identifica qual é o codigo da janela focada e busca saber qual é o indice que ele se encontra para conseguir fazer a comparação
+                    if (encontrarIndicePeloValor(quantidadeDeCodigosSalvosNoBancoDeDados, Integer.parseInt(frmCCE.getCodigoCargoEmprego())) > primeiraMatricula)
+                    {
+                        contadorAnterior--;
+                    }
+                    if (encontrarIndicePeloValor(quantidadeDeCodigosSalvosNoBancoDeDados, Integer.parseInt(frmCCE.getCodigoCargoEmprego())) < primeiraMatricula)
+                    {
+                        contadorAnterior = 0;
+                        executor.shutdown();
+                        btnAnteriorRapido.setEnabled(true);
+                        btnProximoRapido.setEnabled(true);
+                    }
+                }
+                else
+                {
+                    //caso o usuario fique voltando o contador volta tambem no caso do avançar e retornar rapido
+                    if (contadorProximo > 0)
+                    {
+                        contadorProximo--;
+                    }
+                    else
+                    {
+                        contadorProximo = 0;
+                    }
+                }
+                break;
+            case "proximo":
+                if (rapido)
+                {
+                    int primeiraMatricula = quantidadeDeCodigosSalvosNoBancoDeDados.get(0);
+                    int ultimaMatricula = quantidadeDeCodigosSalvosNoBancoDeDados.size() - 1;
+                    int matriculaAtual = quantidadeDeCodigosSalvosNoBancoDeDados.get(contadorProximo);
+
+                    if (encontrarIndicePeloValor(quantidadeDeCodigosSalvosNoBancoDeDados, Integer.parseInt(frmCCE.getCodigoCargoEmprego())) < ultimaMatricula)
+                    {
+                        contadorProximo++;
+                    }
+
+                    if (encontrarIndicePeloValor(quantidadeDeCodigosSalvosNoBancoDeDados, Integer.parseInt(frmCCE.getCodigoCargoEmprego())) >= ultimaMatricula)
+                    {
+                        executor.shutdown();
+                        contadorProximo = 0;
+                        btnAnteriorRapido.setEnabled(true);
+                        btnProximoRapido.setEnabled(true);
+                    }
+                }
+                else
+                {
+                    //caso o usuario fique voltando o contador volta tambem no caso do avançar e retornar rapido
+                    if (contadorAnterior < quantidadeDeCodigosSalvosNoBancoDeDados.size() - 1)
+                    {
+                        contadorAnterior++;
+                    }
+                    else
+                    {
+                        contadorAnterior = contadorAnterior + 0;
+                    }
+                }
+                break;
+            case "ultimo":
+                if (contadorAnterior < quantidadeDeCodigosSalvosNoBancoDeDados.size() - 1)
+                {
+                    contadorAnterior++;
+                }
+                else
+                {
+                    contadorAnterior = contadorAnterior + 0;
+                }
+                break;
+            default:
+                throw new AssertionError();
         }
     }
 
