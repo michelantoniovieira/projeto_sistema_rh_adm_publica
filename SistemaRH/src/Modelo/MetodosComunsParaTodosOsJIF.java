@@ -13,4 +13,6 @@ import java.util.List;
 public interface MetodosComunsParaTodosOsJIF
 {
     public List<Integer> gerenciadorNavegacao(String acao);
+    
+    public String getCodigo();
 }

@@ -1704,11 +1704,11 @@ public class frmPrincipal extends javax.swing.JFrame
                     int primeiraMatricula = quantidadeDeCodigosSalvosNoBancoDeDados.get(0);
 
                     //esse bloco de comando identifica qual é o codigo da janela focada e busca saber qual é o indice que ele se encontra para conseguir fazer a comparação
-                    if (encontrarIndicePeloValor(quantidadeDeCodigosSalvosNoBancoDeDados, Integer.parseInt(frmCCE.getCodigoCargoEmprego())) > primeiraMatricula)
+                    if (encontrarIndicePeloValor(quantidadeDeCodigosSalvosNoBancoDeDados, Integer.parseInt(mtd.getCodigo())) > primeiraMatricula)
                     {
                         contadorAnterior--;
                     }
-                    if (encontrarIndicePeloValor(quantidadeDeCodigosSalvosNoBancoDeDados, Integer.parseInt(frmCCE.getCodigoCargoEmprego())) < primeiraMatricula)
+                    if (encontrarIndicePeloValor(quantidadeDeCodigosSalvosNoBancoDeDados, Integer.parseInt(mtd.getCodigo())) < primeiraMatricula)
                     {
                         contadorAnterior = 0;
                         executor.shutdown();
@@ -1736,12 +1736,12 @@ public class frmPrincipal extends javax.swing.JFrame
                     int ultimaMatricula = quantidadeDeCodigosSalvosNoBancoDeDados.size() - 1;
                     int matriculaAtual = quantidadeDeCodigosSalvosNoBancoDeDados.get(contadorProximo);
 
-                    if (encontrarIndicePeloValor(quantidadeDeCodigosSalvosNoBancoDeDados, Integer.parseInt(frmCCE.getCodigoCargoEmprego())) < ultimaMatricula)
+                    if (encontrarIndicePeloValor(quantidadeDeCodigosSalvosNoBancoDeDados, Integer.parseInt(mtd.getCodigo())) < ultimaMatricula)
                     {
                         contadorProximo++;
                     }
 
-                    if (encontrarIndicePeloValor(quantidadeDeCodigosSalvosNoBancoDeDados, Integer.parseInt(frmCCE.getCodigoCargoEmprego())) >= ultimaMatricula)
+                    if (encontrarIndicePeloValor(quantidadeDeCodigosSalvosNoBancoDeDados, Integer.parseInt(mtd.getCodigo())) >= ultimaMatricula)
                     {
                         executor.shutdown();
                         contadorProximo = 0;

@@ -237,6 +237,12 @@ public class frmCadastrarCargoEmprego extends javax.swing.JInternalFrame impleme
         return txtCodigoCargoEmprego.getText();
     }
 
+    @Override
+    public String getCodigo()
+    {
+        return txtCodigoCargoEmprego.getText();
+    }
+
     public void setCodigoCargoEmprego(String codigoCargoEmprego)
     {
         this.codigoCargoEmprego = codigoCargoEmprego;
@@ -1337,4 +1343,5 @@ public class frmCadastrarCargoEmprego extends javax.swing.JInternalFrame impleme
     private javax.swing.JTextField txtCodigoCargoEmprego;
     private javax.swing.JTextField txtDescricaoCargoEmprego;
     // End of variables declaration//GEN-END:variables
+
 }
