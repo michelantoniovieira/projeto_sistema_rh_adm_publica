@@ -148,15 +148,24 @@ public class frmCadastrarCargoEmprego extends javax.swing.JInternalFrame impleme
             limparCampos();
         }
 
+        //cargo/emprego
         txtCodigoCargoEmprego.setText(String.valueOf(lista.get(0).getCodigoCargoEmprego()));
         txtDescricaoCargoEmprego.setText(String.valueOf(lista.get(0).getDescricaoCargoEmprego()));
         txtCboCargoEmprego.setText(String.valueOf(lista.get(0).getCboCargoEmprego()));
         cmbRegimeJuridico.setSelectedItem(String.valueOf(lista.get(0).getRegimeJuridicoCargoEmprego()));
         chkAtivo.setSelected(lista.get(0).getChkAtivoCargoEmprego());
+        
+        //carreira
         cmbCarreira.setSelectedItem(String.valueOf(lista.get(0).getTipoCarreira()));
+        
+        //tipo
         cmbCargaHorariaSemanal.setSelectedItem(String.valueOf(lista.get(0).getCargaHorariaSemanal()));
         cmbCargaHorariaMensal.setSelectedItem(String.valueOf(lista.get(0).getCargaHorariaMensal()));
+        
+        //exigências
         cmbEscolaridade.setSelectedItem(String.valueOf(lista.get(0).getEscolaridade()));
+        
+        //quadro
     }
 
     //liberar os campos para edição

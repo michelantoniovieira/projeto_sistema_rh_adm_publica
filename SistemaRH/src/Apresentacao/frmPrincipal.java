@@ -867,7 +867,6 @@ public class frmPrincipal extends javax.swing.JFrame
         //entra aqui quando for gravar o primeiro cadastro
         if (frmCCE.isVisible() && !frmCCE.getDescricaoCargoEmprego().equals("") && gravarAlteracaoFrmCCE == false)
         {
-
             try
             {
                 //quando eu digitar nos campos da janela CadastrarConcursoCargoEmprego e clicar no icone salvar da janela principal entra aqui e manda gravar registro que significa que os dados dos campos serão passados para as variaveis que eu acesso por aqui para mandar para a variavel controle
@@ -894,7 +893,6 @@ public class frmPrincipal extends javax.swing.JFrame
         //entra aqui quando for alterar um cadastro
         if (frmCCE.isVisible() && !frmCCE.getCodigoCargoEmprego().equals("") && gravarAlteracaoFrmCCE == true)
         {
-
             //CadastrarCargoEmpregoControle controle = new CadastrarCargoEmpregoControle(Integer.parseInt(frmCCE.getCodigoCargoEmprego()), frmCCE.getNomeCargoEmprego(), frmCCE.getRegimeJuridico(), frmCCE.getNumeroLeiCriaCargoEmprego(), frmCCE.getDataLeiCriaCargoEmprego(), frmCCE.getReferenciaSalarial());
             gravarAlteracaoFrmCCE = false;
             frmCCE.limparCampos();
@@ -911,7 +909,6 @@ public class frmPrincipal extends javax.swing.JFrame
         if (frmCC.isVisible() && !frmCC.getNumeroConcurso().equals("") && gravarAlteracaoFrmCC == false)
         {
             //quando eu digitar nos campos da janela CadastrarConcurso e clicar no icone salvar da janela principal entra aqui e manda gravar registro que significa que os dados dos campos serão passados para as variaveis que eu acesso por aqui para mandar para a variavel controle           
-
             CadastrarConcursoControle controle = new CadastrarConcursoControle(Integer.parseInt(frmCC.getNumeroConcurso()), Integer.parseInt(frmCC.getAnoConcurso()), Integer.parseInt(frmCC.getSituacaoConcurso()), Integer.parseInt(frmCC.getFk_matricula_responsavel_concurso()), Integer.parseInt(frmCC.getFk_codigo_banca()));
             controle.cadastrar();
             if (controle.getMensagem().equals("erro 1"))
@@ -1327,7 +1324,7 @@ public class frmPrincipal extends javax.swing.JFrame
                     }
                 });
             }
-        }, 0, 1, TimeUnit.SECONDS);
+        }, 0, 350, TimeUnit.MILLISECONDS);
     }//GEN-LAST:event_btnProximoRapidoActionPerformed
 
     private void btnAnteriorRapidoActionPerformed(java.awt.event.ActionEvent evt)//GEN-FIRST:event_btnAnteriorRapidoActionPerformed
@@ -1360,8 +1357,7 @@ public class frmPrincipal extends javax.swing.JFrame
                 }
                 );
             }
-        }, 0, 1, TimeUnit.SECONDS
-        );
+        },  0, 350, TimeUnit.MILLISECONDS);
     }//GEN-LAST:event_btnAnteriorRapidoActionPerformed
 
     private void btnPararActionPerformed(java.awt.event.ActionEvent evt)//GEN-FIRST:event_btnPararActionPerformed
@@ -1518,7 +1514,7 @@ public class frmPrincipal extends javax.swing.JFrame
                 if (!isRunning)
                 {
                     isRunning = true;
-                    timer = new Timer(340, new ActionListener()
+                    timer = new Timer(250, new ActionListener()
                     {
                         @Override
                         public void actionPerformed(ActionEvent e)
@@ -1573,7 +1569,7 @@ public class frmPrincipal extends javax.swing.JFrame
                 if (!isRunning)
                 {
                     isRunning = true;
-                    timer = new Timer(340, new ActionListener()
+                    timer = new Timer(250, new ActionListener()
                     {
                         @Override
                         public void actionPerformed(ActionEvent e)
