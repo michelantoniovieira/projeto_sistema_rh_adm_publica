@@ -203,7 +203,4 @@ public class CadastrarCargoEmpregoControle extends CadastrarCargoEmpregoDTO
     {
         this.codigoCargosEmpregos = codigoCargosEmpregos;
     }
-    
-    
-
 }
