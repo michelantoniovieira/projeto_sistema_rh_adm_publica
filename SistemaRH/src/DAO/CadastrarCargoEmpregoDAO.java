@@ -1,6 +1,7 @@
 package DAO;
 
 import DTO.CadastrarCargoEmpregoDTO;
+import java.math.BigDecimal;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -35,10 +36,10 @@ public class CadastrarCargoEmpregoDAO
             return null;
         }
     }
-    
+
     public List<Integer> consultarCodigosDosCargosEmpregosNoBanco()
     {
-        
+
         List<Integer> codigosCargos = new ArrayList<>();
         conn = new ConexaoDAO().conectaBD();
         try
@@ -57,7 +58,7 @@ public class CadastrarCargoEmpregoDAO
         {
             JOptionPane.showMessageDialog(null, "Erro ao pesquisar Codigo dos Cargos e Empregos" + erro);
         }
-        
+
         return codigosCargos;
     }
 
@@ -265,6 +266,56 @@ public class CadastrarCargoEmpregoDAO
             ConexaoDAO.encerrarConexao(conexao, stmt, rs);
         }
         return objcadastrarcargoempregodto;
+    }
+
+    public BigDecimal pesquisarRemuneracao(String tipoCarreira, String referenciaSalarial, String grau)
+    {
+        switch (tipoCarreira)
+        {
+            case "Técnico":
+                tipoCarreira = "1";
+                break;
+
+            case "Aposentado":
+                tipoCarreira = "1";
+                break;
+
+            case "Professor":
+                tipoCarreira = "3";
+                break;
+
+            case "Comissão":
+                tipoCarreira = "4";
+                break;
+
+            case "Eletivo":
+                tipoCarreira = "5";
+                break;
+
+            default:
+                throw new AssertionError();
+        }
+
+        conn = new ConexaoDAO().conectaBD();
+        BigDecimal remuneracao = new BigDecimal("0");
+
+        try
+        {
+            String sql = "SELECT * FROM vencimentos WHERE " + tipoCarreira + " = fk_codigo_tabela_salarial AND " + referenciaSalarial + " = referencia_vencimento AND '" + grau + "' = grau_vencimento";
+
+            PreparedStatement pstm = conn.prepareStatement(sql);
+            ResultSet rs = pstm.executeQuery();
+
+            if (rs.next())
+            {
+                remuneracao = rs.getBigDecimal("valor_vencimento");
+            }
+        }
+        catch (SQLException erro)
+        {
+            JOptionPane.showMessageDialog(null, "Erro ao pesquisar remuneração: " + erro);
+        }
+        return remuneracao;
     }
 
 }

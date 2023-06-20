@@ -9,6 +9,7 @@ import DAO.CadastrarCargoEmpregoDAO;
 import DTO.CadastrarCargoEmpregoDTO;
 import Modelo.ControleCadastrarFundamento;
 import Util.CadastrarCargoEmpregoValidacao;
+import java.math.BigDecimal;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
@@ -175,6 +176,12 @@ public class CadastrarCargoEmpregoControle extends CadastrarCargoEmpregoDTO
     public String pesquisarRemuneracao()
     {
         return null;
+    }
+    
+    //informações remuneração
+    public BigDecimal vincularRemuneração(String tipoCarreira, String referenciaSalarial, String grau)
+    {
+         return cadastrarCargoEmpregoDAO.pesquisarRemuneracao(tipoCarreira, referenciaSalarial, grau);
     }
 
     public List<CadastrarCargoEmpregoDTO> getObjPuxadoDaPesquisaDeCargoEmprego()

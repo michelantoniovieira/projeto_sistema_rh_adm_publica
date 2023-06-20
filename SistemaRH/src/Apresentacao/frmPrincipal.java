@@ -1327,7 +1327,7 @@ public class frmPrincipal extends javax.swing.JFrame
                     }
                 });
             }
-        }, 0, 1, TimeUnit.SECONDS);
+        }, 0, 350, TimeUnit.MILLISECONDS);
     }//GEN-LAST:event_btnProximoRapidoActionPerformed
 
     private void btnAnteriorRapidoActionPerformed(java.awt.event.ActionEvent evt)//GEN-FIRST:event_btnAnteriorRapidoActionPerformed
@@ -1360,8 +1360,7 @@ public class frmPrincipal extends javax.swing.JFrame
                 }
                 );
             }
-        }, 0, 1, TimeUnit.SECONDS
-        );
+        }, 0, 350, TimeUnit.MILLISECONDS);
     }//GEN-LAST:event_btnAnteriorRapidoActionPerformed
 
     private void btnPararActionPerformed(java.awt.event.ActionEvent evt)//GEN-FIRST:event_btnPararActionPerformed

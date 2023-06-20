@@ -9,7 +9,11 @@ import Controle.CadastrarCargoEmpregoControle;
 import DTO.CadastrarCargoEmpregoDTO;
 import Modelo.CentralizarJanela;
 import Modelo.ControleCadastrarFundamento;
+import java.awt.event.ItemEvent;
+import java.awt.event.ItemListener;
 import java.awt.event.KeyEvent;
+import java.math.BigDecimal;
+import java.text.DecimalFormat;
 import java.util.ArrayList;
 import java.util.List;
 import javax.accessibility.AccessibleContext;
@@ -104,12 +108,15 @@ public class frmCadastrarCargoEmprego extends javax.swing.JInternalFrame impleme
 
     private List<Integer> codigoCargosEmpregos;
 
+    public CadastrarCargoEmpregoControle controle;
+
     public frmCadastrarCargoEmprego()
     {
         initComponents();
         gerenciadorDeTabelas(tbQuadro);
         gerenciadorDeTabelas(tbFundamentoCriacaoExclusao);
         gerenciadorDeTabelas(tbFundamentoReajuste);
+        controle = new CadastrarCargoEmpregoControle();
     }
 
     public void gravarRegistro()
@@ -157,6 +164,85 @@ public class frmCadastrarCargoEmprego extends javax.swing.JInternalFrame impleme
         cmbCargaHorariaSemanal.setSelectedItem(String.valueOf(lista.get(0).getCargaHorariaSemanal()));
         cmbCargaHorariaMensal.setSelectedItem(String.valueOf(lista.get(0).getCargaHorariaMensal()));
         cmbEscolaridade.setSelectedItem(String.valueOf(lista.get(0).getEscolaridade()));
+
+        //preencher remuneração
+        preecherTabelaVencimentos(jtpRemuneracao);
+    }
+
+    public void preecherTabelaVencimentos(JTabbedPane jtp)
+    {
+        // Adiciona um ItemListener ao cmbReferenciaSalarial, ao  mudar no combobox ele ja atualiza
+        cmbReferenciaSalarial.addItemListener(new ItemListener()
+        {
+            @Override
+            public void itemStateChanged(ItemEvent e)
+            {
+                if (e.getStateChange() == ItemEvent.SELECTED)
+                {
+                    String selectedItem = (String) cmbReferenciaSalarial.getSelectedItem();
+                    // Aqui você pode chamar o método ou fazer qualquer ação desejada
+                    BigDecimal remuneracao = controle.vincularRemuneração(cmbCarreira.getSelectedItem().toString(), cmbReferenciaSalarial.getSelectedItem().toString(), cmbGrau.getSelectedItem().toString());
+                    DecimalFormat decimalFormat = new DecimalFormat("#,##0.00");
+                    String valorFormatado = decimalFormat.format(remuneracao);
+                    lblRemuneracao.setText(valorFormatado);
+                }
+            }
+        });
+
+        // Adiciona um ItemListener ao cmbReferenciaSalarial, ao  mudar no combobox ele ja atualiza
+        cmbGrau.addItemListener(new ItemListener()
+        {
+            @Override
+            public void itemStateChanged(ItemEvent e)
+            {
+                if (e.getStateChange() == ItemEvent.SELECTED)
+                {
+                    String selectedItem = (String) cmbGrau.getSelectedItem();
+                    // Aqui você pode chamar o método ou fazer qualquer ação desejada
+                    BigDecimal remuneracao = controle.vincularRemuneração(cmbCarreira.getSelectedItem().toString(), cmbReferenciaSalarial.getSelectedItem().toString(), cmbGrau.getSelectedItem().toString());
+                    DecimalFormat decimalFormat = new DecimalFormat("#,##0.00");
+                    String valorFormatado = decimalFormat.format(remuneracao);
+                    lblRemuneracao.setText(valorFormatado);
+                }
+            }
+        });
+
+        String regimeJuridicoSelecionado = cmbCarreira.getSelectedItem().toString();
+
+        switch (regimeJuridicoSelecionado)
+        {
+            case "Técnico":
+                jtp.setSelectedIndex(0);
+                jtp.setEnabledAt(0, true);
+                jtp.setEnabledAt(1, false);
+                jtp.setEnabledAt(2, false);
+                jtp.setEnabledAt(3, false);
+                break;
+
+            case "Professor":
+                jtp.setSelectedIndex(0);
+                jtp.setEnabledAt(0, false);
+                jtp.setEnabledAt(1, true);
+                jtp.setEnabledAt(2, false);
+                jtp.setEnabledAt(3, false);
+                break;
+
+            case "Comissão":
+                jtp.setSelectedIndex(0);
+                jtp.setEnabledAt(0, false);
+                jtp.setEnabledAt(1, false);
+                jtp.setEnabledAt(2, true);
+                jtp.setEnabledAt(3, false);
+                break;
+
+            case "Eletivo":
+                jtp.setSelectedIndex(0);
+                jtp.setEnabledAt(0, false);
+                jtp.setEnabledAt(1, false);
+                jtp.setEnabledAt(2, false);
+                jtp.setEnabledAt(3, true);
+                break;
+        }
     }
 
     //liberar os campos para edição
@@ -181,7 +267,6 @@ public class frmCadastrarCargoEmprego extends javax.swing.JInternalFrame impleme
         cmbFaixaSalarial.setEnabled(true);
         cmbGrauSalario.setEnabled(true);
         lblRsDocente.setEnabled(true);
-        cmbGrauInsalubridade.setEnabled(true);
         btnCadastrarFundamento.setEnabled(true);
         btnAlterarFundamento.setEnabled(true);
         btnExcluirFundamento.setEnabled(true);
@@ -209,7 +294,6 @@ public class frmCadastrarCargoEmprego extends javax.swing.JInternalFrame impleme
         cmbFaixaSalarial.setEnabled(false);
         cmbGrauSalario.setEnabled(false);
         lblRsDocente.setEnabled(false);
-        cmbGrauInsalubridade.setEnabled(false);
         btnCadastrarFundamento.setEnabled(false);
         btnAlterarFundamento.setEnabled(false);
         btnExcluirFundamento.setEnabled(false);
@@ -423,9 +507,8 @@ public class frmCadastrarCargoEmprego extends javax.swing.JInternalFrame impleme
         lblGrauProf = new javax.swing.JLabel();
         cmbGrauSalario = new javax.swing.JComboBox<>();
         lblRsDocente = new javax.swing.JLabel();
-        jpInsalubridade = new javax.swing.JPanel();
-        lblGrauInsalubridade = new javax.swing.JLabel();
-        cmbGrauInsalubridade = new javax.swing.JComboBox<>();
+        jPanel1 = new javax.swing.JPanel();
+        jPanel2 = new javax.swing.JPanel();
         jpRequisitosDeProvimento = new javax.swing.JPanel();
         jScrollPane1 = new javax.swing.JScrollPane();
         txtAreaRequisitosProvimento = new javax.swing.JTextArea();
@@ -728,35 +811,49 @@ public class frmCadastrarCargoEmprego extends javax.swing.JInternalFrame impleme
         jpTabelaVencimentosLayout.setHorizontalGroup(
             jpTabelaVencimentosLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jpTabelaVencimentosLayout.createSequentialGroup()
-                .addContainerGap()
-                .addComponent(lblReferenciaSalarial)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(cmbReferenciaSalarial, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(32, 32, 32)
-                .addComponent(lblGrau)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(cmbGrau, javax.swing.GroupLayout.PREFERRED_SIZE, 43, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(31, 31, 31)
+                .addGroup(jpTabelaVencimentosLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(jpTabelaVencimentosLayout.createSequentialGroup()
+                        .addGap(37, 37, 37)
+                        .addComponent(lblGrau))
+                    .addGroup(jpTabelaVencimentosLayout.createSequentialGroup()
+                        .addContainerGap()
+                        .addComponent(lblReferenciaSalarial)))
+                .addGroup(jpTabelaVencimentosLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(jpTabelaVencimentosLayout.createSequentialGroup()
+                        .addGap(18, 18, 18)
+                        .addComponent(cmbReferenciaSalarial, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jpTabelaVencimentosLayout.createSequentialGroup()
+                        .addGap(19, 19, 19)
+                        .addComponent(cmbGrau, javax.swing.GroupLayout.PREFERRED_SIZE, 49, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addGap(99, 99, 99)
                 .addComponent(lblRsVencimentos)
                 .addGap(18, 18, 18)
                 .addComponent(lblRemuneracao)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addContainerGap(111, Short.MAX_VALUE))
         );
         jpTabelaVencimentosLayout.setVerticalGroup(
             jpTabelaVencimentosLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jpTabelaVencimentosLayout.createSequentialGroup()
-                .addGap(3, 3, 3)
-                .addGroup(jpTabelaVencimentosLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(lblRemuneracao, javax.swing.GroupLayout.PREFERRED_SIZE, 35, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(cmbGrau, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(lblGrau)
-                    .addComponent(cmbReferenciaSalarial, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(lblReferenciaSalarial)
-                    .addComponent(lblRsVencimentos, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addGap(20, 20, 20)
+                .addGroup(jpTabelaVencimentosLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(jpTabelaVencimentosLayout.createSequentialGroup()
+                        .addGroup(jpTabelaVencimentosLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(cmbReferenciaSalarial, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(lblReferenciaSalarial))
+                        .addGap(18, 18, 18)
+                        .addGroup(jpTabelaVencimentosLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(cmbGrau, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(lblGrau)))
+                    .addGroup(jpTabelaVencimentosLayout.createSequentialGroup()
+                        .addGap(18, 18, 18)
+                        .addGroup(jpTabelaVencimentosLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(lblRemuneracao, javax.swing.GroupLayout.PREFERRED_SIZE, 35, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(lblRsVencimentos, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 9, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addGap(18, 18, 18))
         );
 
-        jtpRemuneracao.addTab("Tabela de Vencimentos", jpTabelaVencimentos);
+        jtpRemuneracao.addTab("Técnicos", jpTabelaVencimentos);
 
         lblFaixa.setText("Faixa:");
 
@@ -775,58 +872,64 @@ public class frmCadastrarCargoEmprego extends javax.swing.JInternalFrame impleme
             jpEscalaVencimentosDocenteLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jpEscalaVencimentosDocenteLayout.createSequentialGroup()
                 .addGap(14, 14, 14)
-                .addComponent(lblFaixa)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(cmbFaixaSalarial, javax.swing.GroupLayout.PREFERRED_SIZE, 208, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(lblGrauProf)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(cmbGrauSalario, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addGroup(jpEscalaVencimentosDocenteLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                    .addComponent(lblGrauProf, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(lblFaixa, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addGap(37, 37, 37)
+                .addGroup(jpEscalaVencimentosDocenteLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(cmbFaixaSalarial, javax.swing.GroupLayout.PREFERRED_SIZE, 208, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(cmbGrauSalario, javax.swing.GroupLayout.PREFERRED_SIZE, 208, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(31, 31, 31)
                 .addComponent(lblRsDocente)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addContainerGap(111, Short.MAX_VALUE))
         );
         jpEscalaVencimentosDocenteLayout.setVerticalGroup(
             jpEscalaVencimentosDocenteLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jpEscalaVencimentosDocenteLayout.createSequentialGroup()
-                .addGap(7, 7, 7)
-                .addGroup(jpEscalaVencimentosDocenteLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(lblFaixa)
-                    .addComponent(cmbFaixaSalarial, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(lblGrauProf)
-                    .addComponent(cmbGrauSalario, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(lblRsDocente, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addGap(15, 15, 15)
+                .addGroup(jpEscalaVencimentosDocenteLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(jpEscalaVencimentosDocenteLayout.createSequentialGroup()
+                        .addGap(8, 8, 8)
+                        .addComponent(lblFaixa))
+                    .addGroup(jpEscalaVencimentosDocenteLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                        .addGroup(jpEscalaVencimentosDocenteLayout.createSequentialGroup()
+                            .addGap(5, 5, 5)
+                            .addComponent(cmbFaixaSalarial, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addGap(18, 18, 18)
+                            .addGroup(jpEscalaVencimentosDocenteLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                                .addComponent(cmbGrauSalario, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addComponent(lblGrauProf)))
+                        .addComponent(lblRsDocente, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 67, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addContainerGap(18, Short.MAX_VALUE))
         );
 
-        jtpRemuneracao.addTab("Escala de Vencimentos - Docente", jpEscalaVencimentosDocente);
+        jtpRemuneracao.addTab("Docentes", jpEscalaVencimentosDocente);
 
-        lblGrauInsalubridade.setText("Grau:");
-
-        cmbGrauInsalubridade.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "-", "Leve - 10%", "Médio - 20%", "Máximo - 40%" }));
-
-        javax.swing.GroupLayout jpInsalubridadeLayout = new javax.swing.GroupLayout(jpInsalubridade);
-        jpInsalubridade.setLayout(jpInsalubridadeLayout);
-        jpInsalubridadeLayout.setHorizontalGroup(
-            jpInsalubridadeLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jpInsalubridadeLayout.createSequentialGroup()
-                .addGap(18, 18, 18)
-                .addComponent(lblGrauInsalubridade)
-                .addGap(18, 18, 18)
-                .addComponent(cmbGrauInsalubridade, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(283, Short.MAX_VALUE))
+        javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
+        jPanel1.setLayout(jPanel1Layout);
+        jPanel1Layout.setHorizontalGroup(
+            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 458, Short.MAX_VALUE)
         );
-        jpInsalubridadeLayout.setVerticalGroup(
-            jpInsalubridadeLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jpInsalubridadeLayout.createSequentialGroup()
-                .addGap(14, 14, 14)
-                .addGroup(jpInsalubridadeLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(lblGrauInsalubridade)
-                    .addComponent(cmbGrauInsalubridade, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+        jPanel1Layout.setVerticalGroup(
+            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 100, Short.MAX_VALUE)
         );
 
-        jtpRemuneracao.addTab("Insalubridade", jpInsalubridade);
+        jtpRemuneracao.addTab("Comissão", jPanel1);
+
+        javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
+        jPanel2.setLayout(jPanel2Layout);
+        jPanel2Layout.setHorizontalGroup(
+            jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 458, Short.MAX_VALUE)
+        );
+        jPanel2Layout.setVerticalGroup(
+            jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 100, Short.MAX_VALUE)
+        );
+
+        jtpRemuneracao.addTab("Eletivo", jPanel2);
 
         jpRequisitosDeProvimento.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "Requisitos de Provimento", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Segoe UI", 1, 12))); // NOI18N
 
@@ -920,7 +1023,7 @@ public class frmCadastrarCargoEmprego extends javax.swing.JInternalFrame impleme
         jpLegislacaoLayout.setVerticalGroup(
             jpLegislacaoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jpLegislacaoLayout.createSequentialGroup()
-                .addComponent(jScrollPane3, javax.swing.GroupLayout.DEFAULT_SIZE, 141, Short.MAX_VALUE)
+                .addComponent(jScrollPane3, javax.swing.GroupLayout.DEFAULT_SIZE, 167, Short.MAX_VALUE)
                 .addContainerGap())
         );
 
@@ -962,7 +1065,7 @@ public class frmCadastrarCargoEmprego extends javax.swing.JInternalFrame impleme
         jpReajusteLayout.setVerticalGroup(
             jpReajusteLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jpReajusteLayout.createSequentialGroup()
-                .addComponent(jScrollPane4, javax.swing.GroupLayout.DEFAULT_SIZE, 143, Short.MAX_VALUE)
+                .addComponent(jScrollPane4, javax.swing.GroupLayout.DEFAULT_SIZE, 169, Short.MAX_VALUE)
                 .addContainerGap())
         );
 
@@ -1296,10 +1399,11 @@ public class frmCadastrarCargoEmprego extends javax.swing.JInternalFrame impleme
     private javax.swing.JComboBox<String> cmbEscolaridade;
     private javax.swing.JComboBox<String> cmbFaixaSalarial;
     private javax.swing.JComboBox<String> cmbGrau;
-    private javax.swing.JComboBox<String> cmbGrauInsalubridade;
     private javax.swing.JComboBox<String> cmbGrauSalario;
     private javax.swing.JComboBox<String> cmbReferenciaSalarial;
     private javax.swing.JComboBox<String> cmbRegimeJuridico;
+    private javax.swing.JPanel jPanel1;
+    private javax.swing.JPanel jPanel2;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JScrollPane jScrollPane3;
     private javax.swing.JScrollPane jScrollPane4;
@@ -1310,7 +1414,6 @@ public class frmCadastrarCargoEmprego extends javax.swing.JInternalFrame impleme
     private javax.swing.JPanel jpCarreira;
     private javax.swing.JPanel jpEscalaVencimentosDocente;
     private javax.swing.JPanel jpExigencias;
-    private javax.swing.JPanel jpInsalubridade;
     private javax.swing.JPanel jpLegislacao;
     private javax.swing.JPanel jpOperacoes;
     private javax.swing.JPanel jpQuadro;
@@ -1326,7 +1429,6 @@ public class frmCadastrarCargoEmprego extends javax.swing.JInternalFrame impleme
     private javax.swing.JLabel lblEscolaridade;
     private javax.swing.JLabel lblFaixa;
     private javax.swing.JLabel lblGrau;
-    private javax.swing.JLabel lblGrauInsalubridade;
     private javax.swing.JLabel lblGrauProf;
     private javax.swing.JLabel lblMensal;
     private javax.swing.JLabel lblReferenciaSalarial;
