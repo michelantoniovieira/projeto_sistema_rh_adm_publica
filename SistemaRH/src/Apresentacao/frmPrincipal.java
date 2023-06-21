@@ -7,6 +7,7 @@ package Apresentacao;
 import Controle.CadastrarCargoEmpregoControle;
 import Modelo.CadastrarBancaControle;
 import Modelo.CadastrarConcursoControle;
+import Modelo.CentralizarJanela;
 import Modelo.GerenciadorDeCoresDaInterface;
 import Modelo.GerenciadorDeJanelas;
 import Modelo.GerenciadorDeJanelas;
@@ -64,6 +65,8 @@ public class frmPrincipal extends javax.swing.JFrame
     //gerenciadores
     GerenciadorDeJanelas gerenciador;
     GerenciadorDeCoresDaInterface gerenciadorCores;
+
+    CentralizarJanela centralizar;
 
     //criação do menuJanela que gerencia janelas abertas
     static JMenu menuJanela = new JMenu("Janela");
@@ -139,7 +142,9 @@ public class frmPrincipal extends javax.swing.JFrame
         gerenciadorCores = new GerenciadorDeCoresDaInterface();
 
         //definição
+        centralizar = new CentralizarJanela();
         definicoesSistema();
+
     }
 
     @SuppressWarnings("unchecked")
@@ -1285,8 +1290,8 @@ public class frmPrincipal extends javax.swing.JFrame
         }
         else
         {
-            frmCCE.indiceConsultaCargoEmprego = 0;
-            frmCCE.setLocation((jdkpPrincipal.getWidth() - frmCCE.getWidth()) / 2, (jdkpPrincipal.getHeight() - frmCCE.getHeight()) / 2);
+            centralizar.CentralizarJInternalFrame(frmCCE);
+            frmCCE.indiceConsultaCargoEmprego = -1;
             frmCCE.pack();
             jdkpPrincipal.add(frmCCE, 2);
             gerenciadorJanelasAbertas(gerenciador, frmCCE);
@@ -1730,9 +1735,7 @@ public class frmPrincipal extends javax.swing.JFrame
             case "proximo":
                 if (rapido)
                 {
-                    int primeiraMatricula = quantidadeDeCodigosSalvosNoBancoDeDados.get(0);
                     int ultimaMatricula = quantidadeDeCodigosSalvosNoBancoDeDados.size() - 1;
-                    int matriculaAtual = quantidadeDeCodigosSalvosNoBancoDeDados.get(contadorProximo);
 
                     if (encontrarIndicePeloValor(quantidadeDeCodigosSalvosNoBancoDeDados, Integer.parseInt(mtd.getCodigo())) < ultimaMatricula)
                     {
@@ -1744,7 +1747,7 @@ public class frmPrincipal extends javax.swing.JFrame
                         executor.shutdown();
                         contadorProximo = 0;
                         btnAnteriorRapido.setEnabled(true);
-                        btnProximoRapido.setEnabled(true);
+                        btnProximoRapido.setEnabled(true);   
                     }
                 }
                 else
@@ -1752,11 +1755,11 @@ public class frmPrincipal extends javax.swing.JFrame
                     //caso o usuario fique voltando o contador volta tambem no caso do avançar e retornar rapido
                     if (contadorAnterior < quantidadeDeCodigosSalvosNoBancoDeDados.size() - 1)
                     {
-                        contadorAnterior++;
+                        
                     }
                     else
                     {
-                        contadorAnterior = contadorAnterior + 0;
+
                     }
                 }
                 break;

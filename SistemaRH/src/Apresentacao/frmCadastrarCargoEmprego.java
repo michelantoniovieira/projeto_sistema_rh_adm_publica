@@ -9,6 +9,7 @@ import DTO.PesquisarCargoEmpregoDTO;
 import DTO.CadastrarCargoEmpregoDTO;
 import Modelo.CentralizarJanela;
 import Modelo.ControleCadastrarFundamento;
+import java.awt.Dimension;
 import java.awt.event.ItemEvent;
 import java.awt.event.ItemListener;
 import java.awt.event.KeyEvent;
@@ -161,14 +162,14 @@ public class frmCadastrarCargoEmprego extends javax.swing.JInternalFrame impleme
         txtCboCargoEmprego.setText(String.valueOf(lista.get(0).getCboCargoEmprego()));
         cmbRegimeJuridico.setSelectedItem(String.valueOf(lista.get(0).getRegimeJuridicoCargoEmprego()));
         chkAtivo.setSelected(lista.get(0).getChkAtivoCargoEmprego());
-        
+
         //carreira
         cmbCarreira.setSelectedItem(String.valueOf(lista.get(0).getTipoCarreira()));
-        
+
         //tipo
         cmbCargaHorariaSemanal.setSelectedItem(String.valueOf(lista.get(0).getCargaHorariaSemanal()));
         cmbCargaHorariaMensal.setSelectedItem(String.valueOf(lista.get(0).getCargaHorariaMensal()));
-        
+
         //exigências
         cmbEscolaridade.setSelectedItem(String.valueOf(lista.get(0).getEscolaridade()));
 
@@ -536,6 +537,8 @@ public class frmCadastrarCargoEmprego extends javax.swing.JInternalFrame impleme
 
         setClosable(true);
         setTitle("Manutenção de Cargos e Empregos");
+        setAlignmentX(0.0F);
+        setAlignmentY(0.0F);
         addAncestorListener(new javax.swing.event.AncestorListener()
         {
             public void ancestorAdded(javax.swing.event.AncestorEvent evt)
