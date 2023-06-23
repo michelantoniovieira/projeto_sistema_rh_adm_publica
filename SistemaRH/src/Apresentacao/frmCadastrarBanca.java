@@ -6,12 +6,13 @@ package Apresentacao;
 
 import DTO.PesquisarBancaDTO;
 import java.util.ArrayList;
+import java.util.List;
 
 /**
  *
  * @author miche
  */
-public class frmCadastrarBanca extends javax.swing.JInternalFrame
+public class frmCadastrarBanca extends javax.swing.JInternalFrame implements Modelo.MetodosComunsParaTodosOsJIF
 {
 
     private String codigoBanca = "";
@@ -61,6 +62,7 @@ public class frmCadastrarBanca extends javax.swing.JInternalFrame
     }
 
     //liberar os campos para edição
+    @Override
     public void ativarCampos()
     {
         txtCodigoBanca.setEnabled(false);
@@ -72,6 +74,7 @@ public class frmCadastrarBanca extends javax.swing.JInternalFrame
     }
 
     //travar os campos para edição
+    @Override
     public void desativarCampos()
     {
         txtCodigoBanca.setEnabled(false);
@@ -397,4 +400,16 @@ public class frmCadastrarBanca extends javax.swing.JInternalFrame
     private javax.swing.JFormattedTextField txtTelBanca;
     private javax.swing.JTextField txtTelResponsavelBanca;
     // End of variables declaration//GEN-END:variables
+
+    @Override
+    public List<Integer> gerenciadorNavegacao(String acao)
+    {
+        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+    }
+
+    @Override
+    public String getCodigo()
+    {
+        return codigoBanca;
+    }
 }

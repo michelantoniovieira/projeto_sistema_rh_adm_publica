@@ -15,4 +15,8 @@ public interface MetodosComunsParaTodosOsJIF
     public List<Integer> gerenciadorNavegacao(String acao);
     
     public String getCodigo();
+    
+    public void desativarCampos();
+    
+    public void ativarCampos();
 }

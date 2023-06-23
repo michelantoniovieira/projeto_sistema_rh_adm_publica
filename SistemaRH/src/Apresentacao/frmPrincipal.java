@@ -79,8 +79,8 @@ public class frmPrincipal extends javax.swing.JFrame
     {
         this.desativarBotoesFrmCC = desativarBotoesFrmCC;
     }
-    private boolean desativarBotoesFrmCCE = true;
 
+    private boolean desativarBotoesFrmCCE = true;
     //cadastrar banca
     public boolean gravarAlteracaoFrmCB = false;
     //cadastrar cargo e emprego
@@ -96,6 +96,9 @@ public class frmPrincipal extends javax.swing.JFrame
     int numeroAtual;
     int contadorProximo = 0;
     int contadorAnterior = 0;
+
+    //botao alterar
+    boolean estaAtivado = false;
 
     public void setGravarAlteracaoFrmCC(boolean gravarAlteracaoFrmCC)
     {
@@ -870,7 +873,7 @@ public class frmPrincipal extends javax.swing.JFrame
         desativarBotoesFrmCCE = false;
 
         //entra aqui quando for gravar o primeiro cadastro
-        if (frmCCE.isVisible() && !frmCCE.getDescricaoCargoEmprego().equals("") && gravarAlteracaoFrmCCE == false)
+        if (frmCCE.isVisible() && !frmCCE.getDescricaoCargoEmprego().equals(""))
         {
             try
             {
@@ -1093,18 +1096,20 @@ public class frmPrincipal extends javax.swing.JFrame
 
     private void btnAlterarActionPerformed(java.awt.event.ActionEvent evt)//GEN-FIRST:event_btnAlterarActionPerformed
     {//GEN-HEADEREND:event_btnAlterarActionPerformed
-        //janela cadastrar banca
-        if (frmCB.isVisible() && !frmCB.getBancaConcurso().equals("") && gravarAlteracaoFrmCB == false)
-        {
-            frmCB.ativarCampos();
-            gravarAlteracaoFrmCB = true;
-        }
+        alterar(frmCCE, frmCCE, "Manutenção de Cargos e Empregos");
+        alterar(frmCB, frmCB, "Cadastrar Banca");
+
 
         //janela cadastrar cargo/emprego
         if (frmCCE.isVisible() && !frmCCE.getDescricaoCargoEmprego().equals("") && gravarAlteracaoFrmCCE == false)
         {
-            frmCCE.ativarCampos();
             gravarAlteracaoFrmCCE = true;
+            frmCCE.ativarCampos();
+        }
+        else
+        {
+            gravarAlteracaoFrmCCE = false;
+            frmCCE.desativarCampos();
         }
 
         //janela cadastrar concurso
@@ -1681,6 +1686,10 @@ public class frmPrincipal extends javax.swing.JFrame
     public void gerenciadorNavegacao(MetodosComunsParaTodosOsJIF mtd, JInternalFrame frm, String tituloJanela, String acao, boolean rapido)
     {
         JInternalFrame janelaFocada = jdkpPrincipal.getSelectedFrame();
+        mtd.desativarCampos();
+
+        //comando usado para o botão alterar
+        this.estaAtivado = false;
 
         if (frm.getTitle().equals(tituloJanela) && frm.equals(janelaFocada))
         {
@@ -1747,7 +1756,7 @@ public class frmPrincipal extends javax.swing.JFrame
                         executor.shutdown();
                         contadorProximo = 0;
                         btnAnteriorRapido.setEnabled(true);
-                        btnProximoRapido.setEnabled(true);   
+                        btnProximoRapido.setEnabled(true);
                     }
                 }
                 else
@@ -1755,7 +1764,7 @@ public class frmPrincipal extends javax.swing.JFrame
                     //caso o usuario fique voltando o contador volta tambem no caso do avançar e retornar rapido
                     if (contadorAnterior < quantidadeDeCodigosSalvosNoBancoDeDados.size() - 1)
                     {
-                        
+
                     }
                     else
                     {
@@ -1776,6 +1785,25 @@ public class frmPrincipal extends javax.swing.JFrame
             default:
                 throw new AssertionError();
         }
+    }
+
+    public void alterar(MetodosComunsParaTodosOsJIF mtd, JInternalFrame frm, String tituloJanela)
+    {
+        JInternalFrame janelaFocada = jdkpPrincipal.getSelectedFrame();
+        if (frm.getTitle().equals(tituloJanela) && frm.equals(janelaFocada) && !mtd.getCodigo().isEmpty())
+        {
+            if (!estaAtivado)
+            {
+                estaAtivado = true;
+                mtd.ativarCampos();
+            }
+            else
+            {
+                estaAtivado = false;
+                mtd.desativarCampos();
+            }
+        }
+
     }
 
 

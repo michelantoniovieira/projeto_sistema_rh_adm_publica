@@ -128,6 +128,12 @@ public class CadastrarCargoEmpregoControle extends CadastrarCargoEmpregoDTO
                     pesquisarCargoEmprego(String.valueOf(codigoCargosEmpregos.get(frm.indiceConsultaCargoEmprego)));
                     tudoCerto = "ok";
                 }
+                else
+                {
+                    frm.indiceConsultaCargoEmprego = 0;
+                    pesquisarCargoEmprego(String.valueOf(codigoCargosEmpregos.get(frm.indiceConsultaCargoEmprego)));
+                    tudoCerto = "ok";
+                }
                 break;
 
             case "proximo":
@@ -177,11 +183,11 @@ public class CadastrarCargoEmpregoControle extends CadastrarCargoEmpregoDTO
     {
         return null;
     }
-    
+
     //informações remuneração
     public BigDecimal vincularRemuneração(String tipoCarreira, String referenciaSalarial, String grau)
     {
-         return cadastrarCargoEmpregoDAO.pesquisarRemuneracao(tipoCarreira, referenciaSalarial, grau);
+        return cadastrarCargoEmpregoDAO.pesquisarRemuneracao(tipoCarreira, referenciaSalarial, grau);
     }
 
     public List<CadastrarCargoEmpregoDTO> getObjPuxadoDaPesquisaDeCargoEmprego()

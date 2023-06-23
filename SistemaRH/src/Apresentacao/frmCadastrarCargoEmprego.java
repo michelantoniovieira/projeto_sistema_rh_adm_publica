@@ -281,6 +281,7 @@ public class frmCadastrarCargoEmprego extends javax.swing.JInternalFrame impleme
     }
 
     //travar os campos para edição
+    @Override
     public void desativarCampos()
     {
         txtCodigoCargoEmprego.setEnabled(true);
