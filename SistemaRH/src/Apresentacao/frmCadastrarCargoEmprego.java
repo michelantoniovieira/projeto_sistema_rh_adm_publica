@@ -115,6 +115,8 @@ public class frmCadastrarCargoEmprego extends javax.swing.JInternalFrame impleme
 
     public CadastrarCargoEmpregoControle controle;
 
+    public boolean alterarRemuneracao = false;
+
     public frmCadastrarCargoEmprego()
     {
         initComponents();
@@ -177,13 +179,13 @@ public class frmCadastrarCargoEmprego extends javax.swing.JInternalFrame impleme
         //exigências
         cmbEscolaridade.setSelectedItem(String.valueOf(lista.get(0).getEscolaridade()));
 
-        //puxa o codigo do vencimento do banco de dados e passa para ca, para uma nova consulta
-        consultarReferenciaGrauVencimento(String.valueOf(lista.get(0).getVencimento()));
-
         //preencher remuneração
         preencherReferenciaVencimento();
         preencherGrauVencimento();
-        //preecherVencimento(jtpRemuneracao);
+
+        //puxa o codigo do vencimento do banco de dados e passa para ca, para uma nova consulta
+        consultarReferenciaGrauVencimento(String.valueOf(lista.get(0).getVencimento()));
+
     }
 
     public void consultarReferenciaGrauVencimento(String codigo_vencimento)
@@ -191,6 +193,7 @@ public class frmCadastrarCargoEmprego extends javax.swing.JInternalFrame impleme
         cmbReferenciaSalarial.setSelectedItem(controle.consultarReferenciaGrauVencimento(codigo_vencimento).getReferencia());
         cmbGrau.setSelectedItem(controle.consultarReferenciaGrauVencimento(codigo_vencimento).getGrau());
         lblRemuneracao.setText(controle.consultarReferenciaGrauVencimento(codigo_vencimento).getValorVencimento());
+
     }
 
     //preencher referencia no combobox
@@ -254,7 +257,7 @@ public class frmCadastrarCargoEmprego extends javax.swing.JInternalFrame impleme
         }
     }
 
-    public void preecherVencimento(JTabbedPane jtp)
+    public void preecherVencimento()
     {
         // Adiciona um ItemListener ao cmbReferenciaSalarial, ao  mudar no combobox ele ja atualiza
         cmbReferenciaSalarial.addItemListener(new ItemListener()
@@ -264,7 +267,6 @@ public class frmCadastrarCargoEmprego extends javax.swing.JInternalFrame impleme
             {
                 if (e.getStateChange() == ItemEvent.SELECTED)
                 {
-                    String selectedItem = (String) cmbReferenciaSalarial.getSelectedItem();
                     // Aqui você pode chamar o método ou fazer qualquer ação desejada
                     BigDecimal remuneracao = controle.vincularRemuneração(cmbCarreira.getSelectedItem().toString(), cmbReferenciaSalarial.getSelectedItem().toString(), cmbGrau.getSelectedItem().toString());
                     DecimalFormat decimalFormat = new DecimalFormat("#,##0.00");
@@ -292,8 +294,10 @@ public class frmCadastrarCargoEmprego extends javax.swing.JInternalFrame impleme
             }
         });
 
+        /*
+        comentado este codigo agilizou o sistema
         String regimeJuridicoSelecionado = cmbCarreira.getSelectedItem().toString();
-
+        JTabbedPane jtp = jtpRemuneracao;
         switch (regimeJuridicoSelecionado)
         {
             case "Técnico":
@@ -328,6 +332,7 @@ public class frmCadastrarCargoEmprego extends javax.swing.JInternalFrame impleme
                 jtp.setEnabledAt(3, true);
                 break;
         }
+*/
     }
 
     //liberar os campos para edição
@@ -355,6 +360,7 @@ public class frmCadastrarCargoEmprego extends javax.swing.JInternalFrame impleme
         btnCadastrarFundamento.setEnabled(true);
         btnAlterarFundamento.setEnabled(true);
         btnExcluirFundamento.setEnabled(true);
+        preecherVencimento();
     }
 
     //travar os campos para edição
