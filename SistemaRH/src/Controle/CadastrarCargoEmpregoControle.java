@@ -185,6 +185,22 @@ public class CadastrarCargoEmpregoControle extends CadastrarCargoEmpregoDTO
     }
 
     //informações remuneração
+    
+    public CadastrarCargoEmpregoDAO consultarReferenciaGrauVencimento(String codigoVencimento)
+    {
+        return cadastrarCargoEmpregoDAO.consultarReferenciaGrauVencimento(codigoVencimento);
+    }
+    
+    public ArrayList<String> pesquisarReferenciaRemuneracao()
+    {
+        return cadastrarCargoEmpregoDAO.pesquisarReferencia();
+    }
+    
+    public ArrayList<String> pesquisarGrauRemuneracao()
+    {
+        return cadastrarCargoEmpregoDAO.pesquisarGrau();
+    }
+    
     public BigDecimal vincularRemuneração(String tipoCarreira, String referenciaSalarial, String grau)
     {
         return cadastrarCargoEmpregoDAO.pesquisarRemuneracao(tipoCarreira, referenciaSalarial, grau);

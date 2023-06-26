@@ -14,6 +14,7 @@ public class CadastrarCargoEmpregoDTO
     private String cargaHorariaSemanal;
     private String cargaHorariaMensal;
     private String escolaridade;
+    private String vencimento;
     
 
     public String getMensagem()
@@ -115,6 +116,18 @@ public class CadastrarCargoEmpregoDTO
     {
         this.escolaridade = escolaridade;
     }
+
+    public String getVencimento()
+    {
+        return vencimento;
+    }
+
+    public void setVencimento(String vencimento)
+    {
+        this.vencimento = vencimento;
+    }
+    
+    
     
     
 

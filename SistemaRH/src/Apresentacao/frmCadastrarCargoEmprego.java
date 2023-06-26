@@ -16,7 +16,11 @@ import java.awt.event.KeyEvent;
 import java.math.BigDecimal;
 import java.text.DecimalFormat;
 import java.util.ArrayList;
+import java.util.Comparator;
+import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
+import java.util.TreeSet;
 import javax.accessibility.AccessibleContext;
 import javax.swing.Icon;
 import javax.swing.JButton;
@@ -173,11 +177,84 @@ public class frmCadastrarCargoEmprego extends javax.swing.JInternalFrame impleme
         //exigências
         cmbEscolaridade.setSelectedItem(String.valueOf(lista.get(0).getEscolaridade()));
 
+        //puxa o codigo do vencimento do banco de dados e passa para ca, para uma nova consulta
+        consultarReferenciaGrauVencimento(String.valueOf(lista.get(0).getVencimento()));
+
         //preencher remuneração
-        preecherTabelaVencimentos(jtpRemuneracao);
+        preencherReferenciaVencimento();
+        preencherGrauVencimento();
+        //preecherVencimento(jtpRemuneracao);
     }
 
-    public void preecherTabelaVencimentos(JTabbedPane jtp)
+    public void consultarReferenciaGrauVencimento(String codigo_vencimento)
+    {
+        cmbReferenciaSalarial.setSelectedItem(controle.consultarReferenciaGrauVencimento(codigo_vencimento).getReferencia());
+        cmbGrau.setSelectedItem(controle.consultarReferenciaGrauVencimento(codigo_vencimento).getGrau());
+        lblRemuneracao.setText(controle.consultarReferenciaGrauVencimento(codigo_vencimento).getValorVencimento());
+    }
+
+    //preencher referencia no combobox
+    public void preencherReferenciaVencimento()
+    {
+        ArrayList<String> referenciaEncontrada = controle.pesquisarReferenciaRemuneracao();
+        Set<String> referenciaUnica = new HashSet<>(referenciaEncontrada);
+        TreeSet<String> referenciaOrdenada = new TreeSet<>(new ReferenciaComparator());
+
+        referenciaOrdenada.addAll(referenciaUnica);
+
+        cmbReferenciaSalarial.removeAllItems();
+
+        for (String referencia : referenciaOrdenada)
+        {
+            cmbReferenciaSalarial.addItem(referencia);
+        }
+    }
+
+    private static class ReferenciaComparator implements Comparator<String>
+    {
+
+        @Override
+        public int compare(String s1, String s2)
+        {
+            if (s1.equals("RME"))
+            {
+                return 1; // Coloca "RME" no final
+            }
+            else if (s2.equals("RME"))
+            {
+                return -1; // Coloca "RME" no final
+            }
+            else
+            {
+                try
+                {
+                    int i1 = Integer.parseInt(s1);
+                    int i2 = Integer.parseInt(s2);
+                    return Integer.compare(i1, i2);
+                }
+                catch (NumberFormatException e)
+                {
+                    return s1.compareTo(s2);
+                }
+            }
+        }
+    }
+
+    //preencher o grau no combobox
+    public void preencherGrauVencimento()
+    {
+        ArrayList<String> grauEncontrado = controle.pesquisarGrauRemuneracao();
+        Set<String> grauUnico = new HashSet<>(grauEncontrado);
+
+        cmbGrau.removeAllItems(); // Remover todos os itens existentes no combobox antes de adicionar os novos
+
+        for (String grau : grauUnico)
+        {
+            cmbGrau.addItem(grau);
+        }
+    }
+
+    public void preecherVencimento(JTabbedPane jtp)
     {
         // Adiciona um ItemListener ao cmbReferenciaSalarial, ao  mudar no combobox ele ja atualiza
         cmbReferenciaSalarial.addItemListener(new ItemListener()
@@ -805,11 +882,7 @@ public class frmCadastrarCargoEmprego extends javax.swing.JInternalFrame impleme
 
         lblReferenciaSalarial.setText("Referência:");
 
-        cmbReferenciaSalarial.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "1", "2", "3", "4", "5", "6", "7", "8", "9", "10", "11", "12", "13", "14", "15", "16", "17", "18", "19", "20", "21", "22", "23", "24", "25", "26", "27", "28", "29", "30", "31", "32", "33", "34", "35", "RME" }));
-
         lblGrau.setText("Grau:");
-
-        cmbGrau.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "A", "B", "C", "D", "E", "F", "G" }));
 
         lblRsVencimentos.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
         lblRsVencimentos.setText("R$:");

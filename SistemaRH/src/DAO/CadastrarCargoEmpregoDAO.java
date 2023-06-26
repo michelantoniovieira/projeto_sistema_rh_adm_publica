@@ -16,6 +16,22 @@ public class CadastrarCargoEmpregoDAO
     Connection conn;
     PreparedStatement pstm;
     ResultSet rs;
+    
+    String referencia;
+    String grau;
+    String valorVencimento;
+    
+    public CadastrarCargoEmpregoDAO()
+    {
+        
+    }
+    
+    public CadastrarCargoEmpregoDAO(String referencia, String grau, String valorVencimento)
+    {
+        this.setReferencia(referencia);
+        this.setGrau(grau);
+        this.setValorVencimento(valorVencimento);
+    }
 
     public ResultSet verificarAntesDeCadastrar(CadastrarCargoEmpregoDTO cadastrarcargoempregodto)
     {
@@ -34,6 +50,10 @@ public class CadastrarCargoEmpregoDAO
         {
             JOptionPane.showMessageDialog(null, "Erro ao pesquisar Cargos e Empregos" + erro);
             return null;
+        }
+        finally
+        {
+            ConexaoDAO.encerrarConexao(conn, pstm, rs);
         }
     }
 
@@ -57,6 +77,10 @@ public class CadastrarCargoEmpregoDAO
         catch (SQLException erro)
         {
             JOptionPane.showMessageDialog(null, "Erro ao pesquisar Codigo dos Cargos e Empregos" + erro);
+        }
+        finally
+        {
+            ConexaoDAO.encerrarConexao(conn, pstm, rs);
         }
 
         return codigosCargos;
@@ -82,6 +106,10 @@ public class CadastrarCargoEmpregoDAO
         {
             JOptionPane.showMessageDialog(null, "Erro ao pesquisar ultimo registro CargoEmprego: " + erro);
         }
+        finally
+        {
+            ConexaoDAO.encerrarConexao(conn, pstm, rs);
+        }
         return ultimoRegistro;
     }
 
@@ -104,6 +132,10 @@ public class CadastrarCargoEmpregoDAO
         catch (SQLException erro)
         {
             JOptionPane.showMessageDialog(null, "Erro ao pesquisar ultimo registro CargoEmprego: " + erro);
+        }
+        finally
+        {
+            ConexaoDAO.encerrarConexao(conn, pstm, rs);
         }
         return ultimoRegistro;
     }
@@ -133,6 +165,7 @@ public class CadastrarCargoEmpregoDAO
                 cargoEmprego.setCargaHorariaSemanal(rs.getString("carga_horaria_semanal_cargo_emprego"));
                 cargoEmprego.setCargaHorariaMensal(rs.getString("carga_horaria_mensal_cargo_emprego"));
                 cargoEmprego.setEscolaridade(rs.getString("escolaridade_cargo_emprego"));
+                cargoEmprego.setVencimento(rs.getString("fk_codigo_vencimento"));
                 // Adicionar o objeto CargoEmprego à lista
                 cargosEmpregos.add(cargoEmprego);
             }
@@ -190,6 +223,10 @@ public class CadastrarCargoEmpregoDAO
         catch (SQLException erro)
         {
             JOptionPane.showMessageDialog(null, "CadastrarCargoEmpregoDAO - Cadastrar" + erro);
+        }
+        finally
+        {
+            ConexaoDAO.encerrarConexao(conn, pstm, rs);
         }
     }
 
@@ -268,6 +305,107 @@ public class CadastrarCargoEmpregoDAO
         return objcadastrarcargoempregodto;
     }
 
+    public CadastrarCargoEmpregoDAO consultarReferenciaGrauVencimento(String codigoVencimento)
+    {
+        ArrayList<String> resultado = new ArrayList<>();
+        conn = new ConexaoDAO().conectaBD();
+
+        try
+        {
+            String sql = "SELECT v.referencia_vencimento, v.grau_vencimento, v.valor_vencimento "
+                    + "FROM vencimentos v "
+                    + "JOIN cargo_emprego c ON c.fk_codigo_vencimento = v.codigo_vencimento "
+                    + "WHERE v.codigo_vencimento = ?";
+
+            pstm = conn.prepareStatement(sql);
+            pstm.setString(1, codigoVencimento);
+            rs = pstm.executeQuery();
+
+            while (rs.next())
+            {
+                String referencia = rs.getString("referencia_vencimento");
+                String grau = rs.getString("grau_vencimento");
+                String valorVencimento = rs.getString("valor_vencimento");
+                return new CadastrarCargoEmpregoDAO(referencia, grau, valorVencimento);
+                
+            }
+
+            return null;
+        }
+        catch (SQLException erro)
+        {
+            JOptionPane.showMessageDialog(null, "Erro ao consultar referência e grau do vencimento: " + erro);
+            System.out.println("Erro ao consultar referência e grau do vencimento: " + erro);
+            return null;
+        }
+        finally
+        {
+            ConexaoDAO.encerrarConexao(conn, pstm, rs);
+        }
+    }
+
+    public ArrayList<String> pesquisarReferencia()
+    {
+        conn = new ConexaoDAO().conectaBD();
+        ArrayList<String> referencia = new ArrayList<>();
+
+        try
+        {
+            referencia.clear(); // Limpar o ArrayList antes de adicionar os novos valores
+            String sql = "SELECT referencia_vencimento FROM vencimentos";
+
+            pstm = conn.prepareStatement(sql);
+            rs = pstm.executeQuery();
+
+            while (rs.next())
+            {
+                referencia.add(rs.getString("referencia_vencimento"));
+            }
+
+            return referencia;
+        }
+        catch (SQLException erro)
+        {
+            JOptionPane.showMessageDialog(null, "Erro ao pesquisar Referencia" + erro);
+            return null;
+        }
+        finally
+        {
+            ConexaoDAO.encerrarConexao(conn, pstm, rs);
+        }
+    }
+
+    public ArrayList<String> pesquisarGrau()
+    {
+        conn = new ConexaoDAO().conectaBD();
+        ArrayList<String> grau = new ArrayList<>();
+
+        try
+        {
+            grau.clear(); // Limpar o ArrayList antes de adicionar os novos valores
+            String sql = "SELECT grau_vencimento FROM vencimentos";
+
+            pstm = conn.prepareStatement(sql);
+            rs = pstm.executeQuery();
+
+            while (rs.next())
+            {
+                grau.add(rs.getString("grau_vencimento"));
+            }
+
+            return grau;
+        }
+        catch (SQLException erro)
+        {
+            JOptionPane.showMessageDialog(null, "Erro ao pesquisar Grau" + erro);
+            return null;
+        }
+        finally
+        {
+            ConexaoDAO.encerrarConexao(conn, pstm, rs);
+        }
+    }
+
     public BigDecimal pesquisarRemuneracao(String tipoCarreira, String referenciaSalarial, String grau)
     {
         switch (tipoCarreira)
@@ -301,10 +439,10 @@ public class CadastrarCargoEmpregoDAO
 
         try
         {
-            String sql = "SELECT * FROM vencimentos WHERE " + tipoCarreira + " = fk_codigo_tabela_salarial AND " + referenciaSalarial + " = referencia_vencimento AND '" + grau + "' = grau_vencimento";
+            String sql = "SELECT valor_vencimento FROM vencimentos WHERE " + tipoCarreira + " = fk_codigo_tabela_salarial AND '" + referenciaSalarial + "' = referencia_vencimento AND '" + grau + "' = grau_vencimento";
 
-            PreparedStatement pstm = conn.prepareStatement(sql);
-            ResultSet rs = pstm.executeQuery();
+            pstm = conn.prepareStatement(sql);
+            rs = pstm.executeQuery();
 
             if (rs.next())
             {
@@ -314,8 +452,44 @@ public class CadastrarCargoEmpregoDAO
         catch (SQLException erro)
         {
             JOptionPane.showMessageDialog(null, "Erro ao pesquisar remuneração: " + erro);
+            System.out.println("Erro ao pesquisar remuneração: " + erro);
+        }
+        finally
+        {
+            ConexaoDAO.encerrarConexao(conn, pstm, rs);
         }
         return remuneracao;
     }
 
+    public String getReferencia()
+    {
+        return referencia;
+    }
+
+    public void setReferencia(String referencia)
+    {
+        this.referencia = referencia;
+    }
+
+    public String getGrau()
+    {
+        return grau;
+    }
+
+    public void setGrau(String grau)
+    {
+        this.grau = grau;
+    }
+
+    public String getValorVencimento()
+    {
+        return valorVencimento;
+    }
+
+    public void setValorVencimento(String valorVencimento)
+    {
+        this.valorVencimento = valorVencimento;
+    }
+
+    
 }

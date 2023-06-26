@@ -583,7 +583,7 @@ public class frmPrincipal extends javax.swing.JFrame
         );
         jdkpPrincipalLayout.setVerticalGroup(
             jdkpPrincipalLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 638, Short.MAX_VALUE)
+            .addGap(0, 647, Short.MAX_VALUE)
         );
 
         jdkpRodape.setBorder(javax.swing.BorderFactory.createEtchedBorder());
