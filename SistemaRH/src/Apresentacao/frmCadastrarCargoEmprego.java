@@ -117,6 +117,9 @@ public class frmCadastrarCargoEmprego extends javax.swing.JInternalFrame impleme
 
     public boolean alterarRemuneracao = false;
 
+    ItemListener cmbRefSal;
+    ItemListener cmbGrauSal;
+
     public frmCadastrarCargoEmprego()
     {
         initComponents();
@@ -185,9 +188,10 @@ public class frmCadastrarCargoEmprego extends javax.swing.JInternalFrame impleme
 
         //puxa o codigo do vencimento do banco de dados e passa para ca, para uma nova consulta
         consultarReferenciaGrauVencimento(String.valueOf(lista.get(0).getVencimento()));
-
         preencherVencimento();
 
+        //o problema é que eu estou fechando o listener mesmo sem ter mudado de tela. 
+        //para resolver o problema eu preciso fechar o listener depois que mudar de tela ou quando eu terminar de consultar os valores
     }
 
     public void consultarReferenciaGrauVencimento(String codigo_vencimento)
@@ -263,7 +267,7 @@ public class frmCadastrarCargoEmprego extends javax.swing.JInternalFrame impleme
     {
         // Adiciona um ItemListener ao cmbReferenciaSalarial, ao  mudar no combobox ele ja atualiza
 
-        ItemListener cmbRefSal = new ItemListener()
+        cmbRefSal = new ItemListener()
         {
             @Override
             public void itemStateChanged(ItemEvent e)
@@ -275,14 +279,11 @@ public class frmCadastrarCargoEmprego extends javax.swing.JInternalFrame impleme
                     DecimalFormat decimalFormat = new DecimalFormat("#,##0.00");
                     String valorFormatado = decimalFormat.format(remuneracao);
                     lblRemuneracao.setText(valorFormatado);
-                    cmbReferenciaSalarial.removeItemListener(this);
                 }
             }
         };
-        cmbReferenciaSalarial.addItemListener(cmbRefSal);
-
         // Adiciona um ItemListener ao cmbReferenciaSalarial, ao  mudar no combobox ele ja atualiza
-        ItemListener cmbGrauSal = new ItemListener()
+        cmbGrauSal = new ItemListener()
         {
             @Override
             public void itemStateChanged(ItemEvent e)
@@ -295,12 +296,10 @@ public class frmCadastrarCargoEmprego extends javax.swing.JInternalFrame impleme
                     DecimalFormat decimalFormat = new DecimalFormat("#,##0.00");
                     String valorFormatado = decimalFormat.format(remuneracao);
                     lblRemuneracao.setText(valorFormatado);
-                    cmbGrau.removeItemListener(this);
-
                 }
+
             }
         };
-        cmbGrau.addItemListener(cmbGrauSal);
 
         String regimeJuridicoSelecionado = cmbCarreira.getSelectedItem().toString();
         JTabbedPane jtp = jtpRemuneracao;
@@ -356,8 +355,8 @@ public class frmCadastrarCargoEmprego extends javax.swing.JInternalFrame impleme
         cmbCargaHorariaSemanal.setEnabled(true);
         cmbCargaHorariaMensal.setEnabled(true);
         cmbEscolaridade.setEnabled(true);
-        cmbReferenciaSalarial.setEnabled(true);
-        cmbGrau.setEnabled(true);
+        cmbReferenciaSalarial.setEnabled(false);
+        cmbGrau.setEnabled(false);
         lblRsVencimentos.setEnabled(true);
         lblRemuneracao.setEnabled(true);
         cmbFaixaSalarial.setEnabled(true);
@@ -598,6 +597,7 @@ public class frmCadastrarCargoEmprego extends javax.swing.JInternalFrame impleme
         cmbGrau = new javax.swing.JComboBox<>();
         lblRsVencimentos = new javax.swing.JLabel();
         lblRemuneracao = new javax.swing.JLabel();
+        chkVencimento = new javax.swing.JCheckBox();
         jpEscalaVencimentosDocente = new javax.swing.JPanel();
         lblFaixa = new javax.swing.JLabel();
         cmbFaixaSalarial = new javax.swing.JComboBox<>();
@@ -901,6 +901,15 @@ public class frmCadastrarCargoEmprego extends javax.swing.JInternalFrame impleme
         lblRemuneracao.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
         lblRemuneracao.setText("3.917,95");
 
+        chkVencimento.setText("Alterar Vencimento");
+        chkVencimento.addActionListener(new java.awt.event.ActionListener()
+        {
+            public void actionPerformed(java.awt.event.ActionEvent evt)
+            {
+                chkVencimentoActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout jpTabelaVencimentosLayout = new javax.swing.GroupLayout(jpTabelaVencimentos);
         jpTabelaVencimentos.setLayout(jpTabelaVencimentosLayout);
         jpTabelaVencimentosLayout.setHorizontalGroup(
@@ -921,17 +930,20 @@ public class frmCadastrarCargoEmprego extends javax.swing.JInternalFrame impleme
                         .addGap(19, 19, 19)
                         .addComponent(cmbGrau, javax.swing.GroupLayout.PREFERRED_SIZE, 49, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addGap(99, 99, 99)
-                .addComponent(lblRsVencimentos)
-                .addGap(18, 18, 18)
-                .addComponent(lblRemuneracao)
-                .addContainerGap(111, Short.MAX_VALUE))
+                .addGroup(jpTabelaVencimentosLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(jpTabelaVencimentosLayout.createSequentialGroup()
+                        .addComponent(lblRsVencimentos)
+                        .addGap(18, 18, 18)
+                        .addComponent(lblRemuneracao))
+                    .addComponent(chkVencimento))
+                .addContainerGap(101, Short.MAX_VALUE))
         );
         jpTabelaVencimentosLayout.setVerticalGroup(
             jpTabelaVencimentosLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jpTabelaVencimentosLayout.createSequentialGroup()
-                .addGap(20, 20, 20)
                 .addGroup(jpTabelaVencimentosLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jpTabelaVencimentosLayout.createSequentialGroup()
+                        .addGap(20, 20, 20)
                         .addGroup(jpTabelaVencimentosLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(cmbReferenciaSalarial, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(lblReferenciaSalarial))
@@ -940,7 +952,9 @@ public class frmCadastrarCargoEmprego extends javax.swing.JInternalFrame impleme
                             .addComponent(cmbGrau, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(lblGrau)))
                     .addGroup(jpTabelaVencimentosLayout.createSequentialGroup()
-                        .addGap(18, 18, 18)
+                        .addGap(12, 12, 12)
+                        .addComponent(chkVencimento)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addGroup(jpTabelaVencimentosLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(lblRemuneracao, javax.swing.GroupLayout.PREFERRED_SIZE, 35, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(lblRsVencimentos, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
@@ -1477,6 +1491,24 @@ public class frmCadastrarCargoEmprego extends javax.swing.JInternalFrame impleme
         controle.pesquisarCargoEmprego(txtCodigoCargoEmprego.getText());
         preencherCamposLista(controle.getObjPuxadoDaPesquisaDeCargoEmprego());
     }//GEN-LAST:event_txtCodigoCargoEmpregoActionPerformed
+
+    private void chkVencimentoActionPerformed(java.awt.event.ActionEvent evt)//GEN-FIRST:event_chkVencimentoActionPerformed
+    {//GEN-HEADEREND:event_chkVencimentoActionPerformed
+        if (chkVencimento.isSelected())
+        {
+            cmbReferenciaSalarial.setEnabled(true);
+            cmbGrau.setEnabled(true);
+            cmbReferenciaSalarial.addItemListener(cmbRefSal);
+            cmbGrau.addItemListener(cmbGrauSal);
+        }
+        else
+        {
+            cmbReferenciaSalarial.setEnabled(false);
+            cmbGrau.setEnabled(false);
+            cmbGrau.removeItemListener(cmbGrauSal);
+            cmbReferenciaSalarial.removeItemListener(cmbRefSal);
+        }
+    }//GEN-LAST:event_chkVencimentoActionPerformed
     public void limparTabelas(JTable tabela)
     {
         DefaultTableModel limparTabela = (DefaultTableModel) tabela.getModel();
@@ -1488,6 +1520,7 @@ public class frmCadastrarCargoEmprego extends javax.swing.JInternalFrame impleme
     private javax.swing.JButton btnCadastrarFundamento;
     private javax.swing.JButton btnExcluirFundamento;
     private javax.swing.JCheckBox chkAtivo;
+    private javax.swing.JCheckBox chkVencimento;
     private javax.swing.JComboBox<String> cmbCargaHorariaMensal;
     private javax.swing.JComboBox<String> cmbCargaHorariaSemanal;
     private javax.swing.JComboBox<String> cmbCarreira;
