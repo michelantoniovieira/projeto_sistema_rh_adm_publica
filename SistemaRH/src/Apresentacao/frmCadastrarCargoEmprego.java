@@ -358,6 +358,7 @@ public class frmCadastrarCargoEmprego extends javax.swing.JInternalFrame impleme
         cmbReferenciaSalarial.setEnabled(false);
         cmbGrau.setEnabled(false);
         lblRsVencimentos.setEnabled(true);
+        chkVencimento.setEnabled(true);
         lblRemuneracao.setEnabled(true);
         cmbFaixaSalarial.setEnabled(true);
         cmbGrauSalario.setEnabled(true);
@@ -387,6 +388,10 @@ public class frmCadastrarCargoEmprego extends javax.swing.JInternalFrame impleme
         cmbGrau.setEnabled(false);
         lblRsVencimentos.setEnabled(false);
         lblRemuneracao.setEnabled(false);
+        chkVencimento.setSelected(false);
+        cmbGrau.removeItemListener(cmbGrauSal);
+        cmbReferenciaSalarial.removeItemListener(cmbRefSal);
+        chkVencimento.setEnabled(false);
         cmbFaixaSalarial.setEnabled(false);
         cmbGrauSalario.setEnabled(false);
         lblRsDocente.setEnabled(false);
@@ -591,13 +596,15 @@ public class frmCadastrarCargoEmprego extends javax.swing.JInternalFrame impleme
         tbQuadro = new javax.swing.JTable();
         jtpRemuneracao = new javax.swing.JTabbedPane();
         jpTabelaVencimentos = new javax.swing.JPanel();
+        jPanel3 = new javax.swing.JPanel();
+        lblRemuneracao = new javax.swing.JLabel();
+        lblRsVencimentos = new javax.swing.JLabel();
+        chkVencimento = new javax.swing.JCheckBox();
+        jPanel4 = new javax.swing.JPanel();
+        cmbGrau = new javax.swing.JComboBox<>();
+        lblGrau = new javax.swing.JLabel();
         lblReferenciaSalarial = new javax.swing.JLabel();
         cmbReferenciaSalarial = new javax.swing.JComboBox<>();
-        lblGrau = new javax.swing.JLabel();
-        cmbGrau = new javax.swing.JComboBox<>();
-        lblRsVencimentos = new javax.swing.JLabel();
-        lblRemuneracao = new javax.swing.JLabel();
-        chkVencimento = new javax.swing.JCheckBox();
         jpEscalaVencimentosDocente = new javax.swing.JPanel();
         lblFaixa = new javax.swing.JLabel();
         cmbFaixaSalarial = new javax.swing.JComboBox<>();
@@ -791,7 +798,7 @@ public class frmCadastrarCargoEmprego extends javax.swing.JInternalFrame impleme
                     .addGroup(jpExigenciasLayout.createSequentialGroup()
                         .addComponent(lblEscolaridade)
                         .addGap(0, 0, Short.MAX_VALUE))
-                    .addComponent(cmbEscolaridade, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                    .addComponent(cmbEscolaridade, 0, 0, Short.MAX_VALUE))
                 .addContainerGap())
         );
         jpExigenciasLayout.setVerticalGroup(
@@ -891,16 +898,16 @@ public class frmCadastrarCargoEmprego extends javax.swing.JInternalFrame impleme
 
         jtpRemuneracao.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "Remuneração", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Segoe UI", 1, 12))); // NOI18N
 
-        lblReferenciaSalarial.setText("Referência:");
+        jPanel3.setBorder(new javax.swing.border.SoftBevelBorder(javax.swing.border.BevelBorder.RAISED));
+        jPanel3.setAutoscrolls(true);
 
-        lblGrau.setText("Grau:");
-
-        lblRsVencimentos.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
-        lblRsVencimentos.setText("R$:");
-
-        lblRemuneracao.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
+        lblRemuneracao.setFont(new java.awt.Font("Segoe UI", 1, 24)); // NOI18N
         lblRemuneracao.setText("3.917,95");
 
+        lblRsVencimentos.setFont(new java.awt.Font("Segoe UI", 1, 24)); // NOI18N
+        lblRsVencimentos.setText("R$:");
+
+        chkVencimento.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
         chkVencimento.setText("Alterar Vencimento");
         chkVencimento.addActionListener(new java.awt.event.ActionListener()
         {
@@ -910,56 +917,91 @@ public class frmCadastrarCargoEmprego extends javax.swing.JInternalFrame impleme
             }
         });
 
+        javax.swing.GroupLayout jPanel3Layout = new javax.swing.GroupLayout(jPanel3);
+        jPanel3.setLayout(jPanel3Layout);
+        jPanel3Layout.setHorizontalGroup(
+            jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel3Layout.createSequentialGroup()
+                .addContainerGap(35, Short.MAX_VALUE)
+                .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+                    .addComponent(chkVencimento, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addGroup(jPanel3Layout.createSequentialGroup()
+                        .addComponent(lblRsVencimentos)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(lblRemuneracao, javax.swing.GroupLayout.PREFERRED_SIZE, 110, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addGap(34, 34, 34))
+        );
+        jPanel3Layout.setVerticalGroup(
+            jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel3Layout.createSequentialGroup()
+                .addGap(18, 18, 18)
+                .addComponent(chkVencimento, javax.swing.GroupLayout.PREFERRED_SIZE, 20, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(lblRsVencimentos, javax.swing.GroupLayout.PREFERRED_SIZE, 22, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(lblRemuneracao, javax.swing.GroupLayout.PREFERRED_SIZE, 22, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+        );
+
+        jPanel4.setBorder(new javax.swing.border.SoftBevelBorder(javax.swing.border.BevelBorder.RAISED));
+
+        lblGrau.setText("Grau:");
+
+        lblReferenciaSalarial.setText("Referência:");
+
+        javax.swing.GroupLayout jPanel4Layout = new javax.swing.GroupLayout(jPanel4);
+        jPanel4.setLayout(jPanel4Layout);
+        jPanel4Layout.setHorizontalGroup(
+            jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel4Layout.createSequentialGroup()
+                .addContainerGap()
+                .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(jPanel4Layout.createSequentialGroup()
+                        .addGap(31, 31, 31)
+                        .addComponent(lblGrau))
+                    .addComponent(lblReferenciaSalarial))
+                .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(jPanel4Layout.createSequentialGroup()
+                        .addGap(18, 18, 18)
+                        .addComponent(cmbReferenciaSalarial, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                    .addGroup(jPanel4Layout.createSequentialGroup()
+                        .addGap(19, 19, 19)
+                        .addComponent(cmbGrau, 0, 74, Short.MAX_VALUE)))
+                .addContainerGap())
+        );
+        jPanel4Layout.setVerticalGroup(
+            jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel4Layout.createSequentialGroup()
+                .addGap(12, 12, 12)
+                .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(cmbReferenciaSalarial, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(lblReferenciaSalarial))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(cmbGrau, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(lblGrau))
+                .addContainerGap(14, Short.MAX_VALUE))
+        );
+
         javax.swing.GroupLayout jpTabelaVencimentosLayout = new javax.swing.GroupLayout(jpTabelaVencimentos);
         jpTabelaVencimentos.setLayout(jpTabelaVencimentosLayout);
         jpTabelaVencimentosLayout.setHorizontalGroup(
             jpTabelaVencimentosLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jpTabelaVencimentosLayout.createSequentialGroup()
-                .addGroup(jpTabelaVencimentosLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(jpTabelaVencimentosLayout.createSequentialGroup()
-                        .addGap(37, 37, 37)
-                        .addComponent(lblGrau))
-                    .addGroup(jpTabelaVencimentosLayout.createSequentialGroup()
-                        .addContainerGap()
-                        .addComponent(lblReferenciaSalarial)))
-                .addGroup(jpTabelaVencimentosLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(jpTabelaVencimentosLayout.createSequentialGroup()
-                        .addGap(18, 18, 18)
-                        .addComponent(cmbReferenciaSalarial, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jpTabelaVencimentosLayout.createSequentialGroup()
-                        .addGap(19, 19, 19)
-                        .addComponent(cmbGrau, javax.swing.GroupLayout.PREFERRED_SIZE, 49, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addGap(99, 99, 99)
-                .addGroup(jpTabelaVencimentosLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(jpTabelaVencimentosLayout.createSequentialGroup()
-                        .addComponent(lblRsVencimentos)
-                        .addGap(18, 18, 18)
-                        .addComponent(lblRemuneracao))
-                    .addComponent(chkVencimento))
-                .addContainerGap(101, Short.MAX_VALUE))
+                .addContainerGap()
+                .addComponent(jPanel4, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jPanel3, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addContainerGap())
         );
         jpTabelaVencimentosLayout.setVerticalGroup(
             jpTabelaVencimentosLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jpTabelaVencimentosLayout.createSequentialGroup()
-                .addGroup(jpTabelaVencimentosLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(jpTabelaVencimentosLayout.createSequentialGroup()
-                        .addGap(20, 20, 20)
-                        .addGroup(jpTabelaVencimentosLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(cmbReferenciaSalarial, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(lblReferenciaSalarial))
-                        .addGap(18, 18, 18)
-                        .addGroup(jpTabelaVencimentosLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(cmbGrau, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(lblGrau)))
-                    .addGroup(jpTabelaVencimentosLayout.createSequentialGroup()
-                        .addGap(12, 12, 12)
-                        .addComponent(chkVencimento)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addGroup(jpTabelaVencimentosLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(lblRemuneracao, javax.swing.GroupLayout.PREFERRED_SIZE, 35, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(lblRsVencimentos, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 9, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addGap(18, 18, 18))
+                .addGap(16, 16, 16)
+                .addGroup(jpTabelaVencimentosLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+                    .addComponent(jPanel3, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(jPanel4, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addContainerGap(35, Short.MAX_VALUE))
         );
 
         jtpRemuneracao.addTab("Técnicos", jpTabelaVencimentos);
@@ -990,7 +1032,7 @@ public class frmCadastrarCargoEmprego extends javax.swing.JInternalFrame impleme
                     .addComponent(cmbGrauSalario, javax.swing.GroupLayout.PREFERRED_SIZE, 208, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(31, 31, 31)
                 .addComponent(lblRsDocente)
-                .addContainerGap(111, Short.MAX_VALUE))
+                .addContainerGap(69, Short.MAX_VALUE))
         );
         jpEscalaVencimentosDocenteLayout.setVerticalGroup(
             jpEscalaVencimentosDocenteLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -1009,7 +1051,7 @@ public class frmCadastrarCargoEmprego extends javax.swing.JInternalFrame impleme
                                 .addComponent(cmbGrauSalario, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addComponent(lblGrauProf)))
                         .addComponent(lblRsDocente, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 67, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addContainerGap(18, Short.MAX_VALUE))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
         jtpRemuneracao.addTab("Docentes", jpEscalaVencimentosDocente);
@@ -1018,11 +1060,11 @@ public class frmCadastrarCargoEmprego extends javax.swing.JInternalFrame impleme
         jPanel1.setLayout(jPanel1Layout);
         jPanel1Layout.setHorizontalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 458, Short.MAX_VALUE)
+            .addGap(0, 416, Short.MAX_VALUE)
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 100, Short.MAX_VALUE)
+            .addGap(0, 139, Short.MAX_VALUE)
         );
 
         jtpRemuneracao.addTab("Comissão", jPanel1);
@@ -1031,11 +1073,11 @@ public class frmCadastrarCargoEmprego extends javax.swing.JInternalFrame impleme
         jPanel2.setLayout(jPanel2Layout);
         jPanel2Layout.setHorizontalGroup(
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 458, Short.MAX_VALUE)
+            .addGap(0, 416, Short.MAX_VALUE)
         );
         jPanel2Layout.setVerticalGroup(
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 100, Short.MAX_VALUE)
+            .addGap(0, 139, Short.MAX_VALUE)
         );
 
         jtpRemuneracao.addTab("Eletivo", jPanel2);
@@ -1060,7 +1102,7 @@ public class frmCadastrarCargoEmprego extends javax.swing.JInternalFrame impleme
             jpRequisitosDeProvimentoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jpRequisitosDeProvimentoLayout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 115, Short.MAX_VALUE)
+                .addComponent(jScrollPane1)
                 .addContainerGap())
         );
 
@@ -1132,7 +1174,7 @@ public class frmCadastrarCargoEmprego extends javax.swing.JInternalFrame impleme
         jpLegislacaoLayout.setVerticalGroup(
             jpLegislacaoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jpLegislacaoLayout.createSequentialGroup()
-                .addComponent(jScrollPane3, javax.swing.GroupLayout.DEFAULT_SIZE, 167, Short.MAX_VALUE)
+                .addComponent(jScrollPane3, javax.swing.GroupLayout.DEFAULT_SIZE, 177, Short.MAX_VALUE)
                 .addContainerGap())
         );
 
@@ -1174,7 +1216,7 @@ public class frmCadastrarCargoEmprego extends javax.swing.JInternalFrame impleme
         jpReajusteLayout.setVerticalGroup(
             jpReajusteLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jpReajusteLayout.createSequentialGroup()
-                .addComponent(jScrollPane4, javax.swing.GroupLayout.DEFAULT_SIZE, 169, Short.MAX_VALUE)
+                .addComponent(jScrollPane4, javax.swing.GroupLayout.DEFAULT_SIZE, 179, Short.MAX_VALUE)
                 .addContainerGap())
         );
 
@@ -1267,18 +1309,17 @@ public class frmCadastrarCargoEmprego extends javax.swing.JInternalFrame impleme
                     .addComponent(jpCargoEmprego, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(jpExigencias, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(jpCadastroCargoEmpregoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                .addGroup(jpCadastroCargoEmpregoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                     .addGroup(jpCadastroCargoEmpregoLayout.createSequentialGroup()
                         .addComponent(jpQuadro, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addGroup(jpCadastroCargoEmpregoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jtpLegislacao)
-                            .addComponent(jpOperacoes, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
+                            .addComponent(jpOperacoes, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(jtpLegislacao)))
                     .addGroup(jpCadastroCargoEmpregoLayout.createSequentialGroup()
-                        .addComponent(jtpRemuneracao, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addComponent(jpRequisitosDeProvimento, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addContainerGap())
+                        .addComponent(jtpRemuneracao, javax.swing.GroupLayout.PREFERRED_SIZE, 193, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(jpRequisitosDeProvimento, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))))
         );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
@@ -1289,9 +1330,7 @@ public class frmCadastrarCargoEmprego extends javax.swing.JInternalFrame impleme
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(layout.createSequentialGroup()
-                .addComponent(jpCadastroCargoEmprego, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(0, 0, Short.MAX_VALUE))
+            .addComponent(jpCadastroCargoEmprego, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
         );
 
         pack();
@@ -1532,6 +1571,8 @@ public class frmCadastrarCargoEmprego extends javax.swing.JInternalFrame impleme
     private javax.swing.JComboBox<String> cmbRegimeJuridico;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
+    private javax.swing.JPanel jPanel3;
+    private javax.swing.JPanel jPanel4;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JScrollPane jScrollPane3;
     private javax.swing.JScrollPane jScrollPane4;

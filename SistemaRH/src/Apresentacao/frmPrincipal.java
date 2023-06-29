@@ -1099,16 +1099,15 @@ public class frmPrincipal extends javax.swing.JFrame
         alterar(frmCCE, frmCCE, "Manutenção de Cargos e Empregos");
         alterar(frmCB, frmCB, "Cadastrar Banca");
 
-
         //janela cadastrar cargo/emprego
-        if (frmCCE.isVisible() && !frmCCE.getDescricaoCargoEmprego().equals("") && gravarAlteracaoFrmCCE == false)
+        if (frmCCE.isVisible() && !frmCCE.getDescricaoCargoEmprego().equals("") && estaAtivado == false)
         {
-            gravarAlteracaoFrmCCE = true;
+            estaAtivado = true;
             frmCCE.ativarCampos();
         }
         else
         {
-            gravarAlteracaoFrmCCE = false;
+            estaAtivado = false;
             frmCCE.desativarCampos();
         }
 
@@ -1318,6 +1317,7 @@ public class frmPrincipal extends javax.swing.JFrame
 
     private void btnProximoRapidoActionPerformed(java.awt.event.ActionEvent evt)//GEN-FIRST:event_btnProximoRapidoActionPerformed
     {//GEN-HEADEREND:event_btnProximoRapidoActionPerformed
+        estaAtivado = true;
         btnAnteriorRapido.setEnabled(false);
         btnProximoRapido.setEnabled(false);
         executor = Executors.newSingleThreadScheduledExecutor();
@@ -1339,6 +1339,7 @@ public class frmPrincipal extends javax.swing.JFrame
 
     private void btnAnteriorRapidoActionPerformed(java.awt.event.ActionEvent evt)//GEN-FIRST:event_btnAnteriorRapidoActionPerformed
     {//GEN-HEADEREND:event_btnAnteriorRapidoActionPerformed
+        //comando usado para o botão alterar não ficar ativado enquanto é mudado de registro
         btnAnteriorRapido.setEnabled(false);
         btnProximoRapido.setEnabled(false);
         int ultimaMatricula;
@@ -1374,6 +1375,12 @@ public class frmPrincipal extends javax.swing.JFrame
 
     private void btnPararActionPerformed(java.awt.event.ActionEvent evt)//GEN-FIRST:event_btnPararActionPerformed
     {//GEN-HEADEREND:event_btnPararActionPerformed
+        btnSalvar.setEnabled(true);
+        btnNovo.setEnabled(true);
+        btnPesquisar.setEnabled(true);
+        btnAlterar.setEnabled(true);
+        btnExcluir.setEnabled(true);
+        btnAlterar.setEnabled(true);
         executor.shutdown();
         btnAnteriorRapido.setEnabled(true);
         btnProximoRapido.setEnabled(true);
@@ -1685,11 +1692,11 @@ public class frmPrincipal extends javax.swing.JFrame
 
     public void gerenciadorNavegacao(MetodosComunsParaTodosOsJIF mtd, JInternalFrame frm, String tituloJanela, String acao, boolean rapido)
     {
-        JInternalFrame janelaFocada = jdkpPrincipal.getSelectedFrame();
-        mtd.desativarCampos();
 
         //comando usado para o botão alterar
         this.estaAtivado = false;
+        JInternalFrame janelaFocada = jdkpPrincipal.getSelectedFrame();
+        mtd.desativarCampos();
 
         if (frm.getTitle().equals(tituloJanela) && frm.equals(janelaFocada))
         {
@@ -1712,16 +1719,31 @@ public class frmPrincipal extends javax.swing.JFrame
             case "anterior":
                 if (rapido)
                 {
+
+                    //comando usado para o botão alterar
+                    this.estaAtivado = true;
+
                     //bloco de comando do botão anterior rapido
                     int primeiraMatricula = quantidadeDeCodigosSalvosNoBancoDeDados.get(0);
 
                     //esse bloco de comando identifica qual é o codigo da janela focada e busca saber qual é o indice que ele se encontra para conseguir fazer a comparação
                     if (encontrarIndicePeloValor(quantidadeDeCodigosSalvosNoBancoDeDados, Integer.parseInt(mtd.getCodigo())) > primeiraMatricula)
                     {
+                        btnSalvar.setEnabled(false);
+                        btnNovo.setEnabled(false);
+                        btnPesquisar.setEnabled(false);
+                        btnAlterar.setEnabled(false);
+                        btnExcluir.setEnabled(false);
                         contadorAnterior--;
                     }
                     if (encontrarIndicePeloValor(quantidadeDeCodigosSalvosNoBancoDeDados, Integer.parseInt(mtd.getCodigo())) < primeiraMatricula)
                     {
+                        btnSalvar.setEnabled(true);
+                        btnNovo.setEnabled(true);
+                        btnPesquisar.setEnabled(true);
+                        btnAlterar.setEnabled(true);
+                        btnExcluir.setEnabled(true);
+                        btnAlterar.setEnabled(true);
                         contadorAnterior = 0;
                         executor.shutdown();
                         btnAnteriorRapido.setEnabled(true);
@@ -1744,15 +1766,29 @@ public class frmPrincipal extends javax.swing.JFrame
             case "proximo":
                 if (rapido)
                 {
+                    //comando usado para o botão alterar
+                    this.estaAtivado = true;
+
                     int ultimaMatricula = quantidadeDeCodigosSalvosNoBancoDeDados.size() - 1;
 
                     if (encontrarIndicePeloValor(quantidadeDeCodigosSalvosNoBancoDeDados, Integer.parseInt(mtd.getCodigo())) < ultimaMatricula)
                     {
+                        btnSalvar.setEnabled(false);
+                        btnNovo.setEnabled(false);
+                        btnPesquisar.setEnabled(false);
+                        btnAlterar.setEnabled(false);
+                        btnExcluir.setEnabled(false);
                         contadorProximo++;
                     }
 
                     if (encontrarIndicePeloValor(quantidadeDeCodigosSalvosNoBancoDeDados, Integer.parseInt(mtd.getCodigo())) >= ultimaMatricula)
                     {
+                        btnSalvar.setEnabled(true);
+                        btnNovo.setEnabled(true);
+                        btnPesquisar.setEnabled(true);
+                        btnAlterar.setEnabled(true);
+                        btnExcluir.setEnabled(true);
+                        btnAlterar.setEnabled(true);
                         executor.shutdown();
                         contadorProximo = 0;
                         btnAnteriorRapido.setEnabled(true);
@@ -1792,16 +1828,7 @@ public class frmPrincipal extends javax.swing.JFrame
         JInternalFrame janelaFocada = jdkpPrincipal.getSelectedFrame();
         if (frm.getTitle().equals(tituloJanela) && frm.equals(janelaFocada) && !mtd.getCodigo().isEmpty())
         {
-            if (!estaAtivado)
-            {
-                estaAtivado = true;
-                mtd.ativarCampos();
-            }
-            else
-            {
-                estaAtivado = false;
-                mtd.desativarCampos();
-            }
+            mtd.desativarCampos();
         }
 
     }
