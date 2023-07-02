@@ -923,13 +923,15 @@ public class frmCadastrarCargoEmprego extends javax.swing.JInternalFrame impleme
             jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel3Layout.createSequentialGroup()
                 .addContainerGap(35, Short.MAX_VALUE)
-                .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
-                    .addComponent(chkVencimento, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addGroup(jPanel3Layout.createSequentialGroup()
+                        .addComponent(chkVencimento, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addGap(34, 34, 34))
                     .addGroup(jPanel3Layout.createSequentialGroup()
                         .addComponent(lblRsVencimentos)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(lblRemuneracao, javax.swing.GroupLayout.PREFERRED_SIZE, 110, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addGap(34, 34, 34))
+                        .addComponent(lblRemuneracao, javax.swing.GroupLayout.PREFERRED_SIZE, 138, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addContainerGap())))
         );
         jPanel3Layout.setVerticalGroup(
             jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -1067,7 +1069,7 @@ public class frmCadastrarCargoEmprego extends javax.swing.JInternalFrame impleme
             .addGap(0, 139, Short.MAX_VALUE)
         );
 
-        jtpRemuneracao.addTab("Comissão", jPanel1);
+        jtpRemuneracao.addTab("Eletivo", jPanel1);
 
         javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
         jPanel2.setLayout(jPanel2Layout);
@@ -1080,7 +1082,7 @@ public class frmCadastrarCargoEmprego extends javax.swing.JInternalFrame impleme
             .addGap(0, 139, Short.MAX_VALUE)
         );
 
-        jtpRemuneracao.addTab("Eletivo", jPanel2);
+        jtpRemuneracao.addTab("Comissão", jPanel2);
 
         jpRequisitosDeProvimento.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "Requisitos de Provimento", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Segoe UI", 1, 12))); // NOI18N
 
@@ -1108,7 +1110,14 @@ public class frmCadastrarCargoEmprego extends javax.swing.JInternalFrame impleme
 
         jpCarreira.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "Carreira", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Segoe UI", 1, 12))); // NOI18N
 
-        cmbCarreira.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Técnico", "Professor", "Eletivo", "Comissão", "Aposentado" }));
+        cmbCarreira.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Técnico", "Professor", "Eletivo", "Comissão" }));
+        cmbCarreira.addItemListener(new java.awt.event.ItemListener()
+        {
+            public void itemStateChanged(java.awt.event.ItemEvent evt)
+            {
+                cmbCarreiraItemStateChanged(evt);
+            }
+        });
 
         lblCarreira.setText("Tipo:");
 
@@ -1548,6 +1557,33 @@ public class frmCadastrarCargoEmprego extends javax.swing.JInternalFrame impleme
             cmbReferenciaSalarial.removeItemListener(cmbRefSal);
         }
     }//GEN-LAST:event_chkVencimentoActionPerformed
+
+    private void cmbCarreiraItemStateChanged(java.awt.event.ItemEvent evt)//GEN-FIRST:event_cmbCarreiraItemStateChanged
+    {//GEN-HEADEREND:event_cmbCarreiraItemStateChanged
+        String alterarCarreira = cmbCarreira.getSelectedItem().toString();
+
+        switch (alterarCarreira)
+        {
+            case "Técnico":
+                jtpRemuneracao.setSelectedIndex(0);
+                break;
+
+            case "Professor":
+                jtpRemuneracao.setSelectedIndex(1);
+                break;
+
+            case "Eletivo":
+                jtpRemuneracao.setSelectedIndex(2);
+                break;
+
+            case "Comissão":
+                jtpRemuneracao.setSelectedIndex(3);
+                break;
+
+            default:
+                throw new AssertionError();
+        }
+    }//GEN-LAST:event_cmbCarreiraItemStateChanged
     public void limparTabelas(JTable tabela)
     {
         DefaultTableModel limparTabela = (DefaultTableModel) tabela.getModel();

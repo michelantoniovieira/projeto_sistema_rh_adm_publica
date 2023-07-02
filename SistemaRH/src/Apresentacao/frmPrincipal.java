@@ -1339,6 +1339,7 @@ public class frmPrincipal extends javax.swing.JFrame
 
     private void btnAnteriorRapidoActionPerformed(java.awt.event.ActionEvent evt)//GEN-FIRST:event_btnAnteriorRapidoActionPerformed
     {//GEN-HEADEREND:event_btnAnteriorRapidoActionPerformed
+
         //comando usado para o botão alterar não ficar ativado enquanto é mudado de registro
         btnAnteriorRapido.setEnabled(false);
         btnProximoRapido.setEnabled(false);
@@ -1721,7 +1722,7 @@ public class frmPrincipal extends javax.swing.JFrame
                 {
 
                     //comando usado para o botão alterar
-                    this.estaAtivado = true;
+                    this.estaAtivado = false;
 
                     //bloco de comando do botão anterior rapido
                     int primeiraMatricula = quantidadeDeCodigosSalvosNoBancoDeDados.get(0);
@@ -1767,7 +1768,7 @@ public class frmPrincipal extends javax.swing.JFrame
                 if (rapido)
                 {
                     //comando usado para o botão alterar
-                    this.estaAtivado = true;
+                    this.estaAtivado = false;
 
                     int ultimaMatricula = quantidadeDeCodigosSalvosNoBancoDeDados.size() - 1;
 
