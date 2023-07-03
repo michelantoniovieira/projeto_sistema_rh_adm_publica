@@ -314,23 +314,23 @@ public class frmCadastrarCargoEmprego extends javax.swing.JInternalFrame impleme
                 break;
 
             case "Professor":
-                jtp.setSelectedIndex(0);
+                jtp.setSelectedIndex(1);
                 jtp.setEnabledAt(0, false);
                 jtp.setEnabledAt(1, true);
                 jtp.setEnabledAt(2, false);
                 jtp.setEnabledAt(3, false);
                 break;
 
-            case "Comissão":
-                jtp.setSelectedIndex(0);
+            case "Eletivo":
+                jtp.setSelectedIndex(2);
                 jtp.setEnabledAt(0, false);
                 jtp.setEnabledAt(1, false);
                 jtp.setEnabledAt(2, true);
                 jtp.setEnabledAt(3, false);
                 break;
 
-            case "Eletivo":
-                jtp.setSelectedIndex(0);
+            case "Comissão":
+                jtp.setSelectedIndex(3);
                 jtp.setEnabledAt(0, false);
                 jtp.setEnabledAt(1, false);
                 jtp.setEnabledAt(2, false);
