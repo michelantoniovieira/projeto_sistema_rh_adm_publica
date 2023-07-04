@@ -49,9 +49,12 @@ public class CadastrarCargoEmpregoControle extends CadastrarCargoEmpregoDTO
         dto.setCargaHorariaSemanal(frm.getCargaHorariaSemanal());
         dto.setCargaHorariaMensal(frm.getCargaHorariaMensal());
         dto.setEscolaridade(frm.getEscolaridade());
-
+        dto.setVagasCriadas(frm.getQuadro().getValueAt(0, 0).toString());
+        
+        
         CadastrarCargoEmpregoValidacao val = new CadastrarCargoEmpregoValidacao(dto);
-        if (val.getMensagem().equals("ok"))
+
+        if (val.getMensagem() != null && val.getMensagem().equals("ok"))
         {
 
             ResultSet rs = cadastrarCargoEmpregoDAO.verificarAntesDeCadastrar(dto);
@@ -225,4 +228,6 @@ public class CadastrarCargoEmpregoControle extends CadastrarCargoEmpregoDTO
     {
         this.codigoCargosEmpregos = codigoCargosEmpregos;
     }
+
+    
 }

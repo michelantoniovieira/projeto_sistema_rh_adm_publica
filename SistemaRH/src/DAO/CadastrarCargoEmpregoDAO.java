@@ -53,7 +53,7 @@ public class CadastrarCargoEmpregoDAO
         }
         finally
         {
-            ConexaoDAO.encerrarConexao(conn, pstm, rs);
+            //ConexaoDAO.encerrarConexao(conn, pstm, rs);
         }
     }
 
@@ -202,7 +202,7 @@ public class CadastrarCargoEmpregoDAO
 
     public void cadastrar(CadastrarCargoEmpregoDTO cadastrarcargoempregodto)
     {
-        String sql = "INSERT INTO cargo_emprego (descricao_cargo_emprego, cbo_cargo_emprego, regime_juridico_cargo_emprego, esta_ativo_cargo_emprego, tipo_carreira_cargo_emprego, carga_horaria_semanal_cargo_emprego, carga_horaria_mensal_cargo_emprego, escolaridade_cargo_emprego) values (?,?,?,?,?,?,?,?)";
+        String sql = "INSERT INTO cargo_emprego (descricao_cargo_emprego, cbo_cargo_emprego, regime_juridico_cargo_emprego, esta_ativo_cargo_emprego, tipo_carreira_cargo_emprego, carga_horaria_semanal_cargo_emprego, carga_horaria_mensal_cargo_emprego, escolaridade_cargo_emprego, vagas_criadas) values (?,?,?,?,?,?,?,?,?)";
         conn = new ConexaoDAO().conectaBD();
 
         try
@@ -216,6 +216,7 @@ public class CadastrarCargoEmpregoDAO
             pstm.setString(6, cadastrarcargoempregodto.getCargaHorariaSemanal());
             pstm.setString(7, cadastrarcargoempregodto.getCargaHorariaMensal());
             pstm.setString(8, cadastrarcargoempregodto.getEscolaridade());
+            pstm.setString(9, cadastrarcargoempregodto.getVagasCriadas());
 
             pstm.execute();
             pstm.close();

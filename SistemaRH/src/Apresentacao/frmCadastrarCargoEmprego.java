@@ -66,10 +66,7 @@ public class frmCadastrarCargoEmprego extends javax.swing.JInternalFrame impleme
     private String escolaridadeCargoEmprego;
 
     //tabela - quadro cargo emprego
-    private String quantidadeCargoEmpregoCriada;
-    private String quantidadeCargoEmpregoProvida;
-    private String quantidadeCargoEmpregoReservada;
-    private String quantidadeCargoEmpregoDisponivel;
+    private JTable quadro;
 
     //tabela - remuneração - tabela de vencimentos
     private String referenciaTecnicoCargoEmprego;
@@ -127,6 +124,7 @@ public class frmCadastrarCargoEmprego extends javax.swing.JInternalFrame impleme
         gerenciadorDeTabelas(tbFundamentoCriacaoExclusao);
         gerenciadorDeTabelas(tbFundamentoReajuste);
         controle = new CadastrarCargoEmpregoControle();
+        quadro = tbQuadro;
     }
 
     public void gravarRegistro()
@@ -196,10 +194,13 @@ public class frmCadastrarCargoEmprego extends javax.swing.JInternalFrame impleme
 
     public void consultarReferenciaGrauVencimento(String codigo_vencimento)
     {
-        cmbReferenciaSalarial.setSelectedItem(controle.consultarReferenciaGrauVencimento(codigo_vencimento).getReferencia());
-        cmbGrau.setSelectedItem(controle.consultarReferenciaGrauVencimento(codigo_vencimento).getGrau());
-        lblRemuneracao.setText(controle.consultarReferenciaGrauVencimento(codigo_vencimento).getValorVencimento());
-
+        String referencia = controle.consultarReferenciaGrauVencimento(codigo_vencimento).getReferencia();
+        if (referencia != null)
+        {
+            cmbReferenciaSalarial.setSelectedItem(referencia);
+            cmbGrau.setSelectedItem(controle.consultarReferenciaGrauVencimento(codigo_vencimento).getGrau());
+            lblRemuneracao.setText(controle.consultarReferenciaGrauVencimento(codigo_vencimento).getValorVencimento());
+        }
     }
 
     //preencher referencia no combobox
@@ -511,6 +512,16 @@ public class frmCadastrarCargoEmprego extends javax.swing.JInternalFrame impleme
     public void setEscolaridade(String escolaridadeCargoEmprego)
     {
         this.escolaridadeCargoEmprego = escolaridadeCargoEmprego;
+    }
+
+    public void setQuadro(JTable quadro)
+    {
+        this.quadro = quadro;
+    }
+
+    public JTable getQuadro()
+    {
+        return quadro;
     }
 
     public String getNumeroLeiCriaCargoEmprego()
@@ -1644,7 +1655,7 @@ public class frmCadastrarCargoEmprego extends javax.swing.JInternalFrame impleme
     private javax.swing.JLabel lblSemanal;
     private javax.swing.JTable tbFundamentoCriacaoExclusao;
     private javax.swing.JTable tbFundamentoReajuste;
-    private javax.swing.JTable tbQuadro;
+    public javax.swing.JTable tbQuadro;
     private javax.swing.JTextArea txtAreaRequisitosProvimento;
     private javax.swing.JTextField txtCboCargoEmprego;
     private javax.swing.JTextField txtCodigoCargoEmprego;

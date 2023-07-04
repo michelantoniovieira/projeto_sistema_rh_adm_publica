@@ -880,15 +880,14 @@ public class frmPrincipal extends javax.swing.JFrame
                 //quando eu digitar nos campos da janela CadastrarConcursoCargoEmprego e clicar no icone salvar da janela principal entra aqui e manda gravar registro que significa que os dados dos campos serão passados para as variaveis que eu acesso por aqui para mandar para a variavel controle
                 CadastrarCargoEmpregoControle controle = new CadastrarCargoEmpregoControle(frmCCE);
                 controle.cadastrarCargoEmprego();
-                if (controle.getMensagem().equals("erro 1"))
+                if (controle.getMensagem() != null && controle.getMensagem().equals("erro 1"))
                 {
-                    JOptionPane.showMessageDialog(null, "Esta banca já foi cadastrada!");
+                    JOptionPane.showMessageDialog(null, "Cargo/Emprego já cadastrado!");
                 }
-                else if (controle.getMensagem().equals("ok"))
+                else if (controle.getMensagem() != null && controle.getMensagem().equals("ok"))
                 {
-                    JOptionPane.showMessageDialog(null, "Banca cadastrada com sucesso.");
+                    JOptionPane.showMessageDialog(null, "Cargo/Emprego cadastrado com sucesso.");
                     frmCCE.limparCampos();
-                    frmCCE.desativarCampos();
                     frmCCE.desativarCampos();
                 }
             }

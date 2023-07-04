@@ -15,7 +15,7 @@ public class CadastrarCargoEmpregoValidacao extends CadastrarCargoEmpregoDTO
         validar(dto);
     }
 
-    public void validar(CadastrarCargoEmpregoDTO dto)
+    public final void validar(CadastrarCargoEmpregoDTO dto)
     {
         List<String> camposVazios = new ArrayList<>();
 

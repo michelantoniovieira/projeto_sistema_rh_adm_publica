@@ -15,6 +15,9 @@ public class CadastrarCargoEmpregoDTO
     private String cargaHorariaMensal;
     private String escolaridade;
     private String vencimento;
+    private String vagasCriadas;
+    private String vagasProvidas;
+    private String vagasDisponiveis;
     
 
     public String getMensagem()
@@ -126,6 +129,37 @@ public class CadastrarCargoEmpregoDTO
     {
         this.vencimento = vencimento;
     }
+
+    public String getVagasCriadas()
+    {
+        return vagasCriadas;
+    }
+
+    public void setVagasCriadas(String vagasCriadas)
+    {
+        this.vagasCriadas = vagasCriadas;
+    }
+
+    public String getVagasProvidas()
+    {
+        return vagasProvidas;
+    }
+
+    public void setVagasProvidas(String vagasProvidas)
+    {
+        this.vagasProvidas = vagasProvidas;
+    }
+
+    public String getVagasDisponiveis()
+    {
+        return vagasDisponiveis;
+    }
+
+    public void setVagasDisponiveis(String vagasDisponiveis)
+    {
+        this.vagasDisponiveis = vagasDisponiveis;
+    }
+    
     
     
     
