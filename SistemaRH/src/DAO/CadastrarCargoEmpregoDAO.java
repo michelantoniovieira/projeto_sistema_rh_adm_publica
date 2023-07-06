@@ -139,6 +139,33 @@ public class CadastrarCargoEmpregoDAO
         }
         return ultimoRegistro;
     }
+    
+        public Integer pesquisarVagasCriadas(String codigoCargoEmprego)
+    {
+        conn = new ConexaoDAO().conectaBD();
+        Integer vagasCriadas = 0;
+
+        try
+        {
+            String sql = "SELECT vagas_criadas FROM cargo_emprego WHERE codigo_cargo_emprego = '" + codigoCargoEmprego + "'";
+            PreparedStatement pstm = conn.prepareStatement(sql);
+            ResultSet rs = pstm.executeQuery();
+
+            if (rs.next())
+            {
+                vagasCriadas = rs.getInt("vagas_criadas");
+            }
+        }
+        catch (SQLException erro)
+        {
+            JOptionPane.showMessageDialog(null, "Erro ao pesquisar vagas criadas: " + erro);
+        }
+        finally
+        {
+            ConexaoDAO.encerrarConexao(conn, pstm, rs);
+        }
+        return vagasCriadas;
+    }
 
     public List<CadastrarCargoEmpregoDTO> pesquisar(String codigoCargoEmprego)
     {
@@ -199,6 +226,8 @@ public class CadastrarCargoEmpregoDAO
         }
         return cargosEmpregos;
     }
+    
+    
 
     public void cadastrar(CadastrarCargoEmpregoDTO cadastrarcargoempregodto)
     {
@@ -324,14 +353,14 @@ public class CadastrarCargoEmpregoDAO
 
             while (rs.next())
             {
-                String referencia = rs.getString("referencia_vencimento");
-                String grau = rs.getString("grau_vencimento");
-                String valorVencimento = rs.getString("valor_vencimento");
+                referencia = rs.getString("referencia_vencimento");
+                grau = rs.getString("grau_vencimento");
+                valorVencimento = rs.getString("valor_vencimento");
                 return new CadastrarCargoEmpregoDAO(referencia, grau, valorVencimento);
                 
             }
 
-            return null;
+            return new CadastrarCargoEmpregoDAO(referencia, grau, valorVencimento);
         }
         catch (SQLException erro)
         {

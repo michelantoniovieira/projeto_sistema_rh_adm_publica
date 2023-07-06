@@ -1253,6 +1253,7 @@ public class frmPrincipal extends javax.swing.JFrame
             desativarBotoesFrmCCE = true;
             frmCCE.ativarCampos();
             frmCCE.limparCampos();
+            frmCCE.consultarUltimoRegistro();
         }
 
         //tela cadastro concurso

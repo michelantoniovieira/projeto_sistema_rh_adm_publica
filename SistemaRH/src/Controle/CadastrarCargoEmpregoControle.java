@@ -24,6 +24,7 @@ public class CadastrarCargoEmpregoControle extends CadastrarCargoEmpregoDTO
     private CadastrarCargoEmpregoDAO cadastrarCargoEmpregoDAO;
     private List<CadastrarCargoEmpregoDTO> objPuxadoDaPesquisaDeCargoEmprego;
     private List<Integer> codigoCargosEmpregos;
+    private int ultimoRegistro;
 
     public CadastrarCargoEmpregoControle()
     {
@@ -51,6 +52,7 @@ public class CadastrarCargoEmpregoControle extends CadastrarCargoEmpregoDTO
         dto.setEscolaridade(frm.getEscolaridade());
         dto.setVagasCriadas(frm.getQuadro().getValueAt(0, 0).toString());
         
+        /* preciso mostrar na tabela quadro as informações de vagas criadas, após isto, devo prosseguir com a logica do botão salvar*/
         
         CadastrarCargoEmpregoValidacao val = new CadastrarCargoEmpregoValidacao(dto);
 
@@ -71,6 +73,14 @@ public class CadastrarCargoEmpregoControle extends CadastrarCargoEmpregoDTO
         }
     }
 
+    public String pesquisarUltimoRegistro()
+    {
+        CadastrarCargoEmpregoDAO dao = new CadastrarCargoEmpregoDAO();
+        int ultimoRegistroSalvo = dao.pesquisarUltimoRegistro();
+        int soma = ultimoRegistroSalvo + 1;
+        return String.valueOf(soma);
+    }
+    
     // pesquisar cargo pelo codigo inserido
     public void pesquisarCargoEmprego(String codigoCargoEmprego)
     {
@@ -159,6 +169,12 @@ public class CadastrarCargoEmpregoControle extends CadastrarCargoEmpregoDTO
         }
         return tudoCerto;
     }
+    
+    public Integer preencherQuadro(String codigoCargoEmprego)
+    {
+        CadastrarCargoEmpregoDAO controle = new CadastrarCargoEmpregoDAO();
+        return controle.pesquisarVagasCriadas(codigoCargoEmprego);
+    }
 
     //informações do quadro
     public String cadastrarCargoEmpregoNoQuadro(DefaultTableModel tabelaQuadro, DefaultTableModel tabelaFundamento)
@@ -229,5 +245,16 @@ public class CadastrarCargoEmpregoControle extends CadastrarCargoEmpregoDTO
         this.codigoCargosEmpregos = codigoCargosEmpregos;
     }
 
+    public int getUltimoRegistro()
+    {
+        return ultimoRegistro;
+    }
+
+    public void setUltimoRegistro(int ultimoRegistro)
+    {
+        this.ultimoRegistro = ultimoRegistro;
+    }
+
+    
     
 }

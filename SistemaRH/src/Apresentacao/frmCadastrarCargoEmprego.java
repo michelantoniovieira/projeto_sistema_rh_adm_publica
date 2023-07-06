@@ -125,8 +125,14 @@ public class frmCadastrarCargoEmprego extends javax.swing.JInternalFrame impleme
         gerenciadorDeTabelas(tbFundamentoReajuste);
         controle = new CadastrarCargoEmpregoControle();
         quadro = tbQuadro;
+        preencherQuadro();
     }
 
+    public void consultarUltimoRegistro()
+    {
+        txtCodigoCargoEmprego.setText(controle.pesquisarUltimoRegistro());
+    }
+    
     public void gravarRegistro()
     {
         setCodigoCargoEmprego(txtCodigoCargoEmprego.getText());
@@ -180,6 +186,9 @@ public class frmCadastrarCargoEmprego extends javax.swing.JInternalFrame impleme
         //exigências
         cmbEscolaridade.setSelectedItem(String.valueOf(lista.get(0).getEscolaridade()));
 
+        //preencher quadro 
+        preencherQuadro();
+        
         //preencher remuneração
         preencherReferenciaVencimento();
         preencherGrauVencimento();
@@ -201,6 +210,16 @@ public class frmCadastrarCargoEmprego extends javax.swing.JInternalFrame impleme
             cmbGrau.setSelectedItem(controle.consultarReferenciaGrauVencimento(codigo_vencimento).getGrau());
             lblRemuneracao.setText(controle.consultarReferenciaGrauVencimento(codigo_vencimento).getValorVencimento());
         }
+        else
+        {
+            JOptionPane.showMessageDialog(null, "nulo");
+        }
+    }
+    
+    //processo para preencher quadro
+    public void preencherQuadro()
+    {
+        System.out.println("Vagas criadas" + controle.preencherQuadro(txtCodigoCargoEmprego.getText()));
     }
 
     //preencher referencia no combobox
@@ -416,6 +435,15 @@ public class frmCadastrarCargoEmprego extends javax.swing.JInternalFrame impleme
         limparTabelas(tbFundamentoCriacaoExclusao);
         limparTabelas(tbFundamentoReajuste);
         txtAreaRequisitosProvimento.setText("");
+
+        cmbReferenciaSalarial.setSelectedIndex(0);
+        cmbGrau.setSelectedIndex(0);
+
+        // Carregar a primeira remuneração
+        BigDecimal remuneracao = controle.vincularRemuneração(cmbCarreira.getSelectedItem().toString(), cmbReferenciaSalarial.getSelectedItem().toString(), cmbGrau.getSelectedItem().toString());
+        DecimalFormat decimalFormat = new DecimalFormat("#,##0.00");
+        String valorFormatado = decimalFormat.format(remuneracao);
+        lblRemuneracao.setText(valorFormatado);
     }
 
     public String getCodigoCargoEmprego()
@@ -958,9 +986,13 @@ public class frmCadastrarCargoEmprego extends javax.swing.JInternalFrame impleme
 
         jPanel4.setBorder(new javax.swing.border.SoftBevelBorder(javax.swing.border.BevelBorder.RAISED));
 
+        cmbGrau.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "-" }));
+
         lblGrau.setText("Grau:");
 
         lblReferenciaSalarial.setText("Referência:");
+
+        cmbReferenciaSalarial.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "-" }));
 
         javax.swing.GroupLayout jPanel4Layout = new javax.swing.GroupLayout(jPanel4);
         jPanel4.setLayout(jPanel4Layout);
