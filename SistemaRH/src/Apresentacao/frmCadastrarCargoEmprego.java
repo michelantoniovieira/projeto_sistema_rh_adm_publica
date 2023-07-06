@@ -132,7 +132,7 @@ public class frmCadastrarCargoEmprego extends javax.swing.JInternalFrame impleme
     {
         txtCodigoCargoEmprego.setText(controle.pesquisarUltimoRegistro());
     }
-    
+
     public void gravarRegistro()
     {
         setCodigoCargoEmprego(txtCodigoCargoEmprego.getText());
@@ -188,7 +188,7 @@ public class frmCadastrarCargoEmprego extends javax.swing.JInternalFrame impleme
 
         //preencher quadro 
         preencherQuadro();
-        
+
         //preencher remuneração
         preencherReferenciaVencimento();
         preencherGrauVencimento();
@@ -215,11 +215,26 @@ public class frmCadastrarCargoEmprego extends javax.swing.JInternalFrame impleme
             JOptionPane.showMessageDialog(null, "nulo");
         }
     }
-    
+
     //processo para preencher quadro
     public void preencherQuadro()
     {
-        System.out.println("Vagas criadas" + controle.preencherQuadro(txtCodigoCargoEmprego.getText()));
+        //criar padrão de tabela
+        DefaultTableModel model = (DefaultTableModel) tbQuadro.getModel();
+
+        // Crie um array para representar os dados da nova linha
+        Object[] novaLinha =
+        {
+            controle.preencherQuadro(txtCodigoCargoEmprego.getText())
+        };
+
+        if(model.getRowCount() < 1)
+        {
+            model.addRow(novaLinha);
+        }
+        
+        model.setValueAt(controle.preencherQuadro(txtCodigoCargoEmprego.getText()), 0, 0);
+
     }
 
     //preencher referencia no combobox
