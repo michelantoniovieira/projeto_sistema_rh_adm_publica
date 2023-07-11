@@ -14,6 +14,7 @@ import java.awt.event.ItemEvent;
 import java.awt.event.ItemListener;
 import java.awt.event.KeyEvent;
 import java.math.BigDecimal;
+import java.sql.SQLException;
 import java.text.DecimalFormat;
 import java.util.ArrayList;
 import java.util.Comparator;
@@ -21,11 +22,14 @@ import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
 import java.util.TreeSet;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.accessibility.AccessibleContext;
 import javax.swing.Icon;
 import javax.swing.JButton;
 import javax.swing.JCheckBox;
 import javax.swing.JComboBox;
+import javax.swing.JInternalFrame;
 import javax.swing.JLabel;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
@@ -45,7 +49,7 @@ import javax.swing.table.DefaultTableModel;
  *
  * @author miche
  */
-public class frmCadastrarCargoEmprego extends javax.swing.JInternalFrame implements Modelo.MetodosComunsParaTodosOsJIF
+public class frmCadastrarCargoEmprego extends javax.swing.JInternalFrame implements Modelo.MetodosComunsParaTodosOsJIF<frmCadastrarCargoEmprego>
 {
 
     //cargo emprego
@@ -228,11 +232,11 @@ public class frmCadastrarCargoEmprego extends javax.swing.JInternalFrame impleme
             controle.preencherQuadro(txtCodigoCargoEmprego.getText())
         };
 
-        if(model.getRowCount() < 1)
+        if (model.getRowCount() < 1)
         {
             model.addRow(novaLinha);
         }
-        
+
         model.setValueAt(controle.preencherQuadro(txtCodigoCargoEmprego.getText()), 0, 0);
 
     }
@@ -252,6 +256,14 @@ public class frmCadastrarCargoEmprego extends javax.swing.JInternalFrame impleme
         {
             cmbReferenciaSalarial.addItem(referencia);
         }
+    }
+
+    @Override
+    public void cadastrar(frmCadastrarCargoEmprego frm)
+    {
+        System.out.println(frm.getCargaHorariaMensal());
+        
+        //continua aqui
     }
 
     private static class ReferenciaComparator implements Comparator<String>

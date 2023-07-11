@@ -5,6 +5,7 @@
 package Apresentacao;
 
 import DTO.PesquisarBancaDTO;
+import Modelo.CadastrarBancaControle;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -12,7 +13,7 @@ import java.util.List;
  *
  * @author miche
  */
-public class frmCadastrarBanca extends javax.swing.JInternalFrame implements Modelo.MetodosComunsParaTodosOsJIF
+public class frmCadastrarBanca extends javax.swing.JInternalFrame implements Modelo.MetodosComunsParaTodosOsJIF<CadastrarBancaControle>
 {
 
     private String codigoBanca = "";
@@ -411,5 +412,11 @@ public class frmCadastrarBanca extends javax.swing.JInternalFrame implements Mod
     public String getCodigo()
     {
         return codigoBanca;
+    }
+
+    @Override
+    public void cadastrar(CadastrarBancaControle frm)
+    {
+        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
     }
 }

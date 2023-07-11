@@ -5,12 +5,14 @@
 package Modelo;
 
 import java.util.List;
+import javax.swing.JInternalFrame;
 
 /**
  *
  * @author miche
+ * @param <frm>
  */
-public interface MetodosComunsParaTodosOsJIF
+public interface MetodosComunsParaTodosOsJIF<frm>
 {
     public List<Integer> gerenciadorNavegacao(String acao);
     
@@ -19,4 +21,6 @@ public interface MetodosComunsParaTodosOsJIF
     public void desativarCampos();
     
     public void ativarCampos();
+    
+    public void cadastrar(frm frm);
 }

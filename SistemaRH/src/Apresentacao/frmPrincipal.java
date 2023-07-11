@@ -834,6 +834,8 @@ public class frmPrincipal extends javax.swing.JFrame
     private void btnSalvarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSalvarActionPerformed
         //se tiver aparecendo a janela de cadastrar concurso executa essa parte do sistema
         //tela cadastrar banca
+        salvarNovoCadastro(frmCCE, frmCCE, "Manutenção de Cargos e Empregos", "salvar");
+        /*
         frmCB.gravarRegistro();
         desativarBotoesFrmCC = false;
 
@@ -873,7 +875,7 @@ public class frmPrincipal extends javax.swing.JFrame
         desativarBotoesFrmCCE = false;
 
         //entra aqui quando for gravar o primeiro cadastro
-        if (frmCCE.isVisible() && !frmCCE.getDescricaoCargoEmprego().equals(""))
+        if (frmCCE.isVisible() && !frmCCE.getDescricaoCargoEmprego().equals("") && gravarAlteracaoFrmCCE == false)
         {
             try
             {
@@ -943,7 +945,51 @@ public class frmPrincipal extends javax.swing.JFrame
             frmCC.desativarCampos();
             JOptionPane.showMessageDialog(null, "Alteração realizada com sucesso!");
         }
+         */
     }//GEN-LAST:event_btnSalvarActionPerformed
+
+    private void salvarNovoCadastro(MetodosComunsParaTodosOsJIF mtd, JInternalFrame frm, String tituloJanela, String acao)
+    {
+        JInternalFrame janelaFocada = jdkpPrincipal.getSelectedFrame();
+        if (frm.getTitle().equals(tituloJanela) && frm.equals(janelaFocada) && !mtd.getCodigo().isEmpty())
+        {
+            if (acao.equals("salvar"))
+            {
+                mtd.cadastrar(frmCCE);
+                 /*
+                try
+                {
+                   
+                    mtd.cadastrar(frm);
+                    //quando eu digitar nos campos da janela CadastrarConcursoCargoEmprego e clicar no icone salvar da janela principal entra aqui e manda gravar registro que significa que os dados dos campos serão passados para as variaveis que eu acesso por aqui para mandar para a variavel controle
+                    CadastrarCargoEmpregoControle controle = new CadastrarCargoEmpregoControle(frmCCE);
+                    controle.cadastrarCargoEmprego();
+                    if (controle.getMensagem() != null && controle.getMensagem().equals("erro 1"))
+                    {
+                        JOptionPane.showMessageDialog(null, "Cargo/Emprego já cadastrado!");
+                    }
+                    else if (controle.getMensagem() != null && controle.getMensagem().equals("ok"))
+                    {
+                        JOptionPane.showMessageDialog(null, "Cargo/Emprego cadastrado com sucesso.");
+                        frmCCE.limparCampos();
+                        frmCCE.desativarCampos();
+                    }
+                   
+                }
+                catch (SQLException ex)
+                {
+                    Logger.getLogger(frmPrincipal.class.getName()).log(Level.SEVERE, null, ex);
+                }
+                */
+                     
+            }
+            else if (acao.equals("alterar"))
+            {
+                System.out.println("alterar");
+            }
+        }
+
+    }
 
     private void btnPrimeiroActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnPrimeiroActionPerformed
         gerenciadorNavegacao(frmCCE, frmCCE, "Manutenção de Cargos e Empregos", "primeiro", false);
