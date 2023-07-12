@@ -16,16 +16,16 @@ public class CadastrarCargoEmpregoDAO
     Connection conn;
     PreparedStatement pstm;
     ResultSet rs;
-    
+
     String referencia;
     String grau;
     String valorVencimento;
-    
+
     public CadastrarCargoEmpregoDAO()
     {
-        
+
     }
-    
+
     public CadastrarCargoEmpregoDAO(String referencia, String grau, String valorVencimento)
     {
         this.setReferencia(referencia);
@@ -139,8 +139,8 @@ public class CadastrarCargoEmpregoDAO
         }
         return ultimoRegistro;
     }
-    
-        public Integer pesquisarVagasCriadas(String codigoCargoEmprego)
+
+    public Integer pesquisarVagasCriadas(String codigoCargoEmprego)
     {
         conn = new ConexaoDAO().conectaBD();
         Integer vagasCriadas = 0;
@@ -192,7 +192,7 @@ public class CadastrarCargoEmpregoDAO
                 cargoEmprego.setCargaHorariaSemanal(rs.getString("carga_horaria_semanal_cargo_emprego"));
                 cargoEmprego.setCargaHorariaMensal(rs.getString("carga_horaria_mensal_cargo_emprego"));
                 cargoEmprego.setEscolaridade(rs.getString("escolaridade_cargo_emprego"));
-                cargoEmprego.setVencimento(rs.getString("fk_codigo_vencimento"));
+                cargoEmprego.setCodigoVencimento(rs.getString("fk_codigo_vencimento"));
                 // Adicionar o objeto CargoEmprego à lista
                 cargosEmpregos.add(cargoEmprego);
             }
@@ -226,12 +226,10 @@ public class CadastrarCargoEmpregoDAO
         }
         return cargosEmpregos;
     }
-    
-    
 
     public void cadastrar(CadastrarCargoEmpregoDTO cadastrarcargoempregodto)
     {
-        String sql = "INSERT INTO cargo_emprego (descricao_cargo_emprego, cbo_cargo_emprego, regime_juridico_cargo_emprego, esta_ativo_cargo_emprego, tipo_carreira_cargo_emprego, carga_horaria_semanal_cargo_emprego, carga_horaria_mensal_cargo_emprego, escolaridade_cargo_emprego, vagas_criadas) values (?,?,?,?,?,?,?,?,?)";
+        String sql = "INSERT INTO cargo_emprego (descricao_cargo_emprego, cbo_cargo_emprego, regime_juridico_cargo_emprego, esta_ativo_cargo_emprego, tipo_carreira_cargo_emprego, carga_horaria_semanal_cargo_emprego, carga_horaria_mensal_cargo_emprego, escolaridade_cargo_emprego, vagas_criadas, fk_codigo_vencimento) values (?,?,?,?,?,?,?,?,?,?)";
         conn = new ConexaoDAO().conectaBD();
 
         try
@@ -246,6 +244,7 @@ public class CadastrarCargoEmpregoDAO
             pstm.setString(7, cadastrarcargoempregodto.getCargaHorariaMensal());
             pstm.setString(8, cadastrarcargoempregodto.getEscolaridade());
             pstm.setString(9, cadastrarcargoempregodto.getVagasCriadas());
+            pstm.setString(10, cadastrarcargoempregodto.getCodigoVencimento());
 
             pstm.execute();
             pstm.close();
@@ -253,6 +252,63 @@ public class CadastrarCargoEmpregoDAO
         catch (SQLException erro)
         {
             JOptionPane.showMessageDialog(null, "CadastrarCargoEmpregoDAO - Cadastrar" + erro);
+        }
+        finally
+        {
+            ConexaoDAO.encerrarConexao(conn, pstm, rs);
+        }
+    }
+
+public String pesquisarCodigoVencimento(CadastrarCargoEmpregoDTO cadastrarcargoempregodto) {
+    conn = new ConexaoDAO().conectaBD();
+    String codigoVencimento = "";
+
+    try {
+        String sql = "SELECT codigo_vencimento FROM vencimentos " +
+                     "WHERE referencia_vencimento = ? " +
+                     "AND grau_vencimento = ?";
+
+        pstm = conn.prepareStatement(sql);
+        pstm.setString(1, cadastrarcargoempregodto.getReferenciaVencimento());
+        pstm.setString(2, cadastrarcargoempregodto.getGrauVencimento());
+        rs = pstm.executeQuery();
+
+        while (rs.next()) {
+            codigoVencimento = rs.getString("codigo_vencimento");
+        }
+
+        return codigoVencimento;
+    } catch (SQLException erro) {
+        JOptionPane.showMessageDialog(null, "Erro ao pesquisar Codigo Vencimento" + erro);
+        return null;
+    } finally {
+        ConexaoDAO.encerrarConexao(conn, pstm, rs);
+    }
+}
+
+
+    public void cadastrarVencimento(CadastrarCargoEmpregoDTO cadastrarcargoempregodto)
+    {
+        String sql = "INSERT INTO cargo_emprego (fk_codigo_vencimento) "
+                + "SELECT v.codigo_vencimento "
+                + "FROM vencimentos v "
+                + "WHERE codigo_cargo_emprego = ?"
+                + "AND v.referencia_vencimento = ? "
+                + "AND v.grau_vencimento = ?";
+
+        conn = new ConexaoDAO().conectaBD();
+
+        try
+        {
+            pstm = conn.prepareStatement(sql);
+            pstm.setInt(0, cadastrarcargoempregodto.getCodigoCargoEmprego());
+            pstm.setString(1, cadastrarcargoempregodto.getReferenciaVencimento());
+            pstm.setString(2, cadastrarcargoempregodto.getGrauVencimento());
+            pstm.execute();
+        }
+        catch (SQLException erro)
+        {
+            JOptionPane.showMessageDialog(null, "CadastrarVencimentoCargoEmpregoDAO - Cadastrar" + erro);
         }
         finally
         {
@@ -357,7 +413,7 @@ public class CadastrarCargoEmpregoDAO
                 grau = rs.getString("grau_vencimento");
                 valorVencimento = rs.getString("valor_vencimento");
                 return new CadastrarCargoEmpregoDAO(referencia, grau, valorVencimento);
-                
+
             }
 
             return new CadastrarCargoEmpregoDAO(referencia, grau, valorVencimento);
@@ -521,5 +577,4 @@ public class CadastrarCargoEmpregoDAO
         this.valorVencimento = valorVencimento;
     }
 
-    
 }

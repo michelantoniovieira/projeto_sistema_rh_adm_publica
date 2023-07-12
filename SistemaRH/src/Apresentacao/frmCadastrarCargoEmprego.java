@@ -106,7 +106,6 @@ public class frmCadastrarCargoEmprego extends javax.swing.JInternalFrame impleme
 
     private String numeroLeiCriaCargoEmprego;
     private String dataLeiCriaCargoEmprego;
-    private String referenciaSalarial = "";
     private ArrayList<PesquisarCargoEmpregoDTO> lista;
     private String itemSelecionadoNoComboBox = "";
 
@@ -198,7 +197,7 @@ public class frmCadastrarCargoEmprego extends javax.swing.JInternalFrame impleme
         preencherGrauVencimento();
 
         //puxa o codigo do vencimento do banco de dados e passa para ca, para uma nova consulta
-        consultarReferenciaGrauVencimento(String.valueOf(lista.get(0).getVencimento()));
+        consultarReferenciaGrauVencimento(String.valueOf(lista.get(0).getCodigoVencimento()));
         preencherVencimento();
 
         //o problema é que eu estou fechando o listener mesmo sem ter mudado de tela. 
@@ -216,7 +215,7 @@ public class frmCadastrarCargoEmprego extends javax.swing.JInternalFrame impleme
         }
         else
         {
-            JOptionPane.showMessageDialog(null, "nulo");
+            JOptionPane.showMessageDialog(null, "nulo consulta referencia vencimento");
         }
     }
 
@@ -261,9 +260,15 @@ public class frmCadastrarCargoEmprego extends javax.swing.JInternalFrame impleme
     @Override
     public void cadastrar(frmCadastrarCargoEmprego frm)
     {
-        System.out.println(frm.getCargaHorariaMensal());
-        
-        //continua aqui
+        try
+        {
+            CadastrarCargoEmpregoControle controleCCE = new CadastrarCargoEmpregoControle();
+            controleCCE.cadastrarCargoEmprego(frm);
+        }
+        catch (SQLException ex)
+        {
+            Logger.getLogger(frmCadastrarCargoEmprego.class.getName()).log(Level.SEVERE, null, ex);
+        }
     }
 
     private static class ReferenciaComparator implements Comparator<String>
@@ -308,6 +313,15 @@ public class frmCadastrarCargoEmprego extends javax.swing.JInternalFrame impleme
         {
             cmbGrau.addItem(grau);
         }
+    }
+
+    public void preencherVencimentoSemPrecisarSelecionarOCMBReferenciaOuGrau()
+    {
+        // Aqui você pode chamar o método ou fazer qualquer ação desejada
+        BigDecimal remuneracao = controle.vincularRemuneração(cmbCarreira.getSelectedItem().toString(), cmbReferenciaSalarial.getSelectedItem().toString(), cmbGrau.getSelectedItem().toString());
+        DecimalFormat decimalFormat = new DecimalFormat("#,##0.00");
+        String valorFormatado = decimalFormat.format(remuneracao);
+        lblRemuneracao.setText(valorFormatado);
     }
 
     public void preencherVencimento()
@@ -607,6 +621,26 @@ public class frmCadastrarCargoEmprego extends javax.swing.JInternalFrame impleme
     public void setLista(ArrayList<PesquisarCargoEmpregoDTO> lista)
     {
         this.lista = lista;
+    }
+
+    public JComboBox<String> getCmbReferenciaSalarial()
+    {
+        return cmbReferenciaSalarial;
+    }
+
+    public void setCmbReferenciaSalarial(JComboBox<String> cmbReferenciaSalarial)
+    {
+        this.cmbReferenciaSalarial = cmbReferenciaSalarial;
+    }
+
+    public JComboBox<String> getCmbGrau()
+    {
+        return cmbGrau;
+    }
+
+    public void setCmbGrau(JComboBox<String> cmbGrau)
+    {
+        this.cmbGrau = cmbGrau;
     }
 
     public void gerenciadorDeTabelas(JTable table)

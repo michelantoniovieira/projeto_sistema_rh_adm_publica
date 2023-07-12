@@ -37,7 +37,7 @@ public class CadastrarCargoEmpregoControle extends CadastrarCargoEmpregoDTO
         this.frm = frm;
     }
 
-    public void cadastrarCargoEmprego() throws SQLException
+    public void cadastrarCargoEmprego(frmCadastrarCargoEmprego frm) throws SQLException
     {
         //cria o dto
         CadastrarCargoEmpregoDTO dto = new CadastrarCargoEmpregoDTO();
@@ -51,6 +51,10 @@ public class CadastrarCargoEmpregoControle extends CadastrarCargoEmpregoDTO
         dto.setCargaHorariaMensal(frm.getCargaHorariaMensal());
         dto.setEscolaridade(frm.getEscolaridade());
         dto.setVagasCriadas(frm.getQuadro().getValueAt(0, 0).toString());
+        dto.setReferenciaVencimento(frm.getCmbReferenciaSalarial().getSelectedItem().toString());
+        dto.setGrauVencimento(frm.getCmbGrau().getSelectedItem().toString());
+        dto.setCodigoVencimento(cadastrarCargoEmpregoDAO.pesquisarCodigoVencimento(dto));
+        
         
         /* preciso mostrar na tabela quadro as informações de vagas criadas, após isto, devo prosseguir com a logica do botão salvar*/
         
@@ -68,6 +72,7 @@ public class CadastrarCargoEmpregoControle extends CadastrarCargoEmpregoDTO
             {
                 //mando para o dao
                 cadastrarCargoEmpregoDAO.cadastrar(dto);
+                
                 JOptionPane.showMessageDialog(null, "Cadastro realizado com sucesso!");
             }
         }

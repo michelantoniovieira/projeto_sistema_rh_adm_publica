@@ -230,35 +230,39 @@
                       </Group>
                       <EmptySpace max="-2" attributes="0"/>
                       <Group type="103" groupAlignment="0" attributes="0">
-                          <Component id="lblAnteriorRapido" pref="88" max="32767" attributes="0"/>
+                          <Component id="lblAnteriorRapido" pref="75" max="32767" attributes="0"/>
                           <Component id="btnAnteriorRapido" max="32767" attributes="0"/>
                       </Group>
                       <EmptySpace max="-2" attributes="0"/>
                       <Group type="103" groupAlignment="0" attributes="0">
-                          <Component id="btnAnterior" pref="88" max="32767" attributes="0"/>
-                          <Component id="jLabel5" pref="88" max="32767" attributes="0"/>
+                          <Component id="btnAnterior" pref="75" max="32767" attributes="0"/>
+                          <Component id="jLabel5" pref="75" max="32767" attributes="0"/>
                       </Group>
                       <EmptySpace max="-2" attributes="0"/>
                       <Group type="103" groupAlignment="0" attributes="0">
-                          <Component id="btnParar" alignment="0" pref="90" max="32767" attributes="0"/>
-                          <Component id="lblParar" alignment="0" pref="90" max="32767" attributes="0"/>
+                          <Component id="btnParar" alignment="0" pref="77" max="32767" attributes="0"/>
+                          <Component id="lblParar" alignment="0" pref="77" max="32767" attributes="0"/>
                       </Group>
                       <EmptySpace max="-2" attributes="0"/>
                       <Group type="103" groupAlignment="0" attributes="0">
                           <Component id="btnProximo" max="32767" attributes="0"/>
-                          <Component id="jLabel6" pref="95" max="32767" attributes="0"/>
+                          <Component id="jLabel6" pref="82" max="32767" attributes="0"/>
                       </Group>
                       <EmptySpace max="-2" attributes="0"/>
-                      <Group type="103" groupAlignment="0" max="-2" attributes="0">
-                          <Component id="lblProximoRapido" max="32767" attributes="0"/>
-                          <Component id="btnProximoRapido" min="-2" pref="87" max="-2" attributes="0"/>
+                      <Group type="103" groupAlignment="0" attributes="0">
+                          <Group type="102" alignment="0" attributes="0">
+                              <Component id="lblProximoRapido" max="32767" attributes="0"/>
+                              <EmptySpace min="-2" max="-2" attributes="0"/>
+                              <Component id="jLabel7" linkSize="1" pref="101" max="32767" attributes="0"/>
+                          </Group>
+                          <Group type="102" alignment="0" attributes="0">
+                              <Component id="btnProximoRapido" min="-2" pref="87" max="-2" attributes="0"/>
+                              <EmptySpace max="-2" attributes="0"/>
+                              <Component id="btnUltimo" linkSize="1" max="32767" attributes="0"/>
+                              <EmptySpace min="0" pref="0" max="32767" attributes="0"/>
+                          </Group>
                       </Group>
-                      <EmptySpace min="-2" max="-2" attributes="0"/>
-                      <Group type="103" groupAlignment="0" max="-2" attributes="0">
-                          <Component id="jLabel7" linkSize="1" pref="101" max="32767" attributes="0"/>
-                          <Component id="btnUltimo" linkSize="1" max="32767" attributes="0"/>
-                      </Group>
-                      <EmptySpace min="-2" max="-2" attributes="0"/>
+                      <EmptySpace max="-2" attributes="0"/>
                   </Group>
               </Group>
             </DimensionLayout>
@@ -716,7 +720,7 @@
                       <Component id="lblUsuario" min="-2" max="-2" attributes="0"/>
                       <EmptySpace max="-2" attributes="0"/>
                       <Component id="lblUsuarioConectado" min="-2" max="-2" attributes="0"/>
-                      <EmptySpace max="32767" attributes="0"/>
+                      <EmptySpace pref="1185" max="32767" attributes="0"/>
                   </Group>
               </Group>
             </DimensionLayout>

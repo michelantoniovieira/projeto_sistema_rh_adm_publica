@@ -14,10 +14,12 @@ public class CadastrarCargoEmpregoDTO
     private String cargaHorariaSemanal;
     private String cargaHorariaMensal;
     private String escolaridade;
-    private String vencimento;
     private String vagasCriadas;
     private String vagasProvidas;
     private String vagasDisponiveis;
+    private String codigoVencimento;
+    private String referenciaVencimento;
+    private String grauVencimento;
     
 
     public String getMensagem()
@@ -120,16 +122,6 @@ public class CadastrarCargoEmpregoDTO
         this.escolaridade = escolaridade;
     }
 
-    public String getVencimento()
-    {
-        return vencimento;
-    }
-
-    public void setVencimento(String vencimento)
-    {
-        this.vencimento = vencimento;
-    }
-
     public String getVagasCriadas()
     {
         return vagasCriadas;
@@ -159,6 +151,37 @@ public class CadastrarCargoEmpregoDTO
     {
         this.vagasDisponiveis = vagasDisponiveis;
     }
+
+    public String getCodigoVencimento()
+    {
+        return codigoVencimento;
+    }
+
+    public void setCodigoVencimento(String codigoVencimento)
+    {
+        this.codigoVencimento = codigoVencimento;
+    }
+
+    public String getReferenciaVencimento()
+    {
+        return referenciaVencimento;
+    }
+
+    public void setReferenciaVencimento(String referenciaVencimento)
+    {
+        this.referenciaVencimento = referenciaVencimento;
+    }
+
+    public String getGrauVencimento()
+    {
+        return grauVencimento;
+    }
+
+    public void setGrauVencimento(String grauVencimento)
+    {
+        this.grauVencimento = grauVencimento;
+    }
+    
     
     
     
