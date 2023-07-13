@@ -54,6 +54,20 @@ public class CadastrarCargoEmpregoControle extends CadastrarCargoEmpregoDTO
         dto.setReferenciaVencimento(frm.getCmbReferenciaSalarial().getSelectedItem().toString());
         dto.setGrauVencimento(frm.getCmbGrau().getSelectedItem().toString());
         dto.setCodigoVencimento(cadastrarCargoEmpregoDAO.pesquisarCodigoVencimento(dto));
+        dto.setNumeroAto(frm.getTbFundamentoCriacaoExclusao().getValueAt(0, 0).toString());
+        dto.setAnoAto(frm.getTbFundamentoCriacaoExclusao().getValueAt(0, 1).toString());
+        dto.setCodigoAto(cadastrarCargoEmpregoDAO.pesquisarCodigoAto(dto));
+        
+        System.out.println("pepela" + dto.getCodigoAto());
+        //continuar daqui
+        //a ideia é verificar se a lei ja existe. se existir ele confronta com a informação salva na tabela e coloca o codigo do ato na variavel codigo ato
+        //quando o usuario clicar no botao salvar ele ja salva tudo certinho
+        //durante a confrontação do codigo do ato se não existir o ato ele cria o ato e salva no banco de dados antes do usuario finalizar o cadastro
+        //a ideia é primeiro liberar o ato legal para o usuario criar ou selecionar o ato
+        //e depois liberar os campos para incluir o nome do emprego etc.
+        
+        
+        
         
         
         /* preciso mostrar na tabela quadro as informações de vagas criadas, após isto, devo prosseguir com a logica do botão salvar*/

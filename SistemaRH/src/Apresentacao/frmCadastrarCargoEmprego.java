@@ -593,6 +593,18 @@ public class frmCadastrarCargoEmprego extends javax.swing.JInternalFrame impleme
         return quadro;
     }
 
+    public JTable getTbFundamentoCriacaoExclusao()
+    {
+        return tbFundamentoCriacaoExclusao;
+    }
+
+    public void setTbFundamentoCriacaoExclusao(JTable tbFundamentoCriacaoExclusao)
+    {
+        this.tbFundamentoCriacaoExclusao = tbFundamentoCriacaoExclusao;
+    }
+    
+    
+
     public String getNumeroLeiCriaCargoEmprego()
     {
         return numeroLeiCriaCargoEmprego;

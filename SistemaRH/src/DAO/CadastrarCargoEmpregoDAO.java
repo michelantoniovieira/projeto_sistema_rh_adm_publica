@@ -259,33 +259,74 @@ public class CadastrarCargoEmpregoDAO
         }
     }
 
-public String pesquisarCodigoVencimento(CadastrarCargoEmpregoDTO cadastrarcargoempregodto) {
-    conn = new ConexaoDAO().conectaBD();
-    String codigoVencimento = "";
+    public String pesquisarCodigoVencimento(CadastrarCargoEmpregoDTO cadastrarcargoempregodto)
+    {
+        conn = new ConexaoDAO().conectaBD();
+        String codigoVencimento = "";
 
-    try {
-        String sql = "SELECT codigo_vencimento FROM vencimentos " +
-                     "WHERE referencia_vencimento = ? " +
-                     "AND grau_vencimento = ?";
+        try
+        {
+            String sql = "SELECT codigo_vencimento FROM vencimentos "
+                    + "WHERE referencia_vencimento = ? "
+                    + "AND grau_vencimento = ?";
 
-        pstm = conn.prepareStatement(sql);
-        pstm.setString(1, cadastrarcargoempregodto.getReferenciaVencimento());
-        pstm.setString(2, cadastrarcargoempregodto.getGrauVencimento());
-        rs = pstm.executeQuery();
+            pstm = conn.prepareStatement(sql);
+            pstm.setString(1, cadastrarcargoempregodto.getReferenciaVencimento());
+            pstm.setString(2, cadastrarcargoempregodto.getGrauVencimento());
+            rs = pstm.executeQuery();
 
-        while (rs.next()) {
-            codigoVencimento = rs.getString("codigo_vencimento");
+            while (rs.next())
+            {
+                codigoVencimento = rs.getString("codigo_vencimento");
+            }
+
+            return codigoVencimento;
         }
-
-        return codigoVencimento;
-    } catch (SQLException erro) {
-        JOptionPane.showMessageDialog(null, "Erro ao pesquisar Codigo Vencimento" + erro);
-        return null;
-    } finally {
-        ConexaoDAO.encerrarConexao(conn, pstm, rs);
+        catch (SQLException erro)
+        {
+            JOptionPane.showMessageDialog(null, "Erro ao pesquisar Codigo Vencimento" + erro);
+            return null;
+        }
+        finally
+        {
+            ConexaoDAO.encerrarConexao(conn, pstm, rs);
+        }
     }
-}
 
+    public String pesquisarCodigoAto(CadastrarCargoEmpregoDTO cadastrarcargoempregodto)
+    {
+        conn = new ConexaoDAO().conectaBD();
+        String codigoAto = "";
+
+        try
+        {
+            String sql = "SELECT codigo_ato FROM ato_legal "
+            + "WHERE numero_ato = ? "
+            + "AND ano_ato = ?";
+
+
+            pstm = conn.prepareStatement(sql);
+            pstm.setString(1, cadastrarcargoempregodto.getNumeroAto());
+            pstm.setString(2, cadastrarcargoempregodto.getAnoAto());
+            rs = pstm.executeQuery();
+
+            while (rs.next())
+            {
+                codigoAto = rs.getString("codigo_ato");
+            }
+
+            return codigoAto;
+        }
+        catch (SQLException erro)
+        {
+            JOptionPane.showMessageDialog(null, "Erro ao pesquisar Codigo Vencimento" + erro);
+            return null;
+        }
+        finally
+        {
+            ConexaoDAO.encerrarConexao(conn, pstm, rs);
+        }
+    }
 
     public void cadastrarVencimento(CadastrarCargoEmpregoDTO cadastrarcargoempregodto)
     {

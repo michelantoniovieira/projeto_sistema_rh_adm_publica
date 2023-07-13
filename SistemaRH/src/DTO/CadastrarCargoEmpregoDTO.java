@@ -4,6 +4,7 @@ import javax.swing.table.DefaultTableModel;
 
 public class CadastrarCargoEmpregoDTO
 {
+
     private String mensagem;
     private static int codigoCargoEmprego;
     private String descricaoCargoEmprego;
@@ -20,7 +21,9 @@ public class CadastrarCargoEmpregoDTO
     private String codigoVencimento;
     private String referenciaVencimento;
     private String grauVencimento;
-    
+    private String codigoAto;
+    private String numeroAto;
+    private String anoAto;
 
     public String getMensagem()
     {
@@ -181,10 +184,36 @@ public class CadastrarCargoEmpregoDTO
     {
         this.grauVencimento = grauVencimento;
     }
-    
-    
-    
-    
+
+    public String getCodigoAto()
+    {
+        return codigoAto;
+    }
+
+    public void setCodigoAto(String codigoAto)
+    {
+        this.codigoAto = codigoAto;
+    }
+
+    public String getNumeroAto()
+    {
+        return numeroAto;
+    }
+
+    public void setNumeroAto(String numeroAto)
+    {
+        this.numeroAto = numeroAto;
+    }
+
+    public String getAnoAto()
+    {
+        return anoAto;
+    }
+
+    public void setAnoAto(String anoAto)
+    {
+        this.anoAto = anoAto;
+    }
     
     
 
