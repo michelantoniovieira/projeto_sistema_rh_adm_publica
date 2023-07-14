@@ -301,10 +301,10 @@
               <Properties>
                 <Property name="model" type="javax.swing.ComboBoxModel" editor="org.netbeans.modules.form.editors2.ComboBoxModelEditor">
                   <StringArray count="4">
-                    <StringItem index="0" value="Cria&#xe7;&#xe3;o"/>
-                    <StringItem index="1" value="Extin&#xe7;&#xe3;o"/>
-                    <StringItem index="2" value="Reajuste"/>
-                    <StringItem index="3" value="Outros"/>
+                    <StringItem index="0" value="CRIA&#xc7;&#xc3;O"/>
+                    <StringItem index="1" value="EXTIN&#xc7;&#xc3;O"/>
+                    <StringItem index="2" value="REAJUSTE"/>
+                    <StringItem index="3" value="OUTROS"/>
                   </StringArray>
                 </Property>
               </Properties>

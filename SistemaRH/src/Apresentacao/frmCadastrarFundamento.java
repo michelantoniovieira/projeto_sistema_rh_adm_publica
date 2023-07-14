@@ -342,7 +342,7 @@ public class frmCadastrarFundamento extends javax.swing.JDialog
 
         jtpAto.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "Ato", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Segoe UI", 1, 12))); // NOI18N
 
-        cmbAto.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Criação", "Extinção", "Reajuste", "Outros" }));
+        cmbAto.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "CRIAÇÃO", "EXTINÇÃO", "REAJUSTE", "OUTROS" }));
 
         txtQuantidadeVagas.addActionListener(new java.awt.event.ActionListener()
         {

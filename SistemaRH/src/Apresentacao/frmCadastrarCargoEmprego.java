@@ -15,7 +15,9 @@ import java.awt.event.ItemListener;
 import java.awt.event.KeyEvent;
 import java.math.BigDecimal;
 import java.sql.SQLException;
+import java.text.DateFormat;
 import java.text.DecimalFormat;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Comparator;
 import java.util.HashSet;
@@ -191,6 +193,8 @@ public class frmCadastrarCargoEmprego extends javax.swing.JInternalFrame impleme
 
         //preencher quadro 
         preencherQuadro();
+
+        preencherLegislacao(String.valueOf(lista.get(0).getCodigoAto()));
 
         //preencher remuneração
         preencherReferenciaVencimento();
@@ -401,6 +405,35 @@ public class frmCadastrarCargoEmprego extends javax.swing.JInternalFrame impleme
 
     }
 
+    public void preencherLegislacao(String fkCodigoAto)
+    {
+        if (tbFundamentoCriacaoExclusao != null)
+        {
+            // Limpar a tabela
+            DefaultTableModel dft = (DefaultTableModel) tbFundamentoCriacaoExclusao.getModel();
+            dft.setRowCount(0);
+
+            CadastrarCargoEmpregoControle c = new CadastrarCargoEmpregoControle();
+            CadastrarCargoEmpregoDTO dto = new CadastrarCargoEmpregoDTO();
+
+            // Retorno das informações do banco de dados
+            dto = c.preencherLegislacao(fkCodigoAto);
+
+            // Inserir informações na tabela
+            Object[] rowData =
+            {
+                dto.getNumeroAto(),
+                dto.getAnoAto().substring(0, 4),
+                dto.getDataAto(),
+                dto.getEmentaAto(),
+                dto.getCategoriaAto(),
+                dto.getQuantidadeAto()
+            };
+
+            dft.addRow(rowData);
+        }
+    }
+
     //liberar os campos para edição
     public void ativarCampos()
     {
@@ -602,8 +635,6 @@ public class frmCadastrarCargoEmprego extends javax.swing.JInternalFrame impleme
     {
         this.tbFundamentoCriacaoExclusao = tbFundamentoCriacaoExclusao;
     }
-    
-    
 
     public String getNumeroLeiCriaCargoEmprego()
     {

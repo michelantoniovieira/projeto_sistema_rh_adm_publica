@@ -58,7 +58,6 @@ public class CadastrarCargoEmpregoControle extends CadastrarCargoEmpregoDTO
         dto.setAnoAto(frm.getTbFundamentoCriacaoExclusao().getValueAt(0, 1).toString());
         dto.setCodigoAto(cadastrarCargoEmpregoDAO.pesquisarCodigoAto(dto));
         
-        System.out.println("pepela" + dto.getCodigoAto());
         //continuar daqui
         //a ideia é verificar se a lei ja existe. se existir ele confronta com a informação salva na tabela e coloca o codigo do ato na variavel codigo ato
         //quando o usuario clicar no botao salvar ele ja salva tudo certinho
@@ -85,8 +84,7 @@ public class CadastrarCargoEmpregoControle extends CadastrarCargoEmpregoDTO
             else
             {
                 //mando para o dao
-                cadastrarCargoEmpregoDAO.cadastrar(dto);
-                
+                cadastrarCargoEmpregoDAO.cadastrar(dto);             
                 JOptionPane.showMessageDialog(null, "Cadastro realizado com sucesso!");
             }
         }
@@ -193,6 +191,12 @@ public class CadastrarCargoEmpregoControle extends CadastrarCargoEmpregoDTO
     {
         CadastrarCargoEmpregoDAO controle = new CadastrarCargoEmpregoDAO();
         return controle.pesquisarVagasCriadas(codigoCargoEmprego);
+    }
+    
+    public CadastrarCargoEmpregoDTO preencherLegislacao(String fkCodigoAto)
+    {
+        CadastrarCargoEmpregoDAO controle = new CadastrarCargoEmpregoDAO();
+        return controle.pesquisarAto(fkCodigoAto);
     }
 
     //informações do quadro

@@ -24,6 +24,13 @@ public class CadastrarCargoEmpregoDTO
     private String codigoAto;
     private String numeroAto;
     private String anoAto;
+    private String dataAto;
+    private String ementaAto;
+    private String categoriaAto;
+    private String quantidadeAto;
+    private String reajusteDe;
+    private String reajustePara;
+    
 
     public String getMensagem()
     {
@@ -213,6 +220,66 @@ public class CadastrarCargoEmpregoDTO
     public void setAnoAto(String anoAto)
     {
         this.anoAto = anoAto;
+    }
+
+    public String getDataAto()
+    {
+        return dataAto;
+    }
+
+    public void setDataAto(String dataAto)
+    {
+        this.dataAto = dataAto;
+    }
+
+    public String getEmentaAto()
+    {
+        return ementaAto;
+    }
+
+    public void setEmentaAto(String ementaAto)
+    {
+        this.ementaAto = ementaAto;
+    }
+
+    public String getCategoriaAto()
+    {
+        return categoriaAto;
+    }
+
+    public void setCategoriaAto(String categoriaAto)
+    {
+        this.categoriaAto = categoriaAto;
+    }
+
+    public String getQuantidadeAto()
+    {
+        return quantidadeAto;
+    }
+
+    public void setQuantidadeAto(String quantidadeAto)
+    {
+        this.quantidadeAto = quantidadeAto;
+    }
+
+    public String getReajusteDe()
+    {
+        return reajusteDe;
+    }
+
+    public void setReajusteDe(String reajusteDe)
+    {
+        this.reajusteDe = reajusteDe;
+    }
+
+    public String getReajustePara()
+    {
+        return reajustePara;
+    }
+
+    public void setReajustePara(String reajustePara)
+    {
+        this.reajustePara = reajustePara;
     }
     
     
