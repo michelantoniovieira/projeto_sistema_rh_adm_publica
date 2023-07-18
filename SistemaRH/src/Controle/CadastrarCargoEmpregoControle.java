@@ -63,12 +63,7 @@ public class CadastrarCargoEmpregoControle extends CadastrarCargoEmpregoDTO
         //quando o usuario clicar no botao salvar ele ja salva tudo certinho
         //durante a confrontação do codigo do ato se não existir o ato ele cria o ato e salva no banco de dados antes do usuario finalizar o cadastro
         //a ideia é primeiro liberar o ato legal para o usuario criar ou selecionar o ato
-        //e depois liberar os campos para incluir o nome do emprego etc.
-        
-        
-        
-        
-        
+        //e depois liberar os campos para incluir o nome do emprego etc.  
         /* preciso mostrar na tabela quadro as informações de vagas criadas, após isto, devo prosseguir com a logica do botão salvar*/
         
         CadastrarCargoEmpregoValidacao val = new CadastrarCargoEmpregoValidacao(dto);
@@ -193,10 +188,11 @@ public class CadastrarCargoEmpregoControle extends CadastrarCargoEmpregoDTO
         return controle.pesquisarVagasCriadas(codigoCargoEmprego);
     }
     
-    public CadastrarCargoEmpregoDTO preencherLegislacao(String fkCodigoAto)
+    public CadastrarCargoEmpregoDTO preencherLegislacao(String fkCodigoCargoEmprego)
     {
+
         CadastrarCargoEmpregoDAO controle = new CadastrarCargoEmpregoDAO();
-        return controle.pesquisarAto(fkCodigoAto);
+        return controle.pesquisarAto(fkCodigoCargoEmprego);
     }
 
     //informações do quadro
@@ -276,8 +272,5 @@ public class CadastrarCargoEmpregoControle extends CadastrarCargoEmpregoDTO
     public void setUltimoRegistro(int ultimoRegistro)
     {
         this.ultimoRegistro = ultimoRegistro;
-    }
-
-    
-    
+    }   
 }

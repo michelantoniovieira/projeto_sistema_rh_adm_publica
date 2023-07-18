@@ -1,0 +1,67 @@
+-- MySQL dump 10.13  Distrib 8.0.32, for Win64 (x86_64)
+--
+-- Host: 127.0.0.1    Database: sistemarh
+-- ------------------------------------------------------
+-- Server version	8.0.32
+
+/*!40101 SET @OLD_CHARACTER_SET_CLIENT=@@CHARACTER_SET_CLIENT */;
+/*!40101 SET @OLD_CHARACTER_SET_RESULTS=@@CHARACTER_SET_RESULTS */;
+/*!40101 SET @OLD_COLLATION_CONNECTION=@@COLLATION_CONNECTION */;
+/*!50503 SET NAMES utf8 */;
+/*!40103 SET @OLD_TIME_ZONE=@@TIME_ZONE */;
+/*!40103 SET TIME_ZONE='+00:00' */;
+/*!40014 SET @OLD_UNIQUE_CHECKS=@@UNIQUE_CHECKS, UNIQUE_CHECKS=0 */;
+/*!40014 SET @OLD_FOREIGN_KEY_CHECKS=@@FOREIGN_KEY_CHECKS, FOREIGN_KEY_CHECKS=0 */;
+/*!40101 SET @OLD_SQL_MODE=@@SQL_MODE, SQL_MODE='NO_AUTO_VALUE_ON_ZERO' */;
+/*!40111 SET @OLD_SQL_NOTES=@@SQL_NOTES, SQL_NOTES=0 */;
+
+--
+-- Table structure for table `cargo_emprego`
+--
+
+DROP TABLE IF EXISTS `cargo_emprego`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!50503 SET character_set_client = utf8mb4 */;
+CREATE TABLE `cargo_emprego` (
+  `codigo_cargo_emprego` int NOT NULL AUTO_INCREMENT,
+  `descricao_cargo_emprego` varchar(50) NOT NULL,
+  `cbo_cargo_emprego` varchar(10) NOT NULL,
+  `regime_juridico_cargo_emprego` varchar(11) NOT NULL,
+  `esta_ativo_cargo_emprego` tinyint NOT NULL,
+  `tipo_carreira_cargo_emprego` varchar(45) NOT NULL,
+  `carga_horaria_semanal_cargo_emprego` varchar(3) NOT NULL,
+  `carga_horaria_mensal_cargo_emprego` varchar(4) NOT NULL,
+  `escolaridade_cargo_emprego` varchar(60) NOT NULL,
+  `requisitos_provimento_cargo_emprego` varchar(200) DEFAULT NULL,
+  `escolaridade_exigida_cargo_emprego` varchar(30) DEFAULT NULL,
+  `vagas_criadas` int DEFAULT NULL,
+  `vagas_providas` int DEFAULT NULL,
+  `vagas_disponiveis` int DEFAULT NULL,
+  `fk_codigo_vencimento` int NOT NULL,
+  `fk_codigo_ato` int NOT NULL,
+  PRIMARY KEY (`codigo_cargo_emprego`),
+  KEY `fk_codigo_vencimento_idx` (`fk_codigo_vencimento`),
+  KEY `fk_codigo_ato_idx` (`fk_codigo_ato`)
+) ENGINE=InnoDB AUTO_INCREMENT=51 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `cargo_emprego`
+--
+
+LOCK TABLES `cargo_emprego` WRITE;
+/*!40000 ALTER TABLE `cargo_emprego` DISABLE KEYS */;
+INSERT INTO `cargo_emprego` VALUES (1,'Analista de Recursos Humanos','123123','CELETISTA',1,'Técnico','44h','240h','ENSINO SUPERIOR COMPLETO','','',NULL,NULL,NULL,301,1),(2,'Psicologo da Educação','123433','CELETISTA',1,'Professor','44h','240h','ENSINO SUPERIOR COMPLETO','','',NULL,NULL,NULL,302,2),(3,'Agente de Apoio Operacional','123213','CELETISTA',1,'Eletivo','44h','240h','ENSINO SUPERIOR COMPLETO','','',NULL,NULL,NULL,303,1),(30,'PIPO','777777','ESTATUTÁRIO',0,'Comissão','10h','240h','ENSINO MÉDIO COMPLETO',NULL,NULL,NULL,NULL,NULL,304,1),(31,'WREWRWRWE','777777','ESTATUTÁRIO',1,'Aposentado','30h','150h','ENSINO FUNDAMENTAL INCOMPLETO',NULL,NULL,NULL,NULL,NULL,305,1),(32,'GEGE','213213','ESTATUTÁRIO',1,'Técnico','44h','220h','ENSINO MÉDIO COMPLETO',NULL,NULL,1,NULL,NULL,306,1),(33,'DEPELA','123123','ESTATUTÁRIO',1,'Técnico','20h','100h','ENSINO SUPERIOR COMPLETO',NULL,NULL,2,NULL,NULL,307,1),(34,'AIXI','123123','ESTATUTÁRIO',1,'Técnico','44h','220h','ENSINO MÉDIO COMPLETO',NULL,NULL,51,NULL,NULL,308,1),(35,'Analista de Recursos HumanosS','123123','CELETISTA',1,'Técnico','44h','240h','ENSINO SUPERIOR COMPLETO',NULL,NULL,0,NULL,NULL,309,1),(36,'ANALISTA DE RECURSOS','123123','CELETISTA',1,'Técnico','44h','240h','ENSINO SUPERIOR COMPLETO',NULL,NULL,0,NULL,NULL,310,1),(37,'Analista de Recursos HumanosSS','123123','CELETISTA',1,'Técnico','44h','240h','ENSINO SUPERIOR COMPLETO',NULL,NULL,0,NULL,NULL,311,1),(38,'DEPELAS','123123','ESTATUTÁRIO',1,'Técnico','44h','220h','ENSINO MÉDIO COMPLETO',NULL,NULL,12313123,NULL,NULL,312,1),(39,'DEPELASA','234234','ESTATUTÁRIO',1,'Técnico','44h','220h','ENSINO MÉDIO COMPLETO',NULL,NULL,4,NULL,NULL,313,1),(40,'DEPELASADAS','123123','CELETISTA',1,'Técnico','44h','220h','ENSINO MÉDIO COMPLETO',NULL,NULL,4,NULL,NULL,314,1),(41,'PEPELA','123123','CELETISTA',1,'Técnico','44h','220h','ENSINO MÉDIO COMPLETO',NULL,NULL,1,NULL,NULL,301,1),(42,'PEPELAS','123123','CELETISTA',1,'Técnico','44h','220h','ENSINO MÉDIO COMPLETO',NULL,NULL,1,NULL,NULL,301,1),(43,'PEPELASAS','123123','ESTATUTÁRIO',1,'Técnico','44h','220h','ENSINO MÉDIO COMPLETO',NULL,NULL,1,NULL,NULL,301,1),(44,'QEQEQEQEQW','132131','ESTATUTÁRIO',1,'Técnico','44h','220h','ENSINO MÉDIO COMPLETO',NULL,NULL,44,NULL,NULL,270,1),(45,'QQEWQEWQEQWE','123123','ESTATUTÁRIO',1,'Técnico','44h','220h','ENSINO MÉDIO COMPLETO',NULL,NULL,132123123,NULL,NULL,1,1),(46,'ZEPELAS','123123','CELETISTA',1,'Técnico','44h','220h','ENSINO MÉDIO COMPLETO',NULL,NULL,3131313,NULL,NULL,311,1),(47,'ASDASD','123123','ESTATUTÁRIO',1,'Técnico','44h','220h','ENSINO MÉDIO COMPLETO',NULL,NULL,0,NULL,NULL,35,1),(48,'PEPELASASA','123123','ESTATUTÁRIO',1,'Técnico','44h','220h','ENSINO MÉDIO COMPLETO',NULL,NULL,0,NULL,NULL,127,1),(49,'DGDFGDFGFDG','234234','ESTATUTÁRIO',1,'Técnico','44h','220h','ENSINO MÉDIO COMPLETO',NULL,NULL,4,NULL,NULL,149,1),(50,'GUARDIAAN HERO','123123','ESTATUTÁRIO',1,'Técnico','44h','220h','ENSINO MÉDIO COMPLETO',NULL,NULL,1,NULL,NULL,1,1);
+/*!40000 ALTER TABLE `cargo_emprego` ENABLE KEYS */;
+UNLOCK TABLES;
+/*!40103 SET TIME_ZONE=@OLD_TIME_ZONE */;
+
+/*!40101 SET SQL_MODE=@OLD_SQL_MODE */;
+/*!40014 SET FOREIGN_KEY_CHECKS=@OLD_FOREIGN_KEY_CHECKS */;
+/*!40014 SET UNIQUE_CHECKS=@OLD_UNIQUE_CHECKS */;
+/*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
+/*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;
+/*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
+/*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
+
+-- Dump completed on 2023-07-15 22:00:53

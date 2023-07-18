@@ -195,7 +195,6 @@ public class CadastrarCargoEmpregoDAO
                 cargoEmprego.setCargaHorariaMensal(rs.getString("carga_horaria_mensal_cargo_emprego"));
                 cargoEmprego.setEscolaridade(rs.getString("escolaridade_cargo_emprego"));
                 cargoEmprego.setCodigoVencimento(rs.getString("fk_codigo_vencimento"));
-                cargoEmprego.setCodigoAto(rs.getString("fk_codigo_ato"));
                 // Adicionar o objeto CargoEmprego à lista
                 cargosEmpregos.add(cargoEmprego);
             }
@@ -331,18 +330,22 @@ public class CadastrarCargoEmpregoDAO
         }
     }
 
-    public CadastrarCargoEmpregoDTO pesquisarAto(String fkCodigoAto)
+    public CadastrarCargoEmpregoDTO pesquisarAto(String fkCodigoCargoEmprego)
     {
+        System.out.println(fkCodigoCargoEmprego);
         conn = new ConexaoDAO().conectaBD();
         CadastrarCargoEmpregoDTO dto = new CadastrarCargoEmpregoDTO();
-
         try
         {
-            String sql = "SELECT * FROM ato_legal "
-                    + "WHERE codigo_ato = ? ";
+            String sql = "SELECT ceal.*, al.*, ce.* "
+                    + "FROM cargo_emprego_ato_legal ceal "
+                    + "JOIN ato_legal al ON al.codigo_ato = ceal.fk_codigo_ato_legal "
+                    + "JOIN cargo_emprego ce ON ce.codigo_cargo_emprego = ceal.fk_codigo_cargo_emprego "
+                    + "WHERE ceal.fk_codigo_cargo_emprego = ?";
 
             pstm = conn.prepareStatement(sql);
-            pstm.setString(1, fkCodigoAto);
+            pstm.setString(1, fkCodigoCargoEmprego); // Substitua "fkCodigoCargoEmprego" pelo valor do código do cargo/emprego
+
             rs = pstm.executeQuery();
 
             while (rs.next())

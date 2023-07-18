@@ -194,7 +194,7 @@ public class frmCadastrarCargoEmprego extends javax.swing.JInternalFrame impleme
         //preencher quadro 
         preencherQuadro();
 
-        preencherLegislacao(String.valueOf(lista.get(0).getCodigoAto()));
+        preencherLegislacao(String.valueOf(lista.get(0).getCodigoAto()), String.valueOf(lista.get(0).getCodigoCargoEmprego()));
 
         //preencher remuneração
         preencherReferenciaVencimento();
@@ -405,8 +405,18 @@ public class frmCadastrarCargoEmprego extends javax.swing.JInternalFrame impleme
 
     }
 
-    public void preencherLegislacao(String fkCodigoAto)
+    public void preencherLegislacao(String fkCodigoAto, String fkCodigoCargoEmprego)
     {
+
+        //Aumentar o tamanho da celula para caber mais espaço
+        int columnIndex = 3; // Índice da coluna que você deseja ajustar a altura
+        tbFundamentoCriacaoExclusao.getColumnModel().getColumn(columnIndex).setPreferredWidth(300);
+
+        // Habilita o redimensionamento das colunas pelo usuário
+        tbFundamentoCriacaoExclusao.setAutoResizeMode(JTable.AUTO_RESIZE_OFF);
+        tbFundamentoCriacaoExclusao.setAutoCreateColumnsFromModel(false);
+        tbFundamentoCriacaoExclusao.getTableHeader().setResizingAllowed(true);
+
         if (tbFundamentoCriacaoExclusao != null)
         {
             // Limpar a tabela
@@ -417,7 +427,7 @@ public class frmCadastrarCargoEmprego extends javax.swing.JInternalFrame impleme
             CadastrarCargoEmpregoDTO dto = new CadastrarCargoEmpregoDTO();
 
             // Retorno das informações do banco de dados
-            dto = c.preencherLegislacao(fkCodigoAto);
+            dto = c.preencherLegislacao(fkCodigoCargoEmprego);
 
             // Inserir informações na tabela
             Object[] rowData =
@@ -1331,7 +1341,7 @@ public class frmCadastrarCargoEmprego extends javax.swing.JInternalFrame impleme
             jpLegislacaoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jpLegislacaoLayout.createSequentialGroup()
                 .addComponent(jScrollPane3, javax.swing.GroupLayout.DEFAULT_SIZE, 177, Short.MAX_VALUE)
-                .addContainerGap())
+                .addGap(36, 36, 36))
         );
 
         jtpLegislacao.addTab("Criação/Exclusão", jpLegislacao);
@@ -1372,7 +1382,7 @@ public class frmCadastrarCargoEmprego extends javax.swing.JInternalFrame impleme
         jpReajusteLayout.setVerticalGroup(
             jpReajusteLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jpReajusteLayout.createSequentialGroup()
-                .addComponent(jScrollPane4, javax.swing.GroupLayout.DEFAULT_SIZE, 179, Short.MAX_VALUE)
+                .addComponent(jScrollPane4, javax.swing.GroupLayout.DEFAULT_SIZE, 209, Short.MAX_VALUE)
                 .addContainerGap())
         );
 
