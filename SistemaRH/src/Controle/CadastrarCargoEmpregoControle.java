@@ -7,6 +7,7 @@ package Controle;
 import Apresentacao.frmCadastrarCargoEmprego;
 import DAO.CadastrarCargoEmpregoDAO;
 import DTO.CadastrarCargoEmpregoDTO;
+import DTO.CadastrarFundamentoDTO;
 import Modelo.ControleCadastrarFundamento;
 import Util.CadastrarCargoEmpregoValidacao;
 import java.math.BigDecimal;
@@ -50,14 +51,14 @@ public class CadastrarCargoEmpregoControle extends CadastrarCargoEmpregoDTO
         dto.setCargaHorariaSemanal(frm.getCargaHorariaSemanal());
         dto.setCargaHorariaMensal(frm.getCargaHorariaMensal());
         dto.setEscolaridade(frm.getEscolaridade());
-        dto.setVagasCriadas(frm.getQuadro().getValueAt(0, 0).toString());
+        //dto.setVagasCriadas(frm.getQuadro().getValueAt(0, 0).toString());
         dto.setReferenciaVencimento(frm.getCmbReferenciaSalarial().getSelectedItem().toString());
         dto.setGrauVencimento(frm.getCmbGrau().getSelectedItem().toString());
         dto.setCodigoVencimento(cadastrarCargoEmpregoDAO.pesquisarCodigoVencimento(dto));
-        dto.setNumeroAto(frm.getTbFundamentoCriacaoExclusao().getValueAt(0, 0).toString());
-        dto.setAnoAto(frm.getTbFundamentoCriacaoExclusao().getValueAt(0, 1).toString());
-        dto.setCodigoAto(cadastrarCargoEmpregoDAO.pesquisarCodigoAto(dto));
-        
+        //dto.setNumeroAto(frm.getTbFundamentoCriacaoExclusao().getValueAt(0, 0).toString());
+        //dto.setAnoAto(frm.getTbFundamentoCriacaoExclusao().getValueAt(0, 1).toString());
+       //dto.setCodigoAto(cadastrarCargoEmpregoDAO.pesquisarCodigoAto(dto));
+
         //continuar daqui
         //a ideia é verificar se a lei ja existe. se existir ele confronta com a informação salva na tabela e coloca o codigo do ato na variavel codigo ato
         //quando o usuario clicar no botao salvar ele ja salva tudo certinho
@@ -65,7 +66,6 @@ public class CadastrarCargoEmpregoControle extends CadastrarCargoEmpregoDTO
         //a ideia é primeiro liberar o ato legal para o usuario criar ou selecionar o ato
         //e depois liberar os campos para incluir o nome do emprego etc.  
         /* preciso mostrar na tabela quadro as informações de vagas criadas, após isto, devo prosseguir com a logica do botão salvar*/
-        
         CadastrarCargoEmpregoValidacao val = new CadastrarCargoEmpregoValidacao(dto);
 
         if (val.getMensagem() != null && val.getMensagem().equals("ok"))
@@ -79,7 +79,7 @@ public class CadastrarCargoEmpregoControle extends CadastrarCargoEmpregoDTO
             else
             {
                 //mando para o dao
-                cadastrarCargoEmpregoDAO.cadastrar(dto);             
+                cadastrarCargoEmpregoDAO.cadastrar(dto);
                 JOptionPane.showMessageDialog(null, "Cadastro realizado com sucesso!");
             }
         }
@@ -92,7 +92,7 @@ public class CadastrarCargoEmpregoControle extends CadastrarCargoEmpregoDTO
         int soma = ultimoRegistroSalvo + 1;
         return String.valueOf(soma);
     }
-    
+
     // pesquisar cargo pelo codigo inserido
     public void pesquisarCargoEmprego(String codigoCargoEmprego)
     {
@@ -181,16 +181,21 @@ public class CadastrarCargoEmpregoControle extends CadastrarCargoEmpregoDTO
         }
         return tudoCerto;
     }
-    
+
     public Integer preencherQuadro(String codigoCargoEmprego)
     {
         CadastrarCargoEmpregoDAO controle = new CadastrarCargoEmpregoDAO();
         return controle.pesquisarVagasCriadas(codigoCargoEmprego);
     }
     
-    public CadastrarCargoEmpregoDTO preencherLegislacao(String fkCodigoCargoEmprego)
+    public void cadastrarAto(DefaultTableModel tb)
     {
+        //CadastrarCargoEmpregoDAO controle = new CadastrarCargoEmpregoDAO();
+        //controle.pesquisarVagasCriadas(codigoCargoEmprego);
+    }
 
+    public List<CadastrarCargoEmpregoDTO> pesquisarAto(String fkCodigoCargoEmprego)
+    {
         CadastrarCargoEmpregoDAO controle = new CadastrarCargoEmpregoDAO();
         return controle.pesquisarAto(fkCodigoCargoEmprego);
     }
@@ -223,22 +228,21 @@ public class CadastrarCargoEmpregoControle extends CadastrarCargoEmpregoDTO
     }
 
     //informações remuneração
-    
     public CadastrarCargoEmpregoDAO consultarReferenciaGrauVencimento(String codigoVencimento)
     {
         return cadastrarCargoEmpregoDAO.consultarReferenciaGrauVencimento(codigoVencimento);
     }
-    
+
     public ArrayList<String> pesquisarReferenciaRemuneracao()
     {
         return cadastrarCargoEmpregoDAO.pesquisarReferencia();
     }
-    
+
     public ArrayList<String> pesquisarGrauRemuneracao()
     {
         return cadastrarCargoEmpregoDAO.pesquisarGrau();
     }
-    
+
     public BigDecimal vincularRemuneração(String tipoCarreira, String referenciaSalarial, String grau)
     {
         return cadastrarCargoEmpregoDAO.pesquisarRemuneracao(tipoCarreira, referenciaSalarial, grau);
@@ -272,5 +276,5 @@ public class CadastrarCargoEmpregoControle extends CadastrarCargoEmpregoDTO
     public void setUltimoRegistro(int ultimoRegistro)
     {
         this.ultimoRegistro = ultimoRegistro;
-    }   
+    }
 }

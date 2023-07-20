@@ -53,10 +53,6 @@ public class CadastrarCargoEmpregoDAO
             JOptionPane.showMessageDialog(null, "Erro ao pesquisar Cargos e Empregos" + erro);
             return null;
         }
-        finally
-        {
-            //ConexaoDAO.encerrarConexao(conn, pstm, rs);
-        }
     }
 
     public List<Integer> consultarCodigosDosCargosEmpregosNoBanco()
@@ -114,7 +110,7 @@ public class CadastrarCargoEmpregoDAO
         }
         return ultimoRegistro;
     }
-
+    
     public Integer pesquisarUltimoRegistro()
     {
         conn = new ConexaoDAO().conectaBD();
@@ -141,6 +137,8 @@ public class CadastrarCargoEmpregoDAO
         }
         return ultimoRegistro;
     }
+
+
 
     public Integer pesquisarVagasCriadas(String codigoCargoEmprego)
     {
@@ -231,7 +229,7 @@ public class CadastrarCargoEmpregoDAO
 
     public void cadastrar(CadastrarCargoEmpregoDTO cadastrarcargoempregodto)
     {
-        String sql = "INSERT INTO cargo_emprego (descricao_cargo_emprego, cbo_cargo_emprego, regime_juridico_cargo_emprego, esta_ativo_cargo_emprego, tipo_carreira_cargo_emprego, carga_horaria_semanal_cargo_emprego, carga_horaria_mensal_cargo_emprego, escolaridade_cargo_emprego, vagas_criadas, fk_codigo_vencimento, fk_codigo_ato) values (?,?,?,?,?,?,?,?,?,?,?)";
+        String sql = "INSERT INTO cargo_emprego (descricao_cargo_emprego, cbo_cargo_emprego, regime_juridico_cargo_emprego, esta_ativo_cargo_emprego, tipo_carreira_cargo_emprego, carga_horaria_semanal_cargo_emprego, carga_horaria_mensal_cargo_emprego, escolaridade_cargo_emprego, fk_codigo_vencimento) values (?,?,?,?,?,?,?,?,?)";
         conn = new ConexaoDAO().conectaBD();
 
         try
@@ -245,9 +243,7 @@ public class CadastrarCargoEmpregoDAO
             pstm.setString(6, cadastrarcargoempregodto.getCargaHorariaSemanal());
             pstm.setString(7, cadastrarcargoempregodto.getCargaHorariaMensal());
             pstm.setString(8, cadastrarcargoempregodto.getEscolaridade());
-            pstm.setString(9, cadastrarcargoempregodto.getVagasCriadas());
-            pstm.setString(10, cadastrarcargoempregodto.getCodigoVencimento());
-            pstm.setString(11, cadastrarcargoempregodto.getCodigoAto());
+            pstm.setString(9, cadastrarcargoempregodto.getCodigoVencimento());
 
             pstm.execute();
             pstm.close();
@@ -330,11 +326,17 @@ public class CadastrarCargoEmpregoDAO
         }
     }
 
-    public CadastrarCargoEmpregoDTO pesquisarAto(String fkCodigoCargoEmprego)
+    public void cadastrarAto(String fkCodigoAto)
+    {
+
+    }
+
+    public List<CadastrarCargoEmpregoDTO> pesquisarAto(String fkCodigoCargoEmprego)
     {
         System.out.println(fkCodigoCargoEmprego);
         conn = new ConexaoDAO().conectaBD();
-        CadastrarCargoEmpregoDTO dto = new CadastrarCargoEmpregoDTO();
+        List<CadastrarCargoEmpregoDTO> listaDto = new ArrayList<>();
+
         try
         {
             String sql = "SELECT ceal.*, al.*, ce.* "
@@ -350,23 +352,26 @@ public class CadastrarCargoEmpregoDAO
 
             while (rs.next())
             {
-
+                CadastrarCargoEmpregoDTO novoDTO = new CadastrarCargoEmpregoDTO();
                 Date data = rs.getDate("data_ato");
 
                 // Formatar a data no formato desejado
                 SimpleDateFormat formato = new SimpleDateFormat("dd-MM-yyyy");
                 String dataFormatada = formato.format(data);
 
-                dto.setNumeroAto(rs.getString("numero_ato"));
-                dto.setAnoAto(rs.getString("ano_ato"));
-                dto.setDataAto(dataFormatada);
-                dto.setEmentaAto(rs.getString("ementa_ato"));
-                dto.setCategoriaAto(rs.getString("categoria_ato"));
-                dto.setQuantidadeAto(rs.getString("quantidade_ato"));
-                dto.setReajusteDe(rs.getString("reajuste_de"));
-                dto.setReajustePara(rs.getString("reajuste_para"));
+                novoDTO.setNumeroAto(rs.getString("numero_ato"));
+                novoDTO.setAnoAto(rs.getString("ano_ato"));
+                novoDTO.setDataAto(dataFormatada);
+                novoDTO.setEmentaAto(rs.getString("ementa_ato"));
+                novoDTO.setCategoriaAto(rs.getString("categoria_ato"));
+                novoDTO.setQuantidadeAto(rs.getString("quantidade_ato"));
+                novoDTO.setReajusteDe(rs.getString("reajuste_de"));
+                novoDTO.setReajustePara(rs.getString("reajuste_para"));
+
+                listaDto.add(novoDTO);
             }
-            return dto;
+
+            return listaDto;
         }
         catch (SQLException erro)
         {

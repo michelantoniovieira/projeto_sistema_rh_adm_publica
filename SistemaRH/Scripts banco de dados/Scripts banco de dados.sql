@@ -26,6 +26,9 @@ SELECT ceal.*, al.*, ce.*
 FROM cargo_emprego_ato_legal ceal
 JOIN ato_legal al ON al.codigo_ato = ceal.fk_codigo_ato_legal 
 JOIN cargo_emprego ce ON ce.codigo_cargo_emprego = ceal.fk_codigo_cargo_emprego 
-WHERE ceal.fk_codigo_cargo_emprego = 1 
+WHERE ceal.fk_codigo_cargo_emprego = 1;
+
+-- COMANDO PARA RESETAR UMA TABELA DO BD, ANTES EU TENHO QUE TIRAR A RESTRIÇÃO A CHAVE ESTRANGEIRA
+TRUNCATE TABLE ato_legal;
 
 

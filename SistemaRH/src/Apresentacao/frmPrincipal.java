@@ -1301,6 +1301,7 @@ public class frmPrincipal extends javax.swing.JFrame
         {
             desativarBotoesFrmCCE = true;
             frmCCE.ativarCampos();
+            frmCCE.desativarCamposEspecificos();
             frmCCE.limparCampos();
             frmCCE.consultarUltimoRegistro();
             frmCCE.preencherReferenciaVencimento();

@@ -7,6 +7,8 @@ package Apresentacao;
 import Modelo.ControleCadastrarFundamento;
 import Modelo.DefinirTamanhoMaximoCampoDeTexto;
 import java.awt.event.KeyEvent;
+import java.text.SimpleDateFormat;
+import java.util.Date;
 import javax.swing.JOptionPane;
 import javax.swing.JTabbedPane;
 import javax.swing.table.DefaultTableModel;
@@ -21,15 +23,11 @@ public class frmCadastrarFundamento extends javax.swing.JDialog
     private DefaultTableModel tbFundamentoCriacaoExclusao, tbFundamentoReajuste;
     private boolean eUmaAlteracao = false;
     private int linhaSelecionada = -1;
-    private String numeroDaLei = "";
-    private String anoDaLei = "";
-    private String dataDaLei = "";
-    private String ementaDaLei = "";
     private String atoDaLei = "";
     private String quantidadeCargosEmpregosDaLei = "";
     private JTabbedPane jtp;
-    private String de;
-    private String para;
+    private String codigoCargoEmprego = "";
+    private String codigoAtoLegal = "";
 
     /**
      * Creates new form frmCadastrarFundamento
@@ -41,7 +39,7 @@ public class frmCadastrarFundamento extends javax.swing.JDialog
         txtAnoLei.setDocument(new DefinirTamanhoMaximoCampoDeTexto(4));
     }
 
-    public frmCadastrarFundamento(java.awt.Frame parent, boolean modal, DefaultTableModel tbFundamentoCriacaoExclusao, DefaultTableModel tbFundamentoReajuste, JTabbedPane jtp)
+    public frmCadastrarFundamento(java.awt.Frame parent, boolean modal, DefaultTableModel tbFundamentoCriacaoExclusao, DefaultTableModel tbFundamentoReajuste, JTabbedPane jtp, String codigoCargoEmprego)
     {
         super(parent, modal);
         this.tbFundamentoCriacaoExclusao = tbFundamentoCriacaoExclusao;
@@ -50,6 +48,7 @@ public class frmCadastrarFundamento extends javax.swing.JDialog
         eUmaAlteracao = false;
         txtAnoLei.setDocument(new DefinirTamanhoMaximoCampoDeTexto(4));
         this.jtp = jtp;
+        this.codigoCargoEmprego = codigoCargoEmprego;
 
         //se a aba Criação/Exclusao do frmCadastrarCargoEmprego estiver visivel desativa a aba reajuste do jtpAto
         if (jtp.getSelectedIndex() == 0)
@@ -74,11 +73,11 @@ public class frmCadastrarFundamento extends javax.swing.JDialog
         this.tbFundamentoReajuste = tbFundamentoReajuste;
         initComponents();
         this.txtNumeroLei.setText(numeroDaLei);
-        this.numeroDaLei = numeroDaLei;
+        //this.numeroDaLei = numeroDaLei;
         this.jffDataLei.setText(dataDaLei);
-        this.dataDaLei = dataDaLei;
+        //this.dataDaLei = dataDaLei;
         this.jtaEmenta.setText(ementaDaLei);
-        this.ementaDaLei = ementaDaLei;
+        //this.ementaDaLei = ementaDaLei;
         this.cmbAto.getSelectedItem().equals(atoDaLei);
         this.atoDaLei = atoDaLei;
         this.txtQuantidadeVagas.setText(quantidadeCargosEmpregosDaLei);
@@ -107,6 +106,7 @@ public class frmCadastrarFundamento extends javax.swing.JDialog
             jtpAto.setEnabledAt(0, false);
         }
         this.jtp = jtp;
+
     }
 
     public frmCadastrarFundamento(java.awt.Frame parent, boolean modal, DefaultTableModel tbFundamentoCriacaoExclusao, DefaultTableModel tbFundamentoReajuste, String numeroDaLei, String anoDaLei, String dataDaLei, String ementaDaLei, String de, String para, int linhaSelecionada, JTabbedPane jtp, int i)
@@ -116,14 +116,14 @@ public class frmCadastrarFundamento extends javax.swing.JDialog
         this.tbFundamentoReajuste = tbFundamentoReajuste;
         initComponents();
         this.txtNumeroLei.setText(numeroDaLei);
-        this.numeroDaLei = numeroDaLei;
+        //this.numeroDaLei = numeroDaLei;
         this.jffDataLei.setText(dataDaLei);
-        this.dataDaLei = dataDaLei;
+        //this.dataDaLei = dataDaLei;
         this.jtaEmenta.setText(ementaDaLei);
-        this.ementaDaLei = ementaDaLei;
+        //this.ementaDaLei = ementaDaLei;
         this.cmbAto.getSelectedItem().equals(atoDaLei);
-        this.de = de;
-        this.para = para;
+        //this.de = de;
+        ////this.para = para;
         this.eUmaAlteracao = true;
         this.linhaSelecionada = linhaSelecionada;
         this.txtAnoLei.setDocument(new DefinirTamanhoMaximoCampoDeTexto(4));
@@ -557,7 +557,7 @@ public class frmCadastrarFundamento extends javax.swing.JDialog
                 {
                     if (!txtNumeroLei.getText().isEmpty() && !txtAnoLei.getText().isEmpty() && !jffDataLei.getText().isEmpty() && !jtaEmenta.getText().isEmpty() && !txtQuantidadeVagas.getText().isEmpty())
                     {
-                        ControleCadastrarFundamento controle = new ControleCadastrarFundamento(txtNumeroLei.getText(), txtAnoLei.getText(), jffDataLei.getText(), jtaEmenta.getText(), cmbAto.getSelectedItem().toString(), txtQuantidadeVagas.getText(), tbFundamentoCriacaoExclusao, eUmaAlteracao, linhaSelecionada, txtValorDe.getText(), txtValorPara.getText(), jtp);
+                        ControleCadastrarFundamento controle = new ControleCadastrarFundamento(txtNumeroLei.getText(), txtAnoLei.getText(), jffDataLei.getText(), jtaEmenta.getText(), cmbAto.getSelectedItem().toString(), txtQuantidadeVagas.getText(), tbFundamentoCriacaoExclusao, eUmaAlteracao, linhaSelecionada, txtValorDe.getText(), txtValorPara.getText(), jtp, codigoCargoEmprego, codigoAtoLegal);
                         this.dispose();
                     }
                 }
@@ -568,7 +568,7 @@ public class frmCadastrarFundamento extends javax.swing.JDialog
                 {
                     if (!txtNumeroLei.getText().isEmpty() && !txtAnoLei.getText().isEmpty() && !jffDataLei.getText().isEmpty() && !jtaEmenta.getText().isEmpty() && !txtQuantidadeVagas.getText().isEmpty())
                     {
-                        ControleCadastrarFundamento controle = new ControleCadastrarFundamento(txtNumeroLei.getText(), txtAnoLei.getText(), jffDataLei.getText(), jtaEmenta.getText(), cmbAto.getSelectedItem().toString(), txtQuantidadeVagas.getText(), tbFundamentoCriacaoExclusao, eUmaAlteracao, linhaSelecionada, txtValorDe.getText(), txtValorPara.getText(), jtp);
+                        ControleCadastrarFundamento controle = new ControleCadastrarFundamento(txtNumeroLei.getText(), txtAnoLei.getText(), jffDataLei.getText(), jtaEmenta.getText(), cmbAto.getSelectedItem().toString(), txtQuantidadeVagas.getText(), tbFundamentoCriacaoExclusao, eUmaAlteracao, linhaSelecionada, txtValorDe.getText(), txtValorPara.getText(), jtp, codigoCargoEmprego, codigoAtoLegal);
                         this.dispose();
                     }
                 }
@@ -648,7 +648,7 @@ public class frmCadastrarFundamento extends javax.swing.JDialog
         }
         else if (jtpAto.getSelectedIndex() == 1)
         {
-            
+
             boolean camposPreenchidos = !txtNumeroLei.getText().isEmpty() && !txtAnoLei.getText().isEmpty() && !jffDataLei.getText().isEmpty() && !jtaEmenta.getText().isEmpty() && !txtValorDe.getText().isEmpty() && !txtValorPara.getText().isEmpty();
             btnCadastrar.setEnabled(camposPreenchidos);
         }

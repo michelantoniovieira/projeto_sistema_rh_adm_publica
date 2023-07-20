@@ -11,12 +11,26 @@ package DTO;
 public class CadastrarFundamentoDTO
 {
 
+    private String codigoDoAto;
     private String numeroDaLei;
     private String anoDaLei;
     private String dataDaLei;
     private String ementaDaLei;
     private String atoDaLei;
     private String qtdVagasDaLei;
+    private String reajusteDe;
+    private String reajustePara;
+    private String tipoAto;
+
+    public String getCodigoDoAto()
+    {
+        return codigoDoAto;
+    }
+
+    public void setCodigoDoAto(String codigoDoAto)
+    {
+        this.codigoDoAto = codigoDoAto;
+    }
 
     public String getNumeroDaLei()
     {
@@ -56,7 +70,7 @@ public class CadastrarFundamentoDTO
     public void setEmentaDaLei(String ementaDaLei)
     {
         this.ementaDaLei = ementaDaLei;
-    }
+    }   
 
     public String getAtoDaLei()
     {
@@ -77,5 +91,37 @@ public class CadastrarFundamentoDTO
     {
         this.qtdVagasDaLei = qtdVagasDaLei;
     }
+
+    public String getReajusteDe()
+    {
+        return reajusteDe;
+    }
+
+    public void setReajusteDe(String reajusteDe)
+    {
+        this.reajusteDe = reajusteDe;
+    }
+
+    public String getReajustePara()
+    {
+        return reajustePara;
+    }
+
+    public void setReajustePara(String reajustePara)
+    {
+        this.reajustePara = reajustePara;
+    }
+
+    public String getTipoAto()
+    {
+        return tipoAto;
+    }
+
+    public void setTipoAto(String tipoAto)
+    {
+        this.tipoAto = tipoAto;
+    }
+    
+    
 
 }

@@ -17,9 +17,11 @@ import java.math.BigDecimal;
 import java.sql.SQLException;
 import java.text.DateFormat;
 import java.text.DecimalFormat;
+import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Comparator;
+import java.util.Date;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
@@ -130,7 +132,7 @@ public class frmCadastrarCargoEmprego extends javax.swing.JInternalFrame impleme
         gerenciadorDeTabelas(tbFundamentoReajuste);
         controle = new CadastrarCargoEmpregoControle();
         quadro = tbQuadro;
-        preencherQuadro();
+        //preencherQuadro();
     }
 
     public void consultarUltimoRegistro()
@@ -192,7 +194,7 @@ public class frmCadastrarCargoEmprego extends javax.swing.JInternalFrame impleme
         cmbEscolaridade.setSelectedItem(String.valueOf(lista.get(0).getEscolaridade()));
 
         //preencher quadro 
-        preencherQuadro();
+        //preencherQuadro();
 
         preencherLegislacao(String.valueOf(lista.get(0).getCodigoAto()), String.valueOf(lista.get(0).getCodigoCargoEmprego()));
 
@@ -424,27 +426,50 @@ public class frmCadastrarCargoEmprego extends javax.swing.JInternalFrame impleme
             dft.setRowCount(0);
 
             CadastrarCargoEmpregoControle c = new CadastrarCargoEmpregoControle();
-            CadastrarCargoEmpregoDTO dto = new CadastrarCargoEmpregoDTO();
 
             // Retorno das informações do banco de dados
-            dto = c.preencherLegislacao(fkCodigoCargoEmprego);
+            List<CadastrarCargoEmpregoDTO> listaDto = new ArrayList();
+            listaDto = c.pesquisarAto(fkCodigoCargoEmprego);
+            // Criar o objeto SimpleDateFormat para o formato desejado
+            // Formato atual das datas na variável listaDto.get(i).getDataAto()
+            SimpleDateFormat currentFormat = new SimpleDateFormat("dd-MM-yyyy");
 
-            // Inserir informações na tabela
-            Object[] rowData =
+// Criar o objeto SimpleDateFormat para o formato desejado
+            SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy");
+
+// Inserir informações na tabela
+            for (int i = 0; i < listaDto.size(); i++)
             {
-                dto.getNumeroAto(),
-                dto.getAnoAto().substring(0, 4),
-                dto.getDataAto(),
-                dto.getEmentaAto(),
-                dto.getCategoriaAto(),
-                dto.getQuantidadeAto()
-            };
+                try
+                {
+                    // Obter a data do objeto na posição 'i' da lista
+                    Date dataAto = currentFormat.parse(listaDto.get(i).getDataAto());
 
-            dft.addRow(rowData);
+                    // Formatar a data para o formato desejado
+                    String dataFormatada = sdf.format(dataAto);
+                    Object[] rowData =
+                    {
+                        listaDto.get(i).getNumeroAto(),
+                        listaDto.get(i).getAnoAto().substring(0, 4),
+                        dataFormatada,
+                        listaDto.get(i).getEmentaAto(),
+                        listaDto.get(i).getCategoriaAto(),
+                        listaDto.get(i).getQuantidadeAto()
+                    };
+
+                    dft.addRow(rowData);
+                }
+                catch (ParseException e)
+                {
+                    // Tratar caso a conversão da data falhe
+                    System.out.println("Erro ao formatar data: " + e.getMessage());
+                }
+            }
+
         }
     }
-
     //liberar os campos para edição
+
     public void ativarCampos()
     {
         txtCodigoCargoEmprego.setEnabled(true);
@@ -467,6 +492,14 @@ public class frmCadastrarCargoEmprego extends javax.swing.JInternalFrame impleme
         cmbFaixaSalarial.setEnabled(true);
         cmbGrauSalario.setEnabled(true);
         lblRsDocente.setEnabled(true);
+        btnCadastrarFundamento.setEnabled(true);
+        btnAlterarFundamento.setEnabled(true);
+        btnExcluirFundamento.setEnabled(true);
+        //remuneração
+        chkVencimento.setEnabled(true);
+
+        //operações
+        btnSelecionarFundamento.setEnabled(true);
         btnCadastrarFundamento.setEnabled(true);
         btnAlterarFundamento.setEnabled(true);
         btnExcluirFundamento.setEnabled(true);
@@ -502,6 +535,27 @@ public class frmCadastrarCargoEmprego extends javax.swing.JInternalFrame impleme
         btnCadastrarFundamento.setEnabled(false);
         btnAlterarFundamento.setEnabled(false);
         btnExcluirFundamento.setEnabled(false);
+
+        //remuneração
+        chkVencimento.setEnabled(false);
+
+        //operações
+        btnSelecionarFundamento.setEnabled(false);
+        btnCadastrarFundamento.setEnabled(false);
+        btnAlterarFundamento.setEnabled(false);
+        btnExcluirFundamento.setEnabled(false);
+    }
+
+    public void desativarCamposEspecificos()
+    {
+        //remuneração
+        //chkVencimento.setEnabled(false);
+
+        //operações
+        //btnSelecionarFundamento.setEnabled(false);
+        // btnCadastrarFundamento.setEnabled(false);
+        //btnAlterarFundamento.setEnabled(false);
+        // btnExcluirFundamento.setEnabled(false);
     }
 
     public void limparCampos()
@@ -783,6 +837,7 @@ public class frmCadastrarCargoEmprego extends javax.swing.JInternalFrame impleme
         btnCadastrarFundamento = new javax.swing.JButton();
         btnAlterarFundamento = new javax.swing.JButton();
         btnExcluirFundamento = new javax.swing.JButton();
+        btnSelecionarFundamento = new javax.swing.JButton();
 
         setClosable(true);
         setTitle("Manutenção de Cargos e Empregos");
@@ -1417,22 +1472,35 @@ public class frmCadastrarCargoEmprego extends javax.swing.JInternalFrame impleme
             }
         });
 
+        btnSelecionarFundamento.setText("Selecionar");
+        btnSelecionarFundamento.addActionListener(new java.awt.event.ActionListener()
+        {
+            public void actionPerformed(java.awt.event.ActionEvent evt)
+            {
+                btnSelecionarFundamentoActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout jpOperacoesLayout = new javax.swing.GroupLayout(jpOperacoes);
         jpOperacoes.setLayout(jpOperacoesLayout);
         jpOperacoesLayout.setHorizontalGroup(
             jpOperacoesLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jpOperacoesLayout.createSequentialGroup()
+            .addGroup(jpOperacoesLayout.createSequentialGroup()
                 .addContainerGap(16, Short.MAX_VALUE)
                 .addGroup(jpOperacoesLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(btnExcluirFundamento, javax.swing.GroupLayout.PREFERRED_SIZE, 125, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(btnAlterarFundamento, javax.swing.GroupLayout.PREFERRED_SIZE, 125, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(btnCadastrarFundamento, javax.swing.GroupLayout.PREFERRED_SIZE, 125, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jpOperacoesLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                        .addComponent(btnExcluirFundamento, javax.swing.GroupLayout.PREFERRED_SIZE, 125, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(btnAlterarFundamento, javax.swing.GroupLayout.PREFERRED_SIZE, 125, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(btnCadastrarFundamento, javax.swing.GroupLayout.PREFERRED_SIZE, 125, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(btnSelecionarFundamento, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 125, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addContainerGap())
         );
         jpOperacoesLayout.setVerticalGroup(
             jpOperacoesLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jpOperacoesLayout.createSequentialGroup()
-                .addGap(15, 15, 15)
+                .addGap(28, 28, 28)
+                .addComponent(btnSelecionarFundamento)
+                .addGap(18, 18, 18)
                 .addComponent(btnCadastrarFundamento)
                 .addGap(18, 18, 18)
                 .addComponent(btnAlterarFundamento)
@@ -1523,7 +1591,7 @@ public class frmCadastrarCargoEmprego extends javax.swing.JInternalFrame impleme
             }
             //para centralizar as celulas da tabela
             gerenciadorDeTabelas(tbFundamentoCriacaoExclusao);
-            frmCadastrarFundamento frmCadastrarFundamento = new frmCadastrarFundamento(null, true, (DefaultTableModel) tbFundamentoCriacaoExclusao.getModel(), (DefaultTableModel) tbFundamentoReajuste.getModel(), jtpLegislacao);
+            frmCadastrarFundamento frmCadastrarFundamento = new frmCadastrarFundamento(null, true, (DefaultTableModel) tbFundamentoCriacaoExclusao.getModel(), (DefaultTableModel) tbFundamentoReajuste.getModel(), jtpLegislacao, getCodigoCargoEmprego());
             frmCadastrarFundamento.setVisible(true);
             frmCadastrarFundamento.setLocationRelativeTo(null);
             frmCadastrarFundamento.setDefaultCloseOperation(DISPOSE_ON_CLOSE);
@@ -1538,7 +1606,7 @@ public class frmCadastrarCargoEmprego extends javax.swing.JInternalFrame impleme
 
         if (jtpLegislacao.getSelectedIndex() == 1)
         {
-            frmCadastrarFundamento frmCadastrarFundamento = new frmCadastrarFundamento(null, true, (DefaultTableModel) tbFundamentoCriacaoExclusao.getModel(), (DefaultTableModel) tbFundamentoReajuste.getModel(), jtpLegislacao);
+            frmCadastrarFundamento frmCadastrarFundamento = new frmCadastrarFundamento(null, true, (DefaultTableModel) tbFundamentoCriacaoExclusao.getModel(), (DefaultTableModel) tbFundamentoReajuste.getModel(), jtpLegislacao, getCodigoCargoEmprego());
             frmCadastrarFundamento.setVisible(true);
             frmCadastrarFundamento.setLocationRelativeTo(null);
             frmCadastrarFundamento.setDefaultCloseOperation(DISPOSE_ON_CLOSE);
@@ -1741,6 +1809,11 @@ public class frmCadastrarCargoEmprego extends javax.swing.JInternalFrame impleme
                 throw new AssertionError();
         }
     }//GEN-LAST:event_cmbCarreiraItemStateChanged
+
+    private void btnSelecionarFundamentoActionPerformed(java.awt.event.ActionEvent evt)//GEN-FIRST:event_btnSelecionarFundamentoActionPerformed
+    {//GEN-HEADEREND:event_btnSelecionarFundamentoActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_btnSelecionarFundamentoActionPerformed
     public void limparTabelas(JTable tabela)
     {
         DefaultTableModel limparTabela = (DefaultTableModel) tabela.getModel();
@@ -1751,6 +1824,7 @@ public class frmCadastrarCargoEmprego extends javax.swing.JInternalFrame impleme
     private javax.swing.JButton btnAlterarFundamento;
     private javax.swing.JButton btnCadastrarFundamento;
     private javax.swing.JButton btnExcluirFundamento;
+    private javax.swing.JButton btnSelecionarFundamento;
     private javax.swing.JCheckBox chkAtivo;
     private javax.swing.JCheckBox chkVencimento;
     private javax.swing.JComboBox<String> cmbCargaHorariaMensal;
