@@ -195,7 +195,6 @@ public class frmCadastrarCargoEmprego extends javax.swing.JInternalFrame impleme
 
         //preencher quadro 
         //preencherQuadro();
-
         preencherLegislacao(String.valueOf(lista.get(0).getCodigoAto()), String.valueOf(lista.get(0).getCodigoCargoEmprego()));
 
         //preencher remuneração
@@ -270,6 +269,16 @@ public class frmCadastrarCargoEmprego extends javax.swing.JInternalFrame impleme
         {
             CadastrarCargoEmpregoControle controleCCE = new CadastrarCargoEmpregoControle();
             controleCCE.cadastrarCargoEmprego(frm);
+            
+            //faz a consulta no banco para ver se a informação ja esta la. se tiver libera os campos de remuneração e cadastro de legislação
+            if (controleCCE.consultarSeCargoEmpregoFoiCadastrado(frm).equals("ativarCamposEspecificos"))
+            {
+                ativarCamposEspecificos();
+            }
+            else
+            {
+                ativarCamposEspecificos();
+            }
         }
         catch (SQLException ex)
         {
@@ -504,6 +513,18 @@ public class frmCadastrarCargoEmprego extends javax.swing.JInternalFrame impleme
         btnAlterarFundamento.setEnabled(true);
         btnExcluirFundamento.setEnabled(true);
     }
+    
+       public void ativarCamposEspecificos()
+    {
+        //remuneração
+        chkVencimento.setEnabled(true);
+
+        //operações
+        btnSelecionarFundamento.setEnabled(true);
+        btnCadastrarFundamento.setEnabled(true);
+        btnAlterarFundamento.setEnabled(true);
+        btnExcluirFundamento.setEnabled(true);
+    }
 
     //travar os campos para edição
     @Override
@@ -549,13 +570,13 @@ public class frmCadastrarCargoEmprego extends javax.swing.JInternalFrame impleme
     public void desativarCamposEspecificos()
     {
         //remuneração
-        //chkVencimento.setEnabled(false);
+        chkVencimento.setEnabled(false);
 
         //operações
-        //btnSelecionarFundamento.setEnabled(false);
-        // btnCadastrarFundamento.setEnabled(false);
-        //btnAlterarFundamento.setEnabled(false);
-        // btnExcluirFundamento.setEnabled(false);
+        btnSelecionarFundamento.setEnabled(false);
+        btnCadastrarFundamento.setEnabled(false);
+        btnAlterarFundamento.setEnabled(false);
+        btnExcluirFundamento.setEnabled(false);
     }
 
     public void limparCampos()

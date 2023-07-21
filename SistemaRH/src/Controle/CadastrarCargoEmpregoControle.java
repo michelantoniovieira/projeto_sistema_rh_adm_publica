@@ -38,6 +38,20 @@ public class CadastrarCargoEmpregoControle extends CadastrarCargoEmpregoDTO
         this.frm = frm;
     }
 
+    public String consultarSeCargoEmpregoFoiCadastrado(frmCadastrarCargoEmprego frm)
+    {
+        //cria o dto
+        CadastrarCargoEmpregoDTO dto = new CadastrarCargoEmpregoDTO();
+        dto.setCodigoCargoEmprego(Integer.parseInt(frm.getCodigoCargoEmprego()));
+        CadastrarCargoEmpregoDAO dao = new CadastrarCargoEmpregoDAO();
+        if (dao.consultarSeCargoEmpregoFoiCadastrado(dto) != null)
+        {
+            return "ativarCamposEspecificos";
+        }
+
+        return null;
+    }
+
     public void cadastrarCargoEmprego(frmCadastrarCargoEmprego frm) throws SQLException
     {
         //cria o dto
@@ -57,7 +71,7 @@ public class CadastrarCargoEmpregoControle extends CadastrarCargoEmpregoDTO
         dto.setCodigoVencimento(cadastrarCargoEmpregoDAO.pesquisarCodigoVencimento(dto));
         //dto.setNumeroAto(frm.getTbFundamentoCriacaoExclusao().getValueAt(0, 0).toString());
         //dto.setAnoAto(frm.getTbFundamentoCriacaoExclusao().getValueAt(0, 1).toString());
-       //dto.setCodigoAto(cadastrarCargoEmpregoDAO.pesquisarCodigoAto(dto));
+        //dto.setCodigoAto(cadastrarCargoEmpregoDAO.pesquisarCodigoAto(dto));
 
         //continuar daqui
         //a ideia é verificar se a lei ja existe. se existir ele confronta com a informação salva na tabela e coloca o codigo do ato na variavel codigo ato
@@ -187,7 +201,7 @@ public class CadastrarCargoEmpregoControle extends CadastrarCargoEmpregoDTO
         CadastrarCargoEmpregoDAO controle = new CadastrarCargoEmpregoDAO();
         return controle.pesquisarVagasCriadas(codigoCargoEmprego);
     }
-    
+
     public void cadastrarAto(DefaultTableModel tb)
     {
         //CadastrarCargoEmpregoDAO controle = new CadastrarCargoEmpregoDAO();

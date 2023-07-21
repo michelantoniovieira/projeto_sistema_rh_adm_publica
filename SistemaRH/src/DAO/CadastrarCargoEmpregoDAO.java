@@ -84,6 +84,36 @@ public class CadastrarCargoEmpregoDAO
         return codigosCargos;
     }
 
+    public List<CadastrarCargoEmpregoDTO> consultarSeCargoEmpregoFoiCadastrado(CadastrarCargoEmpregoDTO dto)
+    {
+        String sql = "SELECT * FROM cargo_emprego WHERE codigo_cargo_emprego = ?";
+        List<CadastrarCargoEmpregoDTO> lista = new ArrayList<>();
+
+        try
+        {
+            Connection conn = ConexaoDAO.conectaBD();
+            PreparedStatement pstm = conn.prepareStatement(sql);
+            pstm.setInt(1, dto.getCodigoCargoEmprego());
+            ResultSet rs = pstm.executeQuery();
+
+            while (rs.next())
+            {
+                CadastrarCargoEmpregoDTO dtoCargoEmprego = new CadastrarCargoEmpregoDTO();
+                dtoCargoEmprego.setCodigoCargoEmprego(rs.getInt("codigo_cargo_emprego"));
+                lista.add(dtoCargoEmprego);
+            }
+        }
+        catch (SQLException e)
+        {
+            JOptionPane.showMessageDialog(null, "Erro ao consultar se cargo emprego ja foi cadastrado" + e);
+        }
+        finally
+        {
+            ConexaoDAO.encerrarConexao(conn, pstm, rs);
+        }
+        return lista;
+    }
+
     public Integer pesquisarPrimeiroRegistro()
     {
         conn = new ConexaoDAO().conectaBD();
@@ -110,7 +140,7 @@ public class CadastrarCargoEmpregoDAO
         }
         return ultimoRegistro;
     }
-    
+
     public Integer pesquisarUltimoRegistro()
     {
         conn = new ConexaoDAO().conectaBD();
@@ -137,8 +167,6 @@ public class CadastrarCargoEmpregoDAO
         }
         return ultimoRegistro;
     }
-
-
 
     public Integer pesquisarVagasCriadas(String codigoCargoEmprego)
     {
@@ -324,11 +352,6 @@ public class CadastrarCargoEmpregoDAO
         {
             ConexaoDAO.encerrarConexao(conn, pstm, rs);
         }
-    }
-
-    public void cadastrarAto(String fkCodigoAto)
-    {
-
     }
 
     public List<CadastrarCargoEmpregoDTO> pesquisarAto(String fkCodigoCargoEmprego)
