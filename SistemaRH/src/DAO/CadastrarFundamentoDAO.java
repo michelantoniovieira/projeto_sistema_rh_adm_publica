@@ -39,6 +39,7 @@ public class CadastrarFundamentoDAO
     
     public void cadastrarFundamento(CadastrarFundamentoDTO dto)
     {
+        JOptionPane.showMessageDialog(null, dto.getDataDaLei());
         String dataOriginal = dto.getDataDaLei(); // Data no formato 'DD/MM/AAAA'
         DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd/MM/yyyy");
         LocalDate dataFormatada = LocalDate.parse(dataOriginal, formatter);

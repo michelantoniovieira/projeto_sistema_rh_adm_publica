@@ -6,8 +6,11 @@ package Apresentacao;
 
 import Modelo.ControleCadastrarFundamento;
 import Modelo.DefinirTamanhoMaximoCampoDeTexto;
+import com.toedter.calendar.JCalendar;
 import java.awt.event.KeyEvent;
+import java.text.ParseException;
 import java.text.SimpleDateFormat;
+import java.util.Calendar;
 import java.util.Date;
 import javax.swing.JOptionPane;
 import javax.swing.JTabbedPane;
@@ -28,6 +31,8 @@ public class frmCadastrarFundamento extends javax.swing.JDialog
     private JTabbedPane jtp;
     private String codigoCargoEmprego = "";
     private String codigoAtoLegal = "";
+    private String dataDaLei;
+    private String dataFormatada;
 
     /**
      * Creates new form frmCadastrarFundamento
@@ -36,7 +41,8 @@ public class frmCadastrarFundamento extends javax.swing.JDialog
     {
         super(parent, modal);
         initComponents();
-        txtAnoLei.setDocument(new DefinirTamanhoMaximoCampoDeTexto(4));
+
+        // Desabilitar a edição do JTextField associado ao JDateChooser
     }
 
     public frmCadastrarFundamento(java.awt.Frame parent, boolean modal, DefaultTableModel tbFundamentoCriacaoExclusao, DefaultTableModel tbFundamentoReajuste, JTabbedPane jtp, String codigoCargoEmprego)
@@ -46,7 +52,6 @@ public class frmCadastrarFundamento extends javax.swing.JDialog
         this.tbFundamentoReajuste = tbFundamentoReajuste;
         initComponents();
         eUmaAlteracao = false;
-        txtAnoLei.setDocument(new DefinirTamanhoMaximoCampoDeTexto(4));
         this.jtp = jtp;
         this.codigoCargoEmprego = codigoCargoEmprego;
 
@@ -74,7 +79,7 @@ public class frmCadastrarFundamento extends javax.swing.JDialog
         initComponents();
         this.txtNumeroLei.setText(numeroDaLei);
         //this.numeroDaLei = numeroDaLei;
-        this.jffDataLei.setText(dataDaLei);
+        //this.jffDataLei.setText(dataDaLei);
         //this.dataDaLei = dataDaLei;
         this.jtaEmenta.setText(ementaDaLei);
         //this.ementaDaLei = ementaDaLei;
@@ -84,12 +89,9 @@ public class frmCadastrarFundamento extends javax.swing.JDialog
         this.quantidadeCargosEmpregosDaLei = quantidadeCargosEmpregosDaLei;
         this.eUmaAlteracao = true;
         this.linhaSelecionada = linhaSelecionada;
-        this.txtAnoLei.setDocument(new DefinirTamanhoMaximoCampoDeTexto(4));
-        this.txtAnoLei.setText(anoDaLei);
 
         //desativar campos
         this.txtNumeroLei.setEnabled(false);
-        this.txtAnoLei.setEnabled(false);
 
         //se a aba Criação/Exclusao do frmCadastrarCargoEmprego estiver visivel desativa a aba reajuste do jtpAto
         if (jtp.getSelectedIndex() == 0)
@@ -117,7 +119,7 @@ public class frmCadastrarFundamento extends javax.swing.JDialog
         initComponents();
         this.txtNumeroLei.setText(numeroDaLei);
         //this.numeroDaLei = numeroDaLei;
-        this.jffDataLei.setText(dataDaLei);
+        //this.jffDataLei.setText(dataDaLei);
         //this.dataDaLei = dataDaLei;
         this.jtaEmenta.setText(ementaDaLei);
         //this.ementaDaLei = ementaDaLei;
@@ -126,12 +128,9 @@ public class frmCadastrarFundamento extends javax.swing.JDialog
         ////this.para = para;
         this.eUmaAlteracao = true;
         this.linhaSelecionada = linhaSelecionada;
-        this.txtAnoLei.setDocument(new DefinirTamanhoMaximoCampoDeTexto(4));
-        this.txtAnoLei.setText(anoDaLei);
 
         //desativar campos
         this.txtNumeroLei.setEnabled(false);
-        this.txtAnoLei.setEnabled(false);
 
         //se a aba Criação/Exclusao do frmCadastrarCargoEmprego estiver visivel desativa a aba reajuste do jtpAto
         if (jtp.getSelectedIndex() == 0)
@@ -160,18 +159,12 @@ public class frmCadastrarFundamento extends javax.swing.JDialog
     private void initComponents()
     {
 
+        jCalendar1 = new com.toedter.calendar.JCalendar();
+        jCalendar2 = new com.toedter.calendar.JCalendar();
+        jCalendar3 = new com.toedter.calendar.JCalendar();
         jPanel1 = new javax.swing.JPanel();
-        lblDataLei = new javax.swing.JLabel();
-        jffDataLei = new javax.swing.JFormattedTextField();
         lblNumeroLei = new javax.swing.JLabel();
         txtNumeroLei = new javax.swing.JTextField();
-        lblAnoLei = new javax.swing.JLabel();
-        txtAnoLei = new javax.swing.JTextField();
-        jPanel2 = new javax.swing.JPanel();
-        jScrollPane1 = new javax.swing.JScrollPane();
-        jtaEmenta = new javax.swing.JTextArea();
-        btnCancelar = new javax.swing.JButton();
-        btnCadastrar = new javax.swing.JButton();
         jtpAto = new javax.swing.JTabbedPane();
         jpCriacaoExclusao = new javax.swing.JPanel();
         cmbAto = new javax.swing.JComboBox<>();
@@ -183,40 +176,18 @@ public class frmCadastrarFundamento extends javax.swing.JDialog
         lblValorPara = new javax.swing.JLabel();
         txtValorPara = new javax.swing.JTextField();
         txtValorDe = new javax.swing.JTextField();
+        lblDataLei = new javax.swing.JLabel();
+        calendario = new com.toedter.calendar.JDateChooser();
+        jPanel2 = new javax.swing.JPanel();
+        jScrollPane1 = new javax.swing.JScrollPane();
+        jtaEmenta = new javax.swing.JTextArea();
+        btnCadastrar = new javax.swing.JButton();
+        btnCancelar = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         setTitle("Cadastrar Legislação");
 
         jPanel1.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "Descrição Lei", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Segoe UI", 1, 12))); // NOI18N
-
-        lblDataLei.setText("Data:");
-
-        try
-        {
-            jffDataLei.setFormatterFactory(new javax.swing.text.DefaultFormatterFactory(new javax.swing.text.MaskFormatter("##/##/####")));
-        } catch (java.text.ParseException ex)
-        {
-            ex.printStackTrace();
-        }
-        jffDataLei.setHorizontalAlignment(javax.swing.JTextField.CENTER);
-        jffDataLei.addFocusListener(new java.awt.event.FocusAdapter()
-        {
-            public void focusLost(java.awt.event.FocusEvent evt)
-            {
-                jffDataLeiFocusLost(evt);
-            }
-        });
-        jffDataLei.addKeyListener(new java.awt.event.KeyAdapter()
-        {
-            public void keyReleased(java.awt.event.KeyEvent evt)
-            {
-                jffDataLeiKeyReleased(evt);
-            }
-            public void keyTyped(java.awt.event.KeyEvent evt)
-            {
-                jffDataLeiKeyTyped(evt);
-            }
-        });
 
         lblNumeroLei.setText("Número:");
 
@@ -229,114 +200,6 @@ public class frmCadastrarFundamento extends javax.swing.JDialog
             public void keyTyped(java.awt.event.KeyEvent evt)
             {
                 txtNumeroLeiKeyTyped(evt);
-            }
-        });
-
-        lblAnoLei.setText("Ano:");
-
-        txtAnoLei.addFocusListener(new java.awt.event.FocusAdapter()
-        {
-            public void focusGained(java.awt.event.FocusEvent evt)
-            {
-                txtAnoLeiFocusGained(evt);
-            }
-            public void focusLost(java.awt.event.FocusEvent evt)
-            {
-                txtAnoLeiFocusLost(evt);
-            }
-        });
-        txtAnoLei.addKeyListener(new java.awt.event.KeyAdapter()
-        {
-            public void keyReleased(java.awt.event.KeyEvent evt)
-            {
-                txtAnoLeiKeyReleased(evt);
-            }
-            public void keyTyped(java.awt.event.KeyEvent evt)
-            {
-                txtAnoLeiKeyTyped(evt);
-            }
-        });
-
-        javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
-        jPanel1.setLayout(jPanel1Layout);
-        jPanel1Layout.setHorizontalGroup(
-            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel1Layout.createSequentialGroup()
-                .addContainerGap()
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(lblNumeroLei)
-                    .addComponent(txtNumeroLei, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(18, 18, 18)
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(lblAnoLei)
-                    .addComponent(txtAnoLei, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(18, 18, 18)
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(lblDataLei)
-                    .addComponent(jffDataLei, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-        );
-        jPanel1Layout.setVerticalGroup(
-            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel1Layout.createSequentialGroup()
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(lblDataLei)
-                    .addComponent(lblAnoLei)
-                    .addComponent(lblNumeroLei))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                        .addComponent(txtAnoLei, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addComponent(jffDataLei, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addComponent(txtNumeroLei, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addContainerGap(19, Short.MAX_VALUE))
-        );
-
-        jPanel2.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "Ementa", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Segoe UI", 1, 12))); // NOI18N
-
-        jtaEmenta.setColumns(20);
-        jtaEmenta.setRows(5);
-        jtaEmenta.addKeyListener(new java.awt.event.KeyAdapter()
-        {
-            public void keyReleased(java.awt.event.KeyEvent evt)
-            {
-                jtaEmentaKeyReleased(evt);
-            }
-        });
-        jScrollPane1.setViewportView(jtaEmenta);
-
-        javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
-        jPanel2.setLayout(jPanel2Layout);
-        jPanel2Layout.setHorizontalGroup(
-            jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel2Layout.createSequentialGroup()
-                .addContainerGap()
-                .addComponent(jScrollPane1)
-                .addContainerGap())
-        );
-        jPanel2Layout.setVerticalGroup(
-            jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel2Layout.createSequentialGroup()
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE)
-                .addContainerGap())
-        );
-
-        btnCancelar.setText("CANCELAR");
-        btnCancelar.addActionListener(new java.awt.event.ActionListener()
-        {
-            public void actionPerformed(java.awt.event.ActionEvent evt)
-            {
-                btnCancelarActionPerformed(evt);
-            }
-        });
-
-        btnCadastrar.setText("CADASTRAR");
-        btnCadastrar.setEnabled(false);
-        btnCadastrar.addActionListener(new java.awt.event.ActionListener()
-        {
-            public void actionPerformed(java.awt.event.ActionEvent evt)
-            {
-                btnCadastrarActionPerformed(evt);
             }
         });
 
@@ -363,7 +226,7 @@ public class frmCadastrarFundamento extends javax.swing.JDialog
             }
         });
 
-        lblQuantidadeVagas.setText("Quantidade Vagas:");
+        lblQuantidadeVagas.setText("Quantidade Vagas");
 
         lblTipo.setText("Tipo:");
 
@@ -372,19 +235,20 @@ public class frmCadastrarFundamento extends javax.swing.JDialog
         jpCriacaoExclusaoLayout.setHorizontalGroup(
             jpCriacaoExclusaoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jpCriacaoExclusaoLayout.createSequentialGroup()
-                .addGap(8, 8, 8)
+                .addContainerGap()
                 .addGroup(jpCriacaoExclusaoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(lblTipo)
                     .addComponent(cmbAto, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGap(18, 18, 18)
                 .addGroup(jpCriacaoExclusaoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                     .addComponent(lblQuantidadeVagas, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(txtQuantidadeVagas, javax.swing.GroupLayout.PREFERRED_SIZE, 99, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(txtQuantidadeVagas))
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         jpCriacaoExclusaoLayout.setVerticalGroup(
             jpCriacaoExclusaoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jpCriacaoExclusaoLayout.createSequentialGroup()
+                .addContainerGap()
                 .addGroup(jpCriacaoExclusaoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(lblQuantidadeVagas)
                     .addComponent(lblTipo))
@@ -392,7 +256,7 @@ public class frmCadastrarFundamento extends javax.swing.JDialog
                 .addGroup(jpCriacaoExclusaoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(txtQuantidadeVagas, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(cmbAto, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(0, 0, Short.MAX_VALUE))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
         jtpAto.addTab("Criação/Exclusão", jpCriacaoExclusao);
@@ -446,31 +310,142 @@ public class frmCadastrarFundamento extends javax.swing.JDialog
             .addGroup(jpReajusteLayout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(jpReajusteLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(jpReajusteLayout.createSequentialGroup()
-                        .addComponent(lblValorDe)
-                        .addGap(94, 94, 94)
-                        .addComponent(lblValorPara))
+                    .addComponent(lblValorDe)
                     .addGroup(jpReajusteLayout.createSequentialGroup()
                         .addGap(1, 1, 1)
-                        .addComponent(txtValorDe, javax.swing.GroupLayout.PREFERRED_SIZE, 99, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(txtValorPara, javax.swing.GroupLayout.PREFERRED_SIZE, 99, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addContainerGap(8, Short.MAX_VALUE))
+                        .addComponent(txtValorDe, javax.swing.GroupLayout.PREFERRED_SIZE, 91, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addGap(18, 18, 18)
+                .addGroup(jpReajusteLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(lblValorPara)
+                    .addComponent(txtValorPara, javax.swing.GroupLayout.PREFERRED_SIZE, 91, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addContainerGap(19, Short.MAX_VALUE))
         );
         jpReajusteLayout.setVerticalGroup(
             jpReajusteLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jpReajusteLayout.createSequentialGroup()
-                .addGroup(jpReajusteLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(lblValorPara)
-                    .addComponent(lblValorDe))
+                .addContainerGap()
+                .addGroup(jpReajusteLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(lblValorDe)
+                    .addComponent(lblValorPara))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(jpReajusteLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(txtValorPara, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(txtValorDe, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addContainerGap(13, Short.MAX_VALUE))
+                .addContainerGap(74, Short.MAX_VALUE))
         );
 
         jtpAto.addTab("Reajuste", jpReajuste);
+
+        lblDataLei.setText("Data:");
+
+        calendario.addPropertyChangeListener(new java.beans.PropertyChangeListener()
+        {
+            public void propertyChange(java.beans.PropertyChangeEvent evt)
+            {
+                calendarioPropertyChange(evt);
+            }
+        });
+        calendario.addKeyListener(new java.awt.event.KeyAdapter()
+        {
+            public void keyReleased(java.awt.event.KeyEvent evt)
+            {
+                calendarioKeyReleased(evt);
+            }
+        });
+
+        jPanel2.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "Ementa", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Segoe UI", 1, 12))); // NOI18N
+
+        jtaEmenta.setColumns(20);
+        jtaEmenta.setRows(5);
+        jtaEmenta.setWrapStyleWord(true);
+        jtaEmenta.addKeyListener(new java.awt.event.KeyAdapter()
+        {
+            public void keyReleased(java.awt.event.KeyEvent evt)
+            {
+                jtaEmentaKeyReleased(evt);
+            }
+        });
+        jScrollPane1.setViewportView(jtaEmenta);
+
+        javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
+        jPanel2.setLayout(jPanel2Layout);
+        jPanel2Layout.setHorizontalGroup(
+            jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel2Layout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE)
+                .addContainerGap())
+        );
+        jPanel2Layout.setVerticalGroup(
+            jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 105, javax.swing.GroupLayout.PREFERRED_SIZE)
+        );
+
+        btnCadastrar.setText("CADASTRAR");
+        btnCadastrar.setEnabled(false);
+        btnCadastrar.addActionListener(new java.awt.event.ActionListener()
+        {
+            public void actionPerformed(java.awt.event.ActionEvent evt)
+            {
+                btnCadastrarActionPerformed(evt);
+            }
+        });
+
+        btnCancelar.setText("CANCELAR");
+        btnCancelar.addActionListener(new java.awt.event.ActionListener()
+        {
+            public void actionPerformed(java.awt.event.ActionEvent evt)
+            {
+                btnCancelarActionPerformed(evt);
+            }
+        });
+
+        javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
+        jPanel1.setLayout(jPanel1Layout);
+        jPanel1Layout.setHorizontalGroup(
+            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(jtpAto)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
+                        .addComponent(btnCadastrar)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(btnCancelar, javax.swing.GroupLayout.PREFERRED_SIZE, 96, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(jPanel2, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(lblNumeroLei)
+                            .addComponent(txtNumeroLei, javax.swing.GroupLayout.PREFERRED_SIZE, 73, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(calendario, javax.swing.GroupLayout.PREFERRED_SIZE, 150, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(lblDataLei))))
+                .addContainerGap())
+        );
+        jPanel1Layout.setVerticalGroup(
+            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel1Layout.createSequentialGroup()
+                .addContainerGap()
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(lblNumeroLei)
+                            .addComponent(lblDataLei))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                            .addComponent(calendario, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(txtNumeroLei))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(jtpAto))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(btnCancelar, javax.swing.GroupLayout.PREFERRED_SIZE, 32, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(btnCadastrar, javax.swing.GroupLayout.PREFERRED_SIZE, 32, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(12, 12, 12))
+        );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -478,37 +453,15 @@ public class frmCadastrarFundamento extends javax.swing.JDialog
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                    .addComponent(jPanel2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(18, 18, 18)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jtpAto)
-                    .addGroup(layout.createSequentialGroup()
-                        .addGap(14, 14, 14)
-                        .addComponent(btnCadastrar)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addComponent(btnCancelar)
-                        .addGap(0, 0, Short.MAX_VALUE)))
-                .addContainerGap())
+                .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(layout.createSequentialGroup()
-                        .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(jPanel2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                    .addGroup(layout.createSequentialGroup()
-                        .addComponent(jtpAto, javax.swing.GroupLayout.PREFERRED_SIZE, 111, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(18, 18, 18)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(btnCadastrar, javax.swing.GroupLayout.PREFERRED_SIZE, 32, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(btnCancelar, javax.swing.GroupLayout.PREFERRED_SIZE, 32, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addGap(0, 22, Short.MAX_VALUE)))
-                .addContainerGap())
+                .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
         pack();
@@ -530,13 +483,32 @@ public class frmCadastrarFundamento extends javax.swing.JDialog
 
         boolean valorDuplicado = false;
 
+        // Obtém a data selecionada do JDateChooser
+        Date dataSelecionada = calendario.getDate();
+
+        // Verifica se uma data foi selecionada
+        if (dataSelecionada != null)
+        {
+            // Formata a data para o formato desejado (dd-MM-yyyy)
+            SimpleDateFormat formatoSaida = new SimpleDateFormat("dd/MM/yyyy");
+            dataFormatada = formatoSaida.format(dataSelecionada);
+
+        }
+
+        // Converte a data para Calendar
+        Calendar calendar = Calendar.getInstance();
+        calendar.setTime(dataSelecionada);
+
+// Obtém o ano da data selecionada
+        int ano = calendar.get(Calendar.YEAR);
+
         if (jtp.getSelectedIndex() == 0 && !valorDuplicado)
         {
             //executa o for se tiver registro na tabela
             for (int j = 0; j < tbFundamentoCriacaoExclusao.getRowCount(); j++)
             {
                 //se o numero e ano da lei estiverem repetidos em algum registro da tabela barra a criação do novo registro
-                if (eUmaAlteracao == false && !txtNumeroLei.getText().isEmpty() && txtNumeroLei.getText().equals(tbFundamentoCriacaoExclusao.getValueAt(j, 0)) && !txtAnoLei.getText().isEmpty() && txtAnoLei.getText().equals(tbFundamentoCriacaoExclusao.getValueAt(j, 1)))
+                if (eUmaAlteracao == false && !txtNumeroLei.getText().isEmpty() && txtNumeroLei.getText().equals(tbFundamentoCriacaoExclusao.getValueAt(j, 0)))
                 {
                     JOptionPane.showMessageDialog(null, "Registro duplicado na aba Criação/Exclusão!");
                     valorDuplicado = true;
@@ -544,7 +516,7 @@ public class frmCadastrarFundamento extends javax.swing.JDialog
                 }
 
                 //se os campos estiverem em branco sera mostrado um aviso
-                if (eUmaAlteracao == false && txtNumeroLei.getText().isEmpty() || txtAnoLei.getText().isEmpty() || jffDataLei.getText().isEmpty() || txtQuantidadeVagas.getText().isEmpty() || jtaEmenta.getText().isEmpty())
+                if (eUmaAlteracao == false && txtNumeroLei.getText().isEmpty() || txtQuantidadeVagas.getText().isEmpty() || jtaEmenta.getText().isEmpty())
                 {
                     JOptionPane.showMessageDialog(null, "Preencha os campos para continuar.");
                     break;
@@ -555,9 +527,10 @@ public class frmCadastrarFundamento extends javax.swing.JDialog
             {
                 if (!valorDuplicado)
                 {
-                    if (!txtNumeroLei.getText().isEmpty() && !txtAnoLei.getText().isEmpty() && !jffDataLei.getText().isEmpty() && !jtaEmenta.getText().isEmpty() && !txtQuantidadeVagas.getText().isEmpty())
+                    if (!txtNumeroLei.getText().isEmpty() && !jtaEmenta.getText().isEmpty() && !txtQuantidadeVagas.getText().isEmpty())
                     {
-                        ControleCadastrarFundamento controle = new ControleCadastrarFundamento(txtNumeroLei.getText(), txtAnoLei.getText(), jffDataLei.getText(), jtaEmenta.getText(), cmbAto.getSelectedItem().toString(), txtQuantidadeVagas.getText(), tbFundamentoCriacaoExclusao, eUmaAlteracao, linhaSelecionada, txtValorDe.getText(), txtValorPara.getText(), jtp, codigoCargoEmprego, codigoAtoLegal);
+                        System.out.println(dataFormatada);
+                        ControleCadastrarFundamento controle = new ControleCadastrarFundamento(txtNumeroLei.getText(), String.valueOf(calendario.getDate()), dataFormatada, jtaEmenta.getText(), cmbAto.getSelectedItem().toString(), txtQuantidadeVagas.getText(), tbFundamentoCriacaoExclusao, eUmaAlteracao, linhaSelecionada, txtValorDe.getText(), txtValorPara.getText(), jtp, codigoCargoEmprego, codigoAtoLegal);
                         this.dispose();
                     }
                 }
@@ -566,9 +539,10 @@ public class frmCadastrarFundamento extends javax.swing.JDialog
             {
                 if (!valorDuplicado)
                 {
-                    if (!txtNumeroLei.getText().isEmpty() && !txtAnoLei.getText().isEmpty() && !jffDataLei.getText().isEmpty() && !jtaEmenta.getText().isEmpty() && !txtQuantidadeVagas.getText().isEmpty())
+                    if (!txtNumeroLei.getText().isEmpty() && !jtaEmenta.getText().isEmpty() && !txtQuantidadeVagas.getText().isEmpty())
                     {
-                        ControleCadastrarFundamento controle = new ControleCadastrarFundamento(txtNumeroLei.getText(), txtAnoLei.getText(), jffDataLei.getText(), jtaEmenta.getText(), cmbAto.getSelectedItem().toString(), txtQuantidadeVagas.getText(), tbFundamentoCriacaoExclusao, eUmaAlteracao, linhaSelecionada, txtValorDe.getText(), txtValorPara.getText(), jtp, codigoCargoEmprego, codigoAtoLegal);
+                        System.out.println(dataFormatada);
+                        ControleCadastrarFundamento controle = new ControleCadastrarFundamento(txtNumeroLei.getText(), String.valueOf(ano), dataFormatada, jtaEmenta.getText(), cmbAto.getSelectedItem().toString(), txtQuantidadeVagas.getText(), tbFundamentoCriacaoExclusao, eUmaAlteracao, linhaSelecionada, txtValorDe.getText(), txtValorPara.getText(), jtp, codigoCargoEmprego, codigoAtoLegal);
                         this.dispose();
                     }
                 }
@@ -582,14 +556,14 @@ public class frmCadastrarFundamento extends javax.swing.JDialog
             for (int j = 0; j < tbFundamentoReajuste.getRowCount(); j++)
             {
                 //se o numero e ano da lei estiverem repetidos em algum registro da tabela barra a criação do novo registro
-                if (eUmaAlteracao == false && !txtNumeroLei.getText().isEmpty() && txtNumeroLei.getText().equals(tbFundamentoReajuste.getValueAt(j, 0)) && !txtAnoLei.getText().isEmpty() && txtAnoLei.getText().equals(tbFundamentoReajuste.getValueAt(j, 1)))
+                if (eUmaAlteracao == false && !txtNumeroLei.getText().isEmpty() && txtNumeroLei.getText().equals(tbFundamentoReajuste.getValueAt(j, 0)))
                 {
                     JOptionPane.showMessageDialog(null, "Registro duplicado na aba Reajuste!");
                     valorDuplicado = true;
                     break;
                 }
                 //se os campos estiverem em branco sera mostrado um aviso
-                if (eUmaAlteracao == false && txtNumeroLei.getText().isEmpty() || txtAnoLei.getText().isEmpty() || jffDataLei.getText().isEmpty() || txtValorDe.getText().isEmpty() || txtValorPara.getText().isEmpty() || jtaEmenta.getText().isEmpty())
+                if (eUmaAlteracao == false && txtNumeroLei.getText().isEmpty() || txtValorDe.getText().isEmpty() || txtValorPara.getText().isEmpty() || jtaEmenta.getText().isEmpty())
                 {
                     JOptionPane.showMessageDialog(null, "Preencha os campos para continuar.");
                     break;
@@ -599,9 +573,10 @@ public class frmCadastrarFundamento extends javax.swing.JDialog
             {
                 if (!valorDuplicado)
                 {
-                    if (!txtNumeroLei.getText().isEmpty() && !txtAnoLei.getText().isEmpty() && !jffDataLei.getText().isEmpty() && !jtaEmenta.getText().isEmpty() && !txtValorDe.getText().isEmpty() && !txtValorPara.getText().isEmpty())
+                    if (!txtNumeroLei.getText().isEmpty() && !jtaEmenta.getText().isEmpty() && !txtValorDe.getText().isEmpty() && !txtValorPara.getText().isEmpty())
                     {
-                        ControleCadastrarFundamento controle = new ControleCadastrarFundamento(txtNumeroLei.getText(), txtAnoLei.getText(), jffDataLei.getText(), jtaEmenta.getText(), txtValorDe.getText(), txtValorPara.getText(), tbFundamentoReajuste, eUmaAlteracao, linhaSelecionada, jtp);
+                        System.out.println(dataFormatada);
+                        ControleCadastrarFundamento controle = new ControleCadastrarFundamento(txtNumeroLei.getText(), String.valueOf(calendario.getDate()), dataFormatada, jtaEmenta.getText(), txtValorDe.getText(), txtValorPara.getText(), tbFundamentoReajuste, eUmaAlteracao, linhaSelecionada, jtp);
                         this.dispose();
                     }
                 }
@@ -611,9 +586,10 @@ public class frmCadastrarFundamento extends javax.swing.JDialog
                 if (!valorDuplicado)
                 {
 
-                    if (!txtNumeroLei.getText().isEmpty() && !txtAnoLei.getText().isEmpty() && !jffDataLei.getText().isEmpty() && !jtaEmenta.getText().isEmpty() && !txtValorDe.getText().isEmpty() && !txtValorPara.getText().isEmpty())
+                    if (!txtNumeroLei.getText().isEmpty() && !jtaEmenta.getText().isEmpty() && !txtValorDe.getText().isEmpty() && !txtValorPara.getText().isEmpty())
                     {
-                        ControleCadastrarFundamento controle = new ControleCadastrarFundamento(txtNumeroLei.getText(), txtAnoLei.getText(), jffDataLei.getText(), jtaEmenta.getText(), txtValorDe.getText(), txtValorPara.getText(), tbFundamentoReajuste, eUmaAlteracao, linhaSelecionada, jtp);
+                        System.out.println(dataFormatada);
+                        ControleCadastrarFundamento controle = new ControleCadastrarFundamento(txtNumeroLei.getText(), String.valueOf(calendario.getDate()), dataFormatada, jtaEmenta.getText(), txtValorDe.getText(), txtValorPara.getText(), tbFundamentoReajuste, eUmaAlteracao, linhaSelecionada, jtp);
                         this.dispose();
                     }
                 }
@@ -643,53 +619,16 @@ public class frmCadastrarFundamento extends javax.swing.JDialog
     {
         if (jtpAto.getSelectedIndex() == 0)
         {
-            boolean camposPreenchidos = !txtNumeroLei.getText().isEmpty() && !txtAnoLei.getText().isEmpty() && !jffDataLei.getText().isEmpty() && !txtQuantidadeVagas.getText().isEmpty() && !jtaEmenta.getText().isEmpty();
+            boolean camposPreenchidos = !txtNumeroLei.getText().isEmpty() && !txtQuantidadeVagas.getText().isEmpty() && !jtaEmenta.getText().isEmpty() && calendario.getDate() != null;
             btnCadastrar.setEnabled(camposPreenchidos);
         }
         else if (jtpAto.getSelectedIndex() == 1)
         {
 
-            boolean camposPreenchidos = !txtNumeroLei.getText().isEmpty() && !txtAnoLei.getText().isEmpty() && !jffDataLei.getText().isEmpty() && !jtaEmenta.getText().isEmpty() && !txtValorDe.getText().isEmpty() && !txtValorPara.getText().isEmpty();
+            boolean camposPreenchidos = !txtNumeroLei.getText().isEmpty() && !jtaEmenta.getText().isEmpty() && !txtValorDe.getText().isEmpty() && !txtValorPara.getText().isEmpty() && calendario.getDate() != null;
             btnCadastrar.setEnabled(camposPreenchidos);
         }
     }
-
-    private void txtAnoLeiKeyTyped(java.awt.event.KeyEvent evt)//GEN-FIRST:event_txtAnoLeiKeyTyped
-    {//GEN-HEADEREND:event_txtAnoLeiKeyTyped
-        //Esse código verifica se o caractere digitado é uma letra, um backspace ou um delete. Se não for, o método consume() é chamado no evento, o que impede que o caractere seja inserido no campo de texto.
-        char c = evt.getKeyChar();
-        if (!(Character.isDigit(c) || (c == KeyEvent.VK_BACK_SPACE) || (c == KeyEvent.VK_DELETE)))
-        {
-            evt.consume();
-        }
-        else
-        {
-            String texto = txtAnoLei.getText();
-            if (texto.length() == 3)
-            {
-                txtAnoLei.setFocusTraversalKeysEnabled(true);
-            }
-        }
-    }//GEN-LAST:event_txtAnoLeiKeyTyped
-
-    private void jffDataLeiKeyTyped(java.awt.event.KeyEvent evt)//GEN-FIRST:event_jffDataLeiKeyTyped
-    {//GEN-HEADEREND:event_jffDataLeiKeyTyped
-        //Esse código verifica se o caractere digitado é uma letra, um backspace ou um delete. Se não for, o método consume() é chamado no evento, o que impede que o caractere seja inserido no campo de texto.
-        char c = evt.getKeyChar();
-        if (!(Character.isDigit(c) || (c == KeyEvent.VK_BACK_SPACE) || (c == KeyEvent.VK_DELETE)))
-        {
-            evt.consume();
-        }
-        else
-        {
-            String texto = jffDataLei.getText();
-            if (texto.length() == 8)
-            {
-                jffDataLei.setFocusTraversalKeysEnabled(true);
-            }
-
-        }
-    }//GEN-LAST:event_jffDataLeiKeyTyped
 
     private void txtQuantidadeVagasKeyTyped(java.awt.event.KeyEvent evt)//GEN-FIRST:event_txtQuantidadeVagasKeyTyped
     {//GEN-HEADEREND:event_txtQuantidadeVagasKeyTyped
@@ -700,49 +639,6 @@ public class frmCadastrarFundamento extends javax.swing.JDialog
             evt.consume();
         }
     }//GEN-LAST:event_txtQuantidadeVagasKeyTyped
-
-    private void jffDataLeiFocusLost(java.awt.event.FocusEvent evt)//GEN-FIRST:event_jffDataLeiFocusLost
-    {//GEN-HEADEREND:event_jffDataLeiFocusLost
-
-        String data = jffDataLei.getText(); // Obtém o texto do campo
-        data = data.replaceAll("[^\\d]", ""); // Remove todos os caracteres que não são dígitos (espaços em branco e a barra)
-        int numCaracteresPreenchidos = data.length(); // Conta o número de dígitos restantes
-
-        if (numCaracteresPreenchidos != 8)
-        {
-            JOptionPane.showMessageDialog(null, "Campo data não pode estar vazio!");
-            jffDataLei.requestFocus();
-        }
-        else
-        {
-            jffDataLei.setFocusTraversalKeysEnabled(true);
-        }
-    }//GEN-LAST:event_jffDataLeiFocusLost
-
-    private void txtAnoLeiFocusLost(java.awt.event.FocusEvent evt)//GEN-FIRST:event_txtAnoLeiFocusLost
-    {//GEN-HEADEREND:event_txtAnoLeiFocusLost
-        String data = txtAnoLei.getText(); // Obtém o texto do campo
-        data = data.replaceAll("[^\\d]", ""); // Remove todos os caracteres que não são dígitos (espaços em branco e a barra)
-        int numCaracteresPreenchidos = data.length(); // Conta o número de dígitos restantes
-
-        if (numCaracteresPreenchidos != 4)
-        {
-            JOptionPane.showMessageDialog(null, "Campo ano não pode ser inferior a 4 digitos!");
-            txtAnoLei.requestFocusInWindow();
-        }
-
-
-    }//GEN-LAST:event_txtAnoLeiFocusLost
-
-    private void txtAnoLeiKeyReleased(java.awt.event.KeyEvent evt)//GEN-FIRST:event_txtAnoLeiKeyReleased
-    {//GEN-HEADEREND:event_txtAnoLeiKeyReleased
-        verificarSeOsCamposEstaoPreenchidos();
-    }//GEN-LAST:event_txtAnoLeiKeyReleased
-
-    private void txtAnoLeiFocusGained(java.awt.event.FocusEvent evt)//GEN-FIRST:event_txtAnoLeiFocusGained
-    {//GEN-HEADEREND:event_txtAnoLeiFocusGained
-        txtAnoLei.setFocusTraversalKeysEnabled(false);
-    }//GEN-LAST:event_txtAnoLeiFocusGained
 
     private void txtValorParaActionPerformed(java.awt.event.ActionEvent evt)//GEN-FIRST:event_txtValorParaActionPerformed
     {//GEN-HEADEREND:event_txtValorParaActionPerformed
@@ -769,11 +665,6 @@ public class frmCadastrarFundamento extends javax.swing.JDialog
         verificarSeOsCamposEstaoPreenchidos();
     }//GEN-LAST:event_txtNumeroLeiKeyReleased
 
-    private void jffDataLeiKeyReleased(java.awt.event.KeyEvent evt)//GEN-FIRST:event_jffDataLeiKeyReleased
-    {//GEN-HEADEREND:event_jffDataLeiKeyReleased
-        verificarSeOsCamposEstaoPreenchidos();
-    }//GEN-LAST:event_jffDataLeiKeyReleased
-
     private void txtQuantidadeVagasKeyReleased(java.awt.event.KeyEvent evt)//GEN-FIRST:event_txtQuantidadeVagasKeyReleased
     {//GEN-HEADEREND:event_txtQuantidadeVagasKeyReleased
         verificarSeOsCamposEstaoPreenchidos();
@@ -793,6 +684,17 @@ public class frmCadastrarFundamento extends javax.swing.JDialog
     {//GEN-HEADEREND:event_txtValorParaKeyReleased
         verificarSeOsCamposEstaoPreenchidos();
     }//GEN-LAST:event_txtValorParaKeyReleased
+
+    private void calendarioPropertyChange(java.beans.PropertyChangeEvent evt)//GEN-FIRST:event_calendarioPropertyChange
+    {//GEN-HEADEREND:event_calendarioPropertyChange
+        calendario.getDateEditor().setEnabled(false);
+        verificarSeOsCamposEstaoPreenchidos();
+    }//GEN-LAST:event_calendarioPropertyChange
+
+    private void calendarioKeyReleased(java.awt.event.KeyEvent evt)//GEN-FIRST:event_calendarioKeyReleased
+    {//GEN-HEADEREND:event_calendarioKeyReleased
+
+    }//GEN-LAST:event_calendarioKeyReleased
 
     /**
      * @param args the command line arguments
@@ -863,23 +765,24 @@ public class frmCadastrarFundamento extends javax.swing.JDialog
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnCadastrar;
     private javax.swing.JButton btnCancelar;
+    private com.toedter.calendar.JDateChooser calendario;
     private javax.swing.JComboBox<String> cmbAto;
+    private com.toedter.calendar.JCalendar jCalendar1;
+    private com.toedter.calendar.JCalendar jCalendar2;
+    private com.toedter.calendar.JCalendar jCalendar3;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
     private javax.swing.JScrollPane jScrollPane1;
-    private javax.swing.JFormattedTextField jffDataLei;
     private javax.swing.JPanel jpCriacaoExclusao;
     private javax.swing.JPanel jpReajuste;
     private javax.swing.JTextArea jtaEmenta;
     private javax.swing.JTabbedPane jtpAto;
-    private javax.swing.JLabel lblAnoLei;
     private javax.swing.JLabel lblDataLei;
     private javax.swing.JLabel lblNumeroLei;
     private javax.swing.JLabel lblQuantidadeVagas;
     private javax.swing.JLabel lblTipo;
     private javax.swing.JLabel lblValorDe;
     private javax.swing.JLabel lblValorPara;
-    private javax.swing.JTextField txtAnoLei;
     private javax.swing.JTextField txtNumeroLei;
     private javax.swing.JTextField txtQuantidadeVagas;
     private javax.swing.JTextField txtValorDe;
