@@ -13,11 +13,10 @@ import javax.swing.JOptionPane;
 
 public class CadastrarFundamentoDAO
 {
-    
 
     public void amarrarCargoEmpregoNoFundamento(String codigoCargoEmprego, String codigoAtoLegal)
     {
-        System.out.println("cod cargo"+codigoCargoEmprego);
+        System.out.println("cod cargo" + codigoCargoEmprego);
         String sql = "INSERT INTO cargo_emprego_ato_legal (fk_codigo_cargo_emprego, fk_codigo_ato_legal) "
                 + "VALUES (?,?)";
         Connection con = ConexaoDAO.conectaBD();
@@ -36,10 +35,9 @@ public class CadastrarFundamentoDAO
             System.out.println(erro);
         }
     }
-    
+
     public void cadastrarFundamento(CadastrarFundamentoDTO dto)
     {
-        JOptionPane.showMessageDialog(null, dto.getDataDaLei());
         String dataOriginal = dto.getDataDaLei(); // Data no formato 'DD/MM/AAAA'
         DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd/MM/yyyy");
         LocalDate dataFormatada = LocalDate.parse(dataOriginal, formatter);
@@ -70,10 +68,10 @@ public class CadastrarFundamentoDAO
         }
     }
 
-    
     public List<CadastrarFundamentoDTO> pesquisarCodigoFundamento()
     {
         String sql = "SELECT * FROM ato_legal ORDER BY codigo_ato DESC";
+
         Connection con = ConexaoDAO.conectaBD();
         List<CadastrarFundamentoDTO> listaFundamento = new ArrayList<>();
         try
@@ -105,6 +103,58 @@ public class CadastrarFundamentoDAO
         catch (SQLException erro)
         {
             return null;
+        }
+
+    }
+
+    public List<CadastrarFundamentoDTO> pesquisarCodigoFundamentoParaExcluir(CadastrarFundamentoDTO dto)
+    {
+        String sql = "SELECT * FROM ato_legal WHERE numero_ato = ? AND ano_ato = ?";
+        Connection con = ConexaoDAO.conectaBD();
+        List<CadastrarFundamentoDTO> lista = new ArrayList<>();
+        try
+        {
+            PreparedStatement pstm = con.prepareStatement(sql);
+            pstm.setString(1, dto.getNumeroDaLei());
+            pstm.setString(2, dto.getAnoDaLei());
+
+            ResultSet rs = pstm.executeQuery();
+            while (rs.next())
+            {
+                CadastrarFundamentoDTO dtoLista = new CadastrarFundamentoDTO();
+                dtoLista.setCodigoDoAto(rs.getString("codigo_ato"));
+                dtoLista.setNumeroDaLei(rs.getString("numero_ato"));
+                dtoLista.setAnoDaLei(rs.getString("ano_ato"));
+                dtoLista.setDataDaLei(rs.getString("data_ato"));
+                lista.add(dtoLista);
+            }
+
+        }
+        catch (SQLException e)
+        {
+            System.out.println("Erro ao pesquisar para excluir." + e);
+            return null;
+        }
+
+        return lista;
+    }
+
+    public void excluirFundamentoDoCargoEmprego(String codigoCargoEmprego, String codigoFundamento)
+    {
+        String sql = "DELETE FROM cargo_emprego_ato_legal WHERE fk_codigo_cargo_emprego = ? AND fk_codigo_ato_legal = ?";
+        Connection conn = ConexaoDAO.conectaBD();
+
+        try
+        {
+            PreparedStatement pstm = conn.prepareStatement(sql);
+            pstm.setString(1, codigoCargoEmprego);
+            pstm.setString(2, codigoFundamento);
+            pstm.executeUpdate();
+
+        }
+        catch (SQLException e)
+        {
+            System.out.println("Erro exclusao fundamento" + e);
         }
     }
 }

@@ -6,6 +6,7 @@ package Controle;
 
 import Apresentacao.frmCadastrarCargoEmprego;
 import DAO.CadastrarCargoEmpregoDAO;
+import DAO.CadastrarFundamentoDAO;
 import DTO.CadastrarCargoEmpregoDTO;
 import DTO.CadastrarFundamentoDTO;
 import Modelo.ControleCadastrarFundamento;
@@ -222,10 +223,18 @@ public class CadastrarCargoEmpregoControle extends CadastrarCargoEmpregoDTO
         return controle.getQuantidadeEmpregoCriada();
     }
 
-    public String excluirCargoEmpregoDoQuadro(DefaultTableModel tabela, int linhaSelecionada, int colunaComAInformacaoASerExcluida)
+    public String excluirCargoEmpregoDoQuadro(DefaultTableModel tabela, int linhaSelecionada, int colunaComAInformacaoASerExcluida, CadastrarFundamentoDTO dto)
+    {
+        return null;
+    }
+
+    public void excluirFundamentoDoCargoEmprego(DefaultTableModel tabela, int linhaSelecionada, int colunaComAInformacaoASerExcluida, CadastrarFundamentoDTO dto)
     {
         ControleCadastrarFundamento controle = new ControleCadastrarFundamento();
-        return controle.getQuantidadeEmpregoCriada();
+        CadastrarFundamentoDTO dtoLista = new CadastrarFundamentoDTO();
+        CadastrarFundamentoDAO dao = new CadastrarFundamentoDAO();
+        dtoLista.setCodigoDoAto(dao.pesquisarCodigoFundamentoParaExcluir(dto).get(0).getCodigoDoAto());
+        dao.excluirFundamentoDoCargoEmprego(String.valueOf(getCodigoCargoEmprego()), dtoLista.getCodigoDoAto());
     }
 
     public String alterarCargoEmpregoDoQuadro(DefaultTableModel tabelaQuadro, DefaultTableModel tabelaFundamento, int linhaSelecionada, int colunaComAInformacaoASerAlterada, String quantidadeCargoEmpregoASerAlterada)

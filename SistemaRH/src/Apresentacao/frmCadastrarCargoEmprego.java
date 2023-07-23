@@ -7,6 +7,7 @@ package Apresentacao;
 import Controle.CadastrarCargoEmpregoControle;
 import DTO.PesquisarCargoEmpregoDTO;
 import DTO.CadastrarCargoEmpregoDTO;
+import DTO.CadastrarFundamentoDTO;
 import Modelo.CentralizarJanela;
 import Modelo.ControleCadastrarFundamento;
 import java.awt.Dimension;
@@ -269,7 +270,7 @@ public class frmCadastrarCargoEmprego extends javax.swing.JInternalFrame impleme
         {
             CadastrarCargoEmpregoControle controleCCE = new CadastrarCargoEmpregoControle();
             controleCCE.cadastrarCargoEmprego(frm);
-            
+
             //faz a consulta no banco para ver se a informação ja esta la. se tiver libera os campos de remuneração e cadastro de legislação
             if (controleCCE.consultarSeCargoEmpregoFoiCadastrado(frm).equals("ativarCamposEspecificos"))
             {
@@ -513,8 +514,8 @@ public class frmCadastrarCargoEmprego extends javax.swing.JInternalFrame impleme
         btnAlterarFundamento.setEnabled(true);
         btnExcluirFundamento.setEnabled(true);
     }
-    
-       public void ativarCamposEspecificos()
+
+    public void ativarCamposEspecificos()
     {
         //remuneração
         chkVencimento.setEnabled(true);
@@ -1649,9 +1650,11 @@ public class frmCadastrarCargoEmprego extends javax.swing.JInternalFrame impleme
             if (linhaSelecionada != -1)
             {
                 CadastrarCargoEmpregoControle c = new CadastrarCargoEmpregoControle();
-                c.excluirCargoEmpregoDoQuadro(tabelaFundamento, linhaSelecionada, 5);
+                CadastrarFundamentoDTO dto = new CadastrarFundamentoDTO();
+                dto.setNumeroDaLei(tabelaFundamento.getValueAt(linhaSelecionada, 0).toString());
+                dto.setAnoDaLei(tabelaFundamento.getValueAt(linhaSelecionada, 1).toString());
+                c.excluirFundamentoDoCargoEmprego(tabelaFundamento, linhaSelecionada, 5, dto);
                 tabelaFundamento.removeRow(linhaSelecionada);
-                tbQuadro.setValueAt(c.cadastrarCargoEmpregoNoQuadro(tabelaQuadro, tabelaFundamento), 0, 0);
             }
 
         }
@@ -1833,7 +1836,8 @@ public class frmCadastrarCargoEmprego extends javax.swing.JInternalFrame impleme
 
     private void btnSelecionarFundamentoActionPerformed(java.awt.event.ActionEvent evt)//GEN-FIRST:event_btnSelecionarFundamentoActionPerformed
     {//GEN-HEADEREND:event_btnSelecionarFundamentoActionPerformed
-        // TODO add your handling code here:
+        frmPesquisador frm = new frmPesquisador(null, true);
+        frm.setVisible(true);
     }//GEN-LAST:event_btnSelecionarFundamentoActionPerformed
     public void limparTabelas(JTable tabela)
     {

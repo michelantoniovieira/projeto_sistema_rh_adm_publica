@@ -45,15 +45,6 @@ public class ControleCadastrarFundamento
 
     public void cadastrarLegislacao(String numeroDaLei, String anoDaLei, String dataDaLei, String ementaDaLei, String atoDaLei, String qtdVagasDaLei, DefaultTableModel tabela, boolean eUmaAlteracao, int linhaSelecionada, String de, String para, String codigoCargoEmprego, String codigoAtoLegal)
     {
-        Object[] linha = new Object[6];
-        linha[0] = numeroDaLei;
-        linha[1] = anoDaLei;
-        linha[2] = dataDaLei;
-        linha[3] = ementaDaLei;
-        linha[4] = atoDaLei;
-        linha[5] = qtdVagasDaLei;
-        tabela.addRow(linha);
-
         CadastrarFundamentoDAO dao = new CadastrarFundamentoDAO();
         CadastrarFundamentoDTO dto = new CadastrarFundamentoDTO();
         //passar a informação para dto
@@ -67,15 +58,31 @@ public class ControleCadastrarFundamento
         dto.setReajusteDe("0");
         dto.setReajustePara("0");
         dto.setTipoAto("1");
-        dao.cadastrarFundamento(dto);
-        
-        codigoAtoLegal = dao.pesquisarCodigoFundamento().get(0).getCodigoDoAto();
-        System.out.println(codigoAtoLegal);
-        //parei aqui quando eu salvo o primeiro registro ele vai, o problema são os proximos registros
-        //primeiro passo - vou ter que fazer por bloco. primeiro cadastro o cargo no banco preenecnhendo as informações da parte de cima salvo,
-        //dai vai liberar o acesso aos botoes, o usuario cadastra a lei
-        //dai cadastrar a remuneraçao e o cadastro vai sendo fechado por partes
-        dao.amarrarCargoEmpregoNoFundamento(codigoCargoEmprego, codigoAtoLegal);
+        if (dao.pesquisarCodigoFundamentoParaExcluir(dto).isEmpty())
+        {
+            dao.cadastrarFundamento(dto);
+
+            codigoAtoLegal = dao.pesquisarCodigoFundamento().get(0).getCodigoDoAto();
+            System.out.println(codigoAtoLegal);
+            //parei aqui quando eu salvo o primeiro registro ele vai, o problema são os proximos registros
+            //primeiro passo - vou ter que fazer por bloco. primeiro cadastro o cargo no banco preenecnhendo as informações da parte de cima salvo,
+            //dai vai liberar o acesso aos botoes, o usuario cadastra a lei
+            //dai cadastrar a remuneraçao e o cadastro vai sendo fechado por partes
+            dao.amarrarCargoEmpregoNoFundamento(codigoCargoEmprego, codigoAtoLegal);
+
+            Object[] linha = new Object[6];
+            linha[0] = numeroDaLei;
+            linha[1] = anoDaLei;
+            linha[2] = dataDaLei;
+            linha[3] = ementaDaLei;
+            linha[4] = atoDaLei;
+            linha[5] = qtdVagasDaLei;
+            tabela.addRow(linha);
+        }
+        else
+        {
+            JOptionPane.showMessageDialog(null, "Ato já cadastrado! Selecione!");
+        }
     }
 
     public void alterarLegislacao(String numeroDaLei, String anoDaLei, String dataDaLei, String ementaDaLei, String atoDaLei, String qtdVagasDaLei, DefaultTableModel tabela, boolean eUmaAlteracao, int linhaSelecionada, String de, String para, String codigoCargoEmprego, String codigoAtoLegal)
@@ -128,7 +135,6 @@ public class ControleCadastrarFundamento
         for (int i = 0; i < tabelaFundamento.getRowCount(); i++)
         {
             quantidadeEmpregoCriada += Integer.parseInt(tabelaFundamento.getValueAt(i, 5).toString());
-            JOptionPane.showMessageDialog(null, quantidadeEmpregoCriada);
         }
     }
 }
