@@ -137,4 +137,10 @@ public class ControleCadastrarFundamento
             quantidadeEmpregoCriada += Integer.parseInt(tabelaFundamento.getValueAt(i, 5).toString());
         }
     }
+    
+    public List<CadastrarFundamentoDTO> pesquisarAtoLegal()
+    {
+        CadastrarFundamentoDAO dao = new CadastrarFundamentoDAO();
+        return dao.pesquisarFundamento();
+    }
 }

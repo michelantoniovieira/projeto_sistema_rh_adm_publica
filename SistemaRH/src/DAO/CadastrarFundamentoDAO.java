@@ -104,7 +104,44 @@ public class CadastrarFundamentoDAO
         {
             return null;
         }
+    }
 
+    public List<CadastrarFundamentoDTO> pesquisarFundamento()
+    {
+        String sql = "SELECT * FROM ato_legal ORDER BY codigo_ato ASC";
+
+        Connection con = ConexaoDAO.conectaBD();
+        List<CadastrarFundamentoDTO> listaFundamento = new ArrayList<>();
+        try
+        {
+            PreparedStatement pst = con.prepareStatement(sql);
+            ResultSet rs = pst.executeQuery();
+
+            while (rs.next())
+            {
+
+                CadastrarFundamentoDTO dto = new CadastrarFundamentoDTO();
+
+                dto.setCodigoDoAto(rs.getString("codigo_ato"));
+                dto.setNumeroDaLei(rs.getString("numero_ato"));
+                dto.setAnoDaLei(rs.getString("ano_ato"));
+                dto.setDataDaLei(rs.getString("data_ato"));
+                dto.setEmentaDaLei(rs.getString("ementa_ato"));
+                dto.setAtoDaLei(rs.getString("categoria_ato"));
+                dto.setQtdVagasDaLei(rs.getString("quantidade_ato"));
+                dto.setReajusteDe(rs.getString("reajuste_de"));
+                dto.setReajustePara(rs.getString("reajuste_para"));
+
+                listaFundamento.add(dto);
+
+            }
+            //pst.close();
+            return listaFundamento;
+        }
+        catch (SQLException erro)
+        {
+            return null;
+        }
     }
 
     public List<CadastrarFundamentoDTO> pesquisarCodigoFundamentoParaExcluir(CadastrarFundamentoDTO dto)

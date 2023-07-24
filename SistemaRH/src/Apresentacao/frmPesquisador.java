@@ -4,6 +4,11 @@
  */
 package Apresentacao;
 
+import DTO.CadastrarFundamentoDTO;
+import Modelo.ControleCadastrarFundamento;
+import java.util.List;
+import javax.swing.table.DefaultTableModel;
+
 /**
  *
  * @author miche
@@ -35,14 +40,15 @@ public class frmPesquisador extends javax.swing.JDialog
         txtPesquisar = new javax.swing.JTextField();
         btnPesquisar = new javax.swing.JButton();
         jScrollPane2 = new javax.swing.JScrollPane();
-        jTable1 = new javax.swing.JTable();
+        tbPesquisar = new javax.swing.JTable();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
+        setTitle("Selecionar Ato Legal");
 
         lblPesquisarPor.setText("Pesquisa por:");
 
         cmbModoDePesquisa.setMaximumRowCount(3);
-        cmbModoDePesquisa.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Número do Concurso", "Ano do Concurso", "Nome da Banca", " " }));
+        cmbModoDePesquisa.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Número", "Ano", "Data", "Ementa", "Ato", "Quantidade" }));
 
         btnPesquisar.setText("Pesquisar");
         btnPesquisar.addActionListener(new java.awt.event.ActionListener()
@@ -52,28 +58,21 @@ public class frmPesquisador extends javax.swing.JDialog
                 btnPesquisarActionPerformed(evt);
             }
         });
-        btnPesquisar.addKeyListener(new java.awt.event.KeyAdapter()
-        {
-            public void keyPressed(java.awt.event.KeyEvent evt)
-            {
-                btnPesquisarKeyPressed(evt);
-            }
-        });
 
-        jTable1.setModel(new javax.swing.table.DefaultTableModel(
+        tbPesquisar.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][]
             {
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null}
+                {null, null, null, null, null, null},
+                {null, null, null, null, null, null},
+                {null, null, null, null, null, null},
+                {null, null, null, null, null, null}
             },
             new String []
             {
-                "Title 1", "Title 2", "Title 3", "Title 4"
+                "Número", "Ano", "Data", "Ementa", "Ato", "Quantidade"
             }
         ));
-        jScrollPane2.setViewportView(jTable1);
+        jScrollPane2.setViewportView(tbPesquisar);
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -115,13 +114,20 @@ public class frmPesquisador extends javax.swing.JDialog
 
     private void btnPesquisarActionPerformed(java.awt.event.ActionEvent evt)//GEN-FIRST:event_btnPesquisarActionPerformed
     {//GEN-HEADEREND:event_btnPesquisarActionPerformed
+        ControleCadastrarFundamento controle = new ControleCadastrarFundamento();
+        List<CadastrarFundamentoDTO> lista;
+        lista = controle.pesquisarAtoLegal();
 
+        String[] colunas = {"Número", "Ano", "Data", "Ementa", "Ato", "Quantidade"};
+        DefaultTableModel model = new DefaultTableModel(colunas, 0);
+        
+        for (int i = 0; i < lista.size(); i++)
+        {
+            Object[] rowdata = {lista.get(i).getNumeroDaLei(), lista.get(i).getAnoDaLei(), lista.get(i).getDataDaLei(), lista.get(i).getEmentaDaLei(), lista.get(i).getAtoDaLei(), lista.get(i).getQtdVagasDaLei()};
+            model.addRow(rowdata);
+        }    
+        tbPesquisar.setModel(model);
     }//GEN-LAST:event_btnPesquisarActionPerformed
-
-    private void btnPesquisarKeyPressed(java.awt.event.KeyEvent evt)//GEN-FIRST:event_btnPesquisarKeyPressed
-    {//GEN-HEADEREND:event_btnPesquisarKeyPressed
-
-    }//GEN-LAST:event_btnPesquisarKeyPressed
 
     /**
      * @param args the command line arguments
@@ -188,8 +194,8 @@ public class frmPesquisador extends javax.swing.JDialog
     private javax.swing.JButton btnPesquisar;
     private javax.swing.JComboBox<String> cmbModoDePesquisa;
     private javax.swing.JScrollPane jScrollPane2;
-    private javax.swing.JTable jTable1;
     private javax.swing.JLabel lblPesquisarPor;
+    private javax.swing.JTable tbPesquisar;
     private javax.swing.JTextField txtPesquisar;
     // End of variables declaration//GEN-END:variables
 }
