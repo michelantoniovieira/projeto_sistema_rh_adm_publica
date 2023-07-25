@@ -6,7 +6,15 @@ package Apresentacao;
 
 import DTO.CadastrarFundamentoDTO;
 import Modelo.ControleCadastrarFundamento;
+import java.awt.event.MouseAdapter;
+import java.awt.event.MouseEvent;
+import java.util.ArrayList;
 import java.util.List;
+import java.util.function.Consumer;
+import javax.swing.JOptionPane;
+import javax.swing.JTable;
+import javax.swing.SwingConstants;
+import javax.swing.table.DefaultTableCellRenderer;
 import javax.swing.table.DefaultTableModel;
 
 /**
@@ -23,6 +31,9 @@ public class frmPesquisador extends javax.swing.JDialog
     {
         super(parent, modal);
         initComponents();
+        gerenciadorDeTabelas(tbPesquisar);
+        gerenciadorDeTabelas(tbPesquisar);
+        btnPesquisarActionPerformed(null);
     }
 
     /**
@@ -59,20 +70,39 @@ public class frmPesquisador extends javax.swing.JDialog
             }
         });
 
+        tbPesquisar.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED));
         tbPesquisar.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][]
             {
-                {null, null, null, null, null, null},
-                {null, null, null, null, null, null},
-                {null, null, null, null, null, null},
-                {null, null, null, null, null, null}
+
             },
             new String []
             {
                 "Número", "Ano", "Data", "Ementa", "Ato", "Quantidade"
             }
-        ));
+        )
+        {
+            boolean[] canEdit = new boolean []
+            {
+                false, false, false, false, false, false
+            };
+
+            public boolean isCellEditable(int rowIndex, int columnIndex)
+            {
+                return canEdit [columnIndex];
+            }
+        });
+        tbPesquisar.setSelectionMode(javax.swing.ListSelectionModel.SINGLE_SELECTION);
         jScrollPane2.setViewportView(tbPesquisar);
+        if (tbPesquisar.getColumnModel().getColumnCount() > 0)
+        {
+            tbPesquisar.getColumnModel().getColumn(0).setResizable(false);
+            tbPesquisar.getColumnModel().getColumn(1).setResizable(false);
+            tbPesquisar.getColumnModel().getColumn(2).setResizable(false);
+            tbPesquisar.getColumnModel().getColumn(3).setResizable(false);
+            tbPesquisar.getColumnModel().getColumn(4).setResizable(false);
+            tbPesquisar.getColumnModel().getColumn(5).setResizable(false);
+        }
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -118,16 +148,87 @@ public class frmPesquisador extends javax.swing.JDialog
         List<CadastrarFundamentoDTO> lista;
         lista = controle.pesquisarAtoLegal();
 
-        String[] colunas = {"Número", "Ano", "Data", "Ementa", "Ato", "Quantidade"};
-        DefaultTableModel model = new DefaultTableModel(colunas, 0);
-        
+        String[] colunas =
+        {
+            "Número", "Ano", "Data", "Ementa", "Ato", "Quantidade"
+        };
+
+        // O método isCellEditable é sobrescrito para retornar false, desabilitando a edição de todas as células da tabela.
+        DefaultTableModel model = new DefaultTableModel(colunas, 0)
+        {
+            @Override
+            public boolean isCellEditable(int rowIndex, int vColIndex)
+            {
+                return false;
+            }
+        };
+
         for (int i = 0; i < lista.size(); i++)
         {
-            Object[] rowdata = {lista.get(i).getNumeroDaLei(), lista.get(i).getAnoDaLei(), lista.get(i).getDataDaLei(), lista.get(i).getEmentaDaLei(), lista.get(i).getAtoDaLei(), lista.get(i).getQtdVagasDaLei()};
+            Object[] rowdata =
+            {
+                lista.get(i).getNumeroDaLei(), lista.get(i).getAnoDaLei(), lista.get(i).getDataDaLei(), lista.get(i).getEmentaDaLei(), lista.get(i).getAtoDaLei(), lista.get(i).getQtdVagasDaLei()
+            };
             model.addRow(rowdata);
-        }    
+        }
         tbPesquisar.setModel(model);
     }//GEN-LAST:event_btnPesquisarActionPerformed
+
+    public void gerenciadorDeTabelas(JTable table)
+    {
+        DefaultTableCellRenderer centralizarCelulas = new DefaultTableCellRenderer();
+        centralizarCelulas.setHorizontalAlignment(SwingConstants.CENTER);
+        table.getTableHeader().setReorderingAllowed(false);
+        for (int i = 0; i < table.getColumnCount(); i++)
+        {
+            table.getColumnModel().getColumn(i).setResizable(false);
+            table.getColumnModel().getColumn(i).setCellRenderer(centralizarCelulas);
+        }
+    }
+
+    public void tratarDadosSelecionados(Consumer<List<CadastrarFundamentoDTO>> callback)
+    {
+        obterSelecaoDaPesquisa(callback);
+    }
+
+    public void obterSelecaoDaPesquisa(Consumer<List<CadastrarFundamentoDTO>> callback)
+    {
+
+        tbPesquisar.addMouseListener(new MouseAdapter()
+        {
+            @Override
+            public void mouseClicked(MouseEvent e)
+            {
+
+                int linhaSelecionada = tbPesquisar.getSelectedRow();
+
+                if (linhaSelecionada != -1)
+                {
+                    CadastrarFundamentoDTO dto = new CadastrarFundamentoDTO();
+                    //numero da lei
+                    dto.setNumeroDaLei(tbPesquisar.getValueAt(linhaSelecionada, 0).toString());
+                    //ano da lei
+                    dto.setAnoDaLei(tbPesquisar.getValueAt(linhaSelecionada, 1).toString());
+                    //data da lei      
+                    dto.setDataDaLei(tbPesquisar.getValueAt(linhaSelecionada, 2).toString());
+                    //ementa da lei 
+                    dto.setEmentaDaLei(tbPesquisar.getValueAt(linhaSelecionada, 3).toString());
+                    //ato da lei 
+                    dto.setTipoAto(tbPesquisar.getValueAt(linhaSelecionada, 4).toString());
+                    //Quantidade de vagas 
+                    dto.setQtdVagasDaLei(tbPesquisar.getValueAt(linhaSelecionada, 5).toString());
+
+                    List<CadastrarFundamentoDTO> lista = new ArrayList<>();
+
+                    lista.add(dto);
+
+                    callback.accept(lista);
+
+                    dispose();
+                }
+            }
+        });
+    }
 
     /**
      * @param args the command line arguments

@@ -1837,6 +1837,47 @@ public class frmCadastrarCargoEmprego extends javax.swing.JInternalFrame impleme
     private void btnSelecionarFundamentoActionPerformed(java.awt.event.ActionEvent evt)//GEN-FIRST:event_btnSelecionarFundamentoActionPerformed
     {//GEN-HEADEREND:event_btnSelecionarFundamentoActionPerformed
         frmPesquisador frm = new frmPesquisador(null, true);
+        DefaultTableModel model = new DefaultTableModel();
+        model.setColumnIdentifiers(new Object[]
+        {
+            "Número da Lei", "Ano da Lei", "Data da Lei", "Ementa da Lei", "Tipo do Ato", "Quantidade de Vagas"
+        });
+        tbFundamentoCriacaoExclusao.setModel(model);
+        //obter as informações do formulario pesquisador
+        frm.tratarDadosSelecionados(listaPesquisada ->
+        {
+            // Manipular a lista de dados selecionados quando estiver pronta
+            if (!listaPesquisada.isEmpty())
+            {
+                System.out.println("numero: " + listaPesquisada.get(0).getNumeroDaLei());
+                System.out.println("ano: " + listaPesquisada.get(0).getAnoDaLei());
+                System.out.println("data: " + listaPesquisada.get(0).getDataDaLei());
+                System.out.println("ementa: " + listaPesquisada.get(0).getEmentaDaLei());
+                System.out.println("ato: " + listaPesquisada.get(0).getTipoAto());
+                System.out.println("quantidade: " + listaPesquisada.get(0).getQtdVagasDaLei());
+
+                
+                for (CadastrarFundamentoDTO dto : listaPesquisada)
+                {
+                    Object[] linhaSelecionada = new Object[]
+                    {
+                        dto.getNumeroDaLei(),
+                        dto.getAnoDaLei(),
+                        dto.getDataDaLei(),
+                        dto.getEmentaDaLei(),
+                        dto.getTipoAto(),
+                        dto.getQtdVagasDaLei()
+                    };
+
+                    model.addRow(linhaSelecionada);
+                }
+            }
+            else
+            {
+                System.out.println("Nenhum dado selecionado.");
+            }
+        });
+
         frm.setVisible(true);
     }//GEN-LAST:event_btnSelecionarFundamentoActionPerformed
     public void limparTabelas(JTable tabela)
