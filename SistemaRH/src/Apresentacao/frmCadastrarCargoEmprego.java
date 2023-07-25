@@ -1417,7 +1417,7 @@ public class frmCadastrarCargoEmprego extends javax.swing.JInternalFrame impleme
         jpLegislacaoLayout.setVerticalGroup(
             jpLegislacaoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jpLegislacaoLayout.createSequentialGroup()
-                .addComponent(jScrollPane3, javax.swing.GroupLayout.DEFAULT_SIZE, 177, Short.MAX_VALUE)
+                .addComponent(jScrollPane3, javax.swing.GroupLayout.DEFAULT_SIZE, 184, Short.MAX_VALUE)
                 .addGap(36, 36, 36))
         );
 
@@ -1459,7 +1459,7 @@ public class frmCadastrarCargoEmprego extends javax.swing.JInternalFrame impleme
         jpReajusteLayout.setVerticalGroup(
             jpReajusteLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jpReajusteLayout.createSequentialGroup()
-                .addComponent(jScrollPane4, javax.swing.GroupLayout.DEFAULT_SIZE, 209, Short.MAX_VALUE)
+                .addComponent(jScrollPane4, javax.swing.GroupLayout.DEFAULT_SIZE, 216, Short.MAX_VALUE)
                 .addContainerGap())
         );
 
@@ -1520,10 +1520,10 @@ public class frmCadastrarCargoEmprego extends javax.swing.JInternalFrame impleme
         jpOperacoesLayout.setVerticalGroup(
             jpOperacoesLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jpOperacoesLayout.createSequentialGroup()
-                .addGap(28, 28, 28)
-                .addComponent(btnSelecionarFundamento)
-                .addGap(18, 18, 18)
+                .addGap(35, 35, 35)
                 .addComponent(btnCadastrarFundamento)
+                .addGap(18, 18, 18)
+                .addComponent(btnSelecionarFundamento)
                 .addGap(18, 18, 18)
                 .addComponent(btnAlterarFundamento)
                 .addGap(18, 18, 18)
@@ -1687,10 +1687,10 @@ public class frmCadastrarCargoEmprego extends javax.swing.JInternalFrame impleme
                 Object anoDaLei = tabelaFundamento.getValueAt(linhaSelecionada, 1);
                 Object dataDaLei = tabelaFundamento.getValueAt(linhaSelecionada, 2);
                 Object ementaDaLei = tabelaFundamento.getValueAt(linhaSelecionada, 3);
-                Object atoDaLei = tabelaFundamento.getValueAt(linhaSelecionada, 4);
-                Object quantidadeDaLei = tabelaFundamento.getValueAt(linhaSelecionada, 5);
+                //Object atoDaLei = tabelaFundamento.getValueAt(linhaSelecionada, 4);
+                //Object quantidadeDaLei = tabelaFundamento.getValueAt(linhaSelecionada, 5);
 
-                frmCadastrarFundamento frmCadastrarFundamento = new frmCadastrarFundamento(null, true, (DefaultTableModel) tbFundamentoCriacaoExclusao.getModel(), (DefaultTableModel) tbFundamentoReajuste.getModel(), numeroDaLei.toString(), anoDaLei.toString(), dataDaLei.toString(), ementaDaLei.toString(), atoDaLei.toString(), quantidadeDaLei.toString(), linhaSelecionada, jtpLegislacao);
+                frmCadastrarFundamento frmCadastrarFundamento = new frmCadastrarFundamento(null, true, (DefaultTableModel) tbFundamentoCriacaoExclusao.getModel(), (DefaultTableModel) tbFundamentoReajuste.getModel(), numeroDaLei.toString(), anoDaLei.toString(), dataDaLei.toString(), ementaDaLei.toString(), linhaSelecionada, jtpLegislacao);
                 frmCadastrarFundamento.setVisible(true);
                 frmCadastrarFundamento.setLocationRelativeTo(null);
 
@@ -1840,7 +1840,7 @@ public class frmCadastrarCargoEmprego extends javax.swing.JInternalFrame impleme
         DefaultTableModel model = new DefaultTableModel();
         model.setColumnIdentifiers(new Object[]
         {
-            "Número da Lei", "Ano da Lei", "Data da Lei", "Ementa da Lei", "Tipo do Ato", "Quantidade de Vagas"
+            "Número da Lei", "Ano da Lei", "Data da Lei", "Ementa da Lei", "", ""
         });
         tbFundamentoCriacaoExclusao.setModel(model);
         //obter as informações do formulario pesquisador
@@ -1853,8 +1853,6 @@ public class frmCadastrarCargoEmprego extends javax.swing.JInternalFrame impleme
                 System.out.println("ano: " + listaPesquisada.get(0).getAnoDaLei());
                 System.out.println("data: " + listaPesquisada.get(0).getDataDaLei());
                 System.out.println("ementa: " + listaPesquisada.get(0).getEmentaDaLei());
-                System.out.println("ato: " + listaPesquisada.get(0).getTipoAto());
-                System.out.println("quantidade: " + listaPesquisada.get(0).getQtdVagasDaLei());
 
                 
                 for (CadastrarFundamentoDTO dto : listaPesquisada)
@@ -1864,9 +1862,7 @@ public class frmCadastrarCargoEmprego extends javax.swing.JInternalFrame impleme
                         dto.getNumeroDaLei(),
                         dto.getAnoDaLei(),
                         dto.getDataDaLei(),
-                        dto.getEmentaDaLei(),
-                        dto.getTipoAto(),
-                        dto.getQtdVagasDaLei()
+                        dto.getEmentaDaLei()
                     };
 
                     model.addRow(linhaSelecionada);

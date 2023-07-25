@@ -59,7 +59,7 @@ public class frmPesquisador extends javax.swing.JDialog
         lblPesquisarPor.setText("Pesquisa por:");
 
         cmbModoDePesquisa.setMaximumRowCount(3);
-        cmbModoDePesquisa.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Número", "Ano", "Data", "Ementa", "Ato", "Quantidade" }));
+        cmbModoDePesquisa.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Número", "Ano", "Data", "Ementa", " " }));
 
         btnPesquisar.setText("Pesquisar");
         btnPesquisar.addActionListener(new java.awt.event.ActionListener()
@@ -150,7 +150,7 @@ public class frmPesquisador extends javax.swing.JDialog
 
         String[] colunas =
         {
-            "Número", "Ano", "Data", "Ementa", "Ato", "Quantidade"
+            "Número", "Ano", "Data", "Ementa"
         };
 
         // O método isCellEditable é sobrescrito para retornar false, desabilitando a edição de todas as células da tabela.
@@ -167,7 +167,7 @@ public class frmPesquisador extends javax.swing.JDialog
         {
             Object[] rowdata =
             {
-                lista.get(i).getNumeroDaLei(), lista.get(i).getAnoDaLei(), lista.get(i).getDataDaLei(), lista.get(i).getEmentaDaLei(), lista.get(i).getAtoDaLei(), lista.get(i).getQtdVagasDaLei()
+                lista.get(i).getNumeroDaLei(), lista.get(i).getAnoDaLei(), lista.get(i).getDataDaLei(), lista.get(i).getEmentaDaLei()
             };
             model.addRow(rowdata);
         }
@@ -213,10 +213,7 @@ public class frmPesquisador extends javax.swing.JDialog
                     dto.setDataDaLei(tbPesquisar.getValueAt(linhaSelecionada, 2).toString());
                     //ementa da lei 
                     dto.setEmentaDaLei(tbPesquisar.getValueAt(linhaSelecionada, 3).toString());
-                    //ato da lei 
-                    dto.setTipoAto(tbPesquisar.getValueAt(linhaSelecionada, 4).toString());
-                    //Quantidade de vagas 
-                    dto.setQtdVagasDaLei(tbPesquisar.getValueAt(linhaSelecionada, 5).toString());
+
 
                     List<CadastrarFundamentoDTO> lista = new ArrayList<>();
 

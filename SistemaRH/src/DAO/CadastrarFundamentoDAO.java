@@ -127,10 +127,6 @@ public class CadastrarFundamentoDAO
                 dto.setAnoDaLei(rs.getString("ano_ato"));
                 dto.setDataDaLei(rs.getString("data_ato"));
                 dto.setEmentaDaLei(rs.getString("ementa_ato"));
-                dto.setAtoDaLei(rs.getString("categoria_ato"));
-                dto.setQtdVagasDaLei(rs.getString("quantidade_ato"));
-                dto.setReajusteDe(rs.getString("reajuste_de"));
-                dto.setReajustePara(rs.getString("reajuste_para"));
 
                 listaFundamento.add(dto);
 

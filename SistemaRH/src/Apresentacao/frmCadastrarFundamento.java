@@ -71,7 +71,7 @@ public class frmCadastrarFundamento extends javax.swing.JDialog
         }
     }
 
-    public frmCadastrarFundamento(java.awt.Frame parent, boolean modal, DefaultTableModel tbFundamentoCriacaoExclusao, DefaultTableModel tbFundamentoReajuste, String numeroDaLei, String anoDaLei, String dataDaLei, String ementaDaLei, String atoDaLei, String quantidadeCargosEmpregosDaLei, int linhaSelecionada, JTabbedPane jtp)
+    public frmCadastrarFundamento(java.awt.Frame parent, boolean modal, DefaultTableModel tbFundamentoCriacaoExclusao, DefaultTableModel tbFundamentoReajuste, String numeroDaLei, String anoDaLei, String dataDaLei, String ementaDaLei, int linhaSelecionada, JTabbedPane jtp)
     {
         super(parent, modal);
         this.tbFundamentoCriacaoExclusao = tbFundamentoCriacaoExclusao;
@@ -84,7 +84,7 @@ public class frmCadastrarFundamento extends javax.swing.JDialog
         this.jtaEmenta.setText(ementaDaLei);
         //this.ementaDaLei = ementaDaLei;
         this.cmbAto.getSelectedItem().equals(atoDaLei);
-        this.atoDaLei = atoDaLei;
+        //this.atoDaLei = atoDaLei;
         this.txtQuantidadeVagas.setText(quantidadeCargosEmpregosDaLei);
         this.quantidadeCargosEmpregosDaLei = quantidadeCargosEmpregosDaLei;
         this.eUmaAlteracao = true;

@@ -1,0 +1,7 @@
+21:51 24/07/2023
+
+Parei no botão cadastrar/alterar
+
+Mexi na tabela ato_legal. Removi os atributos reajuste_de, reajuste_para, quantidade_ato e inclui na tabela intermediaria cargo_emprego_ato_legal 
+
+agora preciso mexer no dao, remover a informação de la, e incluir no cadastro da tabela intermediaria
