@@ -5,6 +5,7 @@
 package Apresentacao;
 
 import Controle.CadastrarCargoEmpregoControle;
+import DAO.CadastrarFundamentoDAO;
 import DTO.PesquisarCargoEmpregoDTO;
 import DTO.CadastrarCargoEmpregoDTO;
 import DTO.CadastrarFundamentoDTO;
@@ -1836,8 +1837,10 @@ public class frmCadastrarCargoEmprego extends javax.swing.JInternalFrame impleme
 
     private void btnSelecionarFundamentoActionPerformed(java.awt.event.ActionEvent evt)//GEN-FIRST:event_btnSelecionarFundamentoActionPerformed
     {//GEN-HEADEREND:event_btnSelecionarFundamentoActionPerformed
+        btnAlterarFundamentoActionPerformed(null);
+
         frmPesquisador frm = new frmPesquisador(null, true);
-        DefaultTableModel model = new DefaultTableModel();
+        DefaultTableModel model = (DefaultTableModel) tbFundamentoCriacaoExclusao.getModel();
         model.setColumnIdentifiers(new Object[]
         {
             "Número da Lei", "Ano da Lei", "Data da Lei", "Ementa da Lei", "", ""
@@ -1849,12 +1852,12 @@ public class frmCadastrarCargoEmprego extends javax.swing.JInternalFrame impleme
             // Manipular a lista de dados selecionados quando estiver pronta
             if (!listaPesquisada.isEmpty())
             {
+                System.out.println("codigo: " + listaPesquisada.get(0).getCodigoDoAto());
                 System.out.println("numero: " + listaPesquisada.get(0).getNumeroDaLei());
                 System.out.println("ano: " + listaPesquisada.get(0).getAnoDaLei());
                 System.out.println("data: " + listaPesquisada.get(0).getDataDaLei());
                 System.out.println("ementa: " + listaPesquisada.get(0).getEmentaDaLei());
 
-                
                 for (CadastrarFundamentoDTO dto : listaPesquisada)
                 {
                     Object[] linhaSelecionada = new Object[]
@@ -1866,6 +1869,23 @@ public class frmCadastrarCargoEmprego extends javax.swing.JInternalFrame impleme
                     };
 
                     model.addRow(linhaSelecionada);
+
+                    //selecionar a ultima linha da tabela
+                    tbFundamentoCriacaoExclusao.setRowSelectionInterval(model.getRowCount() - 1, model.getRowCount() - 1);
+                    frm.setVisible(false);
+
+                    frmSelecionarFundamento selecionar = new frmSelecionarFundamento(null, true);
+                    selecionar.setVisible(true);
+
+                    if (selecionar.clicouNoBotaoCancelar())
+                    {
+                        model.removeRow(model.getRowCount()-1);
+                    }
+                    else
+                    {
+                        CadastrarFundamentoDAO dao = new CadastrarFundamentoDAO();
+                        dao.amarrarCargoEmpregoNoFundamento(txtCodigoCargoEmprego.getText(), dto.getCodigoDoAto());
+                    }
                 }
             }
             else

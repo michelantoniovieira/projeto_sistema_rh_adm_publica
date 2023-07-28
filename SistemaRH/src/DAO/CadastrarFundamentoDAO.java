@@ -43,8 +43,8 @@ public class CadastrarFundamentoDAO
         LocalDate dataFormatada = LocalDate.parse(dataOriginal, formatter);
         String dataFormatadaParaBanco = dataFormatada.toString(); // Data no formato 'AAAA-MM-DD'
 
-        String sql = "INSERT INTO ato_legal (numero_ato, ano_ato, data_ato, ementa_ato, categoria_ato, quantidade_ato, reajuste_de, reajuste_para, fk_codigo_tipo_ato) "
-                + "VALUES (?,?,?,?,?,?,?,?,?)";
+        String sql = "INSERT INTO ato_legal (numero_ato, ano_ato, data_ato, ementa_ato, fk_codigo_tipo_ato) "
+                + "VALUES (?,?,?,?,?)";
         Connection con = ConexaoDAO.conectaBD();
         try
         {
@@ -53,11 +53,7 @@ public class CadastrarFundamentoDAO
             pst.setString(2, dto.getAnoDaLei());
             pst.setString(3, dataFormatadaParaBanco);
             pst.setString(4, dto.getEmentaDaLei());
-            pst.setString(5, dto.getAtoDaLei());
-            pst.setString(6, dto.getQtdVagasDaLei());
-            pst.setString(7, dto.getReajusteDe());
-            pst.setString(8, dto.getReajustePara());
-            pst.setString(9, dto.getTipoAto());
+            pst.setString(5, dto.getTipoAto());
             pst.execute();
             pst.close();
         }
@@ -89,10 +85,7 @@ public class CadastrarFundamentoDAO
                 dto.setAnoDaLei(rs.getString("ano_ato"));
                 dto.setDataDaLei(rs.getString("data_ato"));
                 dto.setEmentaDaLei(rs.getString("ementa_ato"));
-                dto.setAtoDaLei(rs.getString("categoria_ato"));
-                dto.setQtdVagasDaLei(rs.getString("quantidade_ato"));
-                dto.setReajusteDe(rs.getString("reajuste_de"));
-                dto.setReajustePara(rs.getString("reajuste_para"));
+
 
                 listaFundamento.add(dto);
 

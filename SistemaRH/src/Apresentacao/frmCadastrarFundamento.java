@@ -492,7 +492,6 @@ public class frmCadastrarFundamento extends javax.swing.JDialog
             // Formata a data para o formato desejado (dd-MM-yyyy)
             SimpleDateFormat formatoSaida = new SimpleDateFormat("dd/MM/yyyy");
             dataFormatada = formatoSaida.format(dataSelecionada);
-
         }
 
         // Converte a data para Calendar

@@ -150,7 +150,7 @@ public class frmPesquisador extends javax.swing.JDialog
 
         String[] colunas =
         {
-            "Número", "Ano", "Data", "Ementa"
+            "Invisivel", "Número", "Ano", "Data", "Ementa"
         };
 
         // O método isCellEditable é sobrescrito para retornar false, desabilitando a edição de todas as células da tabela.
@@ -167,11 +167,17 @@ public class frmPesquisador extends javax.swing.JDialog
         {
             Object[] rowdata =
             {
-                lista.get(i).getNumeroDaLei(), lista.get(i).getAnoDaLei(), lista.get(i).getDataDaLei(), lista.get(i).getEmentaDaLei()
+                lista.get(i).getCodigoDoAto(), lista.get(i).getNumeroDaLei(), lista.get(i).getAnoDaLei(), lista.get(i).getDataDaLei(), lista.get(i).getEmentaDaLei()
             };
             model.addRow(rowdata);
         }
         tbPesquisar.setModel(model);
+
+        // Tornar a primeira coluna invisível
+        tbPesquisar.getColumnModel().getColumn(0).setMinWidth(0);
+        tbPesquisar.getColumnModel().getColumn(0).setMaxWidth(0);
+        tbPesquisar.getColumnModel().getColumn(0).setWidth(0);
+        tbPesquisar.getColumnModel().getColumn(0).setPreferredWidth(0);
     }//GEN-LAST:event_btnPesquisarActionPerformed
 
     public void gerenciadorDeTabelas(JTable table)
@@ -205,15 +211,16 @@ public class frmPesquisador extends javax.swing.JDialog
                 if (linhaSelecionada != -1)
                 {
                     CadastrarFundamentoDTO dto = new CadastrarFundamentoDTO();
+                    //codigo do ato
+                    dto.setCodigoDoAto(tbPesquisar.getValueAt(linhaSelecionada, 0).toString());
                     //numero da lei
-                    dto.setNumeroDaLei(tbPesquisar.getValueAt(linhaSelecionada, 0).toString());
+                    dto.setNumeroDaLei(tbPesquisar.getValueAt(linhaSelecionada, 1).toString());
                     //ano da lei
-                    dto.setAnoDaLei(tbPesquisar.getValueAt(linhaSelecionada, 1).toString());
+                    dto.setAnoDaLei(tbPesquisar.getValueAt(linhaSelecionada, 2).toString());
                     //data da lei      
-                    dto.setDataDaLei(tbPesquisar.getValueAt(linhaSelecionada, 2).toString());
+                    dto.setDataDaLei(tbPesquisar.getValueAt(linhaSelecionada, 3).toString());
                     //ementa da lei 
-                    dto.setEmentaDaLei(tbPesquisar.getValueAt(linhaSelecionada, 3).toString());
-
+                    dto.setEmentaDaLei(tbPesquisar.getValueAt(linhaSelecionada, 4).toString());
 
                     List<CadastrarFundamentoDTO> lista = new ArrayList<>();
 
